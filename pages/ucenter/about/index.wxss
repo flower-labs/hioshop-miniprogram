@@ -19,7 +19,8 @@ page {
 
 .title {
     width: 100%;
-    font-size: 30rpx;
+    font-size: 60rpx;
+    color: gold;
     font-weight: bold;
     text-indent: 56rpx;
     margin: 24rpx 0;

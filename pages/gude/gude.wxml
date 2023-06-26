@@ -1,0 +1,17 @@
+<!--pages/gude/gude.wxml-->
+<view class="card-theme">
+  <t-swiper
+    current="{{current}}"
+    autoplay="{{autoplay}}"
+    duration="{{duration}}"
+    interval="{{interval}}"
+    bindchange="onChange"
+    navigation="{{ { type: 'dots-bar' } }}"
+    list="{{swiperList}}"
+    image-props="{{ { shape: 'round' } }}"
+    previousMargin="0px"
+    nextMargin="0px"
+    t-class-nav="card-theme-nav"
+  />
+
+</view>

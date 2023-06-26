@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/gude/gude",
         "pages/app-auth/index",
         "pages/category/index",
         "pages/cart/cart",
@@ -39,6 +40,12 @@
                 "iconPath": "images/nav/icon-index-b.png",
                 "selectedIconPath": "images/nav/icon-index-r.png",
                 "text": "首页"
+            },
+            {
+                "pagePath": "pages/gude/gude",
+                "iconPath": "images/nav/icon-index-b.png",
+                "selectedIconPath": "images/nav/icon-index-r.png",
+                "text": "古德"
             },
             {
                 "pagePath": "pages/category/index",
