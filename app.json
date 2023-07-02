@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/index/index",
         "pages/gude/gude",
+        "pages/index/index",
         "pages/app-auth/index",
         "pages/category/index",
         "pages/cart/cart",
@@ -36,16 +36,16 @@
         "backgroundColor": "#fff",
         "list": [
             {
-                "pagePath": "pages/index/index",
-                "iconPath": "images/nav/icon-index-b.png",
-                "selectedIconPath": "images/nav/icon-index-r.png",
-                "text": "首页"
-            },
-            {
                 "pagePath": "pages/gude/gude",
                 "iconPath": "images/nav/icon-index-b.png",
                 "selectedIconPath": "images/nav/icon-index-r.png",
                 "text": "古德"
+            },
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "images/nav/icon-index-b.png",
+                "selectedIconPath": "images/nav/icon-index-r.png",
+                "text": "首页"
             },
             {
                 "pagePath": "pages/category/index",
