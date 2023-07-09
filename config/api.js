@@ -11,6 +11,8 @@ module.exports = {
   IndexUrl: ApiRootUrl + 'index/appInfo', //首页数据接口
   // 分类
   CatalogList: ApiRootUrl + 'catalog/index', //分类目录全部分类数据接口
+  // 服务列表
+  ReserveList: ApiRootUrl + 'reserve/index', //分类目录全部分类数据接口
   CatalogCurrent: ApiRootUrl + 'catalog/current', //分类目录当前分类数据接口
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',
   // 购物车

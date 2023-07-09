@@ -1,0 +1,10 @@
+<!--pages/reserve/index.wxml-->
+<text>
+    <!-- <t-calendar visible="{{visible}}" bind:confirm="handleConfirm" bind:close="onClose" />
+    <t-cell arrow title="单个选择日历" bind:tap="handleCalendar" /> -->
+    {{JSON.stringify(reseveList)}}111
+
+    <scroll-view class="nav" scroll-y="true">
+        <view wx:for="{{reseveList}}" wx:key="id" data-id="{{item.id}}">{{item.name}}</view>
+    </scroll-view>
+</text>
