@@ -1,4 +1,14 @@
 /* pages/gude/gude.wxss */
+.container{
+    background-color: #f1f1f1;
+}
+.gude-text1{
+    font-size: larger;
+    font-weight: bold;
+    padding: 10rpx;
+    margin-bottom: 10rpx;
+}
+
 .card-theme {
   --td-swiper-radius: 0;
   --td-swiper-item-padding: 0 12rpx;
@@ -49,3 +59,240 @@
   margin-top: 20rpx;
   font-size: 35rpx;
 }
+
+  
+  .scale-candidate {
+    height: 105px !important;
+  }
+
+  .block1{
+      position: relative;
+      z-index: 1;
+      margin: -20rpx 30rpx 0rpx 30rpx;
+      background-color:white;
+      box-sizing: border-box;
+      height: 400rpx;
+      border-radius: 18rpx;
+  }
+
+.block3{
+    position: relative;
+    z-index: 1;
+    margin: 30rpx 30rpx 30rpx 30rpx;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 18rpx;
+}
+
+.block1_1{
+    padding: 20rpx;
+    
+}
+
+.block1_1_text1{
+    font-size: 40rpx;
+}
+
+.block1_1_text2{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    margin: 10rpx 0 10rpx 0;
+}
+
+.block1_1_text2 text{
+    background-color: rgba(245, 245, 140, 0.589);
+    border-radius: 15rpx;
+    font-size: small;
+
+}
+
+.block {
+    display: block;
+    margin: 30rpx 30rpx 30rpx 30rpx;
+  }
+  
+  .dark,.light {
+    background-clip: content-box;
+    color: rgb(20, 20, 20);
+    font-size: 28rpx;
+    text-align: center;
+    width: 40rpx;
+    height: 40rpx;
+  }
+
+  
+  .light image{
+      width: 100%;
+      height: 100%;
+  }
+  .dark image{
+    width: 100%;
+    height: 100%;
+}
+
+.grid-item{
+    display: flex;
+    /* 纵向布局，内容居中 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* 设置边框 */
+   
+  }
+  
+  .grid-item image{
+    width: 60rpx;
+    height: 60rpx;
+  }
+  
+  .grid-item text{
+    font-size: 24rpx;
+    margin-top: 10rpx;
+  }
+/* 商品描述 */
+.info-wrap {
+    
+    background: #fff;
+    padding: 30rpx 30rpx 30rpx 30rpx;
+    border-bottom: 1rpx solid #f1f1f1;
+}
+
+.info-wrap .l {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 82%;
+}
+
+.info-wrap .l .goods-title {
+    width: 100%;
+    font-size: 30rpx;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.info-wrap .l .goods-intro {
+    font-size: 26rpx;
+    color: #888;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    overflow: hidden;
+}
+
+.info-wrap .r {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+}
+
+.info-wrap .r .share {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding: 0;
+}
+
+.info-wrap .r .share::after {
+    border: none;
+}
+
+.info-wrap .r .share .icon {
+    width: 26rpx;
+    height: 28rpx;
+    margin: 0 6rpx 2rpx 0;
+}
+
+.info-wrap .r .share .text {
+    font-size: 26rpx;
+    color: #888;
+}
+
+/* 商品价格描述 */
+  .price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14rpx 30rpx 24rpx 30rpx;
+    /* border-bottom: 1rpx solid #f1f1f1; */
+    background: #fff;
+}
+
+  .price-info .l {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-info .l .now-price {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    font-size: 30rpx;
+    color: #ff3456;
+    margin-right: 10rpx;
+}
+
+.price-info .l .now-price .sym {
+    font-size: 24rpx;
+}
+
+.price-info .l .now-price .num {
+    font-size: 28rpx;
+    font-weight: 500;
+}
+
+.price-info .r {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 26rpx;
+    color: #888;
+}
+
+.price-info .r .stock {
+    margin-right: 20rpx;
+}
+
+/* 商品展示模板 */
+
+.new-box {
+    
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    /* height: 330rpx; */
+    float: left;
+    margin: 0rpx 30rpx 20rpx 0rpx;
+    
+}
+
+.list-wrap .no-margin {
+    margin-right: 0;
+}
+
+.navi-url {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-box .navi-url .image {
+    width: 100%;
+    height: 210rpx;
+    border-radius: 8rpx;
+    background: #f9f9f9;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+

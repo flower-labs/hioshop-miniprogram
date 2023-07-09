@@ -1,0 +1,8 @@
+/* pages/lianxi/lianxi.wxss */
+.about .spec.txtColor{
+  color: red;
+  
+}
+.about .spec{
+  border: 1rpx solid black;
+}

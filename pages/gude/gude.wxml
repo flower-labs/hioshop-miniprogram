@@ -1,5 +1,6 @@
 <!--pages/gude/gude.wxml-->
-<view class="card-theme">
+<view class="container">
+
     <t-swiper current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" bindchange="onChange" navigation="{{ { type: 'dots-bar' } }}" list="{{swiperList}}" image-props="{{ { shape: 'round' } }}" previousMargin="0px" nextMargin="0px" t-class-nav="card-theme-nav" />
 
     <view class="home-page-grid">
@@ -29,4 +30,88 @@
 
     </view>
 
+    <view class="gude-text1">谷德车服汽车养护中心</view>
+    <view class="card-theme">
+        <t-swiper current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" bindchange="onChange" navigation="{{ { type: 'dots-bar' } }}" list="{{swiperList}}" image-props="{{ { shape: 'round' } }}" previousMargin="0px" nextMargin="0px" t-class-nav="card-theme-nav" />
+    </view>
+
+    <view class="block1">
+        <view bindtap="goto_gudeInfo1" class="block1_1">
+            <view class="block1_1_text1">
+                <text>古德车服汽车养护中心</text>
+            </view>
+            <view class="block1_1_text2">
+                <text>美容</text>
+                <text>机修</text>
+                <text>洗车</text>
+                <text>精品</text>
+            </view>
+            <view class="block1_1_text3">
+                营业时间
+            </view>
+        </view>
+
+        <t-divider />
+
+        <t-row>
+            <t-col span="16" t-class="dark">
+                <view style="font-size: small;text-align: left;">海口市琼山区滨江街道办滨江路388号滨江世纪佳城(北区)一期商业6#S109号
+                </view>
+                <view style="text-align: left;color: red;" bindtap="getDis">距离：{{dis}}</view>
+            </t-col>
+            <t-col span="4" t-class="light">
+                <view class="grid-item" bindtap="mapViewTap">
+                    <image src="/images/nav/导航.png" mode="" />
+                    <text>导航</text>
+                </view>
+            </t-col>
+            <t-col span="4" t-class="dark">
+                <navigator url="" class="grid-item">
+                    <image src="/images/nav/电话.png" mode="" />
+                    <text>电话</text>
+                </navigator>
+            </t-col>
+        </t-row>
+
+    </view>
+
+    <t-grid class="block" column="{{3}}">
+        <t-grid-item text="多人拼团" image="{{img1}}" />
+        <t-grid-item text="热销卡" image="{{img2}}" />
+        <t-grid-item text="特惠套装" image="{{img3}}" />
+    </t-grid>
+
+    <view class="block3">
+        <view style="text-align: center;margin: 20rpx;background: chartreuse;border-radius: 12rpx;">
+            <image src="/images/icon/chat.png" mode="" />
+        </view>
+        <view style="text-align: center;margin: 24rpx 0rpx;">
+            <text>热销</text>
+        </view>
+        <!-- 商品橱窗模板 -->
+        <view class='list-wrap clearfix'>
+            <view class="new-box {{(iindex+1)%2 == 0?'no-margin':''}}" wx:for="{{goodslist}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="id">
+                <navigator class="navi-url" url="/pages/gudeInfo1/gudeInfo1?id={{iitem.id}}&title={{iitem.title}}">
+                    <!-- 商品图片 -->
+                    <image src="{{iitem.list_pic_url}}" mode="widthFix" class="image" />
+                    <!-- 商品描述 -->
+                    <view class='info-wrap'>
+                        <view class='l'>
+                            <view class='goods-title'>{{iitem.title}}</view>
+                            <view class='goods-intro'>{{iitem.name}}</view>
+                        </view>
+                    </view>
+                    <!-- 价格描述 -->
+                    <view class='price-info'>
+                        <view class="l">
+                            <view class="now-price">
+                                <view class="sym">¥</view>
+                                <view class="num">{{goodslist.retail_price}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
 </view>
