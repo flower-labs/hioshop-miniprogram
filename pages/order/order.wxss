@@ -1,0 +1,89 @@
+/* pages/order/order.wxss */
+page {
+    background-color: rgba(235, 232, 232, 0.459);
+}
+
+.container {
+    padding: 30rpx;
+}
+
+.goods {
+    background-color: white;
+    margin-top: 30rpx;
+    border-radius: 30rpx;
+    display: inline-flex;
+    padding: 30rpx;
+}
+
+.order_left {
+    width: 30%;
+    margin-right: 20rpx;
+
+}
+
+.order_left image {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 30rpx;
+}
+
+.order_right {
+    width: 100%;
+    margin-left: 20rpx;
+}
+
+.order_text {
+    width: 100%;
+    /* 竖向对齐 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.order_text_top {
+    width: 100%;
+    height: 100%;
+    
+    /* 水平对齐 */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.text_title{
+    font-weight: bold;
+}
+
+.text_detail {
+    margin-top: 20rpx;
+    font-size: small;
+}
+
+.item_price{
+    color: red;
+}
+.item_sell{
+    margin-left: 20rpx;
+    font-weight: lighter;
+}
+
+.text_btn {
+    /* 竖向对齐 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    margin-right: 30rpx;
+}
+.text_btn text{
+    background-color: rgb(255, 196, 0);
+    padding: 10rpx 20rpx 10rpx 20rpx;
+    border-radius: 20rpx;
+    color: white;
+    font-weight: lighter;
+}
+.text_bottom {
+    margin-top: 20rpx;
+    font-size: small;
+    font-weight: lighter;
+}

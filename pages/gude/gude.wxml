@@ -3,36 +3,8 @@
 
     <t-swiper current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" bindchange="onChange" navigation="{{ { type: 'dots-bar' } }}" list="{{swiperList}}" image-props="{{ { shape: 'round' } }}" previousMargin="0px" nextMargin="0px" t-class-nav="card-theme-nav" />
 
-    <view class="home-page-grid">
-        <t-grid border="{{border}}" column="{{3}}">
-            <t-grid-item text="热销卡项" image="{{img1}}" />
-            <t-grid-item text="多人拼团" image="{{img2}}" />
-            <t-grid-item text="特惠套装" image="{{img3}}" />
-        </t-grid>
-    </view>
-
-    <view class="home-page-guide">
-        <view class="guide-title">
-            <view>
-                领券中心
-            </view>
-            <view class="logo">
-                <t-icon name="arrow-triangle-up" size="48rpx" />
-            </view>
-        </view>
-
-        <view class="guide-sub-title">
-            福利多多，领完购买最划算哦！
-        </view>
-    </view>
-
     <view class="demo__card">
 
-    </view>
-
-    <view class="gude-text1">谷德车服汽车养护中心</view>
-    <view class="card-theme">
-        <t-swiper current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" bindchange="onChange" navigation="{{ { type: 'dots-bar' } }}" list="{{swiperList}}" image-props="{{ { shape: 'round' } }}" previousMargin="0px" nextMargin="0px" t-class-nav="card-theme-nav" />
     </view>
 
     <view class="block1">
@@ -47,7 +19,7 @@
                 <text>精品</text>
             </view>
             <view class="block1_1_text3">
-                营业时间
+                营业时间:8:00-18:00
             </view>
         </view>
 
@@ -80,6 +52,21 @@
         <t-grid-item text="热销卡" image="{{img2}}" />
         <t-grid-item text="特惠套装" image="{{img3}}" />
     </t-grid>
+
+    <view class="home-page-guide">
+        <view class="guide-title">
+            <view>
+                领券中心
+            </view>
+            <view class="logo">
+                <t-icon name="arrow-triangle-up" size="48rpx" />
+            </view>
+        </view>
+
+        <view class="guide-sub-title">
+            福利多多，领完购买最划算哦！
+        </view>
+    </view>
 
     <view class="block3">
         <view style="text-align: center;margin: 20rpx;background: chartreuse;border-radius: 12rpx;">

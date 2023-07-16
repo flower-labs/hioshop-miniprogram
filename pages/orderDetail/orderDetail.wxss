@@ -1,0 +1,107 @@
+/* pages/orderDetail/orderDetail.wxss */
+.goods_to_title{
+    padding: 20rpx;
+    font-weight: bold;
+    border-bottom: 1rpx solid gray;
+    margin: 0rpx 20rpx;
+    margin-bottom: 20rpx;
+    box-sizing: border-box;
+}
+
+
+scroll-view{
+    height: 128rpx;
+   
+    width: 100%;
+   }
+   scroll-view .list{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+     width: 1302rpx; 
+   }
+   scroll-view .listItem{
+    text-align: center;
+    width: 186rpx;
+    height: 128rpx;
+    background-color: #f1f2f6;
+    padding-top: 30rpx;
+    box-sizing: border-box;
+    /* float: left; */
+    display: inline-block;
+   }
+   scroll-view .listItem text{
+    display: block;
+   }
+   scroll-view .listItem .name{
+    font-size: 30rpx;
+   }
+   scroll-view .listItem .date{
+    font-size: 30rpx;
+   }
+   scroll-view .current{
+    background-color: rgb(255, 196, 0);
+   
+   }
+   scroll-view .current text{
+    color: #fff;
+   }
+   .time{
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 auto;
+    margin-top: 30rpx;
+   }
+   .time .listItem{
+    width: 25%;
+    height: 135rpx;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding-top: 35rpx;
+    border: 1px solid #b9c1c8;
+   }
+   .time .listItem text{
+    display: block;
+    font-size: 30rpx;
+   }
+   .time .current{
+    border: 1px solid rgb(255, 196, 0);
+   }
+   .time .current text{
+    color: rgb(255, 196, 0);
+   }
+   .operate button{
+    width:300rpx;
+    height: 88rpx;
+    background-color: #fff;
+   }
+   .operate .del{
+   
+     color: rgb(255, 196, 0);
+   }
+   .operate button::after{
+    border: 2px solid rgb(255, 196, 0);
+   }
+   .operate{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+   }
+   .operate button:nth-child(2):after{
+    border: 2px solid rgb(255, 196, 0);
+   }
+   .operate .save{
+    color: #fff;
+    background-color: rgb(255, 196, 0);
+   
+   }
+   .operate{
+    width: 100%;
+    padding: 30rpx 0;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+   }

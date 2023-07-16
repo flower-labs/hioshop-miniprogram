@@ -26,12 +26,6 @@
   height: 105px !important;
 }
 
-.home-page-grid {
-  display: block;
-  margin-top: 70rpx;
-  margin-bottom: 32rpx;
-}
-
 .home-page-guide {
   padding-left: 50rpx;
   padding-top: 50rpx;
@@ -41,7 +35,7 @@
   background: no-repeat contain;
   background-image: url(http://rwi9z0rl6.hd-bkt.clouddn.com/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/luck_img.webp);
   border-radius: 25rpx;
-  margin: 0px 20rpx;
+  margin: 0px 30rpx;
 }
 
 .home-page-guide .guide-title {
@@ -101,15 +95,22 @@
 }
 
 .block1_1_text2 text{
-    background-color: rgba(245, 245, 140, 0.589);
+    background-color: rgb(255, 196, 0);
     border-radius: 15rpx;
+    padding: 5rpx 10rpx;
     font-size: small;
 
+}
+
+.block1_1_text3{
+    font-weight: lighter;
+    font-size: small;
 }
 
 .block {
     display: block;
     margin: 30rpx 30rpx 30rpx 30rpx;
+    border-radius: 18rpx;
   }
   
   .dark,.light {
