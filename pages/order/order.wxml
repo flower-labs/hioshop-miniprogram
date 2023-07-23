@@ -1,17 +1,17 @@
 <!--pages/order/order.wxml-->
 <view class="container">
-    <view class="goods" wx:for="{{goods}}" wx:key="index" wx:for-index="index">
+    <view class="goods" wx:for="{{reserveList}}" wx:key="index" wx:for-index="index">
         <view class="order_left">
-            <image src="{{item.img_url}}" mode="aspectFill" />
+            <image src="{{item.service_picture_url}}" mode="aspectFill" />
         </view>
 
         <view class="order_right">
             <view class="order_text">
                 <view class="order_text_top">
                     <view class="text_top">
-                        <view class="text_title">{{item.title}}</view>
+                        <view class="text_title">{{item.service_name}}</view>
                         <view class="text_detail">
-                            <text class="item_price">￥{{item.price}}</text>
+                            <text class="item_price">￥{{item.service_price}}</text>
                             <text class="item_sell">已约:{{item.sell}}</text>
                         </view>
                     </view>

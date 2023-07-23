@@ -1,5 +1,16 @@
 <!--pages/orderDetail/orderDetail.wxml-->
-<view class="goods_to_title">预约：{{goodstitle}}</view>
+<view class="goods_to_title">预约：{{service_name}}</view>
+
+<view class="order_c">姓名：
+    <input type="text" bindinput="input_value1" placeholder="请输入姓名...."/>
+</view>
+<view class="order_c">电话：
+    <input type="text" bindinput="input_value2" placeholder="请输入电话...."/>
+</view>
+<view class="order_c">车牌号：
+    <input type="text" bindinput="input_value3" placeholder="请输入车牌号...."/>
+</view>
+
 <view class='containt'>
  <scroll-view class="scroll-view_H" scroll-x>
   <view class='list' style='width:{{ width }}rpx'>
@@ -15,8 +26,8 @@
    <text>{{ timeItem.status }}</text>
   </view>
  </view>
- <view class='operate'>
-  <button class='del'>删除</button>
-  <button class='save'>保存</button>
+
+ <view class='operate' bindtap="onSubmit">
+  <button class="confirm_order">提交预约</button>
  </view>
 </view>

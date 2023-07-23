@@ -1,4 +1,4 @@
-// pages/order/order.js
+// pages/orderCart/orderCart.js
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
 
@@ -8,25 +8,24 @@ Page({
      * 页面的初始数据
      */
     data: {
-        reserveList:[]
-    },
-    get_order(e){
-        let index=e.currentTarget.dataset.id;
-        let service_name=this.data.reserveList[index].service_name;
-        let id=this.data.reserveList[index].id;
 
-        // 跳转页面
-        wx.navigateTo({
-          url: '/pages/orderDetail/orderDetail?id='+id+'&service_name='+service_name,
-        })
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
-       },
+        this.getin()
+    },
+    getin() {
+        util.request(api.ReserveOrderList).then(function (res) {
+            console.log(res);
+            // that.setData({
+            //   reseveList: res.data.reserveList,
+            //   highLightItem: res.data.reserveList.filter(item=>item.id=== 1008603)[0].name
+            // });
+        });
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -38,18 +37,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-        this.getGoodsInfo()
+
     },
-    //获取商品信息
-    getGoodsInfo(){
-        let that = this;
-        util.request(api.ReserveList).then(function (res) {
-            console.log(res);
-            that.setData({
-                reserveList: res.data.reserveList,
-            });
-        });
-    },
+
     /**
      * 生命周期函数--监听页面隐藏
      */
@@ -84,5 +74,4 @@ Page({
     onShareAppMessage() {
 
     }
-
 })

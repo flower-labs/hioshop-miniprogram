@@ -8,6 +8,19 @@
     box-sizing: border-box;
 }
 
+.order_c{
+    display: flex;
+    padding: 20rpx;
+    font-weight:normal;
+    font-size: small;
+    border-bottom: 1rpx solid gray;
+    margin-left:20rpx;
+    margin-right:20rpx;
+    margin-bottom: 10rpx;
+    box-sizing: border-box;
+    align-items: center;
+}
+
 
 scroll-view{
     height: 128rpx;
@@ -78,30 +91,23 @@ scroll-view{
     height: 88rpx;
     background-color: #fff;
    }
-   .operate .del{
-   
-     color: rgb(255, 196, 0);
-   }
-   .operate button::after{
-    border: 2px solid rgb(255, 196, 0);
-   }
+
    .operate{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
    }
-   .operate button:nth-child(2):after{
-    border: 2px solid rgb(255, 196, 0);
-   }
-   .operate .save{
-    color: #fff;
-    background-color: rgb(255, 196, 0);
-   
-   }
+
+
    .operate{
     width: 100%;
     padding: 30rpx 0;
     background-color: #fff;
     position: fixed;
     bottom: 0;
+   }
+   .operate .confirm_order{
+    color: #fff;
+    background-color: rgb(255, 196, 0);
+   
    }
