@@ -125,6 +125,12 @@ Page({
         });
     },
 
+    //跳转到预约API调用页面
+    toReservePage() {
+        wx.navigateTo({
+            url: '/pages/reserve/index',
+        })
+    },
     //跳转到门店详情
     goto_gudeInfo1() {
         wx.navigateTo({

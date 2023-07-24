@@ -27,7 +27,6 @@
         "pages/payResult/payResult",
         "pages/payOffline/index",
         "pages/reserve/index"
-        
     ],
 
     "window": {

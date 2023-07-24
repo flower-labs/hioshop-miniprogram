@@ -78,7 +78,7 @@ Page({
     getReserveList: function () {
         let that = this;
         util.request(api.ReserveList).then(function (res) {
-            console.log(res);
+            console.log('ReserveList', res);
             that.setData({
                 reseveList: res.data.reserveList,
                 highLightItem: res.data.reserveList.filter(item => item.id === 1008603)[0].name
@@ -87,37 +87,34 @@ Page({
 
 
         util.request(api.ReserveOrderList).then(function (res) {
-            console.log(res);
-            // that.setData({
-            //   reseveList: res.data.reserveList,
-            //   highLightItem: res.data.reserveList.filter(item=>item.id=== 1008603)[0].name
-            // });
+            console.log('ReserveOrderList', res);
         });
 
         // 测试可用时间接口
         util.request(api.AvailableReserveList, {
-            reserve_date: '2023-07-16',
-            reserve_ids: [1008601, 1008602]
+            reserve_date: 1690281822,
+            reserve_ids: [1008601]
         }, 'POST').then(function (res) {
-            console.log('res', res);
+            console.log('AvailableReserveList', res);
         });
 
 
         // 测试预约下单接口
         util.request(api.AddReserveOrder, {
             reserve_id: 1008603,
+            reserve_time: 1690109022,
             reserve_price: 125.25,
             phone_number: 13911927798,
             plate_number: '皖S836782',
             remark: '一段用于测试的文字',
         }, 'POST').then(function (res) {
-            console.log('res', res);
+            console.log('AddReserveOrder', res);
         });
         // 测试取消订单预约接口
-         util.request(api.CancelReservedOrder, {
-            order_id: 100107,
+        util.request(api.CancelReservedOrder, {
+            order_id: 100122,
         }, 'POST').then(function (res) {
-            console.log('res', res);
+            console.log('CancelReservedOrder', res);
         });
     },
 });
