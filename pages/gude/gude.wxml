@@ -3,19 +3,6 @@
 
     <t-swiper current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" bindchange="onChange" navigation="{{ { type: 'dots-bar' } }}" list="{{swiperList}}" image-props="{{ { shape: 'round' } }}" previousMargin="0px" nextMargin="0px" t-class-nav="card-theme-nav" />
 
-    <view class="home-page-grid">
-        <t-grid border="{{border}}" column="{{3}}">
-            <t-grid-item text="热销卡项" image="{{img1}}" />
-            <t-grid-item text="多人拼团" image="{{img2}}" />
-            <t-grid-item text="特惠套装" image="{{img3}}" />
-        </t-grid>
-    </view>
-
-
-    <view class="demo__card">
-
-    </view>
-
     <view class="block1">
         <view bindtap="goto_gudeInfo1" class="block1_1">
             <view class="block1_1_text1">
@@ -31,9 +18,7 @@
                 营业时间:8:00-18:00
             </view>
         </view>
-
         <t-divider />
-
         <t-row>
             <t-col span="16" t-class="dark">
                 <view style="font-size: small;text-align: left;">海口市琼山区滨江街道办滨江路388号滨江世纪佳城(北区)一期商业6#S109号
@@ -53,7 +38,6 @@
                 </navigator>
             </t-col>
         </t-row>
-
     </view>
 
     <t-grid class="block" column="{{3}}">
@@ -71,16 +55,15 @@
                 <t-icon name="arrow-triangle-up" size="48rpx" />
             </view>
         </view>
-
         <view class="guide-sub-title">
             福利多多，领完购买最划算哦！
         </view>
     </view>
 
     <view class="block3">
-        <view style="text-align: center;margin: 20rpx;background: chartreuse;border-radius: 12rpx;">
+        <!-- <view style="text-align: center;margin: 20rpx;background: chartreuse;border-radius: 12rpx;">
             <image src="/images/icon/chat.png" mode="" />
-        </view>
+        </view> -->
         <view style="text-align: center;margin: 24rpx 0rpx;">
             <text>热销</text>
         </view>

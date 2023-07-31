@@ -36,9 +36,6 @@ Page({
       "http://rwi9z0rl6.hd-bkt.clouddn.com/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E9%92%B1%E5%8C%85.png",
     img3:
       "http://rwi9z0rl6.hd-bkt.clouddn.com/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E9%A1%B9%E7%9B%AE.png",
-    border: {
-      color: "#f6f6f6",
-    },
     userInfo:{},
         current: 0,
         autoplay: false,
