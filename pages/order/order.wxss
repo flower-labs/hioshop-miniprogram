@@ -43,14 +43,14 @@ page {
 .order_text_top {
     width: 100%;
     height: 100%;
-    
+
     /* 水平对齐 */
     display: flex;
     flex-direction: row;
     justify-content: space-between
 }
 
-.text_title{
+.text_title {
     font-weight: bold;
 }
 
@@ -59,10 +59,11 @@ page {
     font-size: small;
 }
 
-.item_price{
+.item_price {
     color: red;
 }
-.item_sell{
+
+.item_sell {
     margin-left: 20rpx;
     font-weight: lighter;
 }
@@ -72,16 +73,17 @@ page {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
     margin-right: 30rpx;
 }
-.text_btn text{
+
+.text_btn text {
     background-color: rgb(255, 196, 0);
     padding: 10rpx 20rpx 10rpx 20rpx;
     border-radius: 20rpx;
     color: white;
     font-weight: lighter;
 }
+
 .text_bottom {
     margin-top: 20rpx;
     font-size: small;

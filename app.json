@@ -43,6 +43,12 @@
         "backgroundColor": "#fff",
         "list": [
             {
+                "pagePath": "pages/order/order",
+                "iconPath": "images/nav/预约.png",
+                "selectedIconPath": "images/nav/预约active.png",
+                "text": "预约"
+            },
+            {
                 "pagePath": "pages/gude/gude",
                 "iconPath": "images/nav/icon-index-b.png",
                 "selectedIconPath": "images/nav/icon-index-r.png",
@@ -59,12 +65,6 @@
                 "iconPath": "images/nav/icon-cate-off.png",
                 "selectedIconPath": "images/nav/icon-cate-on.png",
                 "text": "分类"
-            },
-            {
-                "pagePath": "pages/order/order",
-                "iconPath": "images/nav/预约.png",
-                "selectedIconPath": "images/nav/预约active.png",
-                "text": "预约"
             },
             {
                 "pagePath": "pages/ucenter/index/index",
