@@ -12,12 +12,13 @@ Page({
     },
     get_order(e){
         let index=e.currentTarget.dataset.id;
+        let service_price=this.data.reserveList[index].service_price;
         let service_name=this.data.reserveList[index].service_name;
         let id=this.data.reserveList[index].id;
 
         // 跳转页面
         wx.navigateTo({
-          url: '/pages/orderDetail/orderDetail?id='+id+'&service_name='+service_name,
+          url: '/pages/orderDetail/orderDetail?service_id='+id+'&service_name='+service_name+'&service_price='+service_price,
         })
     },
 

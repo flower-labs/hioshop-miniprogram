@@ -1,1 +1,21 @@
 /* pages/orderCart/orderCart.wxss */
+page {
+    background-color: rgba(238, 238, 238, 0.5);
+  }
+  .order {
+    padding: 20rpx;
+    background-color: #fefeff;
+    margin: 27rpx;
+    border-radius: 24rpx;
+  }
+  .order_title{
+      font-weight:bold ;
+  }
+  .order_title text{
+      font-size: small;
+      font-weight: lighter;
+  }
+  .order_time,.order_phone,.order_plate{
+      font-weight: lighter;
+      font-size: small;
+  }

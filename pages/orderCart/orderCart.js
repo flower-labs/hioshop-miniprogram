@@ -2,30 +2,39 @@
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
 
+
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        reserveOrderList:[]
+        
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        this.getin()
+        
     },
-    getin() {
+    getOrderCart() {
+        let that = this;
         util.request(api.ReserveOrderList).then(function (res) {
             console.log(res);
-            // that.setData({
-            //   reseveList: res.data.reserveList,
-            //   highLightItem: res.data.reserveList.filter(item=>item.id=== 1008603)[0].name
-            // });
+            //循环接口数据进行时间戳转换
+            for (var i = 0; i < res.data.reserveOrderList.length; i++) {
+                res.data.reserveOrderList[i]["reserve_time"] = util.formatTimeNum(res.data.reserveOrderList[i]["reserve_time"],'Y-M-D h:m:s')
+           }
+            that.setData({
+                reserveOrderList: res.data.reserveOrderList
+            });
         });
+
     },
+    
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -37,7 +46,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        this.getOrderCart()
     },
 
     /**

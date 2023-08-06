@@ -21,9 +21,9 @@
   </view>
  </scroll-view>
  <view class='time'>
-  <view wx:for="{{ timeArr }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.time}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
+  <view class="listItem"  wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.time}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
    <text>{{ timeItem.time }}</text>
-   <text>{{ timeItem.status }}</text>
+   <text>可预约：{{ timeItem.available_position }}</text>
   </view>
  </view>
 

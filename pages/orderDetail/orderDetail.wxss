@@ -69,16 +69,19 @@ scroll-view{
    }
    .time .listItem{
     width: 25%;
-    height: 135rpx;
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
     box-sizing: border-box;
     background-color: #fff;
     padding-top: 35rpx;
+    padding-bottom: 35rpx;
     border: 1px solid #b9c1c8;
    }
    .time .listItem text{
     display: block;
     font-size: 30rpx;
+    
    }
    .time .current{
     border: 1px solid rgb(255, 196, 0);

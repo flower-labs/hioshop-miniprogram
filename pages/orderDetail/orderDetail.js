@@ -1,5 +1,6 @@
 // pages/orderDetail/orderDetail.js
-
+var api = require("../../config/api.js");
+var util = require("../../utils/util.js");
 Page({
     /**
      * 页面的初始数据
@@ -7,16 +8,20 @@ Page({
     data: {
         service_id: '',
         service_name: '',
+        service_price:'',
         order_c_name: '',
         order_c_phone: '',
         order_c_license: '',
-        order_c_detail: [],
+        order_c_data: '',
+        order_c_time: '',
         myObject: {},
 
         calendar: [],
         width: 0,
         currentIndex: 0,
         currentTime: 0,
+        availableReserveList:[],
+        highLightItem:[],
         timeArr: [{
                 "time": "8:00-9:00",
                 "status": "约满"
@@ -57,7 +62,9 @@ Page({
         //使用页面参数
         that.setData({
             service_name: options.service_name,
-            id: options.id
+            service_id: options.service_id,
+
+            service_price:options.service_price,
         })
 
         function getThisMonthDays(year, month) {
@@ -106,6 +113,8 @@ Page({
         that.setData({
             width: 186 * parseInt(that.data.calendar.length - cur_date <= 7 ? that.data.calendar.length : 7)
         })
+
+        this.getGoodsInfo()
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -117,15 +126,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        
     },
     //获取时间信息
     getGoodsInfo() {
         let that = this;
-        util.request(api.ReserveList).then(function (res) {
+        console.log(that.data.service_id);
+        util.request(api.AvailableReserveList,{ reserve_date: 1690778306,
+            reserve_ids: [Number(that.data.service_id)]},'POST').then(function (res) {
             console.log(res);
+              //循环接口数据进行时间戳转换
+              for (var i = 0; i < res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list.length; i++) {
+                res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[i]["time"] = util.formatTimeNum(res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[i]["time"],'Y-M-D h:m:s')
+           }
             that.setData({
-                reserveList: res.data.reserveList,
+                highLightItem: res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list
             });
         });
     },
@@ -153,7 +168,8 @@ Page({
     select: function (event) {
         //为上半部分的点击事件
         this.setData({
-            currentIndex: event.currentTarget.dataset.index
+            currentIndex: event.currentTarget.dataset.index,
+            order_c_data: event.currentTarget.dataset.date
         })
         console.log(event.currentTarget.dataset.date)
     },
@@ -161,7 +177,8 @@ Page({
     selectTime: function (event) {
         //为下半部分的点击事件
         this.setData({
-            currentTime: event.currentTarget.dataset.tindex
+            currentTime: event.currentTarget.dataset.tindex,
+            order_c_time: event.currentTarget.dataset.time
         })
         console.log(event.currentTarget.dataset.time)
     },
@@ -191,6 +208,8 @@ Page({
         obj.name = this.data.order_c_name
         obj.phone = this.data.order_c_phone
         obj.license = this.data.order_c_license
+        obj.data = this.data.order_c_data
+        obj.time = this.data.order_c_time
         console.log(obj);
         arr.push(obj);
         console.log(arr);
