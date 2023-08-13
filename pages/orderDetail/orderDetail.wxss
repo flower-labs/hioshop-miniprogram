@@ -2,7 +2,7 @@
 .goods_to_title{
     padding: 20rpx;
     font-weight: bold;
-    border-bottom: 1rpx solid gray;
+    border-bottom: 1rpx solid black;
     margin: 0rpx 20rpx;
     margin-bottom: 20rpx;
     box-sizing: border-box;
@@ -13,7 +13,7 @@
     padding: 20rpx;
     font-weight:normal;
     font-size: small;
-    border-bottom: 1rpx solid gray;
+    border-bottom: 1rpx solid black;
     margin-left:20rpx;
     margin-right:20rpx;
     margin-bottom: 10rpx;
@@ -66,6 +66,7 @@ scroll-view{
     justify-content: flex-start;
     margin: 0 auto;
     margin-top: 30rpx;
+    margin-bottom: 30rpx;
    }
    .time .listItem{
     width: 25%;
@@ -73,10 +74,11 @@ scroll-view{
     flex-wrap: wrap;
     text-align: center;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #f1f2f6;
     padding-top: 35rpx;
     padding-bottom: 35rpx;
-    border: 1px solid #b9c1c8;
+    border-radius: 30rpx;
+    
    }
    .time .listItem text{
     display: block;
@@ -84,10 +86,12 @@ scroll-view{
     
    }
    .time .current{
-    border: 1px solid rgb(255, 196, 0);
+    border: 1px solid black;
+    
    }
    .time .current text{
     color: rgb(255, 196, 0);
+    
    }
    .operate button{
     width:300rpx;

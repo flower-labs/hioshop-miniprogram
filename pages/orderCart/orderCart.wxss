@@ -1,14 +1,22 @@
 /* pages/orderCart/orderCart.wxss */
 page {
-    background-color: rgba(238, 238, 238, 0.5);
+    background-color: white;
   }
   .order {
+    
     padding: 20rpx;
-    background-color: #fefeff;
+    background-color: rgb(255, 196, 0);
     margin: 27rpx;
     border-radius: 24rpx;
   }
+  .order_head{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
   .order_title{
+      width: 70%;
       font-weight:bold ;
   }
   .order_title text{
@@ -19,3 +27,26 @@ page {
       font-weight: lighter;
       font-size: small;
   }
+  .detel {
+    width: 30rpx;
+    height: 30rpx;
+  }
+  
+  .detel image {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .order_content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.order_content .order_content_left{
+    width: 60%;
+}
+.order_content .order_content_right{
+    background-color: white;
+    border-radius: 15rpx;
+    padding: 10rpx;
+}

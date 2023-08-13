@@ -8,7 +8,7 @@ Page({
     data: {
         service_id: '',
         service_name: '',
-        service_price:'',
+        service_price: '',
         order_c_name: '',
         order_c_phone: '',
         order_c_license: '',
@@ -20,8 +20,8 @@ Page({
         width: 0,
         currentIndex: 0,
         currentTime: 0,
-        availableReserveList:[],
-        highLightItem:[],
+        availableReserveList: [],
+        highLightItem: [],
         timeArr: [{
                 "time": "8:00-9:00",
                 "status": "约满"
@@ -64,7 +64,7 @@ Page({
             service_name: options.service_name,
             service_id: options.service_id,
 
-            service_price:options.service_price,
+            service_price: options.service_price,
         })
 
         function getThisMonthDays(year, month) {
@@ -126,19 +126,21 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
+
     },
     //获取时间信息
     getGoodsInfo() {
         let that = this;
         console.log(that.data.service_id);
-        util.request(api.AvailableReserveList,{ reserve_date: 1690778306,
-            reserve_ids: [Number(that.data.service_id)]},'POST').then(function (res) {
+        util.request(api.AvailableReserveList, {
+            reserve_date: 1690778306,
+            reserve_ids: [Number(that.data.service_id)]
+        }, 'POST').then(function (res) {
             console.log(res);
-              //循环接口数据进行时间戳转换
-              for (var i = 0; i < res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list.length; i++) {
-                res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[i]["time"] = util.formatTimeNum(res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[i]["time"],'Y-M-D h:m:s')
-           }
+            //循环接口数据进行时间戳转换
+            for (var i = 0; i < res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list.length; i++) {
+                res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[i]["time"] = util.formatTimeNum(res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[i]["time"], 'Y-M-D h:m:s')
+            }
             that.setData({
                 highLightItem: res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list
             });
@@ -205,22 +207,79 @@ Page({
         let arr = new Array;
         obj.id = this.data.service_id
         obj.service_name = this.data.service_name
+        // 用户输入信息
         obj.name = this.data.order_c_name
         obj.phone = this.data.order_c_phone
         obj.license = this.data.order_c_license
+
         obj.data = this.data.order_c_data
         obj.time = this.data.order_c_time
         console.log(obj);
         arr.push(obj);
         console.log(arr);
-        // 跳转页面
-        wx.navigateTo({
-            url: '/pages/orderCart/orderCart',
-            success:(res) => {
-              // 通过eventChannel向被打开页面传送数据
-               res.eventChannel.emit('array',arr)
-            }
-        });
+
+        // 判断输入是否正确
+        function validateInput(name, phone, plateNumber) {
+            const nameReg = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
+            const phoneReg = /^1[3-9]\d{9}$/;
+            const plateNumberReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
+            if (nameReg.test(name) && phoneReg.test(phone) && plateNumberReg.test(plateNumber)) {
+                // 跳转页面
+                wx.navigateTo({
+                    url: '/pages/orderCart/orderCart',
+                    success: (res) => {
+                        // 通过eventChannel向被打开页面传送数据
+                        res.eventChannel.emit('array', arr)
+                    }
+                });
+            } else {
+                if (!nameReg.test(name)) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '请输入正确的姓名',
+                        success(res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+
+                if (!phoneReg.test(phone)) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '请输入正确的电话号码',
+                        success(res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+
+                if (!plateNumberReg.test(plateNumber)) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '请输入正确的车牌号码',
+                        success(res) {
+                            if (res.confirm) {
+                                console.log('用户点击确定')
+                            } else if (res.cancel) {
+                                console.log('用户点击取消')
+                            }
+                        }
+                    })
+                }
+                return "输入格式正确";
+            };
+        }
+        const result = validateInput(obj.name, obj.phone, obj.license);
+        console.log(result); // 输出：输入格式正确
+
         `      `
     }
 })
