@@ -9,14 +9,14 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/gude/gude",
+                    "pathName": "pages/order/order",
                     "query": "",
                     "launchMode": "default",
                     "scene": null
                 },
                 {
                     "name": "",
-                    "pathName": "pages/order/order",
+                    "pathName": "pages/gude/gude",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

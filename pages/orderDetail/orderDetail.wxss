@@ -1,120 +1,117 @@
 /* pages/orderDetail/orderDetail.wxss */
-.goods_to_title{
-    padding: 20rpx;
-    font-weight: bold;
-    border-bottom: 1rpx solid black;
-    margin: 0rpx 20rpx;
-    margin-bottom: 20rpx;
-    box-sizing: border-box;
+.goods_to_title {
+  padding: 20rpx;
+  font-weight: bold;
+  border-bottom: 1rpx solid black;
+  margin: 0rpx 20rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
 }
 
-.order_c{
-    display: flex;
-    padding: 20rpx;
-    font-weight:normal;
-    font-size: small;
-    border-bottom: 1rpx solid black;
-    margin-left:20rpx;
-    margin-right:20rpx;
-    margin-bottom: 10rpx;
-    box-sizing: border-box;
-    align-items: center;
-}
-
-
-scroll-view{
-    height: 128rpx;
-   
-    width: 100%;
-   }
-   scroll-view .list{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-     width: 1302rpx; 
-   }
-   scroll-view .listItem{
-    text-align: center;
-    width: 186rpx;
-    height: 128rpx;
-    background-color: #f1f2f6;
-    padding-top: 30rpx;
-    box-sizing: border-box;
-    /* float: left; */
-    display: inline-block;
-   }
-   scroll-view .listItem text{
-    display: block;
-   }
-   scroll-view .listItem .name{
-    font-size: 30rpx;
-   }
-   scroll-view .listItem .date{
-    font-size: 30rpx;
-   }
-   scroll-view .current{
-    background-color: rgb(255, 196, 0);
-   
-   }
-   scroll-view .current text{
-    color: #fff;
-   }
-   .time{
-    width: 95%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 0 auto;
+.scroll-view_H{
     margin-top: 30rpx;
-    margin-bottom: 30rpx;
-   }
-   .time .listItem{
-    width: 25%;
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    box-sizing: border-box;
-    background-color: #f1f2f6;
-    padding-top: 35rpx;
-    padding-bottom: 35rpx;
-    border-radius: 30rpx;
-    
-   }
-   .time .listItem text{
-    display: block;
-    font-size: 30rpx;
-    
-   }
-   .time .current{
-    border: 1px solid black;
-    
-   }
-   .time .current text{
-    color: rgb(255, 196, 0);
-    
-   }
-   .operate button{
-    width:300rpx;
-    height: 88rpx;
-    background-color: #fff;
-   }
+}
 
-   .operate{
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-   }
+.order_c {
+  display: flex;
+  padding: 20rpx;
+  font-weight: normal;
+  font-size: small;
+  border-bottom: 1rpx solid black;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-bottom: 10rpx;
+  box-sizing: border-box;
+  align-items: center;
+}
 
+scroll-view {
+  height: 128rpx;
 
-   .operate{
-    width: 100%;
-    padding: 30rpx 0;
-    background-color: #fff;
-    position: fixed;
-    bottom: 0;
-   }
-   .operate .confirm_order{
-    color: #fff;
-    background-color: rgb(255, 196, 0);
-   
-   }
+  width: 100%;
+}
+scroll-view .list {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: 1302rpx;
+}
+scroll-view .listItem {
+  text-align: center;
+  width: 186rpx;
+  height: 128rpx;
+  background-color: #f1f2f6;
+  padding-top: 30rpx;
+  box-sizing: border-box;
+  /* float: left; */
+  display: inline-block;
+}
+scroll-view .listItem text {
+  display: block;
+}
+scroll-view .listItem .name {
+  font-size: 30rpx;
+}
+scroll-view .listItem .date {
+  font-size: 30rpx;
+}
+scroll-view .current {
+  background-color: rgb(255, 196, 0);
+}
+scroll-view .current text {
+  color: #fff;
+}
+.time {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 25rpx;
+  margin-top: 30rpx;
+}
+.time .listItem {
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #f1f2f6;
+  padding: 35rpx 0;
+  border-radius: 15rpx;
+}
+.time .listItem text {
+  display: block;
+  font-size: 30rpx;
+}
+.time .current {
+  border: 1px solid black;
+}
+.time .current text {
+  color: rgb(255, 196, 0);
+}
+.operate button {
+  width: 300rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: #fff;
+}
+
+.operate {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.operate {
+  width: 100%;
+  padding: 30rpx 0;
+  line-height: 30rpx;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+}
+.operate .confirm_order {
+  color: #fff;
+  background-color: rgb(255, 196, 0);
+}
