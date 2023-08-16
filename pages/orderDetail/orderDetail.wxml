@@ -1,33 +1,34 @@
 <!--pages/orderDetail/orderDetail.wxml-->
 <view class="goods_to_title">预约：{{service_name}}</view>
 
-<view class="order_c">姓名：
-    <input type="text" bindinput="input_value1" placeholder="请输入姓名...."/>
-</view>
+
 <view class="order_c">电话：
-    <input type="text" bindinput="input_value2" placeholder="请输入电话...."/>
+    <input type="text" bindinput="input_phone" placeholder="请输入电话...." />
 </view>
 <view class="order_c">车牌号：
-    <input type="text" bindinput="input_value3" placeholder="例如：京A12345...."/>
+    <input type="text" bindinput="input_plate" placeholder="例如：京A12345...." />
+</view>
+<view class="order_c">备注信息：
+    <input type="text" bindinput="input_remark" placeholder="可以添加备注信息...." />
 </view>
 
 <view class='containt'>
- <scroll-view class="scroll-view_H" scroll-x>
-  <view class='list' style='width:{{ width }}rpx'>
-   <view bindtap="handleDateSelect" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex? "current":""}}' wx:key='' data-date="{{ item.date}}">
-    <text class='name'>{{ item.week }}</text>
-    <text class='date'>{{ item.date }}</text>
-   </view>
-  </view>
- </scroll-view>
- <view class='time'>
-  <view class="listItem"  wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.time}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
-   <text>{{ timeItem.time }}</text>
-   <text>可预约：{{ timeItem.available_position }}</text>
-  </view>
- </view>
+    <scroll-view class="scroll-view_H" scroll-x>
+        <view class='list' style='width:{{ width }}rpx'>
+            <view bindtap="handleDateSelect" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex? "current":""}}' wx:key='' data-date="{{ item.date}}">
+                <text class='name'>{{ item.week }}</text>
+                <text class='date'>{{ item.date }}</text>
+            </view>
+        </view>
+    </scroll-view>
+    <view class='time'>
+        <view class="listItem" wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.time}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
+            <text>{{ timeItem.time }}</text>
+            <text>可预约：{{ timeItem.available_position }}</text>
+        </view>
+    </view>
 
- <view class='operate' bindtap="onSubmit">
-  <button class="confirm_order">提交预约</button>
- </view>
+    <view class='operate' bindtap="onSubmit">
+        <button class="confirm_order">提交预约</button>
+    </view>
 </view>

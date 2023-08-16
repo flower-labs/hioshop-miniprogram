@@ -1,6 +1,7 @@
 // pages/orderDetail/orderDetail.js
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
+
 Page({
   /**
    * 页面的初始数据
@@ -8,63 +9,31 @@ Page({
   data: {
     service_id: "",
     service_name: "",
-    service_price: "",
+    servicePrice: "",
     order_c_name: "",
-    order_c_phone: "",
-    order_c_license: "",
+    orderPhone: "",
+    orderRemark: "",
+    orderPlate: "",
     selectedDate: "",
     selectedTime: "",
     myObject: {},
-
     calendar: [],
     width: 0,
     currentIndex: 0,
     currentTime: 0,
     availableReserveList: [],
     highLightItem: [],
-    timeArr: [
-      {
-        time: "8:00-9:00",
-        status: "约满",
-      },
-      {
-        time: "9:00-10:00",
-        status: "约满",
-      },
-      {
-        time: "11:00-12:00",
-        status: "约满",
-      },
-      {
-        time: "14:00-15:00",
-        status: "约满",
-      },
-      {
-        time: "15:00-16:00",
-        status: "约满",
-      },
-      {
-        time: "16:00-17:00",
-        status: "约满",
-      },
-      {
-        time: "17:00-18:00",
-        status: "约满",
-      },
-    ],
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this;
-
     //使用页面参数
     that.setData({
       service_name: options.service_name,
       service_id: options.service_id,
-
-      service_price: options.service_price,
+      servicePrice: options.service_price,
     });
 
     function getThisMonthDays(year, month) {
@@ -230,31 +199,29 @@ Page({
       currentTime: event.currentTarget.dataset.tindex,
       selectedTime: event.currentTarget.dataset.time,
     });
-    console.log(event.currentTarget.dataset.time);
   },
 
-  input_value1: function (event) {
+  input_phone: function (event) {
     this.setData({
-      order_c_name: event.detail.value,
+      orderPhone: event.detail.value,
     });
   },
-  input_value2: function (event) {
+  input_plate: function (event) {
     this.setData({
-      order_c_phone: event.detail.value,
+      orderPlate: event.detail.value,
     });
   },
-  input_value3: function (event) {
+  input_remark: function (event) {
     this.setData({
-      order_c_license: event.detail.value,
+      orderRemark: event.detail.value,
     });
   },
 
   // 判断输入是否正确
   validateInput(name, phone, plateNumber) {
-    const nameReg = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
     const phoneReg = /^1[3-9]\d{9}$/;
     const plateNumberReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
-    if (nameReg.test(name) && phoneReg.test(phone) && plateNumberReg.test(plateNumber)) {
+    if (phoneReg.test(phone) && plateNumberReg.test(plateNumber)) {
       // 跳转页面
       wx.navigateTo({
         url: "/pages/orderCart/orderCart",
@@ -264,20 +231,6 @@ Page({
         },
       });
     } else {
-      if (!nameReg.test(name)) {
-        wx.showModal({
-          title: "提示",
-          content: "请输入正确的姓名",
-          success(res) {
-            if (res.confirm) {
-              console.log("用户点击确定");
-            } else if (res.cancel) {
-              console.log("用户点击取消");
-            }
-          },
-        });
-      }
-
       if (!phoneReg.test(phone)) {
         wx.showModal({
           title: "提示",
@@ -310,18 +263,12 @@ Page({
   },
   //提交预约
   onSubmit(e) {
-    //存储页面信息
-    let formInfo = {};
-    formInfo.id = this.data.service_id;
-    formInfo.service_name = this.data.service_name;
-    // 用户输入信息
-    formInfo.name = this.data.order_c_name;
-    formInfo.phone = this.data.order_c_phone;
-    formInfo.license = this.data.order_c_license;
-
-    formInfo.data = this.data.selectedDate;
-    formInfo.time = this.data.selectedTime;
-    console.log(formInfo);
+    if (!this.data.selectedTime) {
+      wx.showModal({
+        title: "提示",
+        content: "请选择预约时间",
+      });
+    }
 
     // const result = validateInput(obj.name, obj.phone, obj.license);
     // console.log(result); // 输出：输入格式正确
@@ -330,17 +277,27 @@ Page({
       .request(
         api.AddReserveOrder,
         {
-          reserve_id: Number(formInfo.id),
-          reserve_time: this.convertToTimestamp(formInfo.time),
-          reserve_price: 125.25,
-          phone_number: formInfo.phone,
-          plate_number: formInfo.license,
-          remark: "",
+          reserve_id: Number(this.data.service_id),
+          reserve_time: this.convertToTimestamp(this.data.selectedTime),
+          reserve_price: this.data.servicePrice,
+          phone_number: this.data.orderPhone,
+          plate_number: this.data.orderPlate,
+          remark: this.data.orderRemark,
         },
         "POST",
       )
       .then(function (res) {
         console.log("AddReserveOrder", res);
+        if (res.data.success) {
+          // 跳转页面
+          wx.navigateTo({
+            url: "/pages/orderCart/orderCart",
+            success: res => {
+              // 通过eventChannel向被打开页面传送数据
+              res.eventChannel.emit("array", arr);
+            },
+          });
+        }
       });
   },
 });
