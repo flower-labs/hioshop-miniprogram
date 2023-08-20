@@ -1,23 +1,13 @@
 <!--pages/lianxi/lianxi.wxml-->
 <!-- 设置滑动模块 -->
-<view>价格：{{tem_price}}</view>
-<view>已选择:{{tem_spec}}</view>
-
-  <!-- 设置滑动模块 -->
-<swiper current="{{current}}" bindchange="swiperInfo">
-  <swiper-item >
-    <image src="" mode="" style="background-color: lightgreen;"/>
-  </swiper-item>
-  <swiper-item >
-    <image src="" mode="" style="background-color: lightcoral;"/>
-  </swiper-item>
-  <swiper-item >
-    <image src="" mode="" style="background-color: lightblue;"/>
-  </swiper-item>
-</swiper>
-
-<view class="about">
-<block wx:for="{{specList}}">
-  <view data-id="{{index}}" bindtap="tapTitle" class="spec {{item.class}}">{{item.spec}}</view>
-</block>
+<view class="product-list">
+  <block wx:for="{{products}}" wx:key="id">
+    <view class="product-item {{(index + 1) % 3 == 0?'no-margin':''}}">
+      <image class="product-img" src="{{item.image}}" mode="aspectFit"></image>
+      <view class="product-name">{{item.name}}</view>
+      <view class="product-price">¥{{item.price}}</view>
+    </view>
+  </block>
 </view>
+
+

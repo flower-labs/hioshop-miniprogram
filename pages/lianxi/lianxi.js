@@ -5,53 +5,39 @@ Page({
      * 页面的初始数据
      */
     data: { 
-      tem_price:'',
-      tem_spec:'',
-      specList:[
-        {spec:'iphone6',good_price:'5555',class:''},
-        {spec:'iphone7',good_price:'6565',class:''},
-        {spec:'iphone8',good_price:'8557',class:''}
-      ]
+        items:["item1","item2","item3","item4","item5"],
+        products:[{
+            img:'/images/icon/chat.png',
+            name:'mao',
+            price:24
+        },{
+            img:'/images/icon/footprint.png',
+            name:'mao',
+            price:24
+        },{
+            img:'/images/icon/no-search.png',
+            name:'mao',
+            price:24
+        },{
+            img:'/images/icon/chat.png',
+            name:'mao',
+            price:24
+        },{
+            img:'/images/icon/footprint.png',
+            name:'mao',
+            price:24
+        },{
+            img:'/images/icon/no-search.png',
+            name:'mao',
+            price:24
+        },{
+            img:'/images/icon/no-search.png',
+            name:'mao',
+            price:24
+        }
+    ]
     },
 
-    tapTitle(e){
-     let index=e.currentTarget.dataset.id
-     let arr=this.data.specList
-     let var_price
-     let var_spec
-     for(let i=0;i<arr.length;i++){
-       if(i==index){
-         arr[i]['class']="txtColor";
-         var_price=arr[i].good_price;
-         var_spec=arr[i].spec;
-         continue;
-       }
-       arr[i]['class']="";
-     }
-     this.setData({
-       specList:arr,current:index,tem_price:var_price,tem_spec:var_spec
-     })
-   },
-
-   swiperInfo(e){
-    let index=e.detail.current
-    let arr=this.data.specList
-    let var_price
-     let var_spec
-    for(let i=0;i<arr.length;i++){
-      if(i==index){
-        arr[i]['class']="txtColor";
-        var_price=arr[i].good_price;
-        var_spec=arr[i].spec;
-        continue;
-      }
-      arr[i]['class']="";
-    }
-    this.setData({
-      specList:arr,current:index,tem_price:var_price,tem_spec:var_spec
-    })
-  },
-  
 
     /**
      * 生命周期函数--监听页面加载

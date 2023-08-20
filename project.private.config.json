@@ -27,6 +27,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/lianxi/lianxi",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

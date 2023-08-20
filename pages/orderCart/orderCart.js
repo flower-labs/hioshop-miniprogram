@@ -45,50 +45,7 @@ Page({
         });
 
     },
-    deletes(e) {
-        var that = this;
-        // 获取索引
-        const index = e.currentTarget.dataset.index;
-        // 获取商品列表数据
-        let reserveOrderList = this.data.reserveOrderList;
-        // 判断何种状态下执行操作
-        if(reserveOrderList[index].status=="待确认"||reserveOrderList[index].status=="已确认"){
-        wx.showModal({
-          title: '提示',
-          content: '确认删除吗',
-          success: function(res) {
-            if (res.confirm) {
-              // 删除索引从1
-              reserveOrderList.splice(index, 1);
-              // 页面渲染数据
-              that.setData({
-                reserveOrderList: reserveOrderList
-              });
-              // 如果数据为空
-            } else {
-              console.log(res);
-            }
-          },
-          fail: function(res) {
-            console.log(res);
-          }
-        })
-        }else{
-            wx.showModal({
-              title: '提示',
-              content: '不可以删除，请找客服',
-              complete: (res) => {
-                if (res.cancel) {
-                  
-                }
-            
-                if (res.confirm) {
-                  
-                }
-              }
-            })
-        }
-      },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

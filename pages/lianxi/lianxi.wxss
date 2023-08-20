@@ -1,8 +1,36 @@
 /* pages/lianxi/lianxi.wxss */
-.about .spec.txtColor{
-  color: red;
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20rpx;
+  }
   
-}
-.about .spec{
-  border: 1rpx solid black;
-}
+  .product-item {
+    width: calc(33.33% - 10rpx);
+    margin-bottom: 20rpx;
+    padding: 10rpx;
+    border: 1px solid #ccc;
+    border-radius: 5rpx;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .product-img {
+    width: 100%;
+    height: 150rpx;
+    margin-bottom: 10rpx;
+  }
+  
+  .product-name {
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+  }
+  
+  .product-price {
+    font-size: 24rpx;
+    color: #f00;
+  }
+  .no-margin{
+      margin-right: 0%;
+  }

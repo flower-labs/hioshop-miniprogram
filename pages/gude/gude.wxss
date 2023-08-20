@@ -260,30 +260,31 @@
 
 /* 商品展示模板 */
 
-.new-box {
-    
-    width: 45%;
+.list-wrap {
     display: flex;
-    flex-direction: column;
-    /* height: 330rpx; */
-    float: left;
-    margin: 0rpx 30rpx 20rpx 0rpx;
-    
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20rpx;
+    box-sizing: border-box;
+}
+
+.list-wrap .new-box {
+    width: 48%;
+    margin-bottom: 20rpx;
+    padding: 10rpx;
+    border: 1px solid #ccc;
+    border-radius: 5rpx;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .list-wrap .no-margin {
     margin-right: 0;
 }
 
-.navi-url {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .new-box .navi-url .image {
     width: 100%;
-    height: 210rpx;
+    height: 150rpx;
     border-radius: 8rpx;
     background: #f9f9f9;
 }

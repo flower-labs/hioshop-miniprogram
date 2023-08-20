@@ -6,9 +6,6 @@
                 <view class="order_title">{{item.reserve_name}}
                     <text>价格：￥{{item.order_price}}</text>
                 </view>
-                <view class="detel" catchtap="deletes" data-index="{{index}}">
-                    <image src="/images/icon/icon-close.png" />
-                </view>
             </view>
             <view class="order_time">预约时间：{{item.reserve_time}}</view>
             <view class="order_content">
