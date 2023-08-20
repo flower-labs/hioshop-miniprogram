@@ -273,16 +273,18 @@ Page({
     // const result = validateInput(obj.name, obj.phone, obj.license);
     // console.log(result); // 输出：输入格式正确
 
+    const { service_id, selectedTime, servicePrice, orderPhone, orderPlate, orderRemark } = this.data;
+
     util
       .request(
         api.AddReserveOrder,
         {
-          reserve_id: Number(this.data.service_id),
-          reserve_time: this.convertToTimestamp(this.data.selectedTime),
-          reserve_price: this.data.servicePrice,
-          phone_number: this.data.orderPhone,
-          plate_number: this.data.orderPlate,
-          remark: this.data.orderRemark,
+          reserve_id: Number(service_id),
+          reserve_time: this.convertToTimestamp(selectedTime),
+          reserve_price: servicePrice,
+          phone_number: orderPhone,
+          plate_number: orderPlate,
+          remark: orderRemark,
         },
         "POST",
       )
