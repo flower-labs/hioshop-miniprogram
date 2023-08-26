@@ -12,14 +12,14 @@
                         <view class="text_title">{{item.service_name}}</view>
                         <view class="text_detail">
                             <text class="item_price">￥{{item.service_price}}</text>
-                            <text class="item_sell">已约:{{item.sell}}</text>
+                            <text class="item_sell">已约:{{item.count}}</text>
                         </view>
                     </view>
                     <view class="text_btn" bindtap="get_order" data-id="{{index}}">
                         <text>预约</text>
                     </view>
                 </view>
-                <view class="text_bottom">最近可约{{item.stock}}</view>
+                <view class="text_bottom">最近可约: {{ item.latestTimestamp }}</view>
             </view>
         </view>
     </view>
