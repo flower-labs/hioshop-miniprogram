@@ -47,6 +47,7 @@ Page({
     const cur_year = date.getFullYear();
     const cur_month = date.getMonth() + 1;
     const cur_date = date.getDate();
+    const cur_minutes = date.getMinutes();
     const weeks_ch = ["日", "一", "二", "三", "四", "五", "六"];
     //利用构造函数创建对象
     function calendar(date, week) {
@@ -74,13 +75,12 @@ Page({
       x++;
     }
     //限制要渲染的日历数据天数为7天以内（用户体验）
-    var flag = that.data.calendar.splice(
+    var processedCalendar = that.data.calendar.splice(
       cur_date,
       that.data.calendar.length - cur_date <= 7 ? that.data.calendar.length : 7,
     );
-    console.log("flag", flag);
     that.setData({
-      calendar: flag,
+      calendar: processedCalendar,
     });
     //设置scroll-view的子容器的宽度
     that.setData({
@@ -113,25 +113,18 @@ Page({
       .then(function (res) {
         console.log(res);
         //循环接口数据进行时间戳转换
-        for (
-          var i = 0;
-          i <
-          res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list
-            .length;
-          i++
-        ) {
-          res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[
-            i
-          ]["time"] = util.formatTimeNum(
-            res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id)).available_list[
-              i
-            ]["time"],
-            "Y-M-D h:m:s",
-          );
-        }
+        const availableList = res.data.availableReserveList.find(
+          item => item.service_id === Number(that.data.service_id),
+        ).available_list;
+
+        const formatedAvailableList = availableList.map(item => ({
+          ...item,
+          formatedTime: util.formatTimeNum(item.time, "Y-M-D h:m:s"),
+        }));
+
         that.setData({
-          highLightItem: res.data.availableReserveList.find(item => item.service_id === Number(that.data.service_id))
-            .available_list,
+          highLightItem: formatedAvailableList,
+          selectedTime: formatedAvailableList.length ? formatedAvailableList[0].formatedTime : "",
         });
       });
   },
