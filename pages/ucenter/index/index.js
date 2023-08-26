@@ -46,6 +46,12 @@ Page({
       url: '/pages/ucenter/about/index',
     });
   },
+  /** 跳转订单详情页 */
+  toReserveOrder: function () {
+    wx.navigateTo({
+        url: "/pages/orderCart/orderCart",
+    });
+  },
   toFootprint: function (e) {
     let res = util.loginNow();
     if (res == true) {

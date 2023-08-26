@@ -75,6 +75,17 @@
         </view>
     </view>
     <view class="li-wrap">
+        <view class="list" bindtap="toReserveOrder">
+            <view class="list-l">
+                <view class="icon">
+                    <image class="img" src="/images/icon/order.png"></image>
+                </view>
+                <view class="text">预约订单</view>
+            </view>
+            <view class="arrow"></view>
+        </view>
+    </view>
+    <view class="li-wrap">
         <view class="list" bindtap="toFootprint">
             <view class="list-l">
                 <view class="icon">

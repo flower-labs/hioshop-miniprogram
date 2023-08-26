@@ -13,6 +13,7 @@ page {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 5rpx;
   }
 
   .order_title{
@@ -26,6 +27,7 @@ page {
   .order_time,.order_phone,.order_plate{
       font-weight: lighter;
       font-size: small;
+      margin-top: 5rpx;
   }
   .order_content{
     display: flex;
