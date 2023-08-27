@@ -8,6 +8,7 @@ Page({
    */
   data: {
     reserveOrderList: [],
+    backTopVisible: false,
   },
 
   /**
@@ -35,6 +36,7 @@ Page({
         );
         res.data.reserveOrderList[i]["status"] = statusArr[res.data.reserveOrderList[i]["status"]];
       }
+      wx.stopPullDownRefresh();
       that.setData({
         reserveOrderList: res.data.reserveOrderList,
       });
@@ -46,7 +48,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {},
-
+  onPageScroll(e) {
+    const { scrollTop } = e;
+    this.setData({
+      backTopVisible: scrollTop > 200,
+    });
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -67,7 +74,9 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() {},
+  onPullDownRefresh() {
+    this.getOrderCart();
+  },
 
   /**
    * 页面上拉触底事件的处理函数

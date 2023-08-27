@@ -1,4 +1,8 @@
 {
-    "usingComponents": {},
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark",
+    "usingComponents": {
+        "t-back-top": "tdesign-miniprogram/back-top/back-top"
+    },
     "navigationBarTitleText": "预约详情"
 }
