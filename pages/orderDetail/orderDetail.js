@@ -1,4 +1,5 @@
 // pages/orderDetail/orderDetail.js
+import Toast from "tdesign-miniprogram/toast/index";
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
 
@@ -86,8 +87,8 @@ Page({
     that.setData({
       width: 186 * parseInt(that.data.calendar.length - cur_date <= 7 ? that.data.calendar.length : 7),
     });
-    const current = Math.floor(Date.now() / 1000);
-    this.getReserveList(current);
+    // const current = Math.floor(Date.now() / 1000);
+    // this.getReserveList(current);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -96,7 +97,15 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+    const currentIndex = this.data.currentIndex;
+    if (currentIndex === 0) {
+      const current = Math.floor(Date.now() / 1000);
+      this.getReserveList(current);
+    } else {
+      this.getReserveList(this.convertToTimestamp(this.data.selectedDate));
+    }
+  },
   //获取时间信息
   getReserveList(reservTime) {
     let that = this;
@@ -117,15 +126,21 @@ Page({
           item => item.service_id === Number(that.data.service_id),
         ).available_list;
 
+        // 转换时间 & 排除已经预约完时间点
         const formatedAvailableList = availableList.map(item => ({
           ...item,
           formatedTime: util.formatTimeNum(item.time, "Y-M-D h:m:s"),
-        }));
+        })).filter(item => item.available_position !== 0);
 
         that.setData({
           highLightItem: formatedAvailableList,
-          selectedTime: formatedAvailableList.length ? formatedAvailableList[0].formatedTime : "",
         });
+
+        if (!that.data.selectTime && formatedAvailableList.length) {
+          that.setData({
+            selectedTime: formatedAvailableList[0].formatedTime,
+          });
+        }
       });
   },
   /** 将字符串时间转为10位时间戳 */
@@ -256,6 +271,7 @@ Page({
   },
   //提交预约
   onSubmit(e) {
+    var that = this;
     if (!this.data.selectedTime) {
       wx.showModal({
         title: "提示",
@@ -284,15 +300,24 @@ Page({
       .then(function (res) {
         console.log("AddReserveOrder", res);
         if (res.data.success) {
-          // 跳转页面
-          wx.navigateTo({
-            url: "/pages/orderCart/orderCart",
-            success: res => {
-              // 通过eventChannel向被打开页面传送数据
-              res.eventChannel.emit("array", arr);
-            },
-          });
+          that.showSuccessAlert();
+          setTimeout(() => {
+            // 跳转页面
+            wx.navigateTo({
+              url: "/pages/orderCart/orderCart",
+            });
+          }, 1000);
         }
       });
+  },
+
+  showSuccessAlert() {
+    Toast({
+      context: this,
+      selector: "#t-toast",
+      message: "预约成功",
+      icon: "check-circle",
+      direction: "column",
+    });
   },
 });

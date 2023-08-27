@@ -27,10 +27,11 @@
             <text>可预约：{{ timeItem.available_position }}</text>
         </view>
     </view>
-
     <view class="blank">
     </view>
     <view class='operate' bindtap="onSubmit">
         <button class="confirm_order">提交预约</button>
     </view>
 </view>
+
+<t-toast id="t-toast" />
