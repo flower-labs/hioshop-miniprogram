@@ -1,75 +1,73 @@
 <!--pages/gude/gude.wxml-->
 <view class="container">
-
+<!-- 轮播 -->
     <t-swiper current="{{current}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" bindchange="onChange" navigation="{{ { type: 'dots-bar' } }}" list="{{swiperList}}" image-props="{{ { shape: 'round' } }}" previousMargin="0px" nextMargin="0px" t-class-nav="card-theme-nav" />
-
-    <view class="block1">
-        <view bindtap="goto_gudeInfo1" class="block1_1">
-            <view class="block1_1_text1">
+<!-- 主题 -->
+    <view class="theme">
+        <view bindtap="goto_gudeInfo" class="theme-box">
+            <view class="theme-box-title">
                 <text>古德车服汽车养护中心</text>
             </view>
-            <view class="block1_1_text2">
+            <view class="theme-box-badge">
                 <text>美容</text>
                 <text>机修</text>
                 <text>洗车</text>
                 <text>精品</text>
             </view>
-            <view class="block1_1_text3">
+            <view class="theme-box-time">
                 营业时间:8:00-18:00
             </view>
         </view>
+
         <t-divider />
+
         <t-row>
-            <t-col span="16" t-class="dark">
+            <t-col span="16" t-class="address">
                 <view style="font-size: small;text-align: left;">海口市琼山区滨江街道办滨江路388号滨江世纪佳城(北区)一期商业6#S109号
                 </view>
-                <view style="text-align: left;color: red;" bindtap="getDis">距离：{{dis}}</view>
+                <view style="text-align: left;color: red;font-size: small;" bindtap="getDis">距离：{{dis}}</view>
             </t-col>
-            <t-col span="4" t-class="light">
+            <t-col span="4" t-class="carNav">
                 <view class="grid-item" bindtap="mapViewTap">
                     <image src="/images/nav/导航.png" mode="" />
                     <text>导航</text>
                 </view>
             </t-col>
-            <t-col span="4" t-class="dark">
+            <t-col span="4" t-class="phone">
                 <navigator url="" class="grid-item">
                     <image src="/images/nav/电话.png" mode="" />
                     <text>电话</text>
                 </navigator>
             </t-col>
         </t-row>
+
     </view>
-
-    <t-grid class="block" column="{{3}}">
-        <t-grid-item text="多人拼团" image="{{img1}}" />
-        <t-grid-item text="热销卡" image="{{img2}}" />
-        <t-grid-item text="特惠套装" image="{{img3}}" />
-    </t-grid>
-
-    <view tap bindtap="toReservePage" class="home-page-guide">
-        <view class="guide-title">
-            <view>
-                领券中心
-            </view>
-            <view class="logo">
-                <t-icon name="arrow-triangle-up" size="48rpx" />
-            </view>
+<!-- 积分 -->
+    <view class="bonus">
+        <view class="bonusItem" bindtap="tobonus">
+            <image src="/images/icon/积分.png" mode="" />
+            <text>{{myBonus}}积分</text>
         </view>
-        <view class="guide-sub-title">
-            福利多多，领完购买最划算哦！
+        <view class="bonusItem" bindtap="toSign">
+            <image src="/images/icon/签到.png" mode="" />
+            <text>每日签到</text>
+        </view>
+        <view class="bonusItem">
+            <image src="/images/icon/券设置@2x.png" mode="" />
+            <text>积分兑券</text>
         </view>
     </view>
-
-    <view class="block3">
+<!-- 热销 -->
+    <view class="Hotsales">
         <!-- <view style="text-align: center;margin: 20rpx;background: chartreuse;border-radius: 12rpx;">
             <image src="/images/icon/chat.png" mode="" />
         </view> -->
         <view style="text-align: center;margin: 24rpx 0rpx;">
-            <text>热销</text>
+            <text>—— 热销 ——</text>
         </view>
         <!-- 商品橱窗模板 -->
-        <view class='list-wrap clearfix'>
-            <view class="new-box {{(iindex+1)%2 == 0?'no-margin':''}}" wx:for="{{goodslist}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="id">
+        <view class='goods-list-wrap clearfix'>
+            <view class="goods-box {{(iindex+1)%2 == 0?'no-margin':''}}" wx:for="{{goodslist}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="id">
                 <navigator class="navi-url" url="/pages/gudeInfo1/gudeInfo1?id={{iitem.id}}&title={{iitem.title}}">
                     <!-- 商品图片 -->
                     <image src="{{iitem.list_pic_url}}" mode="widthFix" class="image" />

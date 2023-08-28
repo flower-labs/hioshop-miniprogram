@@ -5,6 +5,9 @@ Page({
      * 页面的初始数据
      */
     data: { 
+        img1: 'https://tdesign.gtimg.com/miniprogram/images/example1.png',
+        img2: 'https://tdesign.gtimg.com/miniprogram/images/example2.png',
+        img3: 'https://tdesign.gtimg.com/miniprogram/images/example3.png',
         items:["item1","item2","item3","item4","item5"],
         products:[{
             img:'/images/icon/chat.png',
@@ -38,7 +41,7 @@ Page({
     ]
     },
 
-
+    
     /**
      * 生命周期函数--监听页面加载
      */

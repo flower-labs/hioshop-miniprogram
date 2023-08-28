@@ -43,7 +43,17 @@ Page({
       //循环接口数据进行状态转换
     });
   },
-
+  deletes(e) {
+    var that = this;
+    // 获取索引
+    const orderId = e.currentTarget.dataset.order_id;
+    util.request(api.CancelReservedOrder, {
+        order_id: orderId
+    },'POST').then(function (res) {
+        console.log(res);
+        that.getOrderCart();
+    });
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -82,7 +92,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {},
-
   /**
    * 用户点击右上角分享
    */
