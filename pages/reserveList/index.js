@@ -1,4 +1,4 @@
-// pages/orderCart/orderCart.js
+// pages/reserveList/index.js
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
 
@@ -43,7 +43,8 @@ Page({
       //循环接口数据进行状态转换
     });
   },
-  deletes(e) {
+  /** 取消预约 */
+  cancelReserve(e) {
     var that = this;
     // 获取索引
     const orderId = e.currentTarget.dataset.order_id;

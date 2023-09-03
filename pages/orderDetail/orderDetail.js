@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoading: false,
     service_id: "",
     service_name: "",
     servicePrice: "",
@@ -22,6 +23,7 @@ Page({
     width: 0,
     currentIndex: 0,
     currentTime: 0,
+    availableTime: "",
     availableReserveList: [],
     highLightItem: [],
   },
@@ -35,11 +37,13 @@ Page({
       service_name: options.service_name,
       service_id: options.service_id,
       servicePrice: options.service_price,
+      availableTime: options.timestamp,
     });
 
     function getThisMonthDays(year, month) {
       return new Date(year, month, 0).getDate();
     }
+
     // 计算每月第一天是星期几
     function getFirstDayOfWeek(year, month) {
       return new Date(Date.UTC(year, month - 1, 1)).getDay();
@@ -61,6 +65,7 @@ Page({
         this.week = "星期" + week;
       }
     }
+
     //当前月份的天数
     var monthLength = getThisMonthDays(cur_year, cur_month);
     //当前月份的第一天是星期几
@@ -75,11 +80,15 @@ Page({
       that.data.calendar[i] = new calendar(i, [weeks_ch[x]][0]);
       x++;
     }
+
+    const diffDays = util.getDateDiffInDays(that.data.availableTime);
+    console.log("diffDays", diffDays);
+
     //限制要渲染的日历数据天数为7天以内（用户体验）
-    var processedCalendar = that.data.calendar.splice(
-      cur_date,
-      that.data.calendar.length - cur_date <= 7 ? that.data.calendar.length : 7,
-    );
+    const processedCalendar = that.data.calendar
+      .splice(cur_date, that.data.calendar.length - cur_date <= 7 ? that.data.calendar.length : 7)
+      .slice(diffDays);
+
     that.setData({
       calendar: processedCalendar,
     });
@@ -87,8 +96,6 @@ Page({
     that.setData({
       width: 186 * parseInt(that.data.calendar.length - cur_date <= 7 ? that.data.calendar.length : 7),
     });
-    // const current = Math.floor(Date.now() / 1000);
-    // this.getReserveList(current);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -98,18 +105,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const currentIndex = this.data.currentIndex;
+    this.queryReserveList(this.data.currentIndex);
+  },
+
+  queryReserveList(currentIndex) {
+    let that = this;
     if (currentIndex === 0) {
-      const current = Math.floor(Date.now() / 1000);
-      this.getReserveList(current);
+      // 如果diff > 0 需要请求n天后数据
+      const diffDays = util.getDateDiffInDays(that.data.availableTime);
+      if (diffDays === 0) {
+        const current = Math.floor(Date.now() / 1000);
+        that.getReserveList(current);
+      } else {
+        const timestamp = util.getTimestampAfterDays(diffDays);
+        that.getReserveList(timestamp);
+      }
     } else {
       this.getReserveList(this.convertToTimestamp(this.data.selectedDate));
     }
   },
   //获取时间信息
   getReserveList(reservTime) {
+    this.setData({
+      isLoading: true,
+    });
     let that = this;
-    console.log(that.data.service_id);
     util
       .request(
         api.AvailableReserveList,
@@ -121,21 +141,26 @@ Page({
       )
       .then(function (res) {
         console.log(res);
+        that.setData({
+          isLoading: false,
+        });
         //循环接口数据进行时间戳转换
         const availableList = res.data.availableReserveList.find(
           item => item.service_id === Number(that.data.service_id),
         ).available_list;
 
         // 转换时间 & 排除已经预约完时间点
-        const formatedAvailableList = availableList.map(item => ({
-          ...item,
-          formatedTime: util.formatTimeNum(item.time, "Y-M-D h:m:s"),
-        })).filter(item => item.available_position !== 0);
+        const formatedAvailableList = availableList
+          .map(item => ({
+            ...item,
+            formatedTime: util.formatTimeNum(item.time, "Y-M-D h:m:s"),
+          }))
+          .filter(item => item.available_position !== 0);
 
         that.setData({
           highLightItem: formatedAvailableList,
         });
-
+        // TOOD: 如果返回数据长度为0，则切换activeIndex并请求数据
         if (!that.data.selectTime && formatedAvailableList.length) {
           that.setData({
             selectedTime: formatedAvailableList[0].formatedTime,
@@ -143,6 +168,7 @@ Page({
         }
       });
   },
+
   /** 将字符串时间转为10位时间戳 */
   convertToTimestamp(datetimeString) {
     // 将日期时间字符串转换为标准格式
@@ -186,19 +212,18 @@ Page({
   onShareAppMessage: function () {},
   //选择日期
   handleDateSelect: function (event) {
+    const { isLoading } = this.data;
+    if (isLoading) {
+      return;
+    }
     //为上半部分的点击事件
     const currentIndex = event.currentTarget.dataset.index;
     const currentDate = event.currentTarget.dataset.date;
     this.setData({
-      currentIndex: currentIndex,
+      currentIndex,
       selectedDate: currentDate,
     });
-    if (currentIndex === 0) {
-      const current = Math.floor(Date.now() / 1000);
-      this.getReserveList(current);
-    } else {
-      this.getReserveList(this.convertToTimestamp(currentDate));
-    }
+    this.queryReserveList(currentIndex);
   },
   //选择时间
   selectTime: function (event) {
@@ -230,13 +255,9 @@ Page({
     const phoneReg = /^1[3-9]\d{9}$/;
     const plateNumberReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
     if (phoneReg.test(phone) && plateNumberReg.test(plateNumber)) {
-      // 跳转页面
+      // 跳转订单详情页
       wx.navigateTo({
-        url: "/pages/orderCart/orderCart",
-        success: res => {
-          // 通过eventChannel向被打开页面传送数据
-          res.eventChannel.emit("array", arr);
-        },
+        url: "/pages/reserveList/index",
       });
     } else {
       if (!phoneReg.test(phone)) {
@@ -271,7 +292,11 @@ Page({
   },
   //提交预约
   onSubmit(e) {
-    var that = this;
+    const that = this;
+    const { isLoading } = that.data;
+    if (isLoading) {
+      return;
+    }
     if (!this.data.selectedTime) {
       wx.showModal({
         title: "提示",
@@ -304,7 +329,7 @@ Page({
           setTimeout(() => {
             // 跳转页面
             wx.navigateTo({
-              url: "/pages/orderCart/orderCart",
+              url: "/pages/reserveList/index",
             });
           }, 1000);
         }

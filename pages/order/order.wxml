@@ -15,7 +15,7 @@
                             <text class="item_sell">已约:{{item.count}}</text>
                         </view>
                     </view>
-                    <view class="text_btn" bindtap="get_order" data-id="{{index}}">
+                    <view class="text_btn" bindtap="get_order" data-id="{{item.id}}">
                         <text>预约</text>
                     </view>
                 </view>

@@ -1,14 +1,13 @@
+import moment from 'moment'
 var api = require('../config/api.js');
 
 function formatTime(date) {
     var year = date.getFullYear()
     var month = date.getMonth() + 1
     var day = date.getDate()
-
     var hour = date.getHours()
     var minute = date.getMinutes()
     var second = date.getSeconds()
-
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
@@ -67,7 +66,7 @@ function testMobile(num) {
  * 封封微信的的request
  */
 function request(url, data = {}, method = "GET") {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         wx.request({
             url: url,
             data: data,
@@ -76,7 +75,7 @@ function request(url, data = {}, method = "GET") {
                 'Content-Type': 'application/json',
                 'X-Hioshop-Token': wx.getStorageSync('token')
             },
-            success: function(res) {
+            success: function (res) {
                 if (res.statusCode == 200) {
 
                     if (res.data.errno == 401) {
@@ -114,7 +113,7 @@ function request(url, data = {}, method = "GET") {
                 }
 
             },
-            fail: function(err) {
+            fail: function (err) {
                 reject(err)
             }
         })
@@ -125,12 +124,12 @@ function request(url, data = {}, method = "GET") {
  * 检查微信会话是否过期
  */
 function checkSession() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         wx.checkSession({
-            success: function() {
+            success: function () {
                 resolve(true);
             },
-            fail: function() {
+            fail: function () {
                 reject(false);
             }
         })
@@ -141,9 +140,9 @@ function checkSession() {
  * 调用微信登录
  */
 function login() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         wx.login({
-            success: function(res) {
+            success: function (res) {
                 if (res.code) {
                     //登录远程服务器
                     resolve(res);
@@ -151,7 +150,7 @@ function login() {
                     reject(res);
                 }
             },
-            fail: function(err) {
+            fail: function (err) {
                 reject(err);
             }
         });
@@ -159,13 +158,13 @@ function login() {
 }
 
 function getUserInfo() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         wx.getUserInfo({
             withCredentials: true,
-            success: function(res) {
+            success: function (res) {
                 resolve(res);
             },
-            fail: function(err) {
+            fail: function (err) {
                 reject(err);
             }
         })
@@ -222,12 +221,12 @@ function sentRes(url, data, method, fn) {
             'Trackingmore-Api-Key': '1b70c67e-d191-4301-9c05-a50436a2526d'
         }
     };
-    var req = require(isHttp ? 'http' : 'https').request(options, function(res) {
+    var req = require(isHttp ? 'http' : 'https').request(options, function (res) {
         var _data = '';
-        res.on('data', function(chunk) {
+        res.on('data', function (chunk) {
             _data += chunk;
         });
-        res.on('end', function() {
+        res.on('end', function () {
             fn != undefined && fn(_data);
         });
     });
@@ -238,19 +237,19 @@ function sentRes(url, data, method, fn) {
 function loginNow() {
     let userInfo = wx.getStorageSync('userInfo');
     if (userInfo == '') {
-      wx.login({
-        success: (res) => {
-          request(api.AuthLoginByWeixin, {
-            code: res.code
-          }, 'POST').then(function (res) {
-            if (res.errno === 0) {
-              let userInfo = res.data.userInfo;
-              wx.setStorageSync('token', res.data.token);
-              wx.setStorageSync('userInfo', userInfo);
-            }
-          });
-        },
-      });
+        wx.login({
+            success: (res) => {
+                request(api.AuthLoginByWeixin, {
+                    code: res.code
+                }, 'POST').then(function (res) {
+                    if (res.errno === 0) {
+                        let userInfo = res.data.userInfo;
+                        wx.setStorageSync('token', res.data.token);
+                        wx.setStorageSync('userInfo', userInfo);
+                    }
+                });
+            },
+        });
     } else {
         return true;
     }
@@ -363,6 +362,13 @@ function getUid(prefix) {
     );
 }
 
+/** 计算可预约时间与当期那时间相差天数 */
+function getDateDiffInDays(dateString) {
+    return moment(dateString).diff(moment(), 'days');
+}
+
+/** 获取n天后零点时间戳 */
+const getTimestampAfterDays = (day) => moment().add(day, 'days').startOf('day').unix()
 
 module.exports = {
     formatTime: formatTime,
@@ -382,5 +388,7 @@ module.exports = {
     transferColor,
     transferPadding,
     transferBoxShadow,
-    getUid
+    getUid,
+    getDateDiffInDays,
+    getTimestampAfterDays,
 }

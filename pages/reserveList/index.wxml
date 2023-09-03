@@ -1,23 +1,22 @@
-<!--pages/orderCart/orderCart.wxml-->
+<!--pages/reserveList/index.wxml-->
 <view wx:if="{{reserveOrderList}}">
     <view class="order_list">
-        <view class="order" wx:for="{{reserveOrderList}}" wx:key="{{index}}" >
+        <view class="order" wx:for="{{reserveOrderList}}" wx:key="{{index}}">
             <view class="order_head">
-                <view class="order_title">{{item.reserve_name}}
-                    <text>价格：￥{{item.order_price}}</text>
+                <text class="reserve-price">{{item.reserve_name}} ￥{{item.order_price}}</text>
+                <view class="reserve-status">
+                    <t-tag size="large" variant="light-outline" theme="primary">{{item.status}}</t-tag>
                 </view>
-                <view class="detel" catchtap="deletes" data-index="{{index}}" data-order_id="{{item.id}}">
-                        <image src="/images/icon/icon-close.png" />
-                    </view>
             </view>
+            <view class="order_id">订单编号：{{item.id}}</view>
             <view class="order_time">预约时间：{{item.reserve_time}}</view>
             <view class="order_content">
                 <view class="order_content_left">
                     <view class="order_phone">电话：{{item.phone_number}}</view>
                     <view class="order_plate">车牌：{{item.plate_number}}</view>
                 </view>
-                <view class="order_content_right">
-                    <view>{{item.status}}</view>
+                <view data-index="{{index}}" >
+                    <t-button wx:if="{{item.status !== '服务取消' }}" data-order_id="{{item.id}}" bind:tap="cancelReserve" size="small" theme="primary">取消</t-button>
                 </view>
             </view>
         </view>

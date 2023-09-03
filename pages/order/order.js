@@ -11,14 +11,12 @@ Page({
         reserveList: [],
     },
     get_order(e) {
-        let index = e.currentTarget.dataset.id;
-        let service_price = this.data.reserveList[index].service_price;
-        let service_name = this.data.reserveList[index].service_name;
-        let id = this.data.reserveList[index].id;
-
+        const currentReserve = this.data.reserveList.find(item => item.id === e.currentTarget.dataset.id);
+        const { id, service_name, service_price, latestTimestamp } = currentReserve || {};
+        const parmas = `service_id=${id}&service_name=${service_name}&service_price=${service_price}&timestamp=${latestTimestamp}`;
         // 跳转页面
         wx.navigateTo({
-            url: '/pages/orderDetail/orderDetail?service_id=' + id + '&service_name=' + service_name + '&service_price=' + service_price,
+            url: `/pages/orderDetail/orderDetail?${parmas}`,
         })
     },
 
@@ -39,7 +37,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-        this.getGoodsInfo()
+        this.getServiceList()
     },
     convertTime(timestamp) {
         const date = new Date(timestamp * 1000);
@@ -52,9 +50,10 @@ Page({
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     },
     //获取商品信息
-    getGoodsInfo() {
+    getServiceList() {
         let that = this;
         util.request(api.ReserveList).then(function (res) {
+            wx.stopPullDownRefresh();
             // 已预约数据
             const dynamicList = res.data.reserveDynamicList;
             // 返回数据中计算count字段
@@ -86,7 +85,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh() {
-
+        this.getServiceList();
     },
 
     /**

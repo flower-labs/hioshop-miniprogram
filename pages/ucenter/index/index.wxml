@@ -80,7 +80,7 @@
                 <view class="icon">
                     <image class="img" src="/images/icon/order.png"></image>
                 </view>
-                <view class="text">预约订单</view>
+                <view class="text">我的预约</view>
             </view>
             <view class="arrow"></view>
         </view>

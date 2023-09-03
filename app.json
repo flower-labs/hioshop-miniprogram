@@ -2,7 +2,7 @@
     "pages": [
         "pages/order/order",
         "pages/orderDetail/orderDetail",
-        "pages/orderCart/orderCart",
+        "pages/reserveList/index",
         "pages/lianxi/lianxi",
         "pages/gudeInfo1/gudeInfo1",
         "pages/gude/gude",

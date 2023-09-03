@@ -1,15 +1,13 @@
 <!--pages/orderDetail/orderDetail.wxml-->
-<view class="goods_to_title">预约：{{service_name}}</view>
-
-
-<view class="order_c">电话：
-    <input type="text" bindinput="input_phone" placeholder="请输入电话...." />
+<view class="reserve_type_title">
+    <view class="outer">
+        当前预约：{{service_name}}
+    </view>
 </view>
-<view class="order_c">车牌号：
-    <input type="text" bindinput="input_plate" placeholder="例如：京A12345...." />
-</view>
-<view class="order_c">备注信息：
-    <input type="text" bindinput="input_remark" placeholder="可以添加备注信息...." />
+<view class="input_area_wrapper">
+    <t-input prefixIcon="mobile" type="number" value="{{data.orderPhone}}" bind:change="input_phone" maxlength="{{11}}" placeholder="请输入手机号……" clearable />
+    <t-input prefixIcon="verify" value="{{data.orderPlate}}" bind:change="input_plate" placeholder="请输入车牌号……" clearable />
+    <t-input prefixIcon="article" value="{{data.orderRemark}}" bind:change="input_remark" placeholder="可选择添加备注信息……" clearable />
 </view>
 
 <view class='containt'>
@@ -21,17 +19,22 @@
             </view>
         </view>
     </scroll-view>
-    <view class='time'>
-        <view class="listItem" wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.formatedTime}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
-            <text>{{ timeItem.formatedTime }}</text>
-            <text>可预约：{{ timeItem.available_position }}</text>
-        </view>
+
+    <view wx:if="{{isLoading}}" class="loading-container-flex">
+        <t-loading theme="circular" size="64rpx" text="加载中..." class="loading-large" />
     </view>
-    <view class="blank">
+    <view wx:else>
+        <view class='time'>
+            <view class="listItem" wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.formatedTime}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
+                <text>{{ timeItem.formatedTime }}</text>
+                <text>可预约：{{ timeItem.available_position }}</text>
+            </view>
+        </view>
+        <view class="blank" />
     </view>
     <view class='operate' bindtap="onSubmit">
-        <button class="confirm_order">提交预约</button>
-    </view>
+            <button class="confirm_order">提交预约</button>
+        </view>
 </view>
 
 <t-toast id="t-toast" />

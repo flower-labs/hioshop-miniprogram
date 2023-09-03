@@ -3,6 +3,8 @@ const ApiRoot = 'http://localhost:8360';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/'
 
+export const CDN_URL = 'http://cdn.bajie.club'
+
 module.exports = {
     ApiRoot: ApiRoot,
     // 登录
@@ -67,5 +69,5 @@ module.exports = {
     SettingsDetail: ApiRootUrl + 'settings/userDetail',
     UploadAvatar: ApiRootUrl + 'upload/uploadAvatar',
     GetBase64: ApiRootUrl + 'qrcode/getBase64', //获取商品详情二维码
-
+    CDN_URL,
 };

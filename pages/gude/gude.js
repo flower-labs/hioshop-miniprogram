@@ -3,22 +3,13 @@
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 const qqmapsdk = new QQMapWX({
     key: 'CUXBZ-L3L6G-CGTQQ-Q5SUK-RVPBQ-MQFNH'
-
 });
-
 
 const util = require('../../utils/util.js');
 const api = require('../../config/api.js');
 const user = require('../../services/user.js');
 //获取应用实例
 const app = getApp()
-
-const imageCdn = "http://rwi9z0rl6.hd-bkt.clouddn.com";
-const swiperList = [
-    `${imageCdn}/main-4.jpg`,
-    `${imageCdn}/main-2.jpg`,
-    `${imageCdn}/main-3.webp`,
-];
 
 Page({
     /**
@@ -29,20 +20,17 @@ Page({
         autoplay: false,
         duration: 500,
         interval: 5000,
-        swiperList,
-        img1: "http://rwi9z0rl6.hd-bkt.clouddn.com/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%8D%A1%E6%B3%A8%E5%86%8C.png",
-        img2: "http://rwi9z0rl6.hd-bkt.clouddn.com/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E9%92%B1%E5%8C%85.png",
-        img3: "http://rwi9z0rl6.hd-bkt.clouddn.com/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E9%A1%B9%E7%9B%AE.png",
+        swiperList:[
+            `${api.CDN_URL}/main-4.jpg`,
+            `${api.CDN_URL}/main-2.jpg`,
+            `${api.CDN_URL}/main-3.webp`,
+        ],
         userInfo: {},
         current: 0,
         autoplay: false,
         duration: 500,
         interval: 5000,
-        swiperList,
         dis: 0,
-        img1: 'https://tdesign.gtimg.com/miniprogram/images/example1.png',
-        img2: 'https://tdesign.gtimg.com/miniprogram/images/example2.png',
-        img3: 'https://tdesign.gtimg.com/miniprogram/images/example3.png',
         goodslist: [{
                 goods_number: 100,
                 list_pic_url: 'http://yanxuan.nosdn.127.net/63f5da1f5363af43aa91864bf66af48e.png',
@@ -56,7 +44,6 @@ Page({
                 name: '日式素雅纯色流星纹窗帘',
                 id: 2,
                 title: '商品详情2'
-
             },
             {
                 goods_number: 100,
@@ -65,7 +52,6 @@ Page({
                 id: 3,
                 title: '商品详情3'
             }
-
         ]
     },
 
@@ -156,6 +142,7 @@ Page({
     getIndexData: function () {
         let that = this;
         util.request(api.IndexUrl).then(function (res) {
+            wx.stopPullDownRefresh();
             if (res.errno === 0) {
                 that.setData({
                     floorGoods: res.data.categoryList,
@@ -230,7 +217,9 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh() {},
+    onPullDownRefresh() {
+        this.getIndexData();
+      },
 
     /**
      * 页面上拉触底事件的处理函数

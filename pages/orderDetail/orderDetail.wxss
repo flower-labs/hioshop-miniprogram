@@ -1,33 +1,36 @@
 /* pages/orderDetail/orderDetail.wxss */
-.goods_to_title {
+.reserve_type_title {
   padding: 20rpx;
+  margin: 20rpx;
   font-weight: bold;
-  border-bottom: 1rpx solid black;
-  margin: 0rpx 20rpx;
-  margin-bottom: 20rpx;
-  box-sizing: border-box;
+  border-bottom: 1px solid black;
 }
 
-.scroll-view_H{
-    margin-top: 30rpx;
-}
-
-.order_c {
+.loading-container-flex {
   display: flex;
-  padding: 20rpx;
-  font-weight: normal;
-  font-size: small;
-  border-bottom: 1rpx solid black;
-  margin-left: 20rpx;
-  margin-right: 20rpx;
-  margin-bottom: 10rpx;
-  box-sizing: border-box;
   align-items: center;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+
+.loading-container-flex .loading-large {
+  --td-loading-text-font-size: 32rpx;
+}
+.reserve_type_title .outer {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 25rpx;
+  color: rgb(43, 164, 113);
+  background-color: rgb(227, 249, 233);
+  border: 1px solid rgb(43, 164, 113);
+}
+
+.scroll-view_H {
+  margin-top: 30rpx;
 }
 
 scroll-view {
   height: 128rpx;
-
   width: 100%;
 }
 scroll-view .list {

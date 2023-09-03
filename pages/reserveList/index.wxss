@@ -1,0 +1,57 @@
+/* pages/reserveList/index.wxss */
+page {
+  background-color: white;
+}
+.order {
+  padding: 20rpx;
+  background-color: rgb(255, 196, 0);
+  margin: 27rpx;
+  border-radius: 24rpx;
+}
+.order_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15rpx;
+  border-bottom: 2rpx solid black;
+  margin-bottom: 20rpx;
+}
+
+.order_title {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.order_title .reserve_price {
+  font-size: small;
+  font-weight: lighter;
+}
+
+.order_id,
+.order_time,
+.order_phone,
+.order_plate {
+  font-weight: lighter;
+  font-size: small;
+  margin-top: 5rpx;
+}
+
+.order_id {
+  margin-top: 30rpx;
+}
+
+.order_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .order_content .order_content_right{
+    padding: 6rpx 12rpx;
+    margin-right: 12rpx;
+    margin-bottom: 12rpx;
+    border: 1rpx solid #ddd;
+    border-radius: 20rpx;
+    font-size: 26rpx;
+    color: #333;
+} */

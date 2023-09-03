@@ -49,7 +49,7 @@ Page({
   /** 跳转订单详情页 */
   toReserveOrder: function () {
     wx.navigateTo({
-        url: "/pages/orderCart/orderCart",
+        url: "/pages/reserveList/index",
     });
   },
   toFootprint: function (e) {
