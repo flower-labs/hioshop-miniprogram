@@ -1,1 +1,68 @@
 /* pages/bonus/bonus.wxss */
+.top-backgroud {
+  background-color: orange;
+  height: 400rpx;
+}
+.bonus-total{
+    position: relative;
+    left: 20rpx;
+    top: 120rpx;
+    color: white;
+    font-weight: lighter;
+}
+.bonus-total text{
+    font-size: x-large;
+}
+.above-text {
+  display: flex;
+  position: fixed;
+  top: 20rpx;
+  right: 20rpx;
+  width: 150rpx;
+  height: 40rpx;
+  border: 1rpx solid black;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+.above-text image {
+  width: 40rpx;
+  height: 40rpx;
+  border: 1rpx solid red;
+}
+.above-img {
+  position: fixed;
+  top: 120rpx;
+  right: 120rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  background-color: #007aff;
+  z-index: 3;
+  box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.bottom-backgroud {
+    display: flex;
+    position: fixed;
+    top:280rpx;
+    width: 95%;
+    align-self: center;
+    background-color: greenyellow;
+    border-radius: 30rpx;
+    z-index: 2; 
+}
+.bonus-title{
+    margin: 30rpx;
+    border: 1rpx solid hotpink;
+}
+
+.bonus-content{
+    margin: 0rpx 30rpx 0rpx 30rpx;
+    padding:20rpx 0rpx 20rpx 0rpx ;
+    border: 1rpx solid hotpink;
+}

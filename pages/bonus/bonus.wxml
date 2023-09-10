@@ -1,2 +1,27 @@
 <!--pages/bonus/bonus.wxml-->
-<text>pages/bonus/bonus.wxml</text>
+<view class="container">
+    <view class="top-backgroud">
+        <view class="bonus-total">
+            我的积分
+            <text>20</text>
+        </view>
+    </view>
+
+    <view class="above-text">
+        <image src="" mode="" />
+        <text>积分规则</text>
+    </view>
+    <view class="above-img">
+        <image src="" mode="" />
+    </view>
+
+    <view class="bottom-backgroud">
+        <view class="bonus-box">
+            <view class="bonus-title">积分记录</view>
+            <view class="bonus-content">数组</view>
+            <view class="bonus-content">数组</view>
+            <view class="bonus-content">数组</view>
+            <view wx:for="{{bonus_records}}">数组</view>
+        </view>
+    </view>
+</view>
