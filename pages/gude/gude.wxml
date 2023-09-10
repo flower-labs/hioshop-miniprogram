@@ -44,7 +44,7 @@
     </view>
 <!-- 积分 -->
     <view class="bonus">
-        <view class="bonusItem" bindtap="tobonus">
+        <view class="bonusItem" bindtap="toBonus">
             <image src="/images/icon/积分.png" mode="" />
             <text>{{myBonus}}积分</text>
         </view>

@@ -30,7 +30,7 @@
                 },
                 {
                     "name": "",
-                    "pathName": "pages/bonus/myBonus",
+                    "pathName": "pages/sign/sign",
                     "query": "",
                     "launchMode": "default",
                     "scene": null

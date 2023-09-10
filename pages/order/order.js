@@ -54,6 +54,7 @@ Page({
         let that = this;
         util.request(api.ReserveList).then(function (res) {
             wx.stopPullDownRefresh();
+            console.log(res.data);
             // 已预约数据
             const dynamicList = res.data.reserveDynamicList;
             // 返回数据中计算count字段

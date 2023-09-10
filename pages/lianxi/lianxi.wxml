@@ -10,5 +10,8 @@
   </block>
 </view>
 
-
+<view wx:for="{{dates}}" wx:for-index="index" wx:key="{{index}}">
+  <view class="date">{{item.getMonth()+1}}月{{item.getDate()}}日</view>
+  <view class="sign {{item ? 'signed' : ''}}" bindtap="onSignTap" data-index="{{index}}"></view>
+</view>
 
