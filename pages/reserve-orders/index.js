@@ -27,7 +27,6 @@ Page({
       1007: "服务关闭",
     };
     util.request(api.ReserveOrderList).then(function (res) {
-      console.log(res);
       //循环接口数据进行时间戳转换
       for (var i = 0; i < res.data.reserveOrderList.length; i++) {
         res.data.reserveOrderList[i]["reserve_time"] = util.formatTimeNum(
@@ -48,18 +47,27 @@ Page({
     var that = this;
     // 获取索引
     const orderId = e.currentTarget.dataset.order_id;
-    util
-      .request(
-        api.CancelReservedOrder,
-        {
-          order_id: orderId,
-        },
-        "POST",
-      )
-      .then(function (res) {
-        console.log(res);
-        that.getOrderCart();
-      });
+    wx.showModal({
+      title: "提示",
+      content: `确认删除ID为${orderId}的预约吗？`,
+      success: operation => {
+        if (operation.confirm) {
+          util
+            .request(
+              api.CancelReservedOrder,
+              {
+                order_id: orderId,
+              },
+              "POST",
+            )
+            .then(function () {
+              that.getOrderCart();
+            });
+        } else if (operation.cancel) {
+          console.log("cancel");
+        }
+      },
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
