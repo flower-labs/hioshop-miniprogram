@@ -78,7 +78,6 @@ Page({
   getReserveList: function () {
     let that = this;
     util.request(api.ReserveList).then(function (res) {
-      console.log("ReserveList", res);
       that.setData({
         reseveList: res.data.reserveList,
         highLightItem: res.data.reserveList.filter(item => item.id === 1008603)[0].name,

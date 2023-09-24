@@ -1,4 +1,4 @@
-// pages/reserveList/index.js
+// pages/reserve-orders/index.js
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
 
@@ -48,13 +48,19 @@ Page({
     var that = this;
     // 获取索引
     const orderId = e.currentTarget.dataset.order_id;
-    util.request(api.CancelReservedOrder, {
-        order_id: orderId
-    },'POST').then(function (res) {
+    util
+      .request(
+        api.CancelReservedOrder,
+        {
+          order_id: orderId,
+        },
+        "POST",
+      )
+      .then(function (res) {
         console.log(res);
         that.getOrderCart();
-    });
-},
+      });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

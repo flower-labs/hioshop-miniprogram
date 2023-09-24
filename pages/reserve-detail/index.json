@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+        "t-toast": "tdesign-miniprogram/toast/toast",
+        "t-button": "tdesign-miniprogram/button/button",
+        "t-input": "tdesign-miniprogram/input/input",
+        "t-loading": "tdesign-miniprogram/loading/loading",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog"
+    },
+    "navigationBarTitleText": "我要预约",
+    "disableScroll": true
+}

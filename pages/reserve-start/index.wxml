@@ -1,4 +1,4 @@
-<!--pages/order/order.wxml-->
+<!--pages/reserve-start/index.wxml-->
 <view class="container">
     <view class="goods" wx:for="{{reserveList}}" wx:key="index" wx:for-index="index">
         <view class="order_left">

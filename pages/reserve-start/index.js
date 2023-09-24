@@ -1,4 +1,4 @@
-// pages/order/order.js
+// pages/reserve-start/index.js
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
 
@@ -16,7 +16,15 @@ Page({
         const parmas = `service_id=${id}&service_name=${service_name}&service_price=${service_price}&timestamp=${latestTimestamp}`;
         // 跳转页面
         wx.navigateTo({
-            url: `/pages/orderDetail/orderDetail?${parmas}`,
+            url: `/pages/reserve-detail/index?${parmas}`,
+        })
+    },
+
+    choosePlate() {
+        wx.chooseLicensePlate({
+            success:(data)=> {
+                console.log(data);
+            }
         })
     },
 

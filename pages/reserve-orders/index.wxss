@@ -1,6 +1,8 @@
-/* pages/reserveList/index.wxss */
+/* pages/reserve-orders/index.wxss */
+
 page {
   background-color: white;
+  --td-brand-color: navy;
 }
 .order {
   padding: 20rpx;
@@ -47,11 +49,11 @@ page {
 }
 
 /* .order_content .order_content_right{
-    padding: 6rpx 12rpx;
-    margin-right: 12rpx;
-    margin-bottom: 12rpx;
-    border: 1rpx solid #ddd;
-    border-radius: 20rpx;
-    font-size: 26rpx;
-    color: #333;
-} */
+      padding: 6rpx 12rpx;
+      margin-right: 12rpx;
+      margin-bottom: 12rpx;
+      border: 1rpx solid #ddd;
+      border-radius: 20rpx;
+      font-size: 26rpx;
+      color: #333;
+  } */

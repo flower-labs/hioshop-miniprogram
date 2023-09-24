@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "我的预约",
+  "usingComponents": {
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-back-top": "tdesign-miniprogram/back-top/back-top"
+  }
+}

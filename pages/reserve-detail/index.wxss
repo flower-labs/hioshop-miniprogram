@@ -1,4 +1,9 @@
-/* pages/orderDetail/orderDetail.wxss */
+/* pages/reserve-detail/index.wxss */
+
+.container {
+  display: flex;
+}
+
 .reserve_type_title {
   padding: 20rpx;
   margin: 20rpx;
@@ -25,8 +30,9 @@
   border: 1px solid rgb(43, 164, 113);
 }
 
-.scroll-view_H {
+.scroll-view_day {
   margin-top: 30rpx;
+  height: 154rpx;
 }
 
 scroll-view {
@@ -64,33 +70,34 @@ scroll-view .current {
 scroll-view .current text {
   color: #fff;
 }
-.time {
-  width: 100%;
+.time-container {
   display: flex;
+  width: 90%;
+  margin-left: 5%;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 25rpx;
   margin-top: 30rpx;
+  gap: 25rpx;
+  padding-bottom: 300rpx;
 }
-.time .listItem {
-  width: 45%;
+.time-container .listItem {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 47%;
   background-color: #f1f2f6;
-  padding: 35rpx 0;
-  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  border-radius: 25rpx;
 }
-.time .listItem text {
-  display: block;
+
+.time-container .listItem text {
   font-size: 30rpx;
 }
-.time .current {
+.time-container .current {
   border: 1px solid black;
 }
-.time .current text {
+
+.time-container .current text {
   color: rgb(255, 196, 0);
 }
 .operate button {

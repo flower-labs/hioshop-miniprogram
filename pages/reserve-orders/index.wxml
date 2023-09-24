@@ -1,4 +1,4 @@
-<!--pages/reserveList/index.wxml-->
+<!--pages/reserve-orders/index.wxml-->
 <view wx:if="{{reserveOrderList}}">
     <view class="order_list">
         <view class="order" wx:for="{{reserveOrderList}}" wx:key="{{index}}">
@@ -15,11 +15,11 @@
                     <view class="order_phone">电话：{{item.phone_number}}</view>
                     <view class="order_plate">车牌：{{item.plate_number}}</view>
                 </view>
-                <view data-index="{{index}}" >
+                <view data-index="{{index}}">
                     <t-button wx:if="{{item.status !== '服务取消' }}" data-order_id="{{item.id}}" bind:tap="cancelReserve" size="small" theme="primary">取消</t-button>
                 </view>
             </view>
         </view>
     </view>
 </view>
-<t-back-top wx:if="{{backTopVisible}}" theme="round" text="返回顶部" bind:to-top="onToTop"></t-back-top>
+<t-back-top wx:if="{{backTopVisible}}" theme="half-round-dark" text="返回顶部" bind:to-top="onToTop"></t-back-top>

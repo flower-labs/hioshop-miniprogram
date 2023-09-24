@@ -1,0 +1,15 @@
+/* pages/reserve-result/index.wxss */
+
+.reserve-result {
+  margin-top: 120rpx;
+}
+
+.action-area {
+  display: flex;
+  flex-direction: column;
+  margin: 0 32rpx;
+}
+
+.action-button{
+    margin-top: 50rpx;
+}

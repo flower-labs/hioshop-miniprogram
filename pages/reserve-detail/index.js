@@ -1,4 +1,4 @@
-// pages/orderDetail/orderDetail.js
+// pages/reserve-detail/index.js
 import Toast from "tdesign-miniprogram/toast/index";
 var api = require("../../config/api.js");
 var util = require("../../utils/util.js");
@@ -11,6 +11,7 @@ Page({
     isLoading: false,
     service_id: "",
     service_name: "",
+    scrollHeight: 0,
     servicePrice: "",
     order_c_name: "",
     orderPhone: "",
@@ -26,6 +27,9 @@ Page({
     availableTime: "",
     availableReserveList: [],
     highLightItem: [],
+    dialogVisible: false,
+    dialogContent: "",
+    dialogConfirmBtn: { content: "知道了", variant: "base" },
   },
   /**
    * 生命周期函数--监听页面加载
@@ -100,7 +104,9 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () {
+    this.computeScrollViewHeight();
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -197,7 +203,11 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () {
+    // wx.redirectTo({
+    //   url: "/pages/auth/login/login",
+    // });
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -210,6 +220,23 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
+  //计算 scroll-view 的高度
+  computeScrollViewHeight() {
+    let that = this
+    let query = wx.createSelectorQuery().in(this)
+    query.select('.reserve_type_title').boundingClientRect()
+    query.select('.input_area_wrapper').boundingClientRect()
+    query.select('.scroll-view_day').boundingClientRect()
+    query.exec(res => {
+      const titleHeight = res[0].height
+      const inputHeight = res[1].height
+      const dayHeight = res[2].height
+      const windowHeight = wx.getSystemInfoSync().windowHeight
+      const scrollHeight = windowHeight - titleHeight - inputHeight - dayHeight
+      console.log('debug value', scrollHeight, titleHeight, inputHeight, dayHeight)
+      this.setData({ scrollHeight: scrollHeight})
+    })
+  },
   //选择日期
   handleDateSelect: function (event) {
     const { isLoading } = this.data;
@@ -249,46 +276,55 @@ Page({
       orderRemark: event.detail.value,
     });
   },
+  showDialog(value) {
+    console.log("content", value);
+    this.setData({ dialogVisible: true, dialogContent: value });
+  },
 
+  closeDialog() {
+    this.setData({ dialogVisible: false, dialogContent: "" });
+  },
+
+  showModalInfo(content) {
+    wx.showModal({
+      title: content,
+      showCancel: false,
+      content: "请更新重新重新提交",
+    });
+  },
+  choosePlate() {
+    let that = this;
+    wx.chooseLicensePlate({
+      success: plate => {
+        that.setData({ orderPlate: e.plate });
+      },
+    });
+  },
   // 判断输入是否正确
-  validateInput(name, phone, plateNumber) {
+  validateInput(time, phone, plateNumber) {
     const phoneReg = /^1[3-9]\d{9}$/;
-    const plateNumberReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
-    if (phoneReg.test(phone) && plateNumberReg.test(plateNumber)) {
-      // 跳转订单详情页
-      wx.navigateTo({
-        url: "/pages/reserveList/index",
-      });
-    } else {
-      if (!phoneReg.test(phone)) {
-        wx.showModal({
-          title: "提示",
-          content: "请输入正确的电话号码",
-          success(res) {
-            if (res.confirm) {
-              console.log("用户点击确定");
-            } else if (res.cancel) {
-              console.log("用户点击取消");
-            }
-          },
-        });
-      }
-
-      if (!plateNumberReg.test(plateNumber)) {
-        wx.showModal({
-          title: "提示",
-          content: "请输入正确的车牌号码",
-          success(res) {
-            if (res.confirm) {
-              console.log("用户点击确定");
-            } else if (res.cancel) {
-              console.log("用户点击取消");
-            }
-          },
-        });
-      }
-      return "输入格式正确";
+    const plateReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
+    if (!time) {
+      this.showDialog("请选择预约时间");
+      return false;
     }
+    if (!phone) {
+      this.showDialog("请输入手机号");
+      return false;
+    }
+    if (!plateNumber) {
+      this.showDialog("请输入车牌号");
+      return false;
+    }
+    if (!phoneReg.test(phone)) {
+      this.showDialog("请输入正确的手机号");
+      return false;
+    }
+    if (!plateReg.test(plateNumber)) {
+      this.showDialog("请输入正确的车牌号");
+      return false;
+    }
+    return true;
   },
   //提交预约
   onSubmit(e) {
@@ -297,43 +333,38 @@ Page({
     if (isLoading) {
       return;
     }
-    if (!this.data.selectedTime) {
-      wx.showModal({
-        title: "提示",
-        content: "请选择预约时间",
-      });
-    }
-
-    // const result = validateInput(obj.name, obj.phone, obj.license);
-    // console.log(result); // 输出：输入格式正确
 
     const { service_id, selectedTime, servicePrice, orderPhone, orderPlate, orderRemark } = this.data;
 
-    util
-      .request(
-        api.AddReserveOrder,
-        {
-          reserve_id: Number(service_id),
-          reserve_time: this.convertToTimestamp(selectedTime),
-          reserve_price: servicePrice,
-          phone_number: orderPhone,
-          plate_number: orderPlate,
-          remark: orderRemark,
-        },
-        "POST",
-      )
-      .then(function (res) {
-        console.log("AddReserveOrder", res);
-        if (res.data.success) {
-          that.showSuccessAlert();
-          setTimeout(() => {
-            // 跳转页面
-            wx.navigateTo({
-              url: "/pages/reserveList/index",
-            });
-          }, 1000);
-        }
-      });
+    const isValid = this.validateInput(selectedTime, orderPhone, orderPlate);
+    console.log("isValid", isValid);
+    if (isValid) {
+      util
+        .request(
+          api.AddReserveOrder,
+          {
+            reserve_id: Number(service_id),
+            reserve_time: this.convertToTimestamp(selectedTime),
+            reserve_price: servicePrice,
+            phone_number: orderPhone,
+            plate_number: orderPlate,
+            remark: orderRemark,
+          },
+          "POST",
+        )
+        .then(function (res) {
+          console.log("AddReserveOrder", res);
+          if (res.data.success) {
+            that.showSuccessAlert();
+            setTimeout(() => {
+              // 跳转页面
+              wx.redirectTo({
+                url: "/pages/reserve-result/index",
+              });
+            }, 1000);
+          }
+        });
+    }
   },
 
   showSuccessAlert() {

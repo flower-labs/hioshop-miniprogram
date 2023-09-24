@@ -1,8 +1,6 @@
 {   
     "pages": [
-        "pages/order/order",
-        "pages/orderDetail/orderDetail",
-        "pages/reserveList/index",
+        "pages/reserve-orders/index",
         "pages/lianxi/lianxi",
         "pages/gudeInfo1/gudeInfo1",
         "pages/gude/gude",
@@ -27,6 +25,9 @@
         "pages/payResult/payResult",
         "pages/payOffline/index",
         "pages/reserve/index",
+        "pages/reserve-result/index",
+        "pages/reserve-detail/index",
+        "pages/reserve-start/index",
         "pages/bonus/bonus",
         "pages/sign/sign"
     ],
@@ -51,7 +52,7 @@
                 "text": "古德"
             },
             {
-                "pagePath": "pages/order/order",
+                "pagePath": "pages/reserve-start/index",
                 "iconPath": "images/nav/预约.png",
                 "selectedIconPath": "images/nav/预约active.png",
                 "text": "预约"

@@ -1,0 +1,10 @@
+<!--pages/reserve-result/index.wxml-->
+<view class="container">
+    <view class="reserve-result">
+        <t-result theme="success" title="预约成功" description="请选择接下来的操作" />
+        <view class="action-area">
+            <t-button theme="primary" class="action-button" bindtap="redirectToDetail" size="large" block>查看已预约订单</t-button>
+            <t-button theme="default" class="action-button" bindtap="redirectToHome" size="large" block>返回首页</t-button>
+        </view>
+    </view>
+</view>

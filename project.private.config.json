@@ -9,7 +9,7 @@
             "list": [
                 {
                     "name": "",
-                    "pathName": "pages/order/order",
+                    "pathName": "pages/reserve-start/index",
                     "query": "",
                     "launchMode": "default",
                     "scene": null
