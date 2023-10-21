@@ -9,7 +9,7 @@
   margin: -20rpx 30rpx 0rpx 30rpx;
   background-color: white;
   box-sizing: border-box;
-  height: 400rpx;
+  height: 440rpx;
   border-radius: 18rpx;
 }
 
@@ -41,6 +41,7 @@
 
 .address {
   padding-left: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 .grid-item {

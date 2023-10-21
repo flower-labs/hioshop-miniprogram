@@ -15,7 +15,7 @@
                 <text>精品</text>
             </view>
             <view class="theme-box-time">
-                营业时间:8:00-18:00
+                营业时间:9:00-18:00
             </view>
         </view>
 
@@ -23,9 +23,9 @@
 
         <t-row>
             <t-col span="16" t-class="address">
-                <view style="font-size: small;text-align: left;">海口市琼山区滨江街道办滨江路388号滨江世纪佳城(北区)一期商业6#S109号
+                <view style="font-size: small;">湖北省武汉市东湖高新区花山大道与春和路交汇处一期商业6#109号
                 </view>
-                <view style="text-align: left;color: red;font-size: small;" bindtap="getDis">距离：{{dis}}</view>
+                <view style="color: red;font-size: small;margin-bottom: auto;margin-top: 15rpx;" bindtap="getDis">距离：{{dis}}</view>
             </t-col>
             <t-col span="4" t-class="carNav">
                 <view class="grid-item" bindtap="mapViewTap">
@@ -34,10 +34,10 @@
                 </view>
             </t-col>
             <t-col span="4" t-class="phone">
-                <navigator url="" class="grid-item">
+                <view  class="grid-item" bindtap="homePhoneCall">
                     <image src="/images/nav/电话.png" mode="" />
                     <text>电话</text>
-                </navigator>
+                </view>
             </t-col>
         </t-row>
 
@@ -83,7 +83,7 @@
                         <view class="l">
                             <view class="now-price">
                                 <view class="sym">¥</view>
-                                <view class="num">{{goodslist.retail_price}}</view>
+                                <view class="num">{{iitem.retail_price}}</view>
                             </view>
                         </view>
                     </view>
