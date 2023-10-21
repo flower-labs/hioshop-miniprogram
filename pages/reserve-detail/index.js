@@ -15,8 +15,8 @@ Page({
     servicePrice: "",
     order_c_name: "",
     orderPhone: "",
-    orderRemark: "",
     orderPlate: "",
+    orderRemark: "",
     selectedDate: "",
     selectedTime: "",
     myObject: {},
@@ -222,20 +222,20 @@ Page({
   onShareAppMessage: function () {},
   //计算 scroll-view 的高度
   computeScrollViewHeight() {
-    let that = this
-    let query = wx.createSelectorQuery().in(this)
-    query.select('.reserve_type_title').boundingClientRect()
-    query.select('.input_area_wrapper').boundingClientRect()
-    query.select('.scroll-view_day').boundingClientRect()
+    let that = this;
+    let query = wx.createSelectorQuery().in(this);
+    query.select(".reserve_type_title").boundingClientRect();
+    query.select(".input_area_wrapper").boundingClientRect();
+    query.select(".scroll-view_day").boundingClientRect();
     query.exec(res => {
-      const titleHeight = res[0].height
-      const inputHeight = res[1].height
-      const dayHeight = res[2].height
-      const windowHeight = wx.getSystemInfoSync().windowHeight
-      const scrollHeight = windowHeight - titleHeight - inputHeight - dayHeight
-      console.log('debug value', scrollHeight, titleHeight, inputHeight, dayHeight)
-      this.setData({ scrollHeight: scrollHeight})
-    })
+      const titleHeight = res[0].height;
+      const inputHeight = res[1].height;
+      const dayHeight = res[2].height;
+      const windowHeight = wx.getSystemInfoSync().windowHeight;
+      const scrollHeight = windowHeight - titleHeight - inputHeight - dayHeight;
+      console.log("debug value", scrollHeight, titleHeight, inputHeight, dayHeight);
+      this.setData({ scrollHeight: scrollHeight });
+    });
   },
   //选择日期
   handleDateSelect: function (event) {
@@ -293,10 +293,9 @@ Page({
     });
   },
   choosePlate() {
-    let that = this;
     wx.chooseLicensePlate({
-      success: plate => {
-        that.setData({ orderPlate: e.plate });
+      success: e => {
+        this.setData({ orderPlate: e.plateNumber });
       },
     });
   },

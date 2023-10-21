@@ -1,43 +1,43 @@
 <!--pages/reserve-detail/index.wxml-->
 <view class="container">
-    <view class="reserve_type_title">
-        <view class="outer">
-            当前预约：{{service_name}}
-        </view>
+  <view class="reserve_type_title">
+    <view class="outer">
+      当前预约：{{service_name}}
     </view>
-    <view class="input_area_wrapper">
-        <t-input prefixIcon="mobile" type="number" value="{{data.orderPhone}}" bind:change="input_phone" maxlength="{{11}}" placeholder="请输入手机号……" clearable />
-        <t-input prefixIcon="verify" value="{{data.orderPlate}}" bind:change="input_plate" placeholder="请输入车牌号……" clearable>
-            <t-button slot="suffix" theme="primary" bind:tap="choosePlate" size="extra-small"> 选择 </t-button>
-        </t-input>
-        <t-input prefixIcon="article" value="{{data.orderRemark}}" bind:change="input_remark" placeholder="可选择添加备注信息……" clearable />
+  </view>
+  <view class="input_area_wrapper">
+    <t-input prefixIcon="mobile" type="number" value="{{orderPhone}}" bind:change="input_phone" maxlength="{{11}}" placeholder="请输入手机号……" clearable />
+    <t-input prefixIcon="verify" value="{{orderPlate}}" bind:change="input_plate" placeholder="请输入车牌号……" clearable>
+      <t-button slot="suffix" theme="primary" bind:tap="choosePlate" size="extra-small"> 选择 </t-button>
+    </t-input>
+    <t-input prefixIcon="article" value="{{orderRemark}}" bind:change="input_remark" placeholder="可选择添加备注信息……" clearable />
+  </view>
+
+  <scroll-view class="scroll-view_day" scroll-x>
+    <view class='list' style='width:{{ width }}rpx'>
+      <view bindtap="handleDateSelect" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex? "current":""}}' wx:key='' data-date="{{ item.date}}">
+        <text class='name'>{{ item.week }}</text>
+        <text class='date'>{{ item.date }}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{isLoading}}" class="loading-container-flex">
+    <t-loading theme="circular" size="64rpx" text="加载中..." class="loading-large" />
+  </view>
+  <scroll-view class="scroll-container" style='height: {{scrollHeight + "px"}}' scroll-y wx:else>
+    <view class="time-container">
+      <view class="listItem" wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.formatedTime}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
+        <text>{{ timeItem.formatedTime }}</text>
+        <text>可预约：{{ timeItem.available_position }}</text>
+      </view>
     </view>
 
-    <scroll-view class="scroll-view_day" scroll-x>
-        <view class='list' style='width:{{ width }}rpx'>
-            <view bindtap="handleDateSelect" wx:for="{{ calendar }}" wx:for-item="item" wx:for-index="index" data-index="{{ index }}" class='listItem {{index==currentIndex? "current":""}}' wx:key='' data-date="{{ item.date}}">
-                <text class='name'>{{ item.week }}</text>
-                <text class='date'>{{ item.date }}</text>
-            </view>
-        </view>
-    </scroll-view>
-
-    <view wx:if="{{isLoading}}" class="loading-container-flex">
-        <t-loading theme="circular" size="64rpx" text="加载中..." class="loading-large" />
-    </view>
-    <scroll-view class="scroll-container" style='height: {{scrollHeight + "px"}}' scroll-y wx:else>
-        <view class="time-container">
-            <view class="listItem" wx:for="{{ highLightItem }}" wx:for-item="timeItem" wx:for-index="timeIndex" data-Tindex="{{ timeIndex }}" data-time="{{ timeItem.formatedTime}}" bindtap='selectTime' class='listItem {{ currentTime==timeIndex? "current":"" }}' wx:key='index'>
-                <text>{{ timeItem.formatedTime }}</text>
-                <text>可预约：{{ timeItem.available_position }}</text>
-            </view>
-        </view>
-
-    </scroll-view>
-    <view class='operate' bindtap="onSubmit">
-        <button class="confirm_order">提交预约</button>
-    </view>
-    <t-dialog visible="{{dialogVisible}}" title="提示" content="{{dialogContent}}" confirm-btn="{{ dialogConfirmBtn }}" bind:confirm="closeDialog" />
+  </scroll-view>
+  <view class='operate' bindtap="onSubmit">
+    <button class="confirm_order">提交预约</button>
+  </view>
+  <t-dialog visible="{{dialogVisible}}" title="提示" content="{{dialogContent}}" confirm-btn="{{ dialogConfirmBtn }}" bind:confirm="closeDialog" />
 
 </view>
 
