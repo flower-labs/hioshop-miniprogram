@@ -1,5 +1,5 @@
 // 线上地址
-const ApiRoot = 'http://api.bajie.club';
+const ApiRoot = 'https://api.bajie.club';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/';
 

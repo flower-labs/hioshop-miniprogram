@@ -302,7 +302,7 @@ Page({
   // 判断输入是否正确
   validateInput(time, phone, plateNumber) {
     const phoneReg = /^1[3-9]\d{9}$/;
-    const plateReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
+    const plateReg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5,6}$/;
     if (!time) {
       this.showDialog("请选择预约时间");
       return false;

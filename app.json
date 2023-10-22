@@ -1,9 +1,9 @@
 {   
     "pages": [
+        "pages/gude/gude",
         "pages/reserve-orders/index",
         "pages/lianxi/lianxi",
         "pages/gudeInfo1/gudeInfo1",
-        "pages/gude/gude",
         "pages/index/index",
         "pages/app-auth/index",
         "pages/category/index",
