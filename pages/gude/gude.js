@@ -1,13 +1,13 @@
 // pages/gude/gude.js
 // 引入地理位置 API
-const QQMapWX = require("../../utils/qqmap-wx-jssdk.min.js");
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 const qqmapsdk = new QQMapWX({
-  key: "CUXBZ-L3L6G-CGTQQ-Q5SUK-RVPBQ-MQFNH",
+  key: 'CUXBZ-L3L6G-CGTQQ-Q5SUK-RVPBQ-MQFNH',
 });
 
-const util = require("../../utils/util.js");
-const api = require("../../config/api.js");
-const user = require("../../services/user.js");
+const util = require('../../utils/util.js');
+const api = require('../../config/api.js');
+const user = require('../../services/user.js');
 //获取应用实例
 const app = getApp();
 
@@ -26,33 +26,13 @@ Page({
     autoplay: false,
     duration: 500,
     interval: 5000,
+    // 通知列表
+    noticeList: [],
+    // 是否显示通知
+    noticeVisible: 0,
     dis: 0,
-    goodslist: [
-      {
-        goods_number: 100,
-        list_pic_url: "http://cdn.bajie.club/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/zhenpi.jpg",
-        name: "真皮座椅",
-        id: 1,
-        title: "真皮座椅",
-        retail_price: 1200,
-      },
-      {
-        goods_number: 100,
-        list_pic_url: "http://cdn.bajie.club/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/qibeng.webp",
-        name: "气泵",
-        id: 2,
-        title: "气泵",
-        retail_price: 3500,
-      },
-      {
-        goods_number: 100,
-        list_pic_url: "http://cdn.bajie.club/%E6%B4%97%E8%BD%A6%E5%B0%8F%E7%A8%8B%E5%BA%8F/huohuasai.webp",
-        name: "火花塞",
-        id: 3,
-        title: "火花塞",
-        retail_price: 230,
-      },
-    ],
+    floorGoods: [],
+    index_banner_img: 0,
   },
 
   // 获取用户地理位置
@@ -66,14 +46,14 @@ Page({
 
   homePhoneCall: () => {
     wx.makePhoneCall({
-      phoneNumber: "13683626507",
+      phoneNumber: '13683626507',
     });
   },
   //计算距离
   getDis() {
     // 获取用户当前位置
     wx.getLocation({
-      type: "gcj02", // 返回可用于wx.openLocation的坐标系类型
+      type: 'gcj02', // 返回可用于wx.openLocation的坐标系类型
       success: function (res) {
         const userLatitude = res.latitude; // 用户纬度
         const userLongitude = res.longitude; // 用户经度
@@ -84,7 +64,7 @@ Page({
 
         // 调用地理位置 API 计算距离
         qqmapsdk.calculateDistance({
-          mode: "driving", // 计算方式：驾车
+          mode: 'driving', // 计算方式：驾车
           from: {
             latitude: userLatitude,
             longitude: userLongitude,
@@ -97,18 +77,18 @@ Page({
           ],
           success: function (res) {
             const distance = res.result.elements[0].distance; // 距离，单位：米
-            console.log("距离：", distance);
+            console.log('距离：', distance);
             this.setdata({
               dis: distance,
             });
           },
           fail: function (res) {
-            console.error("计算距离失败：", res);
+            console.error('计算距离失败：', res);
           },
         });
       },
       fail: function (res) {
-        console.error("获取位置失败：", res);
+        console.error('获取位置失败：', res);
       },
     });
   },
@@ -116,24 +96,24 @@ Page({
   //跳转到预约API调用页面
   toReservePage() {
     wx.navigateTo({
-      url: "/pages/reserve/index",
+      url: '/pages/reserve/index',
     });
   },
   //跳转到门店详情
   goto_gudeInfo() {
     wx.navigateTo({
-      url: "/pages/gudeInfo1/gudeInfo1",
+      url: '/pages/gudeInfo1/gudeInfo1',
     });
   },
   //获取电话号码
   getPhoneNumber(e) {
     var that = this;
-    if (e.detail.errMsg == "getPhoneNumber:fail user deny") {
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
       //用户点击拒绝
       wx.showToast({
-        title: "请绑定手机号",
+        title: '请绑定手机号',
         duration: 5000,
-        icon: "none",
+        icon: 'none',
       });
     } else {
     }
@@ -145,7 +125,13 @@ Page({
     } = e;
     console.log(current, source);
   },
-
+  goCategory: function (e) {
+    let id = e.currentTarget.dataset.cateid;
+    wx.setStorageSync('categoryId', id);
+    wx.switchTab({
+      url: '/pages/category/index',
+    });
+  },
   getIndexData: function () {
     let that = this;
     util.request(api.IndexUrl).then(function (res) {
@@ -155,16 +141,16 @@ Page({
           floorGoods: res.data.categoryList,
           banner: res.data.banner,
           channel: res.data.channel,
-          notice: res.data.notice,
+          noticeList: res.data.notice,
           loading: 1,
         });
-        let cartGoodsCount = "";
+        let cartGoodsCount = '';
         if (res.data.cartCount == 0) {
           wx.removeTabBarBadge({
             index: 2,
           });
         } else {
-          cartGoodsCount = res.data.cartCount + "";
+          cartGoodsCount = res.data.cartCount + '';
           wx.setTabBarBadge({
             index: 2,
             text: cartGoodsCount,
@@ -173,7 +159,17 @@ Page({
       }
     });
   },
-
+  getChannelShowInfo: function (e) {
+    let that = this;
+    util.request(api.ShowSettings).then(function (res) {
+      if (res.errno === 0) {
+        that.setData({
+          index_banner_img: res.data.index_banner_img,
+          noticeVisible: res.data.notice,
+        });
+      }
+    });
+  },
   onChange(e) {
     const {
       detail: { current, source },
@@ -182,19 +178,19 @@ Page({
   },
   toBonus() {
     wx.navigateTo({
-      url: "/pages/bonus/bonus",
+      url: '/pages/bonus/bonus',
     });
   },
   toSign() {
     wx.navigateTo({
-      url: "/pages/sign/sign",
+      url: '/pages/sign/sign',
     });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log("ok");
+    this.getChannelShowInfo();
   },
 
   /**
@@ -205,7 +201,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {},
+  onShow() {
+    this.getIndexData();
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -222,6 +220,7 @@ Page({
    */
   onPullDownRefresh() {
     this.getIndexData();
+    this.getChannelShowInfo()
   },
 
   /**

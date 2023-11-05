@@ -64,7 +64,7 @@
   display: flex;
   justify-content: space-between;
   background-color: white;
-  margin: 30rpx 30rpx 0rpx 30rpx;
+  margin: 30rpx 30rpx 30rpx 30rpx;
   border-radius: 18rpx;
   padding: 30rpx 10rpx 30rpx 10rpx;
 }
@@ -86,56 +86,109 @@
   margin-top: 10rpx;
   color: #ffa500;
 }
-/* 热销 */
-.Hotsales {
-  position: relative;
-  z-index: 1;
-  margin: 30rpx 30rpx 30rpx 30rpx;
-  background-color: white;
-  box-sizing: border-box;
-  border-radius: 18rpx;
-}
-/* 商品展示模板 */
 
-.goods-list-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20rpx;
-    box-sizing: border-box;
-  }
-  
-  .goods-list-wrap .goods-box {
-    width: 48%;
-    margin-bottom: 20rpx;
-    padding: 10rpx;
-    border: 1px solid #ffa500;
-    border-radius: 5rpx;
-    box-sizing: border-box;
-    text-align: center;
-    
-  }
-  
-  .goods-list-wrap .no-margin {
-    margin-right: 0;
-  }
-  
-  .goods-box .navi-url .image {
-    width: 100%;
-    height: 150rpx;
-    border-radius: 8rpx;
-    background: #f9f9f9;
-  }
-  
-  .clearfix:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-  }
-  
+.list-wrap .new-box {
+  width: 210rpx;
+  float: left;
+  margin: 0 30rpx 20rpx 0;
+}
+
+.new-box .navi-url .box {
+  height: 210rpx;
+  width: 210rpx;
+  position: relative;
+  margin-bottom: 10rpx;
+  border-radius: 4rpx;
+}
+
+.new-box .navi-url .image {
+  width: 210rpx;
+  height: 210rpx;
+  border-radius: 8rpx;
+  background: #f9f9f9;
+}
+
+/* 新品标签 */
+.new-box .navi-url .box .new-tag {
+  height: 36rpx;
+  width: 60rpx;
+  background: #ca2a1d;
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  line-height: 36rpx;
+  text-align: center;
+  font-size: 18rpx;
+  color: #fff;
+  border-radius: 0 40rpx 40rpx 0;
+}
+
+.new-box .navi-url .goods-info .price-container .l {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-box .navi-url .goods-info .price-container .l .h {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #ff3456;
+}
+
+/* 商品标题 */
+.new-box .navi-url .goods-info .goods-title {
+  font-size: 24rpx;
+  color: #222;
+  margin-bottom: 6rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.new-box .navi-url .goods-info .price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-box .navi-url {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 查看更多 */
+.more-category {
+  width: 100%;
+  text-align: center;
+  height: 100rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.goods-list-wrap .no-margin {
+  margin-right: 0;
+}
+
+.goods-box .navi-url .image {
+  width: 100%;
+  height: 150rpx;
+  border-radius: 8rpx;
+  background: #f9f9f9;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: ' ';
+  clear: both;
+  height: 0;
+}
+
 /* 商品描述 */
 .info-wrap {
   background: #fff;
@@ -200,3 +253,115 @@
   font-weight: 500;
 }
 
+/* 商品列表样式 */
+.goods-container .topic-container {
+  width: 100%;
+}
+
+.topic-container .banner-container {
+  margin: 0 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.new-buy .list-wrap,
+.goods-container .list-wrap {
+  display: block;
+  width: 100%;
+  padding: 26rpx 30rpx 10rpx 30rpx;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.list-wrap .no-margin {
+  margin-right: 0;
+}
+
+.topic-container .banner-container {
+  margin: 0 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.banner-container .banner-image-wrap {
+  width: 100%;
+}
+
+.banner-container image {
+  width: 100%;
+  border-radius: 10rpx;
+}
+
+.banner-container .text {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 500;
+  z-index: 9;
+  color: #fff;
+}
+
+.banner-container .bg {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  border-radius: 10rpx;
+  opacity: 0.2;
+}
+
+/* 通知中心样式 */
+
+.swiper-container {
+  margin-top: 80rpx;
+  position: relative;
+}
+
+.notice_box {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  background-color: rgb(234, 247, 229);
+  width: 100%;
+  z-index: 10;
+}
+
+.notice-swiper {
+  width: 100%;
+  height: 30rpx;
+}
+
+.notice-item {
+  display: flex;
+  justify-content: flex-start;
+  height: 80rpx;
+}
+
+.notice-item .notice-text {
+  font-size: 24rpx;
+}
+
+.notice-item .icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notice-item .icon .img {
+  width: 30rpx;
+  height: 30rpx;
+}
