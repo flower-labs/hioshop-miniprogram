@@ -1,16 +1,43 @@
 // pages/bonus/bonus.js
+var api = require("../../config/api.js");
+var util = require("../../utils/util.js");
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        check_list: [],
+        total_points: 0
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
+    // 获取签到列表接口
+    getSignList() {
+        let that = this;
+        var timestamp = Math.floor(Date.now() / 1000);
+        console.log(timestamp);
+        util.request(
+                api.CheckList, {
+                    "current_time": timestamp
+                }, "GET")
+            .then(function (res) {
+                //循环接口数据进行时间戳转换
+                for (var i = 0; i < res.data.check_list.length; i++) {
+                    res.data.check_list[i]["check_time"] = util.formatTimeNum(
+                        res.data.check_list[i]["check_time"],
+                        "Y-M-D h:m:s"
+                    )
+                }
+                wx.stopPullDownRefresh();
+                that.setData({
+                    check_list: res.data.check_list,
+                    total_points: res.data.total_points
+                })
+            })
+    },
     onLoad(options) {
 
     },
@@ -26,7 +53,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        this.getSignList()
     },
 
     /**
@@ -47,7 +74,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh() {
-
+        this.getSignList()
     },
 
     /**

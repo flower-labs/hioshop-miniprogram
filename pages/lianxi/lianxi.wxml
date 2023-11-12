@@ -1,17 +1,21 @@
 <!--pages/lianxi/lianxi.wxml-->
 <!-- 设置滑动模块 -->
-<view class="product-list">
-  <block wx:for="{{products}}" wx:key="id">
-    <view class="product-item {{(index + 1) % 3 == 0?'no-margin':''}}">
-      <image class="product-img" src="{{item.image}}" mode="aspectFit"></image>
-      <view class="product-name">{{item.name}}</view>
-      <view class="product-price">¥{{item.price}}</view>
+
+<view class="bonus-total-desc">已连续签到{{sign_day}}天</view>
+<view class="sign-api">
+    <view class="data-sign">
+        <view class="data-box">
+            <view class="sign {{check_status.yesterday? 'signed' : ''}}" data-index="{{index}}">+10</view>
+            <view style="font-size: small;">昨天</view>
+        </view>
+        <view class="data-box">
+            <view class="sign {{check_status.today? 'signed' : ''}}" data-index="{{index}}">+10</view>
+            <view style="font-size: small;">今天</view>
+        </view>
+        <view wx:for="{{calendar}}" wx:for-index="index" wx:key="{{index}}" class="data-box">
+            <view class="sign">+10</view>
+            <view style="font-size: small;">{{calendar[index]}}</view>
+        </view>
     </view>
-  </block>
 </view>
-
-<view wx:for="{{dates}}" wx:for-index="index" wx:key="{{index}}">
-  <view class="date">{{item.getMonth()+1}}月{{item.getDate()}}日</view>
-  <view class="sign {{item ? 'signed' : ''}}" bindtap="onSignTap" data-index="{{index}}"></view>
-</view>
-
+<t-button theme="primary" size="small" class="sign-button" bindtap="onSignTap" disabled="{{check_status.today}}">立即签到</t-button>

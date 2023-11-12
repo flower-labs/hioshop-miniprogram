@@ -1,17 +1,20 @@
 /* pages/bonus/bonus.wxss */
+page {
+    background-color: rgb(245, 245, 245);
+}  
 .top-backgroud {
   background-color: orange;
   height: 400rpx;
 }
-.bonus-total{
-    position: relative;
-    left: 20rpx;
-    top: 120rpx;
-    color: white;
-    font-weight: lighter;
+.bonus-total {
+  position: relative;
+  left: 20rpx;
+  top: 120rpx;
+  color: white;
+  font-weight: lighter;
 }
-.bonus-total text{
-    font-size: x-large;
+.bonus-total text {
+  font-size: x-large;
 }
 .above-text {
   display: flex;
@@ -46,23 +49,57 @@
   text-align: center;
 }
 
-.bottom-backgroud {
-    display: flex;
-    position: fixed;
-    top:280rpx;
-    width: 95%;
-    align-self: center;
-    background-color: greenyellow;
-    border-radius: 30rpx;
-    z-index: 2; 
+.bonus-box {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  top: 280rpx;
+  width: 95%;
+  align-self: center;
+  background-color: white;
+  border-radius: 30rpx;
+  z-index: 2;
+  bottom: 20rpx;
 }
-.bonus-title{
-    margin: 30rpx;
-    border: 1rpx solid hotpink;
+.bonus-title {
+  margin-top: 20rpx;
+  width: 90%;
+  align-self: center;
+  font-size: large;
+  color: orange;
 }
 
-.bonus-content{
-    margin: 0rpx 30rpx 0rpx 30rpx;
-    padding:20rpx 0rpx 20rpx 0rpx ;
-    border: 1rpx solid hotpink;
+
+.bonus-list {
+  position: relative;
+  margin-top: 20rpx;
+  height: 80%;
+  width: 90%;
+  align-self: center;
+  
+}
+.list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 15rpx;
+    margin-bottom: 20rpx;
+  }
+.item-left {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.item-left text:nth-child(2){
+    font-size: smaller;
+}
+.item-right {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 20%;
+  
+}
+.item-right text{
+    color: orange;
 }

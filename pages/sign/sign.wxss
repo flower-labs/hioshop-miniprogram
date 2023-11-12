@@ -38,16 +38,10 @@ page {
 .bonus-total-desc {
   margin: 24rpx 0rpx 0rpx 0rpx;
 }
-.button-example {
-  background: linear-gradient(to right, rgb(238, 204, 141), #ffa500);
-  padding: 12rpx;
-  margin-top: 12rpx;
-  margin-bottom: 12rpx;
-  width: 50%;
-  height: 40rpx;
-  align-self: center;
-  text-align: center;
-  border-radius: 30rpx;
+.sign-button{
+    align-self: center;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
 }
 .sign-work {
   display: flex;

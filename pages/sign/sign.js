@@ -16,8 +16,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        this.getCalendar();
+        
     },
+    // 获取最近七天日期
     getCalendar() {
         // 获取当前日期
         const today = new Date();
@@ -50,6 +51,13 @@ Page({
     },
     // 在 js 中定义 onSignTap 函数，用于处理签到事件
     onSignTap(e) {
+        // 获取当前日期
+        let M = ((new Date).getMonth()+1).toString();
+        let D = (new Date).getDate().toString();
+        let today=M+"-"+D;
+        console.log(today);
+
+
         const index = e.currentTarget.dataset.index;
         const signed = this.data.signed;
         // 如果已经签到了，不做任何处理
@@ -74,7 +82,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        this.getCalendar();
     },
 
     /**

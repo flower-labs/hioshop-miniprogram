@@ -3,7 +3,7 @@
     <view class="top-backgroud">
         <view class="bonus-total">
             我的积分
-            <text>20</text>
+            <text>{{total_points}}</text>
         </view>
     </view>
 
@@ -15,13 +15,18 @@
         <image src="" mode="" />
     </view>
 
-    <view class="bottom-backgroud">
-        <view class="bonus-box">
-            <view class="bonus-title">积分记录</view>
-            <view class="bonus-content">数组</view>
-            <view class="bonus-content">数组</view>
-            <view class="bonus-content">数组</view>
-            <view wx:for="{{bonus_records}}">数组</view>
-        </view>
+    <view class="bonus-box">
+        <view class="bonus-title">积分记录</view>
+        <scroll-view scroll-y="true" class="bonus-list">
+            <view wx:for="{{check_list}}" class="list-item"  wx:key="{{index}}">
+                <view class="item-left">
+                    <text>每日签到</text>
+                    <text>{{check_list[index].check_time}}</text>
+                </view>
+                <view class="item-right">
+                    <text>+{{check_list[index].points_amount}}</text>
+                </view>
+            </view>
+        </scroll-view>
     </view>
 </view>

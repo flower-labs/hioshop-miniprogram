@@ -1,83 +1,94 @@
 // pages/lianxi/lianxi.js
+var api = require("../../config/api.js");
+var util = require("../../utils/util.js");
+import moment from 'moment'
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        img1: 'https://tdesign.gtimg.com/miniprogram/images/example1.png',
-        img2: 'https://tdesign.gtimg.com/miniprogram/images/example2.png',
-        img3: 'https://tdesign.gtimg.com/miniprogram/images/example3.png',
-        items: ["item1", "item2", "item3", "item4", "item5"],
-        products: [{
-            img: '/images/icon/chat.png',
-            name: 'mao',
-            price: 24
-        }, {
-            img: '/images/icon/footprint.png',
-            name: 'mao',
-            price: 24
-        }, {
-            img: '/images/icon/no-search.png',
-            name: 'mao',
-            price: 24
-        }, {
-            img: '/images/icon/chat.png',
-            name: 'mao',
-            price: 24
-        }, {
-            img: '/images/icon/footprint.png',
-            name: 'mao',
-            price: 24
-        }, {
-            img: '/images/icon/no-search.png',
-            name: 'mao',
-            price: 24
-        }, {
-            img: '/images/icon/no-search.png',
-            name: 'mao',
-            price: 24
-        }],
-        signed: [],  // 保存签到状态的数组，签到为 true，未签到为 false
-        dates: []    // 保存日期的数组
+        yesterday: "",
+        todayDate: "",
+        calendar: [],
+        check_status: {},
+        flag: false
     },
-// 在 js 中定义 onSignTap 函数，用于处理签到事件
-onSignTap: function(event) {
-    const index = event.currentTarget.dataset.index;
-    const signed = this.data.signed;
-    // 如果已经签到了，不做任何处理
-    if (signed[index]) {
-      return;
-    }
-    // 签到成功，更新签到状态
-    signed[index] = true;
-    this.setData({
-      signed: signed
-    });
-  },
- 
+    // 在 js 中定义 onSignTap 函数，用于处理签到事件
+    onSignTap(e) {
+        var that=this;
+        var timestamp = Math.floor(Date.now() / 1000);
+        console.log(timestamp);
+        //  可以传递数据到后端
+        util.request(api.AddCheck, {
+                // 签到类型，目前仅支持每日签到，因此固定传"daily_check"即可
+                "check_type": "daily_check",
+                // 签到时间（时间戳）
+                "check_time": timestamp,
+                // 签到积分，目前穿10即可
+                "points_amount": 10
+            },
+            "POST"
+        ).then(function (res) {
+            console.log(res.data),
+            that.queryCheckStatus()
+        })
+
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-          // 获取当前日期
-  const today = new Date();
-  // 初始化签到状态和日期数组
-  const signed = [];
-  const dates = [];
-  for (let i = 0; i < 7; i++) {
-    // 计算日期
-    const date = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-    dates.unshift(date);
-    // 初始化签到状态为 false
-    signed.unshift(false);
-  }
-  this.setData({
-    signed: signed,
-    dates: dates
-  });
-    },
+        var that = this;
+        // 获取当前日期
+        var today = moment();
+        // 创建一个数组来保存昨天、今天及未来5天的日期
+        var dates = [];
 
+        // 添加昨天日期
+        var yesterday = today.clone().subtract(1, 'day').format('YYYY-MM-DD');
+        this.setData({
+            yesterday: yesterday
+        })
+
+        // 添加今天日期
+        var todayDate = today.format('YYYY-MM-DD');
+        this.setData({
+            todayDate: todayDate
+        })
+
+        // 添加未来5天日期
+        for (var i = 1; i <= 5; i++) {
+            var futureDay = today.clone().add(i, 'day').format('MM-DD');
+            dates.push(futureDay);
+
+        }
+
+        // 打印未来5天的日期数组
+        this.setData({
+            calendar: dates
+        })
+
+        this.queryCheckStatus()
+    },
+    queryCheckStatus() {
+        var that=this;
+        // 获取昨天、今天签到状态
+        var timestamp = Math.floor(Date.now() / 1000);
+        console.log(timestamp);
+        util.request(
+            api.CheckList, {
+                "current_time": timestamp
+            },
+            "GET"
+        ).then(function (res) {
+            that.setData({
+                check_status: res.data.check_status
+            })
+
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -89,7 +100,6 @@ onSignTap: function(event) {
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
 
     },
 
