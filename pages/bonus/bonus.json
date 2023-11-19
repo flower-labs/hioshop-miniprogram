@@ -1,3 +1,6 @@
 {
-    "usingComponents": {}
+    "usingComponents": {
+        "t-popup": "tdesign-miniprogram/popup/popup",
+        "t-button": "tdesign-miniprogram/button/button"
+    }
 }

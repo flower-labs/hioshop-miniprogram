@@ -1,24 +1,42 @@
 <!--pages/bonus/bonus.wxml-->
 <view class="container">
     <view class="top-backgroud">
-        <view class="bonus-total">
+        <view class="points-total">
             我的积分
             <text>{{total_points}}</text>
         </view>
     </view>
 
-    <view class="above-text">
-        <image src="" mode="" />
-        <text>积分规则</text>
+    <view class="points-rule">
+        <t-popup visible="{{visible}}" placement="bottom" bind:visible-change="onVisibleChange">
+            <view class="block">
+                <view class="points-title">积分规则</view>
+                <scroll-view class="points-content" scroll-y="true">
+                    一、了解惠民福利中心积分惠民福利中心积分指为回馈用户而发放的积分奖励，积分可在本平台消费时作为现金抵扣，也可兑换代金券于订单支付时抵扣相应金额，本积分不可提现，不可转让，用户可通过每日任务 (每日签到、浏览商品、消费支付、邀请下单等)与成长任务(会员注册、完善个人信息、绑定手机号码等)积攒积分，具体以积分中心相关页面与内容说明为准
+二、积分领取规则2.1、用户完成相应积分任务后，须及时点击领取已完成任务的积分，逾期未领取的将视为自愿放弃，因此导致的损失由用户自行承担，本平台不负任何责任且不提供任何补偿!
+2.2、用户可前往”积分记录”查看积分收支情况;
+一、了解惠民福利中心积分惠民福利中心积分指为回馈用户而发放的积分奖励，积分可在本平台消费时作为现金抵扣，也可兑换代金券于订单支付时抵扣相应金额，本积分不可提现，不可转让，用户可通过每日任务 (每日签到、浏览商品、消费支付、邀请下单等)与成长任务(会员注册、完善个人信息、绑定手机号码等)积攒积分，具体以积分中心相关页面与内容说明为准
+二、积分领取规则2.1、用户完成相应积分任务后，须及时点击领取已完成任务的积分，逾期未领取的将视为自愿放弃，因此导致的损失由用户自行承担，本平台不负任何责任且不提供任何补偿!
+2.2、用户可前往”积分记录”查看积分收支情况
+二、积分领取规则2.1、用户完成相应积分任务后，须及时点击领取已完成任务的积分，逾期未领取的将视为自愿放弃，因此导致的损失由用户自行承担，本平台不负任何责任且不提供任何补偿!
+2.2、用户可前往”积分记录”查看积分收支情况
+                </scroll-view>
+                <view class="header">
+                    <t-button class="points-close" bindtap="cancelPopup" theme="primary" size="large" block>知道了</t-button>
+                </view>
+            </view>
+        </t-popup>
+        <t-button block class="wrapper" size="small" variant="text" theme="primary" bind:tap="handlePopup">？积分规则</t-button>
     </view>
-    <view class="above-img">
+
+    <view class="points-img">
         <image src="" mode="" />
     </view>
 
     <view class="bonus-box">
         <view class="bonus-title">积分记录</view>
         <scroll-view scroll-y="true" class="bonus-list">
-            <view wx:for="{{check_list}}" class="list-item"  wx:key="{{index}}">
+            <view wx:for="{{check_list}}" class="list-item" wx:key="{{index}}">
                 <view class="item-left">
                     <text>每日签到</text>
                     <text>{{check_list[index].check_time}}</text>

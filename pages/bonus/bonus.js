@@ -7,6 +7,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        cur: {},
         check_list: [],
         total_points: 0
     },
@@ -14,11 +15,34 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
+    handlePopup(e) {
+        const {
+            item
+        } = e.currentTarget.dataset;
+        this.setData({
+                cur: item,
+            },
+            () => {
+                this.setData({
+                    visible: true
+                });
+            },
+        );
+    },
+    onVisibleChange(e) {
+        this.setData({
+            visible: e.detail.visible,
+        });
+    },
+    cancelPopup(){
+        this.setData({
+            visible: false,
+        });
+    },
     // 获取签到列表接口
     getSignList() {
         let that = this;
         var timestamp = Math.floor(Date.now() / 1000);
-        console.log(timestamp);
         util.request(
                 api.CheckList, {
                     "current_time": timestamp

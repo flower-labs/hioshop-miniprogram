@@ -1,52 +1,80 @@
 /* pages/bonus/bonus.wxss */
 page {
-    background-color: rgb(245, 245, 245);
-}  
+  background-color: rgb(245, 245, 245);
+}
 .top-backgroud {
   background-color: orange;
   height: 400rpx;
+  z-index: -3;
 }
-.bonus-total {
+.points-total {
   position: relative;
   left: 20rpx;
   top: 120rpx;
   color: white;
   font-weight: lighter;
 }
-.bonus-total text {
+.points-total text {
   font-size: x-large;
 }
-.above-text {
+.points-rule {
   display: flex;
   position: fixed;
   top: 20rpx;
-  right: 20rpx;
-  width: 150rpx;
-  height: 40rpx;
-  border: 1rpx solid black;
-  font-size: 20rpx;
-  line-height: 40rpx;
+  right: 12rpx;
+}
+.wrapper {
+  --td-button-font-weight: 300;
+  --td-button-primary-text-color: #fff;
+}
+.block {
+  width: 100vw;
+  height: 140vw;
+  background: #fff;
+  border-top-left-radius: 16rpx;
+  border-top-right-radius: 16rpx;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  height: 116rpx;
+  width: 100%;
+  bottom: 0rpx;
+}
+.points-title {
+  margin: 28rpx;
   text-align: center;
 }
-.above-text image {
-  width: 40rpx;
-  height: 40rpx;
-  border: 1rpx solid red;
+.points-content {
+    padding-left: 20rpx;
+    height: 80%;
+    width: 95%;
+    
+   
+    
+  }
+.points-close {
+  flex: 1;
+  margin-left: 36rpx;
+  margin-right: 36rpx;
+  --td-button-border-radius: 56rpx;
+  text-align: center;
+  font-weight: 600;
+  font-size: 36rpx;
 }
-.above-img {
+
+.points-img {
   position: fixed;
   top: 120rpx;
   right: 120rpx;
   width: 180rpx;
   height: 180rpx;
-  border-radius: 50%;
-  background-color: #007aff;
-  z-index: 3;
-  box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 28rpx;
-  line-height: 80rpx;
-  text-align: center;
+  background-color: ivory;
+  rotate: 30deg;
+  z-index: -1;
+ 
 }
 
 .bonus-box {
@@ -58,8 +86,8 @@ page {
   align-self: center;
   background-color: white;
   border-radius: 30rpx;
-  z-index: 2;
   bottom: 20rpx;
+  z-index: -2;
 }
 .bonus-title {
   margin-top: 20rpx;
@@ -69,37 +97,34 @@ page {
   color: orange;
 }
 
-
 .bonus-list {
   position: relative;
   margin-top: 20rpx;
   height: 80%;
   width: 90%;
   align-self: center;
-  
 }
 .list-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 15rpx;
-    margin-bottom: 20rpx;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 15rpx;
+  margin-bottom: 20rpx;
+}
 .item-left {
   display: flex;
   flex-direction: column;
   width: 70%;
 }
-.item-left text:nth-child(2){
-    font-size: smaller;
+.item-left text:nth-child(2) {
+  font-size: smaller;
 }
 .item-right {
   display: flex;
   flex-direction: column;
   align-self: center;
   width: 20%;
-  
 }
-.item-right text{
-    color: orange;
+.item-right text {
+  color: orange;
 }
