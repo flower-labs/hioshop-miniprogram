@@ -1,0 +1,58 @@
+<!--pages/gude-detail/index.wxml-->
+<image src="{{imageUrl}}" mode="aspectFit"></image>
+<view class="container">
+    <view class="info-card">
+        <view class="detail-title">
+            古德车服汽车养护中心
+        </view>
+        <view class="detail-time">
+            营业时间： 9:00 -18：00
+        </view>
+        <view class="detail-address">
+            湖北省武汉市东湖高新区花山大道与春和路交汇处一期商业6#109号
+        </view>
+    </view>
+
+    <view class="info-card">
+        <view class="detail-item">
+            <view class="item-left">
+                <t-icon name="location" size="35rpx" data-name="location" bind:click="onIconTap" />
+            </view>
+            <view class="item-right">
+                湖北省武汉市东湖高新区花山大道与春和路交汇处一期商业6#109号
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="item-left">
+                <t-icon name="call" size="35rpx" data-name="call" bind:click="onIconTap" />
+            </view>
+            <view class="item-right">
+                136XXX26507
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="item-left">
+                <t-icon name="city-10" size="35rpx" data-name="city-10" bind:click="onIconTap" />
+            </view>
+            <view class="item-right">
+                营业时间： 09:00 - 18:00
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="item-left">
+                <t-icon name="animation" size="35rpx" data-name="animation" bind:click="onIconTap" />
+            </view>
+            <view class="item-right">
+                主营业务：汽车美容 / 洗车 / 机修 / 汽车保养
+            </view>
+        </view>
+        <view class="detail-item">
+            <view class="item-left">
+                <t-icon name="file-1" size="30rpx" data-name="file-1" />
+            </view>
+            <view class="item-right">
+                门店介绍： 古德汽修是一家提供良好服务的汽车养护服务门店。
+            </view>
+        </view>
+    </view>
+</view>

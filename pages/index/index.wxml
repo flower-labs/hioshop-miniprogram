@@ -10,7 +10,7 @@
         <text class="txt">搜索,发现更多好物</text>
     </view>
     <view class='banner-wrap' wx:if="{{show_banner && banner.length > 0}}">
-        <swiper class="banner" indicator-dots="true" autoplay="{{autoplay}}" interval="7000" duration="7000"   >
+        <swiper class="banner" indicator-dots="true" autoplay="{{autoplay}}" interval="3000" duration="1000"   >
             <swiper-item wx:for="{{banner}}" wx:key="id">
                 <navigator wx:if="{{item.link_type == 0}}" url="/pages/goods/goods?id={{item.goods_id}}">
                     <image src="{{item.image_url}}" background-size="cover"></image>
@@ -86,7 +86,7 @@
                             <view class="goods-title">{{iitem.name}}</view>
                             <view class='price-container'>
                                 <view class='l'>
-                                    <view class='h'>${{iitem.min_retail_price}}</view>
+                                    <view class='h'>￥{{iitem.min_retail_price}}</view>
                                 </view>
                             </view>
                         </view>

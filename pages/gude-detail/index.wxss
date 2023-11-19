@@ -1,0 +1,47 @@
+/* pages/gude-detail/index.wxss */
+page {
+  background-color: rgba(235, 232, 232, 0.459);
+}
+
+.container {
+  padding: 30rpx;
+}
+
+.info-card {
+  background-color: #fff;
+  border-radius: 15rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  box-shadow: 10rpx 10rpx 10rpx #cdcfcf;
+  margin-bottom: 50rpx;
+}
+
+.detail-title {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.detail-time {
+  font-weight: lighter;
+  font-size: smaller;
+  margin-bottom: 10rpx;
+}
+
+.detail-address {
+  font-weight: lighter;
+  font-size: 30rpx;
+}
+
+.detail-item{
+    display: flex;
+    margin-bottom: 40rpx;
+}
+.detail-item .item-left{
+    display: flex;
+    margin-right: 30rpx;
+    padding-top: 10rpx;
+}
+.detail-item .item-right{
+    font-size: 30rpx;
+}
