@@ -2,7 +2,7 @@
 // 引入地理位置 API
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 const qqmapsdk = new QQMapWX({
-  key: 'CUXBZ-L3L6G-CGTQQ-Q5SUK-RVPBQ-MQFNH',
+  key: 'TOGBZ-ZOFWL-FO7PE-M3557-NEA2J-LGBPK',
 });
 
 const util = require('../../utils/util.js');
@@ -102,7 +102,7 @@ Page({
   //跳转到门店详情
   goto_gudeInfo() {
     wx.navigateTo({
-      url: '/pages/gudeInfo1/gudeInfo1',
+      url: '/pages/gude-detail/index',
     });
   },
   //获取电话号码

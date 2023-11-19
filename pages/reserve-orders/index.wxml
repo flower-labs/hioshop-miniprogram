@@ -20,6 +20,8 @@
                 </view>
             </view>
         </view>
+        <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
+        <view class="no-more" wx:else>没有更多订单了……</view>
     </view>
 </view>
 <t-back-top wx:if="{{backTopVisible}}" theme="half-round-dark" text="返回顶部" bind:to-top="onToTop"></t-back-top>

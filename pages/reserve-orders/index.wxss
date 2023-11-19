@@ -57,3 +57,25 @@ page {
       font-size: 26rpx;
       color: #333;
   } */
+
+.order_list {
+  padding-bottom: 50rpx;
+}
+
+.order_list .show-more {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-bottom: 100rpx;
+  text-align: center;
+  font-size: 35rpx;
+  color: #52a9e2;
+}
+
+.order_list .no-more {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-bottom: 100rpx;
+  text-align: center;
+  font-size: 35rpx;
+  color: #666;
+}
