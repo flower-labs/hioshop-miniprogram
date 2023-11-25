@@ -1,9 +1,9 @@
 <!--pages/gude-detail/index.wxml-->
-<image src="{{imageUrl}}" mode="aspectFit"></image>
+<image class="img"  src="{{imageUrl}}" mode="widthFix"></image>
 <view class="container">
     <view class="info-card">
         <view class="detail-title">
-            古德车服汽车养护中心
+            古德车服汽车服务中心
         </view>
         <view class="detail-time">
             营业时间： 9:00 -18：00

@@ -307,18 +307,18 @@ Page({
       this.showDialog("请选择预约时间");
       return false;
     }
-    if (!phone) {
-      this.showDialog("请输入手机号");
-      return false;
-    }
+    // if (!phone) {
+    //   this.showDialog("请输入手机号");
+    //   return false;
+    // }
     if (!plateNumber) {
       this.showDialog("请输入车牌号");
       return false;
     }
-    if (!phoneReg.test(phone)) {
-      this.showDialog("请输入正确的手机号");
-      return false;
-    }
+    // if (!phoneReg.test(phone)) {
+    //   this.showDialog("请输入正确的手机号");
+    //   return false;
+    // }
     if (!plateReg.test(plateNumber)) {
       this.showDialog("请输入正确的车牌号");
       return false;

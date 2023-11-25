@@ -19,7 +19,8 @@ Page({
    */
   onLoad(options) {},
   /** 获取订单列表 */
-  getOrderCart() {
+  getOrderCart(isRefresh = false) {
+    console.log('isRefresh', isRefresh);
     let that = this;
     const statusArr = {
       1001: '待确认',
@@ -54,7 +55,7 @@ Page({
         }
         const { reserveOrderList } = that.data;
         that.setData({
-          reserveOrderList: reserveOrderList.concat(currentOrders),
+          reserveOrderList: isRefresh ? currentOrders : reserveOrderList.concat(currentOrders),
         });
         wx.stopPullDownRefresh();
       });
@@ -86,7 +87,7 @@ Page({
               'POST',
             )
             .then(function () {
-              that.getOrderCart();
+              that.getOrderCart(true);
             });
         } else if (operation.cancel) {
           console.log('cancel');
@@ -125,7 +126,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    this.getOrderCart();
+    this.getOrderCart(true);
   },
 
   /**

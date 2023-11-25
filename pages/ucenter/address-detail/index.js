@@ -322,10 +322,10 @@ Page({
             util.showErrorToast('请输入姓名');
             return false;
         }
-        if (address.mobile == '' || address.mobile == undefined) {
-            util.showErrorToast('请输入手机号码');
-            return false;
-        }
+        // if (address.mobile == '' || address.mobile == undefined) {
+        //     util.showErrorToast('请输入手机号码');
+        //     return false;
+        // }
         if (address.district_id == 0 || address.district_id == undefined) {
             util.showErrorToast('请输入省市区');
             return false;

@@ -20,7 +20,7 @@
     <view class="theme">
         <view bindtap="goto_gudeInfo" class="theme-box">
             <view class="theme-box-title">
-                <text>古德车服汽车养护中心</text>
+                <text>古德车服汽车服务中心</text>
             </view>
             <view class="theme-box-badge">
                 <text>美容</text>
@@ -37,7 +37,7 @@
             <t-col span="16" t-class="address">
                 <view style="font-size: small;">湖北省武汉市东湖高新区花山大道与春和路交汇处一期商业6#109号
                 </view>
-                <view style="color: red;font-size: small;margin-bottom: auto;margin-top: 15rpx;" bindtap="getDis">距离：{{dis}}</view>
+                <view style="color: darkcyan;font-size: small;margin-top: 15rpx;" bindtap="getDis">距离：{{dis}}</view>
             </t-col>
             <t-col span="4" t-class="carNav">
                 <view class="grid-item" bindtap="mapViewTap">
@@ -56,7 +56,7 @@
 
 
     <!-- 积分 -->
-    <view class="bonus">
+    <!-- <view class="bonus">
         <view class="bonusItem" bindtap="toBonus">
             <image src="/images/icon/积分.png" mode="" />
             <text>{{myBonus}}积分</text>
@@ -69,9 +69,9 @@
             <image src="/images/icon/券设置@2x.png" mode="" />
             <text>积分兑券</text>
         </view>
-    </view>
+    </view> -->
 
-    <view class="goods-container">
+    <!-- <view class="goods-container">
         <view class='topic-container' wx:for="{{floorGoods}}" wx:key="id">
             <view class='banner-container' bindtap="goCategory" data-cateid="{{item.id}}" wx:if="{{index_banner_img == 1}}">
                 <image mode='aspectFill' style="width:100%;height:{{item.height}}rpx" src='{{item.banner}}'>
@@ -111,5 +111,5 @@
             </view>
             <view class="more-category" data-cateid="{{item.id}}" bindtap="goCategory">点击查看更多{{item.name}}</view>
         </view>
-    </view>
+    </view> -->
 </view>

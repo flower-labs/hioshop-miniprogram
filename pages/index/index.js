@@ -88,10 +88,10 @@ Page({
                     })
                 } else {
                     cartGoodsCount = res.data.cartCount + '';
-                    wx.setTabBarBadge({
-                        index: 2,
-                        text: cartGoodsCount
-                    })
+                    // wx.setTabBarBadge({
+                    //     index: 2,
+                    //     text: cartGoodsCount
+                    // })
                 }
             }
         });

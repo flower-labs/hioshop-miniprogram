@@ -25,7 +25,7 @@
         </view>
     </view>
     <!-- <ad unit-id="adunit-89ae0a0b6860dc9f" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad> -->
-    <view class="order-container">
+    <!-- <view class="order-container">
         <view class='header' data-index='0' bindtap='toOrderListTap'>
             <view class='top-title'>
                 <view class='left-line'></view>
@@ -62,8 +62,8 @@
                 <text class='order-txt'>待收货</text>
             </view>
         </view>
-    </view>
-    <view class="li-wrap">
+    </view> -->
+    <!-- <view class="li-wrap">
         <view class="list" bindtap="toAddressList">
             <view class="list-l">
                 <view class="icon">
@@ -73,7 +73,7 @@
             </view>
             <view class="arrow"></view>
         </view>
-    </view>
+    </view> -->
     <view class="li-wrap">
         <view class="list" bindtap="toReserveOrder">
             <view class="list-l">
@@ -86,7 +86,7 @@
         </view>
     </view>
     <view class="li-wrap">
-        <view class="list" bindtap="toFootprint">
+        <!-- <view class="list" bindtap="toFootprint">
             <view class="list-l">
                 <view class="icon">
                     <image class="img" src="/images/icon/icon-footprint-r.png"></image>
@@ -94,7 +94,7 @@
                 <view class="text">我的足迹</view>
             </view>
             <view class="arrow"></view>
-        </view>
+        </view> -->
         <button class="contact-btn" session-from='{"nickName":"{{userInfo.nickname}}","avatarUrl":"{{userInfo.avatar}}"}' open-type="contact">
             <view class="list-l">
                 <view class="icon">

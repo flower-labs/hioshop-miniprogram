@@ -6,7 +6,7 @@
     </view>
   </view>
   <view class="input_area_wrapper">
-    <t-input prefixIcon="mobile" type="number" value="{{orderPhone}}" bind:change="input_phone" maxlength="{{11}}" placeholder="请输入手机号……" clearable />
+    <!-- <t-input prefixIcon="mobile" type="number" value="{{orderPhone}}" bind:change="input_phone" maxlength="{{11}}" placeholder="请输入手机号……" clearable /> -->
     <t-input prefixIcon="verify" value="{{orderPlate}}" bind:change="input_plate" placeholder="请输入车牌号……" clearable>
       <t-button slot="suffix" theme="primary" bind:tap="choosePlate" size="extra-small"> 选择 </t-button>
     </t-input>

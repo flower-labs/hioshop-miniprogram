@@ -6,6 +6,9 @@ page {
 .container {
   padding: 30rpx;
 }
+.img {
+  width: 100%;
+}
 
 .info-card {
   background-color: #fff;
@@ -33,15 +36,15 @@ page {
   font-size: 30rpx;
 }
 
-.detail-item{
-    display: flex;
-    margin-bottom: 40rpx;
+.detail-item {
+  display: flex;
+  margin-bottom: 40rpx;
 }
-.detail-item .item-left{
-    display: flex;
-    margin-right: 30rpx;
-    padding-top: 10rpx;
+.detail-item .item-left {
+  display: flex;
+  margin-right: 30rpx;
+  padding-top: 10rpx;
 }
-.detail-item .item-right{
-    font-size: 30rpx;
+.detail-item .item-right {
+  font-size: 30rpx;
 }

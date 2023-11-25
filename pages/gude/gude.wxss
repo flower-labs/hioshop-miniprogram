@@ -1,6 +1,7 @@
 /* pages/gude/gude.wxss */
 .container {
   background-color: #f1f1f1;
+  height: 100vh;
 }
 /* 主题 */
 .theme {

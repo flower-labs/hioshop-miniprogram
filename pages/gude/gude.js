@@ -20,7 +20,7 @@ Page({
     autoplay: false,
     duration: 500,
     interval: 5000,
-    swiperList: [`${api.CDN_URL}/main-4.jpg`, `${api.CDN_URL}/main-2.jpg`, `${api.CDN_URL}/main-3.webp`],
+    swiperList: [`${api.CDN_URL}/main-4.jpg`, `${api.CDN_URL}/洗车小程序/保养配图1.webp`, `${api.CDN_URL}/洗车小程序/配图2.jpg`],
     userInfo: {},
     current: 0,
     autoplay: false,
@@ -151,10 +151,10 @@ Page({
           });
         } else {
           cartGoodsCount = res.data.cartCount + '';
-          wx.setTabBarBadge({
-            index: 2,
-            text: cartGoodsCount,
-          });
+        //   wx.setTabBarBadge({
+        //     index: 2,
+        //     text: cartGoodsCount,
+        //   });
         }
       }
     });

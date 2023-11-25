@@ -1,4 +1,5 @@
 {
+    "disableScroll": true,
     "usingComponents": {
         "t-icon": "tdesign-miniprogram/icon/icon"
     }
