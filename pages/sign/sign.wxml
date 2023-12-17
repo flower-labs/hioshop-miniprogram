@@ -1,6 +1,6 @@
 <!--pages/sign/sign.wxml-->
 <view class="container">
-  <image class="sign-image" src="{{imageUrl}}" mode="aspectFit"></image>
+  <image class="sign-image" src="{{imageUrl}}" mode="widthFix"></image>
 
   <view class="block">
       <t-grid column="{{3}}">

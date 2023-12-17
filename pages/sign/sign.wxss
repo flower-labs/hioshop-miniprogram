@@ -3,6 +3,10 @@ page {
   background-color: #f5f5f5;
 }
 
+.sign-image{
+   width: 100%;
+}
+
 .sign-record {
   background-color: white;
   display: flex;
