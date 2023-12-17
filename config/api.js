@@ -23,7 +23,8 @@ module.exports = {
   AddReserveOrder: ApiRootUrl + 'reserve/add', //分类目录全部分类数据接口
   // 取消订单预约
   CancelReservedOrder: ApiRootUrl + 'reserve/cancel', //分类目录全部分类数据接口
-
+  CheckList: ApiRootUrl + 'check/index',    // 获取签到状态
+  AddNewCheck: ApiRootUrl + 'check/add',  // 新增签到
   CatalogCurrent: ApiRootUrl + 'catalog/current', //分类目录当前分类数据接口
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',
   // 购物车

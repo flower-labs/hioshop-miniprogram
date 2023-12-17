@@ -1,28 +1,26 @@
 <!--pages/sign/sign.wxml-->
 <view class="container">
-    <view class="background">背景</view>
-    <view class="sign-record">
-        <view class="desc">积分兑换权益</view>
-        <view class="block">
-            <t-grid column="{{3}}">
-                <t-grid-item text="积分记录" image="{{img1}}" />
-                <t-grid-item text="积分兑换" image="{{img2}}" />
-                <t-grid-item text="积分规则" image="{{img3}}" />
-            </t-grid>
-        </view>
+  <image class="sign-image" src="{{imageUrl}}" mode="aspectFit"></image>
+
+  <view class="block">
+      <t-grid column="{{3}}">
+        <t-grid-item text="积分记录" image="{{img1}}" />
+        <t-grid-item text="积分兑换" image="{{img2}}" />
+        <t-grid-item text="积分规则" image="{{img3}}" />
+      </t-grid>
     </view>
-    <view class="sign-box">
-        <view class="bonus-total-desc">已连续签到{{sign_day}}天</view>
-        <view class="sign-api">
-            <view class="data-sign">
-                <view wx:for="{{calendar}}" wx:for-index="index" wx:key="{{index}}" class="data-box">
-                    <view class="sign {{signed[index]? 'signed' : ''}}" data-index="{{index}}">+10</view>
-                    <view style="font-size: small;">{{item}}</view>
-                </view>
-            </view>
+
+  <view class="sign-box">
+    <view class="bonus-total-desc">已连续签到{{sign_day}}天</view>
+    <view class="sign-api">
+      <view class="data-sign">
+        <view wx:for="{{checkPointList}}" wx:for-index="index" wx:key="{{index}}" class="data-box">
+          <view class="sign {{item.isChecked? 'signed' : ''}}" data-index="{{index}}">+10</view>
+          <view style="font-size: small;">{{item.label}}</view>
         </view>
-        <t-button theme="primary" size="small" class="sign-button" bindtap="onSignTap">立即签到</t-button>
-            <view class="sign-work">
+      </view>
+    </view>
+    <!-- <view class="sign-work">
                 <view class="grow-sign">
                     <view class="left">
                         <image src="" mode="" />
@@ -45,6 +43,12 @@
                         </view>
                     </view>
                 </view>
-            </view>
-    </view>
+            </view>  -->
+  </view>
+  <t-button theme="primary" disabled="{{isAddDisabled}}" class="sign-button" bindtap="onSignTap">立即签到</t-button>
+
+  <!-- <view class="sign-record">
+    <view class="desc">积分兑换权益</view>
+    
+  </view> -->
 </view>
