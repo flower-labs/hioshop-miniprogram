@@ -3,10 +3,6 @@ page {
   background-color: #f5f5f5;
 }
 
-.sign-image {
-  height: 422rpx;
-}
-
 .sign-record {
   background-color: white;
   display: flex;
