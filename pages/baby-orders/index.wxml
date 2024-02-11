@@ -2,19 +2,15 @@
 <wxs src='../../utils/filter.wxs' module='filters' />
 <view wx:if="{{reserveOrderList}}">
   <view class="order_list">
-    <view class="order" wx:for="{{reserveOrderList}}" wx:key="{{index}}">
+    <view wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
       <view class="order_head">
         <t-image src="{{item.image}}" mode="aspectFill" width="40" height="40" aria-label="milk" />
-        <view class="time_title">
-          {{item.startTime}}
-        </view>
         <view wx:if="{{item.type === 'milk'}}" class="reserve-status">
           {{item.drink_amount}} ml
         </view>
       </view>
-      <!-- <view class="order_item">结束时间：{{item.endTime}}</view> -->
-      <!-- <view class="order_item">创建时间：{{item.createTime}}</view> -->
-      <view class="order_item">备注信息：{{item.extra}}</view>
+      <view class="order_item">{{item.createTime}}</view>
+      <view wx:if="{{item.extra !== ''}}" class="order_item">{{item.extra}}</view>
     </view>
     <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
     <view class="no-more" wx:else>没有更多记录了……</view>

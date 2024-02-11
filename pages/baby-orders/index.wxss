@@ -7,10 +7,33 @@ page {
 
 .order {
   padding: 30rpx;
-  background-color: rgb(100, 196, 240);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
   margin: 27rpx;
   border-radius: 15rpx;
+}
+
+.card-theme1 {
+  padding: 30rpx;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
+  margin: 27rpx;
+  border-radius: 15rpx;
+  background-image: linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%);
+}
+
+.card-theme2 {
+  padding: 30rpx;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
+  margin: 27rpx;
+  border-radius: 15rpx;
+  background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+}
+
+.card-theme3 {
+  padding: 30rpx;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
+  margin: 27rpx;
+  border-radius: 15rpx;
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
 }
 
 .order_head {
@@ -18,7 +41,6 @@ page {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15rpx;
-  border-bottom: 2rpx solid black;
   margin-bottom: 20rpx;
 }
 
@@ -44,10 +66,6 @@ page {
 .order_item {
   font-size: medium;
   margin-top: 30rpx;
-}
-
-.time_title{
-  font-size: 36rpx;
 }
 
 .order_id {

@@ -84,7 +84,7 @@ Page({
     this.getBabyOrder();
   },
   formatTimestamp(timestamp) {
-    return moment.unix(timestamp).format('YYYY-MM-DD HH:mm:ss');
+    return moment.unix(timestamp).format('MM-DD HH:mm');
   },
   /**
    * 生命周期函数--监听页面隐藏
