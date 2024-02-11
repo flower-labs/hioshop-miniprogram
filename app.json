@@ -10,7 +10,9 @@
         "pages/reserve-detail/index",
         "pages/reserve-start/index",
         "pages/reserve-orders/index",
-        "pages/gude-detail/index"
+        "pages/gude-detail/index",
+        "pages/baby-setting/index",
+        "pages/baby-orders/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -30,6 +32,12 @@
                 "iconPath": "images/nav/icon-index-b.png",
                 "selectedIconPath": "images/nav/icon-index-r.png",
                 "text": "古德"
+            },
+            {
+                "pagePath": "pages/baby-setting/index",
+                "iconPath": "images/icon/baby-default.png",
+                "selectedIconPath": "images/icon/baby-active.png",
+                "text": "宝宝"
             },
             {
                 "pagePath": "pages/reserve-start/index",

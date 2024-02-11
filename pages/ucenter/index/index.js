@@ -52,6 +52,12 @@ Page({
         url: "/pages/reserve-orders/index",
     });
   },
+  // 跳转宝宝记录页
+  toBabyOrder: function () {
+    wx.navigateTo({
+        url: "/pages/baby-orders/index",
+    });
+  },
   toFootprint: function (e) {
     let res = util.loginNow();
     if (res == true) {

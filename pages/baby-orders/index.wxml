@@ -1,0 +1,23 @@
+<!--pages/baby-orders/index.wxml-->
+<wxs src='../../utils/filter.wxs' module='filters' />
+<view wx:if="{{reserveOrderList}}">
+  <view class="order_list">
+    <view class="order" wx:for="{{reserveOrderList}}" wx:key="{{index}}">
+      <view class="order_head">
+        <t-image src="http://cdn.bajie.club/babycare/milk.svg" mode="aspectFill" width="40" height="40" aria-label="milk" />
+        <view class="time_title">
+          {{item.startTime}}
+        </view>
+        <view class="reserve-status">
+          {{item.drink_amount}} ml
+        </view>
+      </view>
+      <view class="order_item">结束时间：{{item.endTime}}</view>
+      <view class="order_item">创建时间：{{item.createTime}}</view>
+      <view class="order_item">备注信息：{{item.extra}}</view>
+    </view>
+    <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
+    <view class="no-more" wx:else>没有更多记录了……</view>
+  </view>
+</view>
+<t-back-top wx:if="{{backTopVisible}}" theme="half-round-dark" text="返回顶部" bind:to-top="onToTop"></t-back-top>

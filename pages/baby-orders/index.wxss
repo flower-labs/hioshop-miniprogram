@@ -1,15 +1,18 @@
-/* pages/reserve-orders/index.wxss */
+/* pages/baby-orders/index.wxss */
 
 page {
   background-color: white;
-  --td-brand-color: navy;
+  --td-brand-color: rgb(132, 236, 47);
 }
+
 .order {
-  padding: 20rpx;
-  background-color: rgb(255, 196, 0);
+  padding: 30rpx;
+  background-color: rgb(100, 196, 240);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
   margin: 27rpx;
-  border-radius: 24rpx;
+  border-radius: 15rpx;
 }
+
 .order_head {
   display: flex;
   justify-content: space-between;
@@ -19,23 +22,33 @@ page {
   margin-bottom: 20rpx;
 }
 
+.reserve-status{
+  background-color: rgba(34, 236, 219, 0.986);
+  border: 1rpx solid #fff;
+  padding: 0 14rpx;
+  border-radius: 16rpx;
+  font-size: 36rpx;
+}
+
 .order_title {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
 }
+
 .order_title .reserve_price {
   font-size: small;
   font-weight: lighter;
 }
 
-.order_id,
-.order_time,
-.order_phone,
-.order_plate {
+.order_item {
   font-weight: lighter;
-  font-size: small;
-  margin-top: 5rpx;
+  font-size: medium;
+  margin-top: 10rpx;
+}
+
+.time_title{
+  font-size: 36rpx;
 }
 
 .order_id {
