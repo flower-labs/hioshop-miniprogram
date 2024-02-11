@@ -5,9 +5,6 @@ import Message from 'tdesign-miniprogram/message/index';
 import moment from 'moment';
 
 Page({
-  options: {
-    styleIsolation: 'apply-shared',
-  },
 
   /**
    * 页面的初始数据
@@ -20,6 +17,27 @@ Page({
     extra: '',
     mode: '',
     addLoading: false,
+    action: 'milk',
+    actionMap: [
+      {
+        key: 'milk',
+        name: '喂奶',
+        value: 'milk',
+        image: 'http://cdn.bajie.club/babycare/milk.svg',
+      },
+      {
+        key: 'pee',
+        name: '嘘嘘',
+        value: 'pee',
+        image: 'http://cdn.bajie.club/babycare/pee.svg',
+      },
+      {
+        key: 'shit',
+        name: '拉粑粑',
+        value: 'shit',
+        image: 'http://cdn.bajie.club/babycare/shit1.svg',
+      },
+    ],
   },
 
   showPicker(e) {
@@ -61,6 +79,10 @@ Page({
     }
   },
 
+  onActionChange(e) {
+    this.setData({ action: e.detail.value });
+  },
+
   onExtraInput(e) {
     console.log('e', e);
     this.setData({
@@ -70,13 +92,13 @@ Page({
 
   handleBabyRecordAdd() {
     this.setData({ addLoading: true });
-    const { extra, drinkAmout, startTime, endTime } = this.data;
+    const { extra, drinkAmout, startTime, endTime, action } = this.data;
     console.log('start end', startTime, endTime);
     util
       .request(
         api.AddBabyRecord,
         {
-          type: 'drink',
+          type: action,
           count: 1,
           extra,
           drink_amount: drinkAmout,

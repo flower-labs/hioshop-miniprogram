@@ -42,9 +42,8 @@ page {
 }
 
 .order_item {
-  font-weight: lighter;
   font-size: medium;
-  margin-top: 10rpx;
+  margin-top: 30rpx;
 }
 
 .time_title{

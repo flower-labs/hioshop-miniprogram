@@ -3,6 +3,14 @@
 <view class="baby-setting-container">
   <t-message id="t-message" />
   <view class="action-container">
+    <t-radio-group t-class="horizontal-box" value="{{action}}" bind:change="onActionChange">
+      <view wx:for="{{actionMap}}" wx:key="index" class="card {{action == item.value ? 'card--active' : ''}}">
+        <t-icon wx:if="{{action == item.value}}" name="check" t-class="card__icon" />
+        <t-image src="{{item.image}}" t-class="radio__image" mode="aspectFill" width="40" height="40" aria-label="milk" />
+        <t-radio value="{{item.value}}" label="" t-class="radio__select" icon="" borderless />
+      </view>
+    </t-radio-group>
+
     <view class="time-range-select">
       <t-cell-group theme="card">
         <t-cell title="选择开始时间" hover note="{{startTime || ''}}" arrow data-mode="start" bindtap="showPicker" t-class="panel-item" />

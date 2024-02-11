@@ -4,16 +4,16 @@
   <view class="order_list">
     <view class="order" wx:for="{{reserveOrderList}}" wx:key="{{index}}">
       <view class="order_head">
-        <t-image src="http://cdn.bajie.club/babycare/milk.svg" mode="aspectFill" width="40" height="40" aria-label="milk" />
+        <t-image src="{{item.image}}" mode="aspectFill" width="40" height="40" aria-label="milk" />
         <view class="time_title">
           {{item.startTime}}
         </view>
-        <view class="reserve-status">
+        <view wx:if="{{item.type === 'milk'}}" class="reserve-status">
           {{item.drink_amount}} ml
         </view>
       </view>
-      <view class="order_item">结束时间：{{item.endTime}}</view>
-      <view class="order_item">创建时间：{{item.createTime}}</view>
+      <!-- <view class="order_item">结束时间：{{item.endTime}}</view> -->
+      <!-- <view class="order_item">创建时间：{{item.createTime}}</view> -->
       <view class="order_item">备注信息：{{item.extra}}</view>
     </view>
     <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
