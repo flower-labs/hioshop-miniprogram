@@ -31,18 +31,13 @@ Page({
         'POST',
       )
       .then(res => {
-        const imageMap = {
-          'milk': 'http://cdn.bajie.club/babycare/milk.svg',
-          'pee': 'http://cdn.bajie.club/babycare/pee.svg',
-          'shit': 'http://cdn.bajie.club/babycare/shit1.svg',
-        }
         const orderInfo = res.data.babyList;
         const currentOrders = orderInfo.data.map(item => ({
           ...item,
           startTime: this.formatTimestamp(item.start_time),
           endTime: this.formatTimestamp(item.end_time),
           createTime: this.formatTimestamp(item.create_time),
-          image: imageMap[item.type],
+          image: this.filterIconArray(item.type),
         }));
         const { currentPage, totalPages } = orderInfo;
         // 判断是否有更多数据
@@ -57,6 +52,20 @@ Page({
         });
         wx.stopPullDownRefresh();
       });
+  },
+  filterIconArray(action) {
+    const imageArray = [];
+    const imageMap = {
+      milk: 'http://cdn.bajie.club/babycare/milk.svg',
+      pee: 'http://cdn.bajie.club/babycare/pee.svg',
+      shit: 'http://cdn.bajie.club/babycare/shit1.svg',
+    };
+    Object.keys(imageMap).forEach(item => {
+      if (action.includes(item)) {
+        imageArray.push(imageMap[item]);
+      }
+    });
+    return imageArray;
   },
   /** 加载更多 */
   handleLoadMore() {

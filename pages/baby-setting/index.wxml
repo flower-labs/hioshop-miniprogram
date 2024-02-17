@@ -1,15 +1,19 @@
 <!--pages/baby-setting/index.wxml-->
 
+<wxs module="_">
+  module.exports.contain = function (arr, key) { return arr.indexOf(key) > -1 } 
+</wxs>
+
 <view class="baby-setting-container">
   <t-message id="t-message" />
   <view class="action-container">
-    <t-radio-group t-class="horizontal-box" value="{{action}}" bind:change="onActionChange">
-      <view wx:for="{{actionMap}}" wx:key="index" class="card {{action == item.value ? 'card--active' : ''}}">
-        <t-icon wx:if="{{action == item.value}}" name="check" t-class="card__icon" />
+    <t-checkbox-group t-class="horizontal-box" value="{{newAction}}" bind:change="onNewActionChange">
+      <view wx:for="{{actionMap}}" wx:key="index" class="card {{_.contain(newAction, item.value) ? 'card--active' : ''}}">
+        <t-icon wx:if="{{_.contain(newAction, item.value)}}" name="check" t-class="card__icon" ariaHidden="{{true}}" />
         <t-image src="{{item.image}}" t-class="radio__image" mode="aspectFill" width="40" height="40" aria-label="milk" />
-        <t-radio value="{{item.value}}" label="" t-class="radio__select" icon="" borderless />
+        <t-checkbox t-class="t-check-class" value="{{item.value}}" label="" icon="none" borderless />
       </view>
-    </t-radio-group>
+    </t-checkbox-group>
 
     <view class="time-range-select">
       <t-cell-group theme="card">

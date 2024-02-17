@@ -4,12 +4,15 @@
   <view class="order_list">
     <view wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
       <view class="order_head">
-        <t-image src="{{item.image}}" mode="aspectFill" width="40" height="40" aria-label="milk" />
+        <view wx:for="{{item.image}}" wx:for-item="itemImage">
+          <t-image src="{{itemImage}}" mode="aspectFill" width="40" height="40" aria-label="milk" />
+        </view>
+
         <view wx:if="{{item.type === 'milk'}}" class="reserve-status">
           {{item.drink_amount}} ml
         </view>
       </view>
-      <view class="order_item">{{item.createTime}}</view>
+      <view class="order_item">{{item.startTime}}</view>
       <view wx:if="{{item.extra !== ''}}" class="order_item">{{item.extra}}</view>
     </view>
     <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>

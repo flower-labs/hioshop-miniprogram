@@ -10,14 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    drinkAmout: 90,
+    drinkAmout: 120,
     startTime: moment().format('HH:mm'),
     endTime: moment().add(15, 'minutes').format('HH:mm'),
     amoutError: false,
     extra: '',
     mode: '',
     addLoading: false,
-    action: 'milk',
+    newAction: ['milk'],
     actionMap: [
       {
         key: 'milk',
@@ -79,8 +79,8 @@ Page({
     }
   },
 
-  onActionChange(e) {
-    this.setData({ action: e.detail.value });
+  onNewActionChange(e) {
+    this.setData({ newAction: e.detail.value });
   },
 
   onExtraInput(e) {
@@ -91,14 +91,17 @@ Page({
   },
 
   handleBabyRecordAdd() {
+    const { extra, drinkAmout, startTime, endTime, newAction } = this.data;
+    if (newAction.length === 0) {
+      return;
+    }
     this.setData({ addLoading: true });
-    const { extra, drinkAmout, startTime, endTime, action } = this.data;
     console.log('start end', startTime, endTime);
     util
       .request(
         api.AddBabyRecord,
         {
-          type: action,
+          type: newAction.join(' '),
           count: 1,
           extra,
           drink_amount: drinkAmout,
