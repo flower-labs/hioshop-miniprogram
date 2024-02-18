@@ -26,7 +26,10 @@
     </view>
 
     <view class="input-wrapper">
-      <t-input style="border-radius: 12rpx;" label="喝奶量" suffix="毫升" align="right" type="number" bindchange="onAmountInput" value="{{drinkAmout}}" tips="{{amoutError ? '请输入正确的喝奶量' : ''}}" t-class-tips="tips" />
+      <t-cell title="喝奶量" arrow hover note="{{milkText}}" bind:click="onTitlePicker" />
+      <t-picker visible="{{milkVisible}}" value="{{milkValue}}" data-key="milk" title="选择喝奶量" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindpick="onColumnChange" bindcancel="onPickerCancel">
+        <t-picker-item options="{{milkOptions}}"></t-picker-item>
+      </t-picker>
     </view>
 
     <view class="textarea-wrapper">

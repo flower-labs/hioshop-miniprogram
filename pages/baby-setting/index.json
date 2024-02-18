@@ -4,6 +4,8 @@
   "usingComponents": {
     "t-image": "tdesign-miniprogram/image/image",
     "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-picker": "tdesign-miniprogram/picker/picker",
+    "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
     "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
     "t-button": "tdesign-miniprogram/button/button",

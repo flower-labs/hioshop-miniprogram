@@ -10,6 +10,8 @@ Page({
   data: {
     pageSize: 10,
     page: 1,
+    drinkTotal: 0,
+    drinkFetched: false,
     hadMore: true,
     reserveOrderList: [],
     backTopVisible: false,
@@ -53,6 +55,29 @@ Page({
         wx.stopPullDownRefresh();
       });
   },
+  querySummary() {
+    this.setData({ drinkFetched: false });
+    util
+      .request(
+        api.BabyOrderList,
+        {
+          size: 30,
+          page: 1,
+        },
+        'POST',
+      )
+      .then(res => {
+        this.setData({ drinkFetched: true });
+        const todayStartTime = moment().startOf('day');
+        const todayOrders = res.data.babyList.data.filter(
+          item => moment(item.start_time * 1000).isBefore(todayStartTime) && item.type.includes('milk'),
+        );
+        const totalMilkAmount = todayOrders.reduce((prev, curr) => prev + curr.drink_amount, 0);
+        this.setData({
+          drinkTotal: totalMilkAmount,
+        });
+      });
+  },
   filterIconArray(action) {
     const imageArray = [];
     const imageMap = {
@@ -91,6 +116,7 @@ Page({
    */
   onShow() {
     this.getBabyOrder();
+    this.querySummary();
   },
   formatTimestamp(timestamp) {
     return moment.unix(timestamp).format('MM-DD HH:mm');

@@ -1,14 +1,22 @@
 <!--pages/baby-orders/index.wxml-->
+
+<wxs module="_">
+  module.exports.contain = function (arr, key) { return arr.indexOf(key) > -1 } 
+</wxs>
 <wxs src='../../utils/filter.wxs' module='filters' />
 <view wx:if="{{reserveOrderList}}">
+  <view wx:if="{{drinkFetched}}" class="baby_summary">
+    当天喝奶量： {{drinkTotal}} ml
+  </view>
+
   <view class="order_list">
     <view wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
       <view class="order_head">
         <view wx:for="{{item.image}}" wx:for-item="itemImage">
-          <t-image src="{{itemImage}}" mode="aspectFill" width="40" height="40" aria-label="milk" />
+          <t-image src="{{itemImage}}" mode="aspectFill" width="40" height="40" aria-label="action" />
         </view>
 
-        <view wx:if="{{item.type === 'milk'}}" class="reserve-status">
+        <view wx:if="{{_.contain(item.type, 'milk')}}" class="reserve-status">
           {{item.drink_amount}} ml
         </view>
       </view>

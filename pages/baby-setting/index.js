@@ -5,15 +5,22 @@ import Message from 'tdesign-miniprogram/message/index';
 import moment from 'moment';
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    drinkAmout: 120,
     startTime: moment().format('HH:mm'),
     endTime: moment().add(15, 'minutes').format('HH:mm'),
-    amoutError: false,
+    milkText: '',
+    milkValue: [],
+    milkVisible: false,
+    milkOptions: [
+      { label: '30ml', value: '30ml' },
+      { label: '60ml', value: '60ml' },
+      { label: '90ml', value: '90ml' },
+      { label: '120ml', value: '120ml' },
+      { label: '150ml', value: '150ml' },
+    ],
     extra: '',
     mode: '',
     addLoading: false,
@@ -65,18 +72,31 @@ Page({
     this.hidePicker();
   },
 
-  onAmountInput(e) {
-    const { amoutError } = this.data;
-    const isNumber = /^\d+$/.test(e.detail.value);
-    if (amoutError === isNumber) {
-      this.setData({
-        amoutError: !isNumber,
-      });
-    } else {
-      this.setData({
-        drinkAmout: e.detail.value,
-      });
-    }
+  onColumnChange(e) {
+    console.log('picker pick:', e);
+  },
+
+  onPickerChange(e) {
+    const { key } = e.currentTarget.dataset;
+    const { value } = e.detail;
+    console.log('picker change:', value);
+
+    this.setData({
+      [`${key}Visible`]: false,
+      [`${key}Value`]: value,
+      [`${key}Text`]: value.join(' '),
+    });
+  },
+
+  onPickerCancel(e) {
+    const { key } = e.currentTarget.dataset;
+    this.setData({
+      [`${key}Visible`]: false,
+    });
+  },
+
+  onTitlePicker() {
+    this.setData({ milkVisible: true });
   },
 
   onNewActionChange(e) {
@@ -90,13 +110,26 @@ Page({
     });
   },
 
+  showWarnMessage() {
+    Message.warning({
+      context: this,
+      offset: [20, 32],
+      duration: 3000,
+      content: '请选择喝奶量',
+    });
+  },
+
   handleBabyRecordAdd() {
-    const { extra, drinkAmout, startTime, endTime, newAction } = this.data;
+    const { extra, startTime, endTime, milkValue, newAction } = this.data;
+    const numberMilkAmout = milkValue?.[0] ?? '';
     if (newAction.length === 0) {
       return;
     }
+    if (!/^\d+ml$/.test(numberMilkAmout)) {
+      this.showWarnMessage();
+      return;
+    }
     this.setData({ addLoading: true });
-    console.log('start end', startTime, endTime);
     util
       .request(
         api.AddBabyRecord,
@@ -104,7 +137,7 @@ Page({
           type: newAction.join(' '),
           count: 1,
           extra,
-          drink_amount: drinkAmout,
+          drink_amount: parseInt(numberMilkAmout),
           start_time: util.transferTimeToUnix(startTime),
           end_time: util.transferTimeToUnix(endTime),
         },

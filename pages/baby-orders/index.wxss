@@ -11,6 +11,9 @@ page {
   margin: 27rpx;
   border-radius: 15rpx;
 }
+.baby_summary{
+  padding: 10rpx;
+}
 
 .card-theme1 {
   padding: 30rpx;
