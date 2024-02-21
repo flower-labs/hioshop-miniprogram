@@ -42,6 +42,10 @@ page {
   height: 100%;
 }
 
+.time-range-select{
+  --td-switch-checked-color: #00A870;
+}
+
 .card {
   position: relative;
   margin: 32rpx;

@@ -13,6 +13,7 @@ Page({
     endTime: moment().add(15, 'minutes').format('HH:mm'),
     milkText: '',
     milkValue: [],
+    isCustomTime: false,
     milkVisible: false,
     milkOptions: [
       { label: '30ml', value: '30ml' },
@@ -94,7 +95,17 @@ Page({
       [`${key}Visible`]: false,
     });
   },
-
+  handleCustomizeTime(e) {
+    const { value } = e.detail;
+    const newStart = moment().format('HH:mm');
+    const newEnd = moment().add(15, 'minutes').format('HH:mm');
+    const { startTime, endTime } = this.data;
+    this.setData({
+      isCustomTime: value,
+      startTime: value ? newStart : startTime,
+      endTime: value ? newEnd : endTime,
+    });
+  },
   onTitlePicker() {
     this.setData({ milkVisible: true });
   },
@@ -120,12 +131,12 @@ Page({
   },
 
   handleBabyRecordAdd() {
-    const { extra, startTime, endTime, milkValue, newAction } = this.data;
+    const { extra, startTime, endTime, milkValue, newAction, isCustomTime } = this.data;
     const numberMilkAmout = milkValue?.[0] ?? '';
     if (newAction.length === 0) {
       return;
     }
-    if (!/^\d+ml$/.test(numberMilkAmout)) {
+    if (newAction.includes('milk') && !/^\d+ml$/.test(numberMilkAmout)) {
       this.showWarnMessage();
       return;
     }
@@ -137,9 +148,9 @@ Page({
           type: newAction.join(' '),
           count: 1,
           extra,
-          drink_amount: parseInt(numberMilkAmout),
-          start_time: util.transferTimeToUnix(startTime),
-          end_time: util.transferTimeToUnix(endTime),
+          drink_amount: numberMilkAmout ? parseInt(numberMilkAmout) : 0,
+          start_time: isCustomTime ? util.transferTimeToUnix(startTime) : moment().unix(),
+          end_time: isCustomTime ? util.transferTimeToUnix(endTime) : moment().add(15, 'minutes').unix(),
         },
         'POST',
       )

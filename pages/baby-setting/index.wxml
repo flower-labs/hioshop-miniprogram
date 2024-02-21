@@ -17,8 +17,11 @@
 
     <view class="time-range-select">
       <t-cell-group theme="card">
-        <t-cell title="选择开始时间" hover note="{{startTime || ''}}" arrow data-mode="start" bindtap="showPicker" t-class="panel-item" />
-        <t-cell title="选择结束时间" hover note="{{endTime || ''}}" arrow data-mode="end" bindtap="showPicker" t-class="panel-item" />
+        <t-cell title="自定义时间">
+          <t-switch bind:change="handleCustomizeTime" value="{{isCustomTime}}" slot="note" />
+        </t-cell>
+        <t-cell wx:if="{{isCustomTime}}" title="选择开始时间" hover note="{{startTime || ''}}" arrow data-mode="start" bindtap="showPicker" t-class="panel-item" />
+        <t-cell wx:if="{{isCustomTime}}" title="选择结束时间" hover note="{{endTime || ''}}" arrow data-mode="end" bindtap="showPicker" t-class="panel-item" />
       </t-cell-group>
 
       <t-date-time-picker title="选择开始时间" visible="{{startVisible}}" mode="{{['null', 'minute']}}" value="{{startTime}}" format="HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
@@ -26,7 +29,7 @@
     </view>
 
     <view class="input-wrapper">
-      <t-cell title="喝奶量" arrow hover note="{{milkText}}" bind:click="onTitlePicker" />
+      <t-cell wx:if="{{_.contain(newAction, 'milk') }}" title="喝奶量" arrow hover note="{{milkText}}" bind:click="onTitlePicker" />
       <t-picker visible="{{milkVisible}}" value="{{milkValue}}" data-key="milk" title="选择喝奶量" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindpick="onColumnChange" bindcancel="onPickerCancel">
         <t-picker-item options="{{milkOptions}}"></t-picker-item>
       </t-picker>

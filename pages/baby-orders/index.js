@@ -70,8 +70,9 @@ Page({
         this.setData({ drinkFetched: true });
         const todayStartTime = moment().startOf('day');
         const todayOrders = res.data.babyList.data.filter(
-          item => moment(item.start_time * 1000).isBefore(todayStartTime) && item.type.includes('milk'),
+          item => moment(item.start_time * 1000).isAfter(todayStartTime) && item.type.includes('milk'),
         );
+        console.log('todayOrders', todayOrders, todayStartTime)
         const totalMilkAmount = todayOrders.reduce((prev, curr) => prev + curr.drink_amount, 0);
         this.setData({
           drinkTotal: totalMilkAmount,

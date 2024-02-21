@@ -14,6 +14,7 @@
     "t-message": "tdesign-miniprogram/message/message",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
-    "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group"
+    "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
+    "t-switch": "tdesign-miniprogram/switch/switch"
   }
 }
