@@ -12,7 +12,8 @@ page {
   border-radius: 15rpx;
 }
 .baby_summary{
-  padding: 10rpx;
+  padding-left: 30rpx;
+  padding-top: 30rpx;
 }
 
 .card-theme1 {
@@ -41,11 +42,8 @@ page {
 
 .order_head {
   display: flex;
-  justify-content: flex-start;
-  gap: 30rpx;
+  justify-content:space-between;
   align-items: center;
-  padding-bottom: 15rpx;
-  margin-bottom: 20rpx;
 }
 
 .reserve-status{
@@ -69,7 +67,11 @@ page {
 
 .order_item {
   font-size: medium;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
+}
+
+.order_start_time{
+  font-size: medium;
 }
 
 .order_id {
@@ -102,4 +104,10 @@ page {
   text-align: center;
   font-size: 35rpx;
   color: #666;
+}
+
+.head_left{
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
 }

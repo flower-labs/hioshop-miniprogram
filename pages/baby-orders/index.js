@@ -8,10 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pageSize: 10,
     page: 1,
+    pageSize: 10,
+    currentDay: moment().format('MM-DD'),
+    activeTab: 'today',
     drinkTotal: 0,
-    drinkFetched: false,
     hadMore: true,
     reserveOrderList: [],
     backTopVisible: false,
@@ -23,22 +24,24 @@ Page({
   onLoad(options) {},
   /** 获取baby记录列表 */
   getBabyOrder(isRefresh = false) {
+    const { activeTab } = this.data;
+    const isToday = activeTab === 'today';
     util
       .request(
         api.BabyOrderList,
         {
-          size: this.data.pageSize,
+          size: isToday ? 30 : this.data.pageSize,
           page: this.data.page,
+          is_today: isToday,
         },
         'POST',
       )
       .then(res => {
         const orderInfo = res.data.babyList;
+        isToday && this.calcDrinkAmount(orderInfo.data);
         const currentOrders = orderInfo.data.map(item => ({
           ...item,
-          startTime: this.formatTimestamp(item.start_time),
-          endTime: this.formatTimestamp(item.end_time),
-          createTime: this.formatTimestamp(item.create_time),
+          startTime: isToday ? this.formatTinyTimestamp(item.start_time) : this.formatTimestamp(item.start_time),
           image: this.filterIconArray(item.type),
         }));
         const { currentPage, totalPages } = orderInfo;
@@ -55,29 +58,17 @@ Page({
         wx.stopPullDownRefresh();
       });
   },
-  querySummary() {
-    this.setData({ drinkFetched: false });
-    util
-      .request(
-        api.BabyOrderList,
-        {
-          size: 30,
-          page: 1,
-        },
-        'POST',
-      )
-      .then(res => {
-        this.setData({ drinkFetched: true });
-        const todayStartTime = moment().startOf('day');
-        const todayOrders = res.data.babyList.data.filter(
-          item => moment(item.start_time * 1000).isAfter(todayStartTime) && item.type.includes('milk'),
-        );
-        console.log('todayOrders', todayOrders, todayStartTime)
-        const totalMilkAmount = todayOrders.reduce((prev, curr) => prev + curr.drink_amount, 0);
-        this.setData({
-          drinkTotal: totalMilkAmount,
-        });
-      });
+  // 计算喝奶量
+  calcDrinkAmount(records) {
+    if (!records || records.length === 0) {
+      return;
+    }
+
+    const milkOrders = records.filter(item => item.type.includes('milk'));
+    const totalMilkAmount = milkOrders.reduce((prev, curr) => prev + curr.drink_amount, 0);
+    this.setData({
+      drinkTotal: totalMilkAmount,
+    });
   },
   filterIconArray(action) {
     const imageArray = [];
@@ -93,6 +84,33 @@ Page({
     });
     return imageArray;
   },
+
+   /** 删除baby记录 */
+   handleBabyOrderDelete(e) {
+    var that = this;
+    const recordId = e.currentTarget.dataset.record_id;
+    wx.showModal({
+      title: '提示',
+      content: `确认删除该记录？`,
+      success: operation => {
+        if (operation.confirm) {
+          util
+            .request(
+              api.DeleteBabyOrder,
+              {
+                record_id: recordId,
+              },
+              'POST',
+            )
+            .then(function () {
+              that.getBabyOrder(true);
+            });
+        } else if (operation.cancel) {
+          console.log('cancel');
+        }
+      },
+    });
+  },
   /** 加载更多 */
   handleLoadMore() {
     const { page } = this.data;
@@ -100,6 +118,12 @@ Page({
       page: page + 1,
     });
     this.getBabyOrder();
+  },
+  onTabsChange(event) {
+    this.setData({
+      activeTab: event.detail.value,
+    });
+    this.getBabyOrder(true);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -117,10 +141,12 @@ Page({
    */
   onShow() {
     this.getBabyOrder();
-    this.querySummary();
   },
   formatTimestamp(timestamp) {
     return moment.unix(timestamp).format('MM-DD HH:mm');
+  },
+  formatTinyTimestamp(timestamp) {
+    return moment.unix(timestamp).format('HH:mm');
   },
   /**
    * 生命周期函数--监听页面隐藏

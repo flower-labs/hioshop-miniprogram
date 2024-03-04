@@ -3,28 +3,40 @@
 <wxs module="_">
   module.exports.contain = function (arr, key) { return arr.indexOf(key) > -1 } 
 </wxs>
-<wxs src='../../utils/filter.wxs' module='filters' />
+<!-- <wxs src='../../utils/filter.wxs' module='filters' /> -->
+
+<t-tabs defaultValue="{{activeTab}}" bind:change="onTabsChange" t-class="custom-tabs">
+  <t-tab-panel label="当天记录" value="today" />
+  <t-tab-panel label="当天前记录" value="before" />
+</t-tabs>
 <view wx:if="{{reserveOrderList}}">
-  <view wx:if="{{drinkFetched}}" class="baby_summary">
-    当天喝奶量： {{drinkTotal}} ml
+  <view wx:if="{{activeTab === 'today'}}" class="baby_summary">
+    {{currentDay}}喝奶量： {{drinkTotal}} ml
   </view>
 
   <view class="order_list">
     <view wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
       <view class="order_head">
-        <view wx:for="{{item.image}}" wx:for-item="itemImage">
-          <t-image src="{{itemImage}}" mode="aspectFill" width="40" height="40" aria-label="action" />
+        <view class="head_left">
+          <view wx:for="{{item.image}}" wx:for-item="itemImage">
+            <t-image src="{{itemImage}}" mode="aspectFill" width="30" height="30" aria-label="action" />
+          </view>
+          <view wx:if="{{_.contain(item.type, 'milk')}}" class="reserve-status">
+            {{item.drink_amount}} ml
+          </view>
+          <view class="order_start_time">{{item.startTime}}</view>
+        </view>
+        <view class="head_right">
+          <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
         </view>
 
-        <view wx:if="{{_.contain(item.type, 'milk')}}" class="reserve-status">
-          {{item.drink_amount}} ml
-        </view>
       </view>
-      <view class="order_item">{{item.startTime}}</view>
       <view wx:if="{{item.extra !== ''}}" class="order_item">{{item.extra}}</view>
     </view>
-    <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
-    <view class="no-more" wx:else>没有更多记录了……</view>
+    <view wx:if="{{activeTab !== 'today'}}">
+      <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
+      <view class="no-more" wx:else>没有更多记录了……</view>
+    </view>
   </view>
 </view>
 <t-back-top wx:if="{{backTopVisible}}" theme="half-round-dark" text="返回顶部" bind:to-top="onToTop"></t-back-top>
