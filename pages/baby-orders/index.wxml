@@ -27,16 +27,16 @@
           <view class="order_start_time">{{item.startTime}}</view>
         </view>
         <view class="head_right">
+          <t-button wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
           <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
         </view>
-
       </view>
-      <view wx:if="{{item.extra !== ''}}" class="order_item">{{item.extra}}</view>
     </view>
     <view wx:if="{{activeTab !== 'today'}}">
       <view class="show-more" bindtap="handleLoadMore" wx:if="{{hadMore}}">加载更多</view>
       <view class="no-more" wx:else>没有更多记录了……</view>
     </view>
   </view>
+  <t-dialog confirm-btn="{{confirmBtn}}" visible="{{dialogVisible}}" title="备注内容" content="{{dialogContent}}" bind:confirm="onDialogClose" />
 </view>
 <t-back-top wx:if="{{backTopVisible}}" theme="half-round-dark" text="返回顶部" bind:to-top="onToTop"></t-back-top>

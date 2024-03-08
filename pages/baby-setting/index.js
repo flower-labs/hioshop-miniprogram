@@ -13,6 +13,7 @@ Page({
     endTime: moment().add(15, 'minutes').format('HH:mm'),
     milkText: '',
     milkValue: [],
+    milkAmount: '',
     isCustomTime: false,
     milkVisible: false,
     milkOptions: [
@@ -95,6 +96,11 @@ Page({
       [`${key}Visible`]: false,
     });
   },
+  handleMilkInput: function (event) {
+    this.setData({
+      milkAmount: event.detail.value,
+    });
+  },
   handleCustomizeTime(e) {
     const { value } = e.detail;
     const newStart = moment().format('HH:mm');
@@ -126,17 +132,18 @@ Page({
       context: this,
       offset: [20, 32],
       duration: 3000,
-      content: '请选择喝奶量',
+      content: '喝奶量不正确，请检查',
     });
   },
 
   handleBabyRecordAdd() {
-    const { extra, startTime, endTime, milkValue, newAction, isCustomTime } = this.data;
-    const numberMilkAmout = milkValue?.[0] ?? '';
+    const { extra, startTime, endTime, milkAmount, newAction, isCustomTime } = this.data;
+
     if (newAction.length === 0) {
       return;
     }
-    if (newAction.includes('milk') && !/^\d+ml$/.test(numberMilkAmout)) {
+    const numberMilkAmount = parseInt(milkAmount);
+    if (newAction.includes('milk') && (isNaN(numberMilkAmount) || !(numberMilkAmount < 1000 && numberMilkAmount > 1))) {
       this.showWarnMessage();
       return;
     }
@@ -148,7 +155,7 @@ Page({
           type: newAction.join(' '),
           count: 1,
           extra,
-          drink_amount: numberMilkAmout ? parseInt(numberMilkAmout) : 0,
+          drink_amount: numberMilkAmount || 0,
           start_time: isCustomTime ? util.transferTimeToUnix(startTime) : moment().unix(),
           end_time: isCustomTime ? util.transferTimeToUnix(endTime) : moment().add(15, 'minutes').unix(),
         },

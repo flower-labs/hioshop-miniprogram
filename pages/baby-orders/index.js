@@ -1,5 +1,6 @@
 // pages/baby-orders/index.js
 import moment from 'moment';
+// import { Texture } from 'XrFrame/kanata/lib/index';
 var api = require('../../config/api.js');
 var util = require('../../utils/util.js');
 
@@ -12,6 +13,9 @@ Page({
     pageSize: 10,
     currentDay: moment().format('MM-DD'),
     activeTab: 'today',
+    dialogContent: '',
+    dialogVisible: false,
+    confirmBtn: { content: '知道了', variant: 'base' },
     drinkTotal: 0,
     hadMore: true,
     reserveOrderList: [],
@@ -124,6 +128,20 @@ Page({
       activeTab: event.detail.value,
     });
     this.getBabyOrder(true);
+  },
+  onDialogShow(e) {
+    const extraContent = e.currentTarget.dataset.extra;
+    const { dialogVisible } = this.data;
+    this.setData({
+      dialogContent: extraContent,
+      dialogVisible: !dialogVisible,
+    })
+  },
+  onDialogClose() {
+    const { dialogVisible } = this.data;
+    this.setData({
+      dialogVisible: !dialogVisible,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

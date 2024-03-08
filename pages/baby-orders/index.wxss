@@ -65,11 +65,6 @@ page {
   font-weight: lighter;
 }
 
-.order_item {
-  font-size: medium;
-  margin-top: 20rpx;
-}
-
 .order_start_time{
   font-size: medium;
 }
@@ -110,4 +105,9 @@ page {
   display: flex;
   align-items: center;
   gap: 20rpx;
+}
+
+.head_right{
+  display: flex;
+  gap: 10rpx;
 }

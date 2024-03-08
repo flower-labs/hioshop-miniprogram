@@ -7,6 +7,7 @@
     "t-back-top": "tdesign-miniprogram/back-top/back-top",
     "t-image": "tdesign-miniprogram/image/image",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
-    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"  
   }
 }
