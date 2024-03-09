@@ -1,7 +1,7 @@
 /* pages/baby-orders/index.wxss */
 
 page {
-  background-color: white;
+  background-color: #f5f5f5;
   --td-brand-color: rgb(132, 236, 47);
 }
 
@@ -10,10 +10,6 @@ page {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
   margin: 27rpx;
   border-radius: 15rpx;
-}
-.baby_summary{
-  padding-left: 30rpx;
-  padding-top: 30rpx;
 }
 
 .card-theme1 {
@@ -110,4 +106,9 @@ page {
 .head_right{
   display: flex;
   gap: 10rpx;
+}
+
+.summary-card{
+  display: block;
+  margin: 32rpx 0;
 }

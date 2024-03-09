@@ -11,15 +11,19 @@ Page({
   data: {
     page: 1,
     pageSize: 10,
-    currentDay: moment().format('MM-DD'),
     activeTab: 'today',
     dialogContent: '',
     dialogVisible: false,
     confirmBtn: { content: '知道了', variant: 'base' },
     drinkTotal: 0,
+    peeTotal: 0,
+    shitTotal: 0,
     hadMore: true,
     reserveOrderList: [],
     backTopVisible: false,
+    milkImage: 'http://cdn.bajie.club/babycare/milk.svg',
+    peeImage: 'http://cdn.bajie.club/babycare/pee.svg',
+    shitImage: 'http://cdn.bajie.club/babycare/shit1.svg',
   },
 
   /**
@@ -68,10 +72,16 @@ Page({
       return;
     }
 
+    console.log('current orders', records)
+
     const milkOrders = records.filter(item => item.type.includes('milk'));
+    const peeOrders = records.filter(item => item.type.includes('pee'));
+    const shitOrders = records.filter(item => item.type.includes('shit'));
     const totalMilkAmount = milkOrders.reduce((prev, curr) => prev + curr.drink_amount, 0);
     this.setData({
       drinkTotal: totalMilkAmount,
+      peeTotal: peeOrders.length,
+      shitTotal: shitOrders.length,
     });
   },
   filterIconArray(action) {

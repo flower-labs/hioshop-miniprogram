@@ -10,8 +10,12 @@
   <t-tab-panel label="当天前记录" value="before" />
 </t-tabs>
 <view wx:if="{{reserveOrderList}}">
-  <view wx:if="{{activeTab === 'today'}}" class="baby_summary">
-    {{currentDay}}喝奶量： {{drinkTotal}} ml
+  <view  wx:if="{{activeTab === 'today'}}" class="summary-card">
+    <t-grid class="block" column="{{3}}" theme="card">
+      <t-grid-item text="{{drinkTotal}} ML" image="{{milkImage}}" />
+      <t-grid-item text="{{peeTotal}} 次" image="{{peeImage}}" />
+      <t-grid-item text="{{shitTotal}} 次" image="{{shitImage}}" />
+    </t-grid>
   </view>
 
   <view class="order_list">
