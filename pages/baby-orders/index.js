@@ -60,8 +60,15 @@ Page({
         //循环接口数据进行时间戳转换
         const { reserveOrderList } = this.data;
 
+        if (isToday || isRefresh) {
+          this.setData({
+            reserveOrderList: currentOrders,
+          });
+          return;
+        }
+
         this.setData({
-          reserveOrderList: isRefresh ? currentOrders : reserveOrderList.concat(currentOrders),
+          reserveOrderList: reserveOrderList.concat(currentOrders),
         });
         wx.stopPullDownRefresh();
       });
