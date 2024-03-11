@@ -27,6 +27,7 @@ module.exports = {
   DeleteBabyOrder: ApiRootUrl + 'baby/delete', // 删除baby记录
   AddBabyRecord: ApiRootUrl + 'baby/add', // 新增baby记录
   BabyOrderList: ApiRootUrl + 'baby/index', // 获取baby记录列表
+  BabyAnalysis: ApiRootUrl + 'baby/analysis', // 获取baby记录列表
   CatalogCurrent: ApiRootUrl + 'catalog/current', //分类目录当前分类数据接口
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',
   // 购物车

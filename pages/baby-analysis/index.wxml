@@ -1,0 +1,5 @@
+<!--pages/baby-analysis/index.wxml-->
+<view class="container">
+  <t-loading wx:if="{{isLoading}}" theme="circular" size="64rpx" text="加载中..." class="loading-large" />
+  <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+</view> 

@@ -176,6 +176,11 @@ Page({
         }
       });
   },
+  handleAnalysis() {
+    wx.redirectTo({
+      url: '/pages/baby-analysis/index',
+    });
+  },
 
   onColumnChange(e) {
     console.log('pick', e.detail.value);

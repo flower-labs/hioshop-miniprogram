@@ -36,7 +36,7 @@
     </view> -->
 
     <view class="input-wrapper">
-      <t-input type="number" focus maxlength="{{3}}"  label="喝奶量" value="{{milkAmount}}" bind:change="handleMilkInput"  placeholder="请输入喝奶量" suffix="毫升">
+      <t-input type="number" focus maxlength="{{3}}" label="喝奶量" value="{{milkAmount}}" bind:change="handleMilkInput" placeholder="请输入喝奶量" suffix="毫升">
         <!-- <t-button slot="suffix" data-key="milk" bind:tap="onTitlePicker" theme="primary" size="extra-small">选择</t-button> -->
       </t-input>
     </view>
@@ -46,6 +46,7 @@
     </view>
     <view class="action-button">
       <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
+      <t-button theme="primary" icon="analytics" bind:tap="handleAnalysis" size="large">统计</t-button>
     </view>
   </view>
 </view>
