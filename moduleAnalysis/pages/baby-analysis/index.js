@@ -1,8 +1,8 @@
-import * as echarts from '../../lib/ec-canvas/echarts';
+import * as echarts from './ec-canvas/echarts';
 import moment from 'moment';
 
-const api = require('../../config/api.js');
-const util = require('../../utils/util.js');
+const api = require('../../../config/api.js');
+const util = require('../../../utils/util.js');
 
 let chart = null;
 

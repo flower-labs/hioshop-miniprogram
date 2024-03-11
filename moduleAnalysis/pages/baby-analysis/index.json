@@ -2,7 +2,7 @@
   "enablePullDownRefresh": false,
   "navigationBarTitleText": "统计数据",
   "usingComponents": {
-    "ec-canvas": "../../lib/ec-canvas/ec-canvas",
+    "ec-canvas": "./ec-canvas/ec-canvas",
     "t-loading": "tdesign-miniprogram/loading/loading"
   }
 }

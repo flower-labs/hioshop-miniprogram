@@ -177,8 +177,9 @@ Page({
       });
   },
   handleAnalysis() {
-    wx.redirectTo({
-      url: '/pages/baby-analysis/index',
+    console.log('trigger');
+    wx.navigateTo({
+      url: '../../moduleAnalysis/pages/baby-analysis/index',
     });
   },
 

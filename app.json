@@ -12,8 +12,16 @@
         "pages/reserve-orders/index",
         "pages/gude-detail/index",
         "pages/baby-setting/index",
-        "pages/baby-orders/index",
-        "pages/baby-analysis/index"
+        "pages/baby-orders/index"
+    ],
+    "subpackages": [
+      {
+        "root": "moduleAnalysis",
+        "pages": [
+          "pages/baby-analysis/index"
+        ],
+        "independent": true
+      }
     ],
     "window": {
         "backgroundTextStyle": "light",
