@@ -1,20 +1,45 @@
 import * as echarts from './ec-canvas/echarts';
 import moment from 'moment';
+import { generateOptions } from './utils';
 
 const api = require('../../../config/api.js');
 const util = require('../../../utils/util.js');
 
-let chart = null;
+let milkChart = null;
+let shitChart = null;
+let peeChart = null;
 
-function initChart(canvas, width, height, dpr) {
-  chart = echarts.init(canvas, null, {
+function initMilkChart(canvas, width, height, dpr) {
+  milkChart = echarts.init(canvas, null, {
     width: width,
     height: height,
     devicePixelRatio: dpr, // new
   });
-  canvas.setChart(chart);
-  chart.setOption({});
-  return chart;
+  canvas.setChart(milkChart);
+  milkChart.setOption({});
+  return milkChart;
+}
+
+function initShitChart(canvas, width, height, dpr) {
+  shitChart = echarts.init(canvas, null, {
+    width: width,
+    height: height,
+    devicePixelRatio: dpr, // new
+  });
+  canvas.setChart(shitChart);
+  shitChart.setOption({});
+  return shitChart;
+}
+
+function initPeeChart(canvas, width, height, dpr) {
+  peeChart = echarts.init(canvas, null, {
+    width: width,
+    height: height,
+    devicePixelRatio: dpr, // new
+  });
+  canvas.setChart(peeChart);
+  peeChart.setOption({});
+  return peeChart;
 }
 
 // pages/baby-analysis/index.js
@@ -23,8 +48,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ec: {
-      onInit: initChart,
+    ecMilkBar: {
+      onInit: initMilkChart,
+    },
+    ecShitBar: {
+      onInit: initShitChart,
+    },
+    ecPeeBar: {
+      onInit: initPeeChart,
     },
     isLoading: false,
     analysisData: [],
@@ -47,100 +78,52 @@ Page({
       });
 
       const milkAmountByDate = {};
+      const shitTimeByDate = {};
+      const peeTimeByDate = {};
       analysisList.forEach(record => {
+        const date = moment(record.start_time * 1000)
+          .startOf('day')
+          .format('MM-DD');
         if (record.type.includes('milk')) {
-          const date = moment(record.start_time * 1000)
-            .startOf('day')
-            .format('MM-DD');
-          console.log('date', date);
           if (!milkAmountByDate[date]) {
             milkAmountByDate[date] = 0;
           }
           milkAmountByDate[date] += record.drink_amount;
         }
+        if (record.type.includes('shit')) {
+          if (!shitTimeByDate[date]) {
+            shitTimeByDate[date] = 0;
+          }
+          shitTimeByDate[date] += 1;
+        }
+        if (record.type.includes('pee')) {
+          if (!peeTimeByDate[date]) {
+            peeTimeByDate[date] = 0;
+          }
+          peeTimeByDate[date] += 1;
+        }
       });
 
-      console.log('milkAmountByDate', milkAmountByDate);
       const xAxisData = Object.keys(milkAmountByDate).reverse();
-      const yAxisData = Object.values(milkAmountByDate).reverse();
+      const milkYAxisData = Object.values(milkAmountByDate).reverse();
+      const shitYAxisData = Object.values(shitTimeByDate).reverse();
+      const peeYAxisData = Object.values(peeTimeByDate).reverse();
 
-      const newOption = {
-        title: {
-          text: '喝奶量统计',
-          left:'center'     
-        },
-        xAxis: {
-          type: 'category',
-          data: xAxisData,
-          axisTick: { show: false },
-          axisLabel: {
-            textStyle: { color: '#999999' },
-            interval: 0,
-          },
-          axisLine: {
-            lineStyle: { color: '#cccccc' },
-          },
-        },
-        yAxis: {
-          type: 'value',
-          nameTextStyle: { color: '#666666' },
-          axisTick: { show: false },
-          axisLabel: { textStyle: { color: '#999999' } },
-          axisLine: {
-            lineStyle: { color: '#cccccc' },
-            show: true,
-          },
-          splitLine: {
-            show: true,
-            lineStyle: { type: 'dashed' },
-          },
-        },
-        series: [
-          {
-            data: yAxisData,
-            type: 'bar',
-            itemStyle: {
-              normal: {
-                barBorderRadius: [12, 12, 0, 0],
-                label: {
-                  show: true,
-                  position: 'top',
-                },
-                color: function (params) {
-                  var colorList = [
-                    ['#5498ff', '#89d3f6'],
-                    ['#0acd81', '#b7f5bf'],
-                    ['#ff9137', '#ffd59a'],
-                    ['#f97878', '#ffafaf'],
-                  ];
-                  var index = params.dataIndex;
-                  if (params.dataIndex >= colorList.length) {
-                    index = params.dataIndex - colorList.length;
-                  }
-                  return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: colorList[index][0] },
-                    { offset: 1, color: colorList[index][1] },
-                  ]);
-                },
-              },
-            },
-          },
-        ],
-      };
+      const milkOption = generateOptions('喝奶量统计', xAxisData, milkYAxisData);
+      const shitOption = generateOptions('拉粑粑统计', xAxisData, shitYAxisData);
+      const peeOption = generateOptions('尿不湿统计', xAxisData, peeYAxisData);
+
       this.setData({ isLoading: false });
-      chart.setOption(newOption);
+      milkChart.setOption(milkOption);
+      shitChart.setOption(shitOption);
+      peeChart.setOption(peeOption);
     });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {
-    setTimeout(function () {
-      // 获取 chart 实例的方式
-      // console.log(chart)
-    }, 2000);
-  },
+  onReady() {},
 
   /**
    * 生命周期函数--监听页面显示
