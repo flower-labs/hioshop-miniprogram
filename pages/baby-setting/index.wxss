@@ -34,9 +34,6 @@ page {
 }
 
 .radio__image {
-  position: absolute;
-  left: 60rpx;
-  top: 25rpx;
   pointer-events: none;
   z-index: 1;
 }
@@ -83,6 +80,11 @@ page {
   z-index: 1;
 }
 
+.t-check-class{
+  width: 100%;
+  position: absolute !important;
+}
+
 /* 横向布局 */
 .horizontal-box {
   width: calc(100% - 64rpx);
@@ -94,6 +96,9 @@ page {
 .horizontal-box .card {
   flex: 1;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .horizontal-box .card + .card {
