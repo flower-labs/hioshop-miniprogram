@@ -1,4 +1,3 @@
-<wxs module="filters" src="../../utils/fixed.wxs"></wxs>
 <view class="container" wx:if="{{loading == 1}}">
     <view class='banner-wrap'>
         <view class='current-item' wx:if="{{gallery.length > 0}}">
