@@ -10,8 +10,8 @@ page {
 }
 
 ec-canvas {
-  margin-top: 50rpx;
-  height: 50vh;
+  margin-top: 100rpx;
+  height: 55vh;
   width: 100vw;
 }
 
@@ -25,4 +25,8 @@ ec-canvas {
 
 .hidden{
   visibility: hidden;
+}
+
+.custom-tabs{
+  margin-bottom: 100rpx;
 }

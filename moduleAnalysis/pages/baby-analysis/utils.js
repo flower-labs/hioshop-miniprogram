@@ -1,6 +1,6 @@
 import * as echarts from './ec-canvas/echarts';
 
-export const generateOptions = ( title, xAxisData, yAxisData) => {
+export const generateOptions = (title, xAxisData, yAxisData) => {
   const newOption = {
     title: {
       text: title,
@@ -22,7 +22,7 @@ export const generateOptions = ( title, xAxisData, yAxisData) => {
       type: 'value',
       nameTextStyle: { color: '#000' },
       axisTick: { show: false },
-      axisLabel: { textStyle: { color: '#000' } },
+      axisLabel: { textStyle: { color: '#000' }, interval: 1, },
       axisLine: {
         lineStyle: { color: '#000' },
         show: true,
@@ -38,7 +38,7 @@ export const generateOptions = ( title, xAxisData, yAxisData) => {
         type: 'bar',
         itemStyle: {
           normal: {
-            barBorderRadius: [12, 12, 0, 0],
+            barBorderRadius: [6, 6, 0, 0],
             label: {
               show: true,
               position: 'top',
@@ -64,6 +64,11 @@ export const generateOptions = ( title, xAxisData, yAxisData) => {
             },
           },
         },
+      },
+      {
+        data: yAxisData,
+        type: 'line',
+        smooth:true,
       },
     ],
     grid: {

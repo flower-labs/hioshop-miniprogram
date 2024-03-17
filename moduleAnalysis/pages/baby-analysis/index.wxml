@@ -2,6 +2,7 @@
 <view class="container">
   <t-loading wx:if="{{isLoading}}" theme="circular" size="64rpx" text="加载中..." class="loading-large" />
   <ec-canvas id="echart-milk-bar" canvas-id="echart-milk-bar" ec="{{ ecMilkBar }}"></ec-canvas>
-  <ec-canvas id="echart-shit-bar" canvas-id="echart-shit-bar" ec="{{ ecShitBar }}"></ec-canvas>
-  <ec-canvas id="echart-pee-bar" canvas-id="echart-pee-bar" ec="{{ ecPeeBar }}"></ec-canvas>
-</view> 
+  <t-tab-bar t-class="custom-tabs" value="{{tabValue}}" bindchange="onChange" shape="round" theme="tag" split="{{false}}">
+    <t-tab-bar-item wx:for="{{tabList}}" wx:key="index" value="{{item.value}}"> {{item.label}} </t-tab-bar-item>
+  </t-tab-bar>
+</view>

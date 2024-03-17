@@ -5,41 +5,17 @@ import { generateOptions } from './utils';
 const api = require('../../../config/api.js');
 const util = require('../../../utils/util.js');
 
-let milkChart = null;
-let shitChart = null;
-let peeChart = null;
+let analysisChart = null;
 
-function initMilkChart(canvas, width, height, dpr) {
-  milkChart = echarts.init(canvas, null, {
+function initChart(canvas, width, height, dpr) {
+  analysisChart = echarts.init(canvas, null, {
     width: width,
     height: height,
     devicePixelRatio: dpr, // new
   });
-  canvas.setChart(milkChart);
-  milkChart.setOption({});
-  return milkChart;
-}
-
-function initShitChart(canvas, width, height, dpr) {
-  shitChart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr, // new
-  });
-  canvas.setChart(shitChart);
-  shitChart.setOption({});
-  return shitChart;
-}
-
-function initPeeChart(canvas, width, height, dpr) {
-  peeChart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr, // new
-  });
-  canvas.setChart(peeChart);
-  peeChart.setOption({});
-  return peeChart;
+  canvas.setChart(analysisChart);
+  analysisChart.setOption({});
+  return analysisChart;
 }
 
 // pages/baby-analysis/index.js
@@ -49,16 +25,19 @@ Page({
    */
   data: {
     ecMilkBar: {
-      onInit: initMilkChart,
-    },
-    ecShitBar: {
-      onInit: initShitChart,
-    },
-    ecPeeBar: {
-      onInit: initPeeChart,
+      onInit: initChart,
     },
     isLoading: false,
     analysisData: [],
+    milkOption: null,
+    shitOption: null,
+    peeOption: null,
+    tabValue: 'milk',
+    tabList: [
+      { value: 'milk', label: '喝奶量' },
+      { value: 'pee', label: '尿不湿' },
+      { value: 'shit', label: '拉粑粑' },
+    ],
   },
 
   /**
@@ -112,12 +91,23 @@ Page({
       const milkOption = generateOptions('喝奶量统计', xAxisData, milkYAxisData);
       const shitOption = generateOptions('拉粑粑统计', xAxisData, shitYAxisData);
       const peeOption = generateOptions('尿不湿统计', xAxisData, peeYAxisData);
-
-      this.setData({ isLoading: false });
-      milkChart.setOption(milkOption);
-      shitChart.setOption(shitOption);
-      peeChart.setOption(peeOption);
+      this.setData({ isLoading: false, milkOption, shitOption, peeOption });
+      analysisChart.setOption(milkOption);
     });
+  },
+
+  onChange(e) {
+    const currentTab = e.detail.value;
+    this.setData({
+      tabValue: currentTab,
+    });
+    if(currentTab === 'milk') {
+      analysisChart.setOption(this.data.milkOption);
+    } else if (currentTab === 'shit') {
+      analysisChart.setOption(this.data.shitOption);
+    } else if (currentTab === 'pee'){
+      analysisChart.setOption(this.data.peeOption);
+    }
   },
 
   /**
