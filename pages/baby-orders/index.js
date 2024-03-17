@@ -3,6 +3,7 @@ import moment from 'moment';
 // import { Texture } from 'XrFrame/kanata/lib/index';
 var api = require('../../config/api.js');
 var util = require('../../utils/util.js');
+const app = getApp();
 
 Page({
   /**
@@ -79,7 +80,6 @@ Page({
       return;
     }
 
-    console.log('current orders', records)
 
     const milkOrders = records.filter(item => item.type.includes('milk'));
     const peeOrders = records.filter(item => item.type.includes('pee'));
@@ -106,8 +106,8 @@ Page({
     return imageArray;
   },
 
-   /** 删除baby记录 */
-   handleBabyOrderDelete(e) {
+  /** 删除baby记录 */
+  handleBabyOrderDelete(e) {
     var that = this;
     const recordId = e.currentTarget.dataset.record_id;
     wx.showModal({
@@ -132,6 +132,16 @@ Page({
       },
     });
   },
+  handleBabyOrderEdit(e) {
+    const uuid = e.currentTarget.dataset.record_uuid;
+    const currentRecord = this.data.reserveOrderList.find(item => item.uuid === uuid);
+    if (currentRecord) {
+      app.globalData.editingBabyRecord = currentRecord;
+      wx.navigateTo({
+        url: '/pages/baby-record-editing/index',
+      });
+    }
+  },
   /** 加载更多 */
   handleLoadMore() {
     const { page } = this.data;
@@ -152,13 +162,13 @@ Page({
     this.setData({
       dialogContent: extraContent,
       dialogVisible: !dialogVisible,
-    })
+    });
   },
   onDialogClose() {
     const { dialogVisible } = this.data;
     this.setData({
       dialogVisible: !dialogVisible,
-    })
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -175,7 +185,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.getBabyOrder();
+    this.getBabyOrder(true);
   },
   formatTimestamp(timestamp) {
     return moment.unix(timestamp).format('MM-DD HH:mm');

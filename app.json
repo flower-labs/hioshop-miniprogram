@@ -12,7 +12,8 @@
         "pages/reserve-orders/index",
         "pages/gude-detail/index",
         "pages/baby-setting/index",
-        "pages/baby-orders/index"
+        "pages/baby-orders/index",
+        "pages/baby-record-editing/index"
     ],
     "subpackages": [
       {

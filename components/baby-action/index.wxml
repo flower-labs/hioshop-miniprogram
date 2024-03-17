@@ -11,7 +11,7 @@
 
   <view class="time-range-select">
     <t-cell-group theme="card">
-      <t-cell title="自定义时间">
+      <t-cell wx:if="{{!isEditing}}" title="自定义时间">
         <t-switch bind:change="_handleCustomizeTime" value="{{isCustomTime}}" slot="note" />
       </t-cell>
       <t-cell wx:if="{{isCustomTime}}" title="选择开始时间" hover note="{{startTime || ''}}" arrow data-mode="start" bindtap="_showPicker" t-class="panel-item" />

@@ -1,0 +1,9 @@
+<!--pages/baby-record-editing/index.wxml-->
+<t-message id="t-message" />
+<view class="editing-container">
+  <baby-action id="baby-action"  newAction="{{type}}" milkAmount="{{drinkAmount}}" isEditing="{{true}}" extra="{{extra}}" />
+  <view class="action-button-group">
+    <t-button theme="primary" loading="{{editLoading}}" disabled="{{editLoading}}" bind:tap="handleBabyRecordEdit" icon="edit-2" size="large">更新</t-button>
+    <t-button  theme="secondary" icon="backward" bind:tap="handleCancel" size="large">取消</t-button>
+  </view>
+</view>

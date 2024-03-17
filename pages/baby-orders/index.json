@@ -1,5 +1,6 @@
 {
   "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
   "navigationBarTitleText": "宝宝日记",
   "usingComponents": {
     "t-tag": "tdesign-miniprogram/tag/tag",

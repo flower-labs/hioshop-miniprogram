@@ -1,5 +1,6 @@
 {
   "disableScroll": true,
+  "navigationBarTitleText": "宝宝日记",
   "usingComponents": {
     "baby-action": "/components/baby-action/index",
     "t-button": "tdesign-miniprogram/button/button",

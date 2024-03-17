@@ -24,10 +24,12 @@ module.exports = {
   AddReserveOrder: ApiRootUrl + 'reserve/add', //分类目录全部分类数据接口
   // 取消订单预约
   CancelReservedOrder: ApiRootUrl + 'reserve/cancel', //分类目录全部分类数据接口
-  DeleteBabyOrder: ApiRootUrl + 'baby/delete', // 删除baby记录
   AddBabyRecord: ApiRootUrl + 'baby/add', // 新增baby记录
+  EditBabyRecord: ApiRootUrl + 'baby/edit', // 编辑baby记录
+  DeleteBabyOrder: ApiRootUrl + 'baby/delete', // 删除baby记录
   BabyOrderList: ApiRootUrl + 'baby/index', // 获取baby记录列表
-  BabyAnalysis: ApiRootUrl + 'baby/analysis', // 获取baby记录列表
+  
+  BabyAnalysis: ApiRootUrl + 'baby/analysis', // 获取baby统计数据
   CatalogCurrent: ApiRootUrl + 'catalog/current', //分类目录当前分类数据接口
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',
   // 购物车

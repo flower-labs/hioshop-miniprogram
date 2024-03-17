@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "编辑记录",
+    "usingComponents": {
+      "baby-action": "/components/baby-action/index",
+      "t-button": "tdesign-miniprogram/button/button",
+      "t-message": "tdesign-miniprogram/message/message"
+    }
+}

@@ -11,6 +11,10 @@ Component({
       type: Boolean, 
       value: false,
     },
+    isEditing: {
+      type: Boolean, 
+      value: false,
+    },
     startTime: {
       type: String,
       value: moment().format('HH:mm'),
