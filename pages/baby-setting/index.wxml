@@ -28,16 +28,8 @@
       <t-date-time-picker title="选择结束时间" visible="{{endVisible}}" mode="{{['null', 'minute']}}" value="{{endTime}}" format="HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
     </view>
 
-    <!-- <view class="input-wrapper">
-      <t-cell wx:if="{{_.contain(newAction, 'milk') }}" title="喝奶量" arrow hover note="{{milkText}}" bind:click="onTitlePicker" />
-      <t-picker visible="{{milkVisible}}" value="{{milkValue}}" data-key="milk" title="选择喝奶量" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindpick="onColumnChange" bindcancel="onPickerCancel">
-        <t-picker-item options="{{milkOptions}}"></t-picker-item>
-      </t-picker>
-    </view> -->
-
     <view class="input-wrapper">
-      <t-input type="number" focus maxlength="{{3}}" label="喝奶量" value="{{milkAmount}}" bind:change="handleMilkInput" placeholder="请输入喝奶量" suffix="毫升">
-        <!-- <t-button slot="suffix" data-key="milk" bind:tap="onTitlePicker" theme="primary" size="extra-small">选择</t-button> -->
+      <t-input type="number" maxlength="{{3}}" label="喝奶量" value="{{milkAmount}}" bind:change="handleMilkInput" placeholder="请输入喝奶量" suffix="毫升">
       </t-input>
     </view>
 
@@ -46,7 +38,7 @@
     </view>
     <view class="action-button">
       <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
-      <t-button theme="primary" icon="analytics" bind:tap="handleAnalysis" size="large">统计</t-button>
+      <t-button theme="primary" icon="analytics" bind:tap="redirectToAnalysis" size="large">统计</t-button>
     </view>
   </view>
 </view>

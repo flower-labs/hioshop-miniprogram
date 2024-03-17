@@ -11,18 +11,8 @@ Page({
   data: {
     startTime: moment().format('HH:mm'),
     endTime: moment().add(15, 'minutes').format('HH:mm'),
-    milkText: '',
-    milkValue: [],
     milkAmount: '',
     isCustomTime: false,
-    milkVisible: false,
-    milkOptions: [
-      { label: '30ml', value: '30ml' },
-      { label: '60ml', value: '60ml' },
-      { label: '90ml', value: '90ml' },
-      { label: '120ml', value: '120ml' },
-      { label: '150ml', value: '150ml' },
-    ],
     extra: '',
     mode: '',
     addLoading: false,
@@ -48,10 +38,8 @@ Page({
       },
     ],
   },
-
   showPicker(e) {
     const { mode } = e.currentTarget.dataset;
-    console.log('show picker', mode);
     this.setData({
       mode: mode,
       [`${mode}Visible`]: true,
@@ -66,35 +54,10 @@ Page({
   onConfirm(e) {
     const { value } = e.detail;
     const { mode } = this.data;
-    console.log('value', value, mode);
     this.setData({
       [`${mode}Time`]: value,
     });
-
     this.hidePicker();
-  },
-
-  onColumnChange(e) {
-    console.log('picker pick:', e);
-  },
-
-  onPickerChange(e) {
-    const { key } = e.currentTarget.dataset;
-    const { value } = e.detail;
-    console.log('picker change:', value);
-
-    this.setData({
-      [`${key}Visible`]: false,
-      [`${key}Value`]: value,
-      [`${key}Text`]: value.join(' '),
-    });
-  },
-
-  onPickerCancel(e) {
-    const { key } = e.currentTarget.dataset;
-    this.setData({
-      [`${key}Visible`]: false,
-    });
   },
   handleMilkInput: function (event) {
     this.setData({
@@ -112,21 +75,14 @@ Page({
       endTime: value ? newEnd : endTime,
     });
   },
-  onTitlePicker() {
-    this.setData({ milkVisible: true });
-  },
-
   onNewActionChange(e) {
     this.setData({ newAction: e.detail.value });
   },
-
   onExtraInput(e) {
-    console.log('e', e);
     this.setData({
       extra: e.detail.value,
     });
   },
-
   showWarnMessage() {
     Message.warning({
       context: this,
@@ -135,10 +91,8 @@ Page({
       content: '喝奶量不正确，请检查',
     });
   },
-
   handleBabyRecordAdd() {
     const { extra, startTime, endTime, milkAmount, newAction, isCustomTime } = this.data;
-
     if (newAction.length === 0) {
       return;
     }
@@ -176,15 +130,11 @@ Page({
         }
       });
   },
-  handleAnalysis() {
+  redirectToAnalysis() {
     console.log('trigger');
     wx.navigateTo({
       url: '../../moduleAnalysis/pages/baby-analysis/index',
     });
-  },
-
-  onColumnChange(e) {
-    console.log('pick', e.detail.value);
   },
 
   /**
