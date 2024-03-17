@@ -1,0 +1,33 @@
+<!--components/baby-record-item/index.wxml-->
+<wxs src='../../utils/tools.wxs' module="tools" />
+<view class="action-container">
+  <t-checkbox-group t-class="horizontal-box" value="{{newAction}}" bind:change="_handleActionChange">
+    <view wx:for="{{actionMap}}" wx:key="index" class="card {{tools.contain(newAction, item.value) ? 'card--active' : ''}}">
+      <t-icon wx:if="{{tools.contain(newAction, item.value)}}" name="check" t-class="card__icon" ariaHidden="{{true}}" />
+      <t-image src="{{item.image}}" t-class="radio_select_image" mode="aspectFill" width="40" height="40" aria-label="milk" />
+      <t-checkbox t-class="t-check-class" value="{{item.value}}" label="" icon="none" borderless />
+    </view>
+  </t-checkbox-group>
+
+  <view class="time-range-select">
+    <t-cell-group theme="card">
+      <t-cell title="自定义时间">
+        <t-switch bind:change="_handleCustomizeTime" value="{{isCustomTime}}" slot="note" />
+      </t-cell>
+      <t-cell wx:if="{{isCustomTime}}" title="选择开始时间" hover note="{{startTime || ''}}" arrow data-mode="start" bindtap="_showPicker" t-class="panel-item" />
+      <t-cell wx:if="{{isCustomTime}}" title="选择结束时间" hover note="{{endTime || ''}}" arrow data-mode="end" bindtap="_showPicker" t-class="panel-item" />
+    </t-cell-group>
+
+    <t-date-time-picker title="选择开始时间" visible="{{startVisible}}" mode="{{['null', 'minute']}}" value="{{startTime}}" format="HH:mm" bindchange="_onConfirm" bindcancel="_hidePicker" />
+    <t-date-time-picker title="选择结束时间" visible="{{endVisible}}" mode="{{['null', 'minute']}}" value="{{endTime}}" format="HH:mm" bindchange="_onConfirm" bindcancel="_hidePicker" />
+  </view>
+
+  <view class="input-wrapper">
+    <t-input type="number" maxlength="{{3}}" label="喝奶量" value="{{milkAmount}}" bind:change="_handleMilkInput" placeholder="请输入喝奶量" suffix="毫升">
+    </t-input>
+  </view>
+
+  <view class="textarea-wrapper">
+    <t-textarea bindchange="_handleExtraInput" value="{{extra}}" t-class="external-class" placeholder="备注" bordered maxlength="100" disableDefaultPadding="{{true}}" indicator style="height: 160rpx" />
+  </view>
+</view>

@@ -1,44 +1,10 @@
 <!--pages/baby-setting/index.wxml-->
-
-<wxs module="_">
-  module.exports.contain = function (arr, key) { return arr.indexOf(key) > -1 } 
-</wxs>
-
-<view class="baby-setting-container">
-  <t-message id="t-message" />
-  <view class="action-container">
-    <t-checkbox-group t-class="horizontal-box" value="{{newAction}}" bind:change="onNewActionChange">
-      <view wx:for="{{actionMap}}" wx:key="index" class="card {{_.contain(newAction, item.value) ? 'card--active' : ''}}">
-        <t-icon wx:if="{{_.contain(newAction, item.value)}}" name="check" t-class="card__icon" ariaHidden="{{true}}" />
-        <t-image src="{{item.image}}" t-class="radio__image" mode="aspectFill" width="40" height="40" aria-label="milk" />
-        <t-checkbox t-class="t-check-class" value="{{item.value}}" label="" icon="none" borderless />
-      </view>
-    </t-checkbox-group>
-
-    <view class="time-range-select">
-      <t-cell-group theme="card">
-        <t-cell title="自定义时间">
-          <t-switch bind:change="handleCustomizeTime" value="{{isCustomTime}}" slot="note" />
-        </t-cell>
-        <t-cell wx:if="{{isCustomTime}}" title="选择开始时间" hover note="{{startTime || ''}}" arrow data-mode="start" bindtap="showPicker" t-class="panel-item" />
-        <t-cell wx:if="{{isCustomTime}}" title="选择结束时间" hover note="{{endTime || ''}}" arrow data-mode="end" bindtap="showPicker" t-class="panel-item" />
-      </t-cell-group>
-
-      <t-date-time-picker title="选择开始时间" visible="{{startVisible}}" mode="{{['null', 'minute']}}" value="{{startTime}}" format="HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
-      <t-date-time-picker title="选择结束时间" visible="{{endVisible}}" mode="{{['null', 'minute']}}" value="{{endTime}}" format="HH:mm" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" />
-    </view>
-
-    <view class="input-wrapper">
-      <t-input type="number" maxlength="{{3}}" label="喝奶量" value="{{milkAmount}}" bind:change="handleMilkInput" placeholder="请输入喝奶量" suffix="毫升">
-      </t-input>
-    </view>
-
-    <view class="textarea-wrapper">
-      <t-textarea bindchange="onExtraInput" value="{{extra}}" t-class="external-class" placeholder="备注" bordered maxlength="100" disableDefaultPadding="{{true}}" indicator style="height: 160rpx" />
-    </view>
-    <view class="action-button">
-      <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
-      <t-button theme="primary" icon="analytics" bind:tap="redirectToAnalysis" size="large">统计</t-button>
-    </view>
+<t-message id="t-message" />
+<!--新增喝奶记录表单-->
+<baby-action id="baby-action" />
+<view class="action-container">
+  <view class="action-button-group">
+    <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
+    <t-button theme="primary" icon="analytics" bind:tap="redirectToAnalysis" size="large">统计</t-button>
   </view>
 </view>

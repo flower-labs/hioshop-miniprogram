@@ -1,10 +1,5 @@
 <!--pages/baby-orders/index.wxml-->
-
-<wxs module="_">
-  module.exports.contain = function (arr, key) { return arr.indexOf(key) > -1 } 
-</wxs>
-<!-- <wxs src='../../utils/filter.wxs' module='filters' /> -->
-
+<wxs src='../../utils/tools.wxs' module="tools" />
 <t-tabs defaultValue="{{activeTab}}" bind:change="onTabsChange" t-class="custom-tabs">
   <t-tab-panel label="当天记录" value="today" />
   <t-tab-panel label="当天前记录" value="before" />
@@ -25,7 +20,7 @@
           <view wx:for="{{item.image}}" wx:for-item="itemImage">
             <t-image src="{{itemImage}}" mode="aspectFill" width="30" height="30" aria-label="action" />
           </view>
-          <view wx:if="{{_.contain(item.type, 'milk')}}" class="reserve-status">
+          <view wx:if="{{tools.contain(item.type, 'milk')}}" class="reserve-status">
             {{item.drink_amount}} ml
           </view>
           <view class="order_start_time">{{item.startTime}}</view>

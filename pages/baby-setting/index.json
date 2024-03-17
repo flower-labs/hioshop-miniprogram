@@ -1,20 +1,8 @@
 {
-  "component": true,
   "disableScroll": true,
   "usingComponents": {
-    "t-image": "tdesign-miniprogram/image/image",
-    "t-cell": "tdesign-miniprogram/cell/cell",
-    "t-picker": "tdesign-miniprogram/picker/picker",
-    "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
-    "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
-    "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
+    "baby-action": "/components/baby-action/index",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-input": "tdesign-miniprogram/input/input",
-    "t-textarea": "tdesign-miniprogram/textarea/textarea",
-    "t-message": "tdesign-miniprogram/message/message",
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
-    "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
-    "t-switch": "tdesign-miniprogram/switch/switch"
+    "t-message": "tdesign-miniprogram/message/message"
   }
 }
