@@ -17,9 +17,8 @@ ec-canvas {
 
 
 .loading-large {
-  margin-top: 200rpx;
-  margin: 0 auto;
-  --td-loading-text-font-size: 32rpx;
+  margin-top: 300rpx;
+  --td-loading-text-font-size: 30rpx;
   --td-loading-color: green;
 }
 

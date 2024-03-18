@@ -21,6 +21,7 @@ export const generateOptions = (title, xAxisData, yAxisData) => {
     yAxis: {
       type: 'value',
       nameTextStyle: { color: '#000' },
+      minInterval: 1,
       axisTick: { show: false },
       axisLabel: { textStyle: { color: '#000' }, interval: 1, },
       axisLine: {

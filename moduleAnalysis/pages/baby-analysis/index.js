@@ -91,8 +91,11 @@ Page({
       const milkOption = generateOptions('喝奶量统计', xAxisData, milkYAxisData);
       const shitOption = generateOptions('拉粑粑统计', xAxisData, shitYAxisData);
       const peeOption = generateOptions('尿不湿统计', xAxisData, peeYAxisData);
-      this.setData({ isLoading: false, milkOption, shitOption, peeOption });
-      analysisChart.setOption(milkOption);
+      this.setData({ milkOption, shitOption, peeOption });
+      setTimeout(() => {
+        this.setData({ isLoading: false });
+        analysisChart.setOption(milkOption);
+      }, 500);
     });
   },
 
@@ -101,11 +104,11 @@ Page({
     this.setData({
       tabValue: currentTab,
     });
-    if(currentTab === 'milk') {
+    if (currentTab === 'milk') {
       analysisChart.setOption(this.data.milkOption);
     } else if (currentTab === 'shit') {
       analysisChart.setOption(this.data.shitOption);
-    } else if (currentTab === 'pee'){
+    } else if (currentTab === 'pee') {
       analysisChart.setOption(this.data.peeOption);
     }
   },

@@ -1,6 +1,6 @@
 <!--pages/baby-analysis/index.wxml-->
 <view class="container">
-  <t-loading wx:if="{{isLoading}}" theme="circular" size="64rpx" text="加载中..." class="loading-large" />
+  <t-loading wx:if="{{isLoading}}" theme="circular" size="64rpx" text="加载中..." t-class="loading-large" />
   <ec-canvas id="echart-milk-bar" canvas-id="echart-milk-bar" ec="{{ ecMilkBar }}"></ec-canvas>
   <t-tab-bar t-class="custom-tabs" value="{{tabValue}}" bindchange="onChange" shape="round" theme="tag" split="{{false}}">
     <t-tab-bar-item wx:for="{{tabList}}" wx:key="index" value="{{item.value}}"> {{item.label}} </t-tab-bar-item>
