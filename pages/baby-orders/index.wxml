@@ -5,7 +5,7 @@
   <t-tab-panel label="当天前记录" value="before" />
 </t-tabs>
 <view wx:if="{{reserveOrderList}}">
-  <view  wx:if="{{activeTab === 'today'}}" class="summary-card">
+  <view wx:if="{{activeTab === 'today'}}" class="summary-card">
     <t-grid class="block" column="{{3}}" theme="card">
       <t-grid-item text="{{drinkTotal}} ML" image="{{milkImage}}" />
       <t-grid-item text="{{peeTotal}} 次" image="{{peeImage}}" />
@@ -14,7 +14,7 @@
   </view>
 
   <view class="order_list">
-    <view wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
+    <view style="height:{{ item.isCollapsed? '60rpx':'240rpx'}}" wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
       <view class="order_head">
         <view class="head_left">
           <view wx:for="{{item.image}}" wx:for-item="itemImage">
@@ -23,13 +23,17 @@
           <view wx:if="{{tools.contain(item.type, 'milk')}}" class="reserve-status">
             {{item.drink_amount}} ml
           </view>
-          <view class="order_start_time">{{item.startTime}}</view>
+        
         </view>
         <view class="head_right">
-          <t-button wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
-          <t-button data-record_uuid="{{item.uuid}}" bind:tap="handleBabyOrderEdit" icon="edit" size="small" />
-          <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
+          <view class="order_start_time">{{item.startTime}}</view>
+          <t-button data-record_uuid="{{item.uuid}}" bind:tap="handlePanelSwitch" icon="{{item.isCollapsed? 'expand-vertical': 'shrink-vertical'}}" size="small" />
         </view>
+      </view>
+      <view class="order_body">
+        <t-button style="margin-right: 20rpx;" wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
+        <t-button style="margin-right: 20rpx;" data-record_uuid="{{item.uuid}}" bind:tap="handleBabyOrderEdit" icon="edit" size="small" />
+        <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
       </view>
     </view>
     <view wx:if="{{activeTab !== 'today'}}">

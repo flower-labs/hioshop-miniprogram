@@ -52,6 +52,7 @@ Page({
           ...item,
           startTime: isToday ? this.formatTinyTimestamp(item.start_time) : this.formatTimestamp(item.start_time),
           image: this.filterIconArray(item.type),
+          isCollapsed: true,
         }));
         const { currentPage, totalPages } = orderInfo;
         // 判断是否有更多数据
@@ -74,13 +75,23 @@ Page({
         wx.stopPullDownRefresh();
       });
   },
+  handlePanelSwitch(e) {
+    const currentId = e.currentTarget.dataset.record_uuid;
+    const newList = this.data.reserveOrderList.map(item => ({
+      ...item,
+      isCollapsed: item.uuid === currentId ? !item.isCollapsed : item.isCollapsed,
+    }));
+    this.setData({
+      reserveOrderList: newList,
+    });
+  },
   // 计算喝奶量
   calcDrinkAmount(records) {
     if (!records || records.length === 0) {
       return;
     }
 
-
+    
     const milkOrders = records.filter(item => item.type.includes('milk'));
     const peeOrders = records.filter(item => item.type.includes('pee'));
     const shitOrders = records.filter(item => item.type.includes('shit'));

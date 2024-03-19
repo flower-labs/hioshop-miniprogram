@@ -14,35 +14,41 @@ page {
 
 .card-theme1 {
   padding: 30rpx;
+  transition: height 200ms;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
   margin: 27rpx;
+  overflow: hidden;
   border-radius: 15rpx;
-  background-image: linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%);
+  background-image: linear-gradient(135deg, #81FBB8 10%, #28C76F 100%);
 }
 
 .card-theme2 {
   padding: 30rpx;
+  transition: height 200ms;
+  overflow: hidden;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
   margin: 27rpx;
   border-radius: 15rpx;
-  background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+  background-image: linear-gradient(135deg, #FCCF31 10%, #F55555 100%);
 }
 
 .card-theme3 {
   padding: 30rpx;
+  transition: height 200ms;
+  overflow: hidden;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 12rpx 18rpx 0px;
   margin: 27rpx;
   border-radius: 15rpx;
-  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+  background-image: linear-gradient(135deg, #ABDCFF 10%, #0396FF 100%);
 }
 
 .order_head {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
 }
 
-.reserve-status{
+.reserve-status {
   background-color: rgba(34, 236, 219, 0.986);
   border: 1rpx solid #fff;
   padding: 0 14rpx;
@@ -61,7 +67,7 @@ page {
   font-weight: lighter;
 }
 
-.order_start_time{
+.order_start_time {
   font-size: medium;
 }
 
@@ -97,18 +103,23 @@ page {
   color: #666;
 }
 
-.head_left{
+.head_left {
   display: flex;
   align-items: center;
   gap: 20rpx;
 }
 
-.head_right{
+.head_right {
   display: flex;
   gap: 10rpx;
 }
 
-.summary-card{
+.summary-card {
   display: block;
   margin: 32rpx 0;
+}
+
+.order_body {
+  margin-top: 120rpx;
+  text-align: right;
 }
