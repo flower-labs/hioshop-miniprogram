@@ -14,7 +14,7 @@
   </view>
 
   <view class="order_list">
-    <view style="height:{{ item.isCollapsed? '60rpx':'240rpx'}}" wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1' :item.type==='shit' ? 'card-theme2': 'card-theme3' }}" wx:key="{{index}}">
+    <view style="height:{{ item.isCollapsed? '60rpx':'200rpx'}}" wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1 baby-card' :item.type==='shit' ? 'card-theme2 baby-card': 'card-theme3 baby-card' }}" wx:key="{{index}}">
       <view class="order_head">
         <view class="head_left">
           <view wx:for="{{item.image}}" wx:for-item="itemImage">
@@ -27,13 +27,18 @@
         </view>
         <view class="head_right">
           <view class="order_start_time">{{item.startTime}}</view>
+          <t-button wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
           <t-button data-record_uuid="{{item.uuid}}" bind:tap="handlePanelSwitch" icon="{{item.isCollapsed? 'expand-vertical': 'shrink-vertical'}}" size="small" />
         </view>
       </view>
       <view class="order_body">
-        <t-button style="margin-right: 20rpx;" wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
-        <t-button style="margin-right: 20rpx;" data-record_uuid="{{item.uuid}}" bind:tap="handleBabyOrderEdit" icon="edit" size="small" />
-        <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
+        <view class="order_body_left">
+          {{item.extra}}
+        </view>
+        <view class="order_body_right">
+          <t-button style="margin-right: 20rpx;" data-record_uuid="{{item.uuid}}" bind:tap="handleBabyOrderEdit" icon="edit" size="small" />
+          <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
+        </view>
       </view>
     </view>
     <view wx:if="{{activeTab !== 'today'}}">
