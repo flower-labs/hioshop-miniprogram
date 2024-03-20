@@ -5,7 +5,7 @@
   <t-tab-panel label="当天前记录" value="before" />
 </t-tabs>
 
-<view wx:if="{{isLoading}}" class="loading-container-flex">
+<view wx:if="{{isLoading && page === 1}}" class="loading-container-flex">
   <t-loading theme="circular" size="64rpx" text="加载中..." class="loading-large" />
 </view>
 
