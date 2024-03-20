@@ -1,6 +1,5 @@
 {
   "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark",
   "navigationBarTitleText": "宝宝日记",
   "usingComponents": {
     "t-tag": "tdesign-miniprogram/tag/tag",
@@ -11,6 +10,7 @@
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",
     "t-grid": "tdesign-miniprogram/grid/grid",
-    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item"
+    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
+    "t-loading": "tdesign-miniprogram/loading/loading"
   }
 }

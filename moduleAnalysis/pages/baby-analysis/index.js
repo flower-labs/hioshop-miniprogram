@@ -35,7 +35,7 @@ Page({
     tabValue: 'milk',
     tabList: [
       { value: 'milk', label: '喝奶量' },
-      { value: 'pee', label: '尿不湿' },
+      { value: 'pee', label: '尿尿' },
       { value: 'shit', label: '拉粑粑' },
     ],
   },
@@ -90,7 +90,7 @@ Page({
 
       const milkOption = generateOptions('喝奶量统计', xAxisData, milkYAxisData);
       const shitOption = generateOptions('拉粑粑统计', xAxisData, shitYAxisData);
-      const peeOption = generateOptions('尿不湿统计', xAxisData, peeYAxisData);
+      const peeOption = generateOptions('尿尿统计', xAxisData, peeYAxisData);
       this.setData({ milkOption, shitOption, peeOption });
       setTimeout(() => {
         this.setData({ isLoading: false });

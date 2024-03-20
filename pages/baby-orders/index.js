@@ -11,7 +11,6 @@ Page({
    */
   data: {
     page: 1,
-    pageSize: 10,
     activeTab: 'today',
     dialogContent: '',
     dialogVisible: false,
@@ -25,6 +24,7 @@ Page({
     milkImage: 'http://cdn.bajie.club/babycare/milk.svg',
     peeImage: 'http://cdn.bajie.club/babycare/pee.svg',
     shitImage: 'http://cdn.bajie.club/babycare/shit1.svg',
+    isLoading: false,
   },
 
   /**
@@ -35,22 +35,24 @@ Page({
   getBabyOrder(isRefresh = false) {
     const { activeTab } = this.data;
     const isToday = activeTab === 'today';
+    this.setData({ isLoading: true });
     util
       .request(
         api.BabyOrderList,
         {
-          size: isToday ? 30 : this.data.pageSize,
+          size: 30,
           page: this.data.page,
           is_today: isToday,
         },
         'POST',
       )
       .then(res => {
+        wx.stopPullDownRefresh();
         const orderInfo = res.data.babyList;
         isToday && this.calcDrinkAmount(orderInfo.data);
         const currentOrders = orderInfo.data.map(item => ({
           ...item,
-          startTime: isToday ? this.formatTinyTimestamp(item.start_time) : this.formatTimestamp(item.start_time),
+          startTime: this.formatTimestamp(item.start_time),
           image: this.filterIconArray(item.type),
           isCollapsed: true,
         }));
@@ -65,14 +67,15 @@ Page({
         if (isToday || isRefresh) {
           this.setData({
             reserveOrderList: currentOrders,
+            isLoading: false,
           });
           return;
         }
 
         this.setData({
           reserveOrderList: reserveOrderList.concat(currentOrders),
+          isLoading: false,
         });
-        wx.stopPullDownRefresh();
       });
   },
   handlePanelSwitch(e) {
@@ -91,7 +94,6 @@ Page({
       return;
     }
 
-    
     const milkOrders = records.filter(item => item.type.includes('milk'));
     const peeOrders = records.filter(item => item.type.includes('pee'));
     const shitOrders = records.filter(item => item.type.includes('shit'));
@@ -164,6 +166,7 @@ Page({
   onTabsChange(event) {
     this.setData({
       activeTab: event.detail.value,
+      reserveOrderList: [],
     });
     this.getBabyOrder(true);
   },
@@ -200,9 +203,6 @@ Page({
   },
   formatTimestamp(timestamp) {
     return moment.unix(timestamp).format('MM-DD HH:mm');
-  },
-  formatTinyTimestamp(timestamp) {
-    return moment.unix(timestamp).format('HH:mm');
   },
   /**
    * 生命周期函数--监听页面隐藏

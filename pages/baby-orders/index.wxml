@@ -4,6 +4,11 @@
   <t-tab-panel label="当天记录" value="today" />
   <t-tab-panel label="当天前记录" value="before" />
 </t-tabs>
+
+<view wx:if="{{isLoading}}" class="loading-container-flex">
+  <t-loading theme="circular" size="64rpx" text="加载中..." class="loading-large" />
+</view>
+
 <view wx:if="{{reserveOrderList}}">
   <view wx:if="{{activeTab === 'today'}}" class="summary-card">
     <t-grid class="block" column="{{3}}" theme="card">
@@ -14,20 +19,20 @@
   </view>
 
   <view class="order_list">
-    <view style="height:{{ item.isCollapsed? '60rpx':'200rpx'}}" wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1 baby-card' :item.type==='shit' ? 'card-theme2 baby-card': 'card-theme3 baby-card' }}" wx:key="{{index}}">
+    <view style="height:{{ item.isCollapsed? '80rpx':'230rpx'}}" wx:for="{{reserveOrderList}}" class="{{item.type=== 'milk' ? 'card-theme1 baby-card' :item.type==='shit' ? 'card-theme2 baby-card': 'card-theme3 baby-card' }}" wx:key="{{index}}">
       <view class="order_head">
         <view class="head_left">
-          <view wx:for="{{item.image}}" wx:for-item="itemImage">
-            <t-image src="{{itemImage}}" mode="aspectFill" width="30" height="30" aria-label="action" />
+          <view wx:for="{{item.image}}" class="baby-icon-type" wx:for-item="itemImage">
+            <t-image src="{{itemImage}}" mode="aspectFill" width="25" height="25" aria-label="action" />
           </view>
-          <view wx:if="{{tools.contain(item.type, 'milk')}}" class="reserve-status">
-            {{item.drink_amount}} ml
-          </view>
-        
+          <t-button wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
         </view>
         <view class="head_right">
-          <view class="order_start_time">{{item.startTime}}</view>
-          <t-button wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
+            <view class="head_right_description">
+            <view wx:if="{{tools.contain(item.type, 'milk')}}" class="baby_drink_amount">{{item.drink_amount}} ml</view>
+            <view wx:else class="baby_drink_amount"></view>
+            <view class="order_start_time">{{item.startTime}}</view>
+          </view>
           <t-button data-record_uuid="{{item.uuid}}" bind:tap="handlePanelSwitch" icon="{{item.isCollapsed? 'expand-vertical': 'shrink-vertical'}}" size="small" />
         </view>
       </view>
