@@ -17,11 +17,11 @@ Page({
   },
   goProfile: function (e) {
     let res = util.loginNow();
-    // if (res == true) {
-    //   wx.navigateTo({
-    //     url: '/pages/ucenter/settings/index',
-    //   });
-    // }
+    if (res == true) {
+      wx.navigateTo({
+        url: '/pages/ucenter/settings/index',
+      });
+    }
   },
   toOrderListTap: function (event) {
     let res = util.loginNow();

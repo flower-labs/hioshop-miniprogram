@@ -8,6 +8,7 @@
     "pages/share/index",
     "pages/ucenter/about/index",
     "pages/ucenter/index/index",
+    "pages/ucenter/settings/index",
     "pages/reserve/index",
     "pages/reserve-result/index",
     "pages/reserve-detail/index",

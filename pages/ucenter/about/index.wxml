@@ -1,14 +1,14 @@
 <view class="container">
     <view class='about-wrap'>
-        <view class='title'>古德汽车服务</view>
+        <view class='title'>宝贝加一</view>
         <view class='content'>
-            一站式汽车养护服务
+          Baby Plus 一站式宝贝呵护小程序
         </view>
         <view class="img-wrap">
-            <image mode="aspectFill" class="code-img" src="http://cdn.bajie.club/%E5%8F%A4%E5%BE%B7.webp" show-menu-by-longpress="{{true}}"></image>
+            <image mode="aspectFill" class="code-img" src="http://cdn.bajie.club/babycare/gpt-baby.png" show-menu-by-longpress="{{true}}"></image>
         </view>
         <view class='content'>
-            更多信息访问：www.gudebaoyang.com
+            更多信息访问：www.babecare.com
         </view>
     </view>
     <!-- <ad unit-id="adunit-1776b4f8f2217197" ad-type="video" ad-theme="white"></ad> -->

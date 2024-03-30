@@ -127,9 +127,9 @@
     </view>
     <view class="company">
         <view class="c-wrap" bindtap="getOrderInfo">
-            <view class="text">古德汽车服务</view>
+            <view class="text">宝贝加一</view>
             <view class="line"></view>
         </view>
-        <view class="tip">汽车一站式养护服务</view>
+        <view class="tip">Baby Plus 一站式宝贝呵护小程序</view>
     </view>
 </view>

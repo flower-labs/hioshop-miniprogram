@@ -11,10 +11,10 @@
       <image class="icon" src="/images/icon/receiver.png"></image>
       <input class='a-input' bindinput="bindinputName" bindblur="bindinputName" placeholder='请输入姓名' value="{{name}}"></input>
     </view>
-    <view class="a-item">
+    <!-- <view class="a-item">
       <image class="icon" src="/images/icon/mobile.png"></image>
       <input class='a-input' bindinput="mobilechange" bindblur="mobilechange" value="{{mobile}}" placeholder='请输入手机'></input>
-    </view>
+    </view> -->
   </view>
   <view class='wrap-btn'>
     <view class="btn-wrap active" bindtap='saveInfo'>保存</view>

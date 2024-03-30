@@ -83,14 +83,14 @@ Page({
     let name = this.data.name;
     let mobile = this.data.mobile;
     mobile = mobile.replace(/(^\s*)|(\s*$)/g, "");
-    if (mobile != '') {
-      var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(16[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
-      if (mobile.length < 11) {
-        return util.showErrorToast('手机号码长度不对');
-      } else if (!myreg.test(mobile)) {
-        return util.showErrorToast('手机号码有问题');
-      }
-    }
+    // if (mobile != '') {
+    //   var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(16[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
+    //   if (mobile.length < 11) {
+    //     return util.showErrorToast('手机号码长度不对');
+    //   } else if (!myreg.test(mobile)) {
+    //     return util.showErrorToast('手机号码有问题');
+    //   }
+    // }
     let avatar = this.data.avatarUrl;
     let nickName = this.data.nickName;
     nickName = nickName.replace(/(^\s*)|(\s*$)/g, "");
