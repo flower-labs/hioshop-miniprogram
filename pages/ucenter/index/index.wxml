@@ -97,15 +97,15 @@
         </view>
     </view>
     <view class="li-wrap">
-        <!-- <view class="list" bindtap="toFootprint">
+        <view class="list" bindtap="toGrupPage">
             <view class="list-l">
                 <view class="icon">
-                    <image class="img" src="/images/icon/icon-footprint-r.png"></image>
+                    <image class="img" src="/images/icon/icon-group-menu.png"></image>
                 </view>
-                <view class="text">我的足迹</view>
+                <view class="text">群组管理</view>
             </view>
             <view class="arrow"></view>
-        </view> -->
+        </view>
         <button class="contact-btn" session-from='{"nickName":"{{userInfo.nickname}}","avatarUrl":"{{userInfo.avatar}}"}' open-type="contact">
             <view class="list-l">
                 <view class="icon">

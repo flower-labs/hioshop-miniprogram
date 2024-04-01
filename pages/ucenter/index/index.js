@@ -4,7 +4,7 @@ var user = require('../../../services/user.js');
 
 // TODO 订单显示数量在图标上
 
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
@@ -13,7 +13,7 @@ Page({
     status: {},
     root: api.ApiRoot,
     is_new: 0,
-    root: api.ApiRoot
+    root: api.ApiRoot,
   },
   goProfile: function (e) {
     let res = util.loginNow();
@@ -49,23 +49,35 @@ Page({
   /** 跳转订单详情页 */
   toReserveOrder: function () {
     wx.navigateTo({
-        url: "/pages/reserve-orders/index",
+      url: '/pages/reserve-orders/index',
     });
   },
   // 跳转宝宝记录页
   toBabyOrder: function () {
-    wx.navigateTo({
-        url: "/pages/baby-orders/index",
-    });
-  },
-  toFootprint: function (e) {
     let res = util.loginNow();
     if (res == true) {
       wx.navigateTo({
-        url: '/pages/ucenter/footprint/index',
+        url: '/pages/baby-orders/index',
       });
     }
   },
+   // 跳转群组管理页
+   toGrupPage: function () {
+    let res = util.loginNow();
+    if (res == true) {
+      wx.navigateTo({
+        url: '/pages/baby-group/index',
+      });
+    }
+  },
+  // toFootprint: function (e) {
+  //   let res = util.loginNow();
+  //   if (res == true) {
+  //     wx.navigateTo({
+  //       url: '/pages/ucenter/footprint/index',
+  //     });
+  //   }
+  // },
   // goAuth: function (e) {
   //   wx.navigateTo({
   //     url: '/pages/app-auth/index',
@@ -75,29 +87,38 @@ Page({
     let code = '';
     let that = this;
     wx.login({
-      success: (res) => {
+      success: res => {
         code = res.code;
-        that.postLogin(code)
+        that.postLogin(code);
       },
+      fail: res=>{
+        console.log(res);
+      }
     });
   },
   postLogin(code) {
     let that = this;
-    util.request(api.AuthLoginByWeixin, {
-      code: code
-    }, 'POST').then(function (res) {
-      if (res.errno === 0) {
-        let userInfo = res.data.userInfo;
-        that.setData({
-          is_new: res.data.is_new,
-          userInfo: userInfo,
-          hasUserInfo: true
-        })
-        wx.setStorageSync('token', res.data.token);
-        wx.setStorageSync('userInfo', userInfo);
-        app.globalData.token = res.data.token;
-      }
-    });
+    util
+      .request(
+        api.AuthLoginByWeixin,
+        {
+          code: code,
+        },
+        'POST',
+      )
+      .then(function (res) {
+        if (res.errno === 0) {
+          let userInfo = res.data.userInfo;
+          that.setData({
+            is_new: res.data.is_new,
+            userInfo: userInfo,
+            hasUserInfo: true,
+          });
+          wx.setStorageSync('token', res.data.token);
+          wx.setStorageSync('userInfo', userInfo);
+          app.globalData.token = res.data.token;
+        }
+      });
   },
   onLoad: function (options) {
     this.goAuth();
@@ -115,16 +136,16 @@ Page({
         // wx.setStorageSync('userInfo', userInfo);
         that.setData({
           userInfo: userInfo,
-          hasUserInfo: true
+          hasUserInfo: true,
         });
       }
     });
   },
   onPullDownRefresh: function () {
-    wx.showNavigationBarLoading()
+    wx.showNavigationBarLoading();
     this.getOrderInfo();
-    wx.hideNavigationBarLoading() //完成停止加载
-    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.hideNavigationBarLoading(); //完成停止加载
+    wx.stopPullDownRefresh(); //停止下拉刷新
   },
   getOrderInfo: function (e) {
     let that = this;
@@ -132,9 +153,9 @@ Page({
       if (res.errno === 0) {
         let status = res.data;
         that.setData({
-          status: status
+          status: status,
         });
       }
     });
   },
-})
+});

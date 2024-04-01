@@ -1,0 +1,149 @@
+page {
+  --td-brand-color: #0052d9;
+  --td-button-primary-active-bg-color: #4785e9;
+  --td-button-primary-active-border-color: rgba(31, 214, 15, 0.075);
+}
+
+
+/* 空群组页面样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  width: 260rpx;
+  height: 100rpx;
+  margin-top: 60rpx;
+  font-size: 39rpx;
+  background-color: #fff;
+  border: 2rpx solid #ccc;
+  border-radius: 10rpx;
+  color: #333;
+}
+
+
+button.active {
+  background-color: #007aff;
+  border-color: #007aff;
+  color: #fff;
+}
+
+/* loading相关样式 */
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+}
+
+.loading-image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 群组相关 */
+.group-card {
+  background-color: #fff;
+  position: relative;
+  border: 1rpx solid #ccc;
+  margin: 0 auto;
+  width: calc(100% - 100rpx);
+  border-radius: 10rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+.group-name {
+  font-size: 46rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.group-remark {
+  margin-top: 10rpx;
+  font-size: 32rpx;
+  color: #666;
+}
+
+.group-info {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.group-info-item {
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.group-info-label {
+  font-size: 34rpx;
+  color: #666;
+}
+
+.group-info-value {
+  font-size: 34rpx;
+  color: #333;
+}
+
+
+/* tdesign 组件 */
+.dialog-input {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  margin-top: 32rpx !important;
+  border-radius: 8rpx;
+  background-color: #f3f3f3 !important;
+}
+
+.invite-action {
+  position: absolute;
+  right: 40rpx;
+  top: -30rpx;
+}
+
+.invite-action button {
+  width: 180rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #fff;
+  font-size: 25rpx;
+  background-color: #007aff;
+  border-color: #007aff;
+  border: 2rpx solid #007aff;
+  border-radius: 10rpx;
+}
+
+.dialog-image {
+  width: 100%;
+  height: 160px;
+}
+
+.code-wrapper{
+  display: flex;
+  align-items: center;
+}

@@ -1,6 +1,6 @@
 // 线上地址
 const ApiRoot = 'https://api.bajie.club';
-// const ApiRoot = 'http://127.0.0.1:8360';
+// const ApiRoot = 'http://192.168.3.3:8360';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/';
 
@@ -28,7 +28,10 @@ module.exports = {
   EditBabyRecord: ApiRootUrl + 'baby/edit', // 编辑baby记录
   DeleteBabyOrder: ApiRootUrl + 'baby/delete', // 删除baby记录
   BabyOrderList: ApiRootUrl + 'baby/index', // 获取baby记录列表
-  
+  AddBabyGroup: ApiRootUrl + 'baby/addGroup', // 创建baby群组
+  BabyGroupList: ApiRootUrl + 'baby/indexGroup', // 获取baby群组列表
+  GenerateInviteCode: ApiRootUrl + 'baby/generateInviteCode', // 生成邀请码
+  AcceptGroupInvite: ApiRootUrl + 'baby/acceptInvite', // 接收邀请
   BabyAnalysis: ApiRootUrl + 'baby/analysis', // 获取baby统计数据
   CatalogCurrent: ApiRootUrl + 'catalog/current', //分类目录当前分类数据接口
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',

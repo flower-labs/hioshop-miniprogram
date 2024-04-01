@@ -3,6 +3,7 @@
     "pages/baby-setting/index",
     "pages/baby-record-editing/index",
     "pages/baby-orders/index",
+    "pages/baby-group/index",
     "pages/gude/gude",
     "pages/app-auth/index",
     "pages/share/index",

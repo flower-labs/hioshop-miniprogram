@@ -1,0 +1,54 @@
+<!--pages/baby-group/index.wxml-->
+<view class="container">
+  <view wx:if="{{!isGroupExist}}" class="button-group">
+    <button data-key="creatDialogVisible" class="create-button active" bindtap="showDialog">创建群组</button>
+    <button data-key="joinDialogVisible" class="join-button" bindtap="showDialog">加入群组</button>
+  </view>
+
+  <view wx:else class="group-card">
+    <view class="group-name">{{groupInfo.name}}</view>
+    <view class="group-remark">{{groupInfo.extra ? groupInfo.extra : "-"}}</view>
+    <view class="group-info">
+      <view class="group-info-item">
+        <text class="group-info-label">创建人：</text>
+        <text class="group-info-value">{{groupInfo.owner}}</text>
+      </view>
+      <view class="group-info-item">
+        <text class="group-info-label">成员：</text>
+        <text class="group-info-value">{{groupInfo.members}}</text>
+      </view>
+      <view class="group-info-item">
+        <text class="group-info-label">创建时间：</text>
+        <text class="group-info-value">{{groupInfo.createTime}}</text>
+      </view>
+    </view>
+    <view class="invite-action">
+      <button data-key="codeDialogVisible" bindtap="showDialog">邀请成员</button>
+    </view>
+  </view>
+
+  <!-- 创建群组 -->
+  <t-dialog visible="{{creatDialogVisible}}" title="创建群组" content="请输入群组名以创建群组，创建后可以邀请成员加入。" confirm-btn="创建" cancel-btn="取消" bind:confirm="handleGroupCreate" bind:cancel="closeDialog">
+    <t-input borderless data-key="groupName" value="{{groupName}}" bind:change="onInputChange" class="dialog-input" clearable slot="content" placeholder="群组名称" />
+    <t-input borderless data-key="groupExtra" value="{{groupExtra}}" bind:change="onInputChange" class="dialog-input" clearable slot="content" placeholder="备注信息" />
+  </t-dialog>
+
+  <!-- 生成邀请码 -->
+  <t-dialog visible="{{codeDialogVisible}}" title="生成邀请码" content="点击生成按钮开始生成邀请码" confirm-btn="{{ {content: '生成', variant: 'base', loading: codeLoading } }}" cancel-btn="取消" bind:confirm="generateInviteCode" bind:cancel="closeDialog">
+    <t-image slot="top" t-class="dialog-image" src="https://tdesign.gtimg.com/mobile/demos/dialog1.png" />
+    <view wx:if="{{inviteCode}}" class="code-wrapper" slot="content">
+      <view class="description">{{inviteCode}}</view>
+      <t-button theme="primary" icon="copy" shape="square" aria-label="复制" bind:tap="copyToClipboard"></t-button>
+    </view>
+  </t-dialog>
+
+  <!-- 加入群组 -->
+  <t-dialog visible="{{joinDialogVisible}}" title="加入群组" content="请输入邀请码，然后点击确认。" confirm-btn="确认" cancel-btn="取消" bind:confirm="handleJoinGroup" bind:cancel="closeDialog">
+    <t-input borderless data-key="acceptInviteCode" value="{{acceptInviteCode}}" bind:change="onInputChange" class="dialog-input" clearable slot="content" placeholder="邀请码" />
+  </t-dialog>
+
+  <view class="loading" wx:if="{{loading}}">
+    <image class="loading-image" src="/images/icon/loading.gif"></image>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>
