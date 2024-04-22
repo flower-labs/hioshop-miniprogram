@@ -32,6 +32,7 @@ Page({
     milkOption: null,
     shitOption: null,
     peeOption: null,
+    milkAverage: 0,
     tabValue: 'milk',
     tabList: [
       { value: 'milk', label: '喝奶量' },
@@ -85,13 +86,19 @@ Page({
 
       const xAxisData = Object.keys(milkAmountByDate).reverse();
       const milkYAxisData = Object.values(milkAmountByDate).reverse();
+ 
       const shitYAxisData = Object.values(shitTimeByDate).reverse();
       const peeYAxisData = Object.values(peeTimeByDate).reverse();
+
+      const milkAverage =
+        milkYAxisData.length > 0
+          ? Math.floor(milkYAxisData.slice(0, -1).reduce((prev, curr) => prev + curr, 0) / (milkYAxisData.length - 1))
+          : 0;
 
       const milkOption = generateOptions('喝奶量统计', xAxisData, milkYAxisData);
       const shitOption = generateOptions('拉粑粑统计', xAxisData, shitYAxisData);
       const peeOption = generateOptions('尿尿统计', xAxisData, peeYAxisData);
-      this.setData({ milkOption, shitOption, peeOption });
+      this.setData({ milkOption, shitOption, peeOption, milkAverage });
       setTimeout(() => {
         this.setData({ isLoading: false });
         analysisChart.setOption(milkOption);

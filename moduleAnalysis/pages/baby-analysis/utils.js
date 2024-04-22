@@ -23,7 +23,7 @@ export const generateOptions = (title, xAxisData, yAxisData) => {
       nameTextStyle: { color: '#000' },
       minInterval: 1,
       axisTick: { show: false },
-      axisLabel: { textStyle: { color: '#000' }, interval: 1, },
+      axisLabel: { textStyle: { color: '#000' }, interval: 1 },
       axisLine: {
         lineStyle: { color: '#000' },
         show: true,
@@ -69,14 +69,14 @@ export const generateOptions = (title, xAxisData, yAxisData) => {
       {
         data: yAxisData,
         type: 'line',
-        smooth:true,
+        smooth: true,
       },
     ],
     grid: {
       left: 20,
       right: 20,
-      bottom: 15,
-      top: '20%',
+      bottom: 5,
+      top: '35%',
       containLabel: true,
     },
   };

@@ -10,8 +10,8 @@ page {
 }
 
 ec-canvas {
-  margin-top: 100rpx;
-  height: 55vh;
+  margin-top: 15%;
+  height: 60vh;
   width: 100vw;
 }
 
@@ -28,4 +28,11 @@ ec-canvas {
 
 .custom-tabs{
   margin-bottom: 100rpx;
+}
+
+.count-area{
+  text-align: right;
+  padding-top: 20rpx;
+  padding-right: 60rpx;
+  font-size: small;
 }

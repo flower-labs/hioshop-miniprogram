@@ -3,9 +3,12 @@
   margin-top: 60rpx;
 }
 
+.time-range-select{
+  margin-bottom: 30rpx;
+}
+
 .input-wrapper {
   margin: 0 32rpx;
-  margin-top: 30rpx;
 }
 
 .textarea-wrapper {
