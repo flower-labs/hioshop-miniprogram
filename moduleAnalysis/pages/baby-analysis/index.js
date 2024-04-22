@@ -52,7 +52,6 @@ Page({
     this.setData({ isLoading: true });
     util.request(api.BabyAnalysis, { duration: 6 }, 'POST').then(response => {
       const analysisList = response.data.babyAnalysisList;
-      console.log('response', analysisList);
       this.setData({
         analysisData: analysisList,
       });
@@ -64,22 +63,25 @@ Page({
         const date = moment(record.start_time * 1000)
           .startOf('day')
           .format('MM-DD');
+
+        if (!milkAmountByDate[date]) {
+          milkAmountByDate[date] = 0;
+        }
+
+        if (!shitTimeByDate[date]) {
+          shitTimeByDate[date] = 0;
+        }
+        if (!peeTimeByDate[date]) {
+          peeTimeByDate[date] = 0;
+        }
+
         if (record.type.includes('milk')) {
-          if (!milkAmountByDate[date]) {
-            milkAmountByDate[date] = 0;
-          }
           milkAmountByDate[date] += record.drink_amount;
         }
         if (record.type.includes('shit')) {
-          if (!shitTimeByDate[date]) {
-            shitTimeByDate[date] = 0;
-          }
           shitTimeByDate[date] += 1;
         }
         if (record.type.includes('pee')) {
-          if (!peeTimeByDate[date]) {
-            peeTimeByDate[date] = 0;
-          }
           peeTimeByDate[date] += 1;
         }
       });
