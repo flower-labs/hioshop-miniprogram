@@ -369,8 +369,8 @@ function getDateDiffInDays(dateString) {
 const getTimestampAfterDays = day => moment().add(day, 'days').startOf('day').unix();
 
 const transferTimeToUnix = time => {
-  const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-  return regex.test(time) ? moment(time, 'HH:mm').unix() : 0;
+  const regex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/;
+  return regex.test(time) ? moment(time, 'YYYY-MM-DD HH:mm').unix() : 0;
 };
 
 module.exports = {

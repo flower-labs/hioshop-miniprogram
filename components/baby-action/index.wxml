@@ -18,8 +18,8 @@
       <t-cell wx:if="{{isCustomTime}}" title="选择结束时间" hover note="{{endTime || ''}}" arrow data-mode="end" bindtap="_showPicker" t-class="panel-item" />
     </t-cell-group>
 
-    <t-date-time-picker title="选择开始时间" visible="{{startVisible}}" mode="{{['null', 'minute']}}" value="{{startTime}}" format="HH:mm" bindchange="_onConfirm" bindcancel="_hidePicker" />
-    <t-date-time-picker title="选择结束时间" visible="{{endVisible}}" mode="{{['null', 'minute']}}" value="{{endTime}}" format="HH:mm" bindchange="_onConfirm" bindcancel="_hidePicker" />
+    <t-date-time-picker title="选择开始时间" end="{{customMaxStart}}" visible="{{startVisible}}" mode="{{['date', 'minute']}}" value="{{startTime}}" format="YYYY-MM-DD HH:mm" bindchange="_onConfirm" bindcancel="_hidePicker" />
+    <t-date-time-picker title="选择结束时间" start="{{startTime}}" visible="{{endVisible}}" mode="{{['date', 'minute']}}" value="{{endTime}}" format="YYYY-MM-DD HH:mm" bindchange="_onConfirm" bindcancel="_hidePicker" />
   </view>
 
   <view wx:if="{{tools.contain(newAction, 'milk')}}" class="input-wrapper">

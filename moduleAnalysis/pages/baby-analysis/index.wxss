@@ -10,7 +10,7 @@ page {
 }
 
 ec-canvas {
-  margin-top: 15%;
+  margin-top: 10%;
   height: 60vh;
   width: 100vw;
 }
@@ -32,7 +32,7 @@ ec-canvas {
 
 .count-area{
   text-align: right;
-  padding-top: 20rpx;
+  margin-top: 30rpx;
   padding-right: 60rpx;
-  font-size: small;
+  font-size: medium;
 }

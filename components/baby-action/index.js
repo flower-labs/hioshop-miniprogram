@@ -8,20 +8,20 @@ Component({
       value: ['milk'], // 属性初始值（可选），如果未指定则会根据类型选择一个
     },
     isCustomTime: {
-      type: Boolean, 
+      type: Boolean,
       value: false,
     },
     isEditing: {
-      type: Boolean, 
+      type: Boolean,
       value: false,
     },
     startTime: {
       type: String,
-      value: moment().format('HH:mm'),
+      value: moment().format('YYYY-MM-DD HH:mm'),
     },
     endTime: {
       type: String,
-      value: moment().add(15, 'minutes').format('HH:mm'),
+      value: moment().add(15, 'minutes').format('YYYY-MM-DD HH:mm'),
     },
     milkAmount: {
       type: String,
@@ -38,6 +38,7 @@ Component({
    */
   data: {
     mode: '',
+    customMaxStart: moment().format('YYYY-MM-DD HH:mm'), //开始时间最大可选当前
     actionMap: [
       {
         key: 'milk',
@@ -67,8 +68,8 @@ Component({
     /** 是否自定义时间 */
     _handleCustomizeTime(e) {
       const { value } = e.detail;
-      const newStart = moment().format('HH:mm');
-      const newEnd = moment().add(15, 'minutes').format('HH:mm');
+      const newStart = moment().format('YYYY-MM-DD HH:mm');
+      const newEnd = moment().add(15, 'minutes').format('YYYY-MM-DD HH:mm');
       const { startTime, endTime } = this.data;
       this.setData({
         isCustomTime: value,
@@ -95,9 +96,17 @@ Component({
     _onConfirm(e) {
       const { value } = e.detail;
       const { mode } = this.data;
-      this.setData({
-        [`${mode}Time`]: value,
-      });
+      const timeFormat = 'YYYY-MM-DD HH:mm';
+      if (mode === 'start') {
+        this.setData({
+          startTime: value,
+          endTime: moment(value, timeFormat).add(15, 'minutes').format(timeFormat),
+        });
+      } else {
+        this.setData({
+          endTime: value,
+        });
+      }
       this._hidePicker();
     },
     /** 切换记录项目 */
@@ -123,7 +132,7 @@ Component({
     clearExtra() {
       this.setData({
         extra: '',
-      })
-    }
+      });
+    },
   },
 });
