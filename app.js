@@ -11,20 +11,27 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    // 登录
-    wx.login({
-      success: (res) => {
-        util.request(api.AuthLoginByWeixin, {
-          code: res.code
-        }, 'POST').then(function (res) {
-          if (res.errno === 0) {
-            let userInfo = res.data.userInfo;
-            wx.setStorageSync('token', res.data.token);
-            wx.setStorageSync('userInfo', userInfo);
-          }
-        });
-      },
-    });
+    // 登录,暂时注释
+    // wx.login({
+    //   success: (res) => {
+    //     util.request(api.AuthLoginByWeixin, {
+    //       code: res.code
+    //     }, 'POST').then(function (res) {
+    //       if (res.errno === 0) {
+    //         let userInfo = res.data.userInfo;
+    //         wx.setStorageSync('token', res.data.token);
+    //         wx.setStorageSync('userInfo', userInfo);
+    //       }
+    //     });
+    //   },
+    //   fail: error => {
+    //     console.log('login fail reason', error);
+    //     // 登录失败跳转到登录页面
+    //     wx.navigateTo({
+    //       url: '/pages/app-auth/index',
+    //     });
+    //   },
+    // });
     let that = this;
     wx.getSystemInfo({ //  获取页面的有关信息
       success: function (res) {

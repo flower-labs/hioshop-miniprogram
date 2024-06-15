@@ -78,24 +78,24 @@ Page({
   //     });
   //   }
   // },
-  // goAuth: function (e) {
-  //   wx.navigateTo({
-  //     url: '/pages/app-auth/index',
-  //   });
-  // },
-  goAuth() {
-    let code = '';
-    let that = this;
-    wx.login({
-      success: res => {
-        code = res.code;
-        that.postLogin(code);
-      },
-      fail: res=>{
-        console.log(res);
-      }
+  goAuth: function (e) {
+    wx.navigateTo({
+      url: '/pages/app-auth/index',
     });
   },
+  // goAuth() {
+  //   let code = '';
+  //   let that = this;
+  //   wx.login({
+  //     success: res => {
+  //       code = res.code;
+  //       that.postLogin(code);
+  //     },
+  //     fail: res=>{
+  //       console.log(res);
+  //     }
+  //   });
+  // },
   postLogin(code) {
     let that = this;
     util

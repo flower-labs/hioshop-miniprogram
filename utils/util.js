@@ -78,30 +78,39 @@ function request(url, data = {}, method = 'GET') {
         if (res.statusCode == 200) {
           if (res.data.errno == 401) {
             //需要登录后才可以操作
-            // let code = null;
-            // return login().then((res) => {
-            //     code = res.code;
-            //     return getUserInfo();
-            // }).then((userInfo) => {
-            //     //登录远程服务器
-            //     request(api.AuthLoginByWeixin, {
-            //         code: code,
-            //         userInfo: userInfo
-            //     }, 'POST').then(res => {
-            //         if (res.errno === 0) {
-            //             //存储用户信息
-            //             wx.setStorageSync('userInfo', res.data.userInfo);
-            //             wx.setStorageSync('token', res.data.token);
-            //             resolve(res);
-            //         } else {
-            //             reject(res);
-            //         }
-            //     }).catch((err) => {
-            //         reject(err);
-            //     });
-            // }).catch((err) => {
-            //     reject(err);
-            // })
+            let code = null;
+            return login()
+              .then(res => {
+                code = res.code;
+                return getUserInfo();
+              })
+              .then(userInfo => {
+                //登录远程服务器
+                request(
+                  api.AuthLoginByWeixin,
+                  {
+                    code: code,
+                    userInfo: userInfo,
+                  },
+                  'POST',
+                )
+                  .then(res => {
+                    if (res.errno === 0) {
+                      //存储用户信息
+                      wx.setStorageSync('userInfo', res.data.userInfo);
+                      wx.setStorageSync('token', res.data.token);
+                      resolve(res);
+                    } else {
+                      reject(res);
+                    }
+                  })
+                  .catch(err => {
+                    reject(err);
+                  });
+              })
+              .catch(err => {
+                reject(err);
+              });
           } else {
             resolve(res.data);
           }
@@ -147,6 +156,9 @@ function login() {
         }
       },
       fail: function (err) {
+        console.log('login fail reason', err);
+        // 登录失败跳转到登录页面
+        wx.navigateTo({ url: '/pages/app-auth/index' });
         reject(err);
       },
     });
@@ -247,6 +259,11 @@ function loginNow() {
             wx.setStorageSync('userInfo', userInfo);
           }
         });
+      },
+      fail: error => {
+        console.log('login fail reason', error);
+        // 登录失败跳转到登录页面
+        wx.navigateTo({ url: '/pages/app-auth/index' });
       },
     });
   } else {
