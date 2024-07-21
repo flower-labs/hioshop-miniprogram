@@ -28,6 +28,6 @@
   </view>
 
   <view class="textarea-wrapper">
-    <t-textarea bindchange="_handleExtraInput" value="{{extra}}" t-class="external-class" placeholder="备注" bordered maxlength="100" disableDefaultPadding="{{true}}" indicator style="height: 160rpx" />
+    <t-textarea bindchange="_handleExtraInput" autosize  value="{{extra}}" t-class="external-class" placeholder="请输入备注信息" bordered maxlength="100" disableDefaultPadding="{{true}}" indicator  />
   </view>
 </view>
