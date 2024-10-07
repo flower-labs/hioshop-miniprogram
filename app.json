@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/baby-setting/index",
+    "pages/weaning-food/index",
     "pages/baby-record-editing/index",
     "pages/baby-orders/index",
     "pages/baby-group/index",
@@ -42,6 +43,12 @@
         "iconPath": "images/icon/baby-default.png",
         "selectedIconPath": "images/icon/baby-active.png",
         "text": "宝宝"
+      },
+      {
+        "pagePath": "pages/weaning-food/index",
+        "iconPath": "images/icon/weaning-default.png",
+        "selectedIconPath": "images/icon/weaning-active.png",
+        "text": "辅食"
       },
       {
         "pagePath": "pages/ucenter/index/index",

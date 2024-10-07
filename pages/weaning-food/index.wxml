@@ -1,0 +1,28 @@
+<!--pages/weaning-food/index.wxml-->
+<view class="page-container">
+  <t-message id="t-message" />
+  <view style="margin-bottom: -30rpx;">
+    <t-input label="辅食名称" maxlength="{{20}}" clearable value="{{weaningName}}" bind:change="hanleNameInput" placeholder="请输入辅食名称" bind:clear="hanleNameClear" />
+  </view>
+
+  <view class="tag-select-container">
+    <t-tag shape="round" wx:for="{{recommendedFoods}}" data-name="{{item}}" bind:click="handleTagClick" size="large" variant="outline">{{item}}</t-tag>
+  </view>
+
+  <view>
+    <t-cell title="选择时间" hover note="{{weaningTime || ''}}" arrow bindtap="showPicker" t-class="panel-item" />
+    <t-date-time-picker title="选择时间" start="{{startTime}}" end="{{maxEndTime}}" value="{{weaningTime}}" visible="{{dateVisible}}" format="YYYY-MM-DD HH:mm" bindchange="onDateConfirm" mode="{{['date', 'minute']}}" bindcancel="hidePicker" />
+  </view>
+
+  <view style="margin-top: -30rpx;">
+    <t-input type="number" maxlength="{{3}}" value="{{weaningAmout}}" bind:change="handleAmoutInput" label="重量" placeholder="请输入辅食量" suffix="克/ml" />
+  </view>
+
+  <view class="textarea-wrapper">
+    <t-textarea bindchange="handleExtraInput" autosize value="{{extra}}" placeholder="请输入备注信息" bordered maxlength="100" disableDefaultPadding="{{true}}" indicator />
+  </view>
+
+  <view class="action-container">
+    <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleWeaningSubmit" icon="{{addLoading ? '': 'add'}}" size="large">新增辅食</t-button>
+  </view>
+</view>

@@ -28,8 +28,8 @@
           <t-button wx:if="{{item.extra !== ''}}" data-record_id="{{item.id}}" data-extra="{{item.extra}}" bind:tap="onDialogShow" icon="info-circle" size="small" />
         </view>
         <view class="head_right">
-            <view class="head_right_description">
-            <view wx:if="{{tools.contain(item.type, 'milk')}}" class="baby_drink_amount">{{item.drink_amount}} ml</view>
+          <view class="head_right_description">
+            <view wx:if="{{tools.contain(item.type, 'milk') || tools.contain(item.type, 'weaning-food')}}" class="baby_drink_amount">{{item.drink_amount}} {{tools.contain(item.type, 'weaning-food') ? 'ml/g':'ml'}}</view>
             <view wx:else class="baby_drink_amount"></view>
             <view class="order_start_time">{{item.startTime}}</view>
           </view>
@@ -37,11 +37,14 @@
         </view>
       </view>
       <view class="order_body">
-        <view class="order_body_left">
+        <view wx:if="{{tools.contain(item.type, 'weaning-food')}}" class="order_body_left">
+          {{item.record_name}}
+        </view>
+        <view wx:else class="order_body_left">
           {{item.extra}}
         </view>
         <view class="order_body_right">
-          <t-button style="margin-right: 20rpx;" data-record_uuid="{{item.uuid}}" bind:tap="handleBabyOrderEdit" icon="edit" size="small" />
+          <t-button wx:if="{{!tools.contain(item.type, 'weaning-food')}}" style="margin-right: 20rpx;" data-record_uuid="{{item.uuid}}" bind:tap="handleBabyOrderEdit" icon="edit" size="small" />
           <t-button data-record_id="{{item.id}}" bind:tap="handleBabyOrderDelete" icon="delete" size="small" />
         </view>
       </view>
