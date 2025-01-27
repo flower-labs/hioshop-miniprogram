@@ -63,6 +63,47 @@ Page({
       url: '../../moduleAnalysis/pages/baby-analysis/index',
     });
   },
+
+  triggerBabyInfoModify() {
+    // 获取
+    // util.request(api.GetBabyDetail, 'POST').then(res => {
+    //   console.log('res', res);
+    // });
+
+    // 新增
+    // util
+    //   .request(
+    //     api.AddBabyDetail,
+    //     {
+    //       baby_name: '刘星程',
+    //       baby_sex: 'female',
+    //       baby_birth: '2024-12-22',
+    //       baby_height: '50',
+    //       baby_weight: '6',
+    //       baby_relation: '父亲',
+    //       baby_blood_type: 'A',
+    //       extra: 'demo extra info',
+    //     },
+    //     'POST',
+    //   )
+    //   .then(res => {
+    //     console.log('res', res);
+    //   });
+    
+    // 更新
+    // util
+    // .request(
+    //   api.EditBabyDetail,
+    //   {
+    //     uuid: 'dc556c15-ae10-4059-ae2a-7f19f3794e30',
+    //     baby_height: '80',
+    //   },
+    //   'POST',
+    // )
+    // .then(res => {
+    //   console.log('res', res);
+    // });
+  },
   /**
    * 生命周期函数--监听页面加载
    */

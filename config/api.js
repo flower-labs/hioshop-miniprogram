@@ -1,6 +1,6 @@
 // 线上地址
 const ApiRoot = 'https://api.bajie.club';
-// const ApiRoot = 'http://192.168.3.3:8360';
+// const ApiRoot = 'http://192.168.2.4:8360';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/';
 
@@ -35,6 +35,10 @@ module.exports = {
   BabyAnalysis: ApiRootUrl + 'baby/analysis', // 获取baby统计数据
   CatalogCurrent: ApiRootUrl + 'catalog/current', //分类目录当前分类数据接口
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',
+  // 宝贝信息
+  GetBabyDetail: ApiRootUrl + 'baby/getBabyDetail',
+  AddBabyDetail: ApiRootUrl + 'baby/addBabyDetail',
+  EditBabyDetail: ApiRootUrl + 'baby/editBabyDetail',
   // 购物车
   CartAdd: ApiRootUrl + 'cart/add', // 添加商品到购物车
   CartList: ApiRootUrl + 'cart/index', //获取购物车的数据
