@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "baby-info":"/components/baby-info/index"
+    },
+    "navigationBarTitleText": "宝宝记录"
+}

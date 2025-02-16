@@ -1,0 +1,80 @@
+/* components/baby-info/index.wxss */
+.container {
+  /* width: calc(100% - 64rpx); */
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, pink, white);
+  display: flex;
+  /* 子目垂直居中 */
+  /* justify-content: center; */
+  /* 子目水平居中 */
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+}
+/* 宝宝昵称样式 */
+.input-example {
+  /* position: absolute;
+  top: 200rpx; */
+  width: 80%;
+  display: block;
+  margin-top: 200rpx;
+}
+
+.baby-name {
+  border-radius: 48rpx;
+}
+
+/* 出生日期样式 */
+.baby-date {
+  /* position: absolute;
+  top: 500rpx; */
+  width: 80%;
+  display: flex;
+  border-radius: 48rpx;
+  margin-top: 100rpx;
+}
+/* 信息提交样式 */
+.baby-info-submit {
+  /* position: absolute;
+  top: 700rpx; */
+  width: 80%;
+  background-color: rgba(201, 33, 61, 0.685);
+  color: white;
+  border: none;
+  border-radius: 48px;
+  margin-top: 100rpx;
+}
+/* 性别组件样式 */
+.gender-box{
+    display: flex;
+    flex-direction: column;
+    /* position: absolute;
+    top: 800rpx; */
+    width: 80%;
+    margin-top: 100rpx;
+}
+.gender-title{
+    margin-left: 30rpx;
+}
+.gender-selector {
+  /* border: black 1rpx solid; */
+  display: flex; 
+  justify-content: space-around;
+  padding: 20rpx;
+}
+.gender-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  background-color: pink;
+  width: 180rpx;
+  border-radius: 40rpx;
+}
+.gender-item-image {
+  width: 40px;
+  height: 40px;
+  /* border: black 1rpx solid; */
+}

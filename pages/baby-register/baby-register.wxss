@@ -1,0 +1,36 @@
+/* pages/baby-register/baby-register.wxss */
+.gradient-background {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, pink, white);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+}
+
+.cancel{
+    position: absolute;
+    top:20rpx;
+    left: 20rpx; 
+    border: none;
+    border-radius: 10rpx;
+    color: #a39191de;
+}
+.content {
+    position: absolute;
+    top: 300rpx;
+    width: 80%;
+    display: block; 
+}
+.avatar {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+.baby-register{
+    border-radius: 60rpx;
+    margin-bottom: 30rpx;
+}
+

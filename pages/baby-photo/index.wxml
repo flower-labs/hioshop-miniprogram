@@ -1,0 +1,11 @@
+<!-- wxml文件 -->
+<view id="photoPic">
+    <view class="show-imager" bindtap="gotoShow">
+        <image src='/images/icon/加.png' id="leftpic"></image>
+        <view id="upPic">一键上传</view>
+    </view>
+    <view wx:for="{{src}}" wx:key="index" style="position: relative;">
+        <image class="show-image" mode="aspectFitf" src="{{item}}" catchtap="viewPic" data-item="{{item}}"></image>
+        <image class="delete-image" mode="aspectFitf" src="/images/icon/search-dele.png" catchtap="deletePic" data-index="{{index}}"></image>
+    </view>
+</view>

@@ -1,0 +1,45 @@
+<view class="container">
+    <view class="nav-top" bindtap="toBabySetting">
+        <view class="icon-text-container">
+            <view class="icon-wrapper">
+                <image class="icon-image" src="/images/icon/婴儿.png" mode="widthFix"></image>
+            </view>
+            <view class="text-wrapper">
+                <text>宝宝</text>
+            </view>
+        </view>
+    </view>
+    <view class="nav-left" bindtap="toBabyFood">
+        <view class="icon-text-container">
+            <view class="icon-wrapper">
+                <image class="icon-image" src="/images/icon/婴儿辅食.png" mode="widthFix"></image>
+            </view>
+            <view class="text-wrapper">
+                <text>辅食</text>
+            </view>
+        </view>
+    </view>
+    <view class="nav-right" bindtap="toBabyUCenter">
+        <view class="icon-text-container">
+            <view class="icon-wrapper">
+                <image class="icon-image" src="/images/icon/我的.png" mode="widthFix"></image>
+            </view>
+            <view class="text-wrapper">
+                <text>我的</text>
+            </view>
+        </view>
+    </view>
+    <view class="nav-bottom" bindtap="toBabyPhoto">
+        <view class="icon-text-container">
+            <view class="icon-wrapper">
+                <image class="icon-image" src="/images/icon/照片墙.png" mode="widthFix"></image>
+            </view>
+            <view class="text-wrapper">
+                <text>照片</text>
+            </view>
+        </view>
+    </view>
+    <view class="image-center">
+        <image class="image" src="/images/icon/babyplus.jpeg"></image>
+    </view>
+</view>

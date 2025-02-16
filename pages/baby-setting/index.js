@@ -10,6 +10,7 @@ Page({
    */
   data: {
     addLoading: false,
+    GetBabyList:[]
   },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
@@ -107,8 +108,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
-
+  onLoad(options) {
+      this.fetchData()
+  },
+    
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

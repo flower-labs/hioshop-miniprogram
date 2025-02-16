@@ -1,0 +1,4 @@
+<!--pages/baby-register-babyinfo/index.wxml-->
+<!-- 添加宝宝基本信息 -->
+<!--  -->
+<baby-info />

@@ -1,0 +1,40 @@
+/* pages/baby-photo/index.wxss */
+#photoPic{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.show-image{
+    width: 190rpx;
+    height: 190rpx;
+    margin:20rpx;
+}
+.show-imager{
+    width: 190rpx;
+    height: 190rpx;
+    margin:20rpx;
+    background-color: #E3E8F2;
+    position: relative;
+}
+.delete-image{
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+    width: 40rpx;
+    height: 40rpx;
+}
+#upPic{
+    position: absolute;
+    top: 120rpx;
+    left: 34rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 26rpx;
+    color: #0C264E;
+    text-align: center;
+    font-weight: 400;
+}
+#leftpic{
+    margin:40rpx 62rpx;
+    width: 62rpx;
+    height: 62rpx;
+}

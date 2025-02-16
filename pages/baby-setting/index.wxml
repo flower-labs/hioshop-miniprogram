@@ -1,10 +1,12 @@
 <!--pages/baby-setting/index.wxml-->
 <t-message id="t-message" />
+<scroll-view scroll-y="true">
 <!--新增喝奶记录表单-->
-<baby-action id="baby-action" />
+<baby-action />
 <view class="action-container">
   <view class="action-button-group">
     <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
     <t-button theme="primary" icon="analytics" bind:tap="redirectToAnalysis" size="large">统计</t-button>
   </view>
 </view>
+</scroll-view>

@@ -1,0 +1,108 @@
+/* pages/baby-nav/index.wxss */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, pink, white);
+  }
+  
+  .nav-top {
+    position: absolute;
+    top: 35%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+    width: 200rpx;
+    height: 200rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 0rpx 20rpx 0rpx 20rpx;
+    background: linear-gradient(to bottom, pink, white);
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .nav-left {
+    position: absolute;
+    top: 65%;
+    left: 28%;
+    transform: translate(-50%, -50%);
+    width: 200rpx;
+    height: 200rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 20rpx 0rpx 20rpx 0rpx;
+    background: linear-gradient(to bottom, pink, white);
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+    writing-mode: vertical - rl;
+  }
+  
+  .nav-right {
+    position: absolute;
+    top: 35%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    width: 200rpx;
+    height: 200rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 20rpx 0rpx 20rpx 0rpx;
+    background: linear-gradient(to bottom, pink, white);
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+    writing-mode: vertical - rl;
+  }
+  
+  .nav-bottom {
+    position: absolute;
+    top: 65%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    width: 200rpx;
+    height: 200rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 0rpx 20rpx 0rpx 20rpx;
+    background: linear-gradient(to bottom, pink, white);
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .image-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 20%;
+  }
+  
+.image {
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+    object-fit: cover;
+    transform: rotate(20deg);
+    /* 水平阴影位置 | 垂直阴影位置 | 模糊距离 | 阴影尺寸 | 阴影颜色 | 阴影是否向内 */
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3), -5px -5px 10px 2px rgba(0, 0, 0, 0.3);
+  }
+  /* 图标描述 */
+  .icon-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+  .icon-image {
+    width: 100%;
+    height: 100%;
+  }
+  .text-wrapper {
+    font-size: 14px;
+    color: #333;
+  }
+  /*  */

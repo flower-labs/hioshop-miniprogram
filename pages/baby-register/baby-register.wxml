@@ -1,0 +1,18 @@
+<!--pages/baby-register/baby-register.wxml-->
+<view class="gradient-background">
+    <view class="cancel">
+        <text bindtap="_cancelRegister">取消</text>
+    </view>
+    <view style="top: 200rpx;position: absolute;font-size: large;">
+        <text>请选择添加宝宝或孕期</text>
+    </view>
+    <!-- 页面内容可以放在这里 -->
+    <view class="content">
+        <t-cell t-class="baby-register" title="宝宝" hover arrow image="https://tdesign.gtimg.com/mobile/demos/avatar1.png" bind:click="_handleBabyRegister">
+        </t-cell>
+        <t-cell t-class="baby-register" title="孕期" hover arrow image="https://tdesign.gtimg.com/mobile/demos/avatar1.png" bind:click="_handleMomRegister">
+        </t-cell>
+    </view>
+    
+
+</view>
