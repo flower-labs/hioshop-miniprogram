@@ -63,18 +63,12 @@ Page({
     onShareAppMessage() {
 
     },
-    _cancelRegister(e){
-        wx.switchTab({
-          url: '/pages/baby-setting/index',
-        })
-    },
     _handleBabyRegister(e){
         wx.navigateTo({
           url: '/pages/baby-register-babyinfo/index',
         })
     },
     _handleMomRegister(e){
-        console.log('Cell 被点击了');
         // 可以在这里添加更多点击后的处理逻辑
         // 例如，跳转到其他页面、显示详情信息等
         wx.showToast({

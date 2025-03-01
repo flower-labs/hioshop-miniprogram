@@ -2,7 +2,7 @@
 <view class="container">
 <!-- part one 宝宝昵称 -->
     <view class="input-example">
-        <t-input t-class="baby-name" label="宝宝昵称" placeholder="请输入文字" borderless bind:change="handleInput" data-field="baby_name" />
+        <t-input t-class="baby-name" label="宝宝小名" borderless bind:change="handleInput" data-field="baby_name" />
     </view>
 
 <!--part two 出生日期 -->
