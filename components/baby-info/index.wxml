@@ -1,30 +1,40 @@
 <!--components/baby-info/index.wxml-->
+<t-message id="t-message" />
 <view class="container">
-<!-- part one 宝宝昵称 -->
-    <view class="input-example">
-        <t-input t-class="baby-name" label="宝宝小名" borderless bind:change="handleInput" data-field="baby_name" />
-    </view>
+  <!-- part one 宝宝昵称 -->
+  <view class="baby-info-input">
+    <t-input t-class="baby-name" label="宝宝小名" borderless bind:change="handleInput" data-field="babyName" />
+  </view>
 
-<!--part two 出生日期 -->
+  <!--part two 出生日期 -->
 
+  <view class="baby-info-input">
     <t-cell title="出生日期" hover note="{{dateText || ''}}" arrow data-mode="date" bindtap="showPicker" class="baby-date" t-class="panel-item" />
     <!-- 年月日 -->
     <t-date-time-picker auto-close title="选择日期" visible="{{dateVisible}}" mode="date" default-value="{{date}}" format="YYYY-MM-DD" start="{{start}}" end="{{end}}" filter="{{filter}}" popup-props="{{popupProps}}" bindchange="onConfirm" bindpick="onColumnChange" bindcancel="hidePicker" bindclose="handleClose" />
+  </view>
 
-<!--part three 性别选择 -->
-    <view class="gender-box">
-        <view class="gender-title">宝宝性别</view>
-        <view class="gender-selector">
-            <view class="gender-item" bindtap="selectGender" data-gender="male">
-                <image class="gender-item-image" src="/images/icon/男宝宝.png" mode="aspectFit"></image>
-                <text>男</text>
-            </view>
-            <view class="gender-item" bindtap="selectGender" data-gender="female">
-                <image class="gender-item-image" src="/images/icon/女宝宝.png" mode="aspectFit"></image>
-                <text>女</text>
-            </view>
-        </view>
+  <!--part three 性别选择 -->
+  <view class="gender-box-wrapper">
+    <view class="gender-box-title">宝宝性别</view>
+    <view class="gender-box-selector">
+      <view class="gender-item {{item.isSelected ? 'selected' : ''}}" wx:for="{{genderTagList}}" wx:key="{{item.id}}" bindtap="handleTagClick" data-id="{{item.id}}" data-type="gender">
+        <image class="gender-item-image" src="{{item.image}}" mode="aspectFit"></image>
+        {{item.text}}
+      </view>
     </view>
-<!-- 信息保存 -->
-    <button class="baby-info-submit" bindtap="saveBabyInfo">保存信息</button>
+  </view>
+
+  <!-- 与宝宝的关系选择 -->
+  <view class="relation-box-wrapper">
+    <view class="relation-box-title">你是宝宝的</view>
+    <view class="relation-box-selector">
+      <view class="relation-item {{item.isSelected ? 'selected' : ''}}" wx:for="{{relationTagList}}" wx:key="{{item.id}}" bindtap="handleTagClick" data-id="{{item.id}}" data-type="relation">
+        {{item.text}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 信息保存 -->
+  <button class="baby-info-submit" bindtap="saveBabyInfo">保存信息</button>
 </view>

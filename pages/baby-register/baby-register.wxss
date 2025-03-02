@@ -2,26 +2,63 @@
 .gradient-background {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: linear-gradient(to bottom, pink, white);
+}
+
+.baby-register_title{
+  margin-top: 160rpx;
+}
+
+.baby-register-action {
+  margin-top: 120rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 80rpx;
+}
+
+/* 自定义按钮样式 */
+.baby-register-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 20rpx;
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 50px; /* 使按钮左右两侧为半圆形 */
+  cursor: pointer;
+  width: 600rpx; /* 设置按钮宽度 */
+  height: 150rpx;
+  box-sizing: border-box;
+}
+
+/* 头像样式 */
+.baby-register-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  background-color: rgb(231, 202, 243);
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+}
+.baby-register-avatar image{
+  width: 110rpx;
+  height: 110rpx;
 }
 
-.baby-register_title {
-  top: 200rpx;
-  position: absolute;
-  font-size: large;
+/* 按钮文本样式 */
+.button-text {
+  flex: 1;
+  font-size: 35rpx;
 }
 
-.baby-register_content {
-  width: 80%;
-  top: 400rpx;
-  position: absolute;
-}
-
-.baby-register_content_cell {
-  border-radius: 60rpx;
-  margin-bottom: 30rpx;
+/* 向右图标样式 */
+.right-icon {
+  width: 28rpx;
+  height: 28rpx;
+  padding-right: 30rpx;
 }

@@ -8,8 +8,6 @@ page {
   /* --td-brand-color:#0052d9; */
   --td-button-primary-active-bg-color: #4785e9;
   --td-button-primary-active-border-color: rgba(31, 214, 15, 0.075);
-
-
 }
 
 .action-button-group {
@@ -19,5 +17,36 @@ page {
 }
 
 
+.baby-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 32rpx;
+  margin-top: 20rpx;
+  background: linear-gradient(90deg, rgb(216, 137, 192) 0%, rgb(214, 94, 148) 52%, rgb(250, 30, 30) 100%);
+  border-radius: 10px; 
+}
 
+.see-detail-button{
+  margin-right: 20rpx;
+}
 
+.user-info {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 20rpx;
+  margin-right: 10px;
+}
+
+.user-name {
+  color: white;
+  font-size: 32rpx;
+  font-weight: bold;
+}

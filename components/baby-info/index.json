@@ -6,6 +6,7 @@
         "t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
         "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
         "t-cell": "tdesign-miniprogram/cell/cell",
-        "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
+        "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
+        "t-message": "tdesign-miniprogram/message/message"
     }
 }
