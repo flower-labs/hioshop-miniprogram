@@ -62,9 +62,16 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/baby-infoCenter/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }
     },
-    "libVersion": "3.7.9"
+    "libVersion": "3.3.4"
 }

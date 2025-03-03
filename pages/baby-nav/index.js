@@ -18,8 +18,8 @@ Page({
         })
     },
     toBabyUCenter(e){
-        wx.switchTab({
-            url: '/pages/ucenter/index/index',
+        wx.navigateTo({
+            url: '/pages/baby-infoCenter/index',
         })
     },
     toBabyPhoto(e){

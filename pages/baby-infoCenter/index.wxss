@@ -1,0 +1,103 @@
+/* pages/baby-infoCenter/index.wxss */
+.page-container {
+  /* background: linear-gradient(to bottom, pink, white); */
+  background-color: #000;
+  height: 100vh;
+}
+.cover-container {
+  position: relative;
+  width: 100%;
+  height: 400rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cover-tip {
+  position: absolute;
+  top: 30%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5rpx 10rpx;
+  border-radius: 5px;
+  color: #333;
+}
+.cover-tip::after {
+  content: '';
+  position: absolute;
+  bottom: -20rpx;
+  left: 30%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20rpx solid transparent;
+  border-right: 20rpx solid transparent;
+  border-top: 20rpx solid rgba(255, 255, 255, 0.7);
+}
+.overlay-box {
+  position: absolute;
+  top: 220rpx;
+  left: 20rpx;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: black;
+}
+.overlay-image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 10rpx;
+}
+.overlay-text {
+  font-size: 32rpx;
+  font-weight: light;
+}
+.info-container {
+  /* padding: 15px; */
+}
+.info-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  background-color: rgb(17, 17, 17);
+}
+.info-item:last-child{
+    margin-top: 20rpx;
+}
+
+
+.label {
+  font-size: 16px;
+  color: white;
+  padding: 2rpx 20rpx;
+  font-weight: lighter;
+}
+.value {
+  font-size: 16px;
+  font-weight: lighter;
+  color: rgba(218, 216, 216, 0.7);
+  position: absolute;
+  right: 10%;
+}
+.twoCode{
+    position: absolute;
+    right: 10%;
+    width: 80rpx;
+    height: 80rpx;
+}
+.arrow {
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  right: 5%;
+  position: absolute;
+}

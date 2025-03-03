@@ -25,7 +25,7 @@
                 <image class="icon-image" src="/images/icon/我的.png" mode="widthFix"></image>
             </view>
             <view class="text-wrapper">
-                <text>我的</text>
+                <text>信息</text>
             </view>
         </view>
     </view>
