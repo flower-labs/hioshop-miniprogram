@@ -1,8 +1,9 @@
 // pages/baby-setting/index.js
+import moment from 'moment';
 var api = require('../../config/api.js');
 var util = require('../../utils/util.js');
 import Message from 'tdesign-miniprogram/message/index';
-import moment from 'moment';
+import { queryBabyDetail } from './utils'
 
 Page({
   /**
@@ -10,6 +11,7 @@ Page({
    */
   data: {
     addLoading: false,
+    babyInfo: {},
   },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
@@ -90,7 +92,7 @@ Page({
     //   .then(res => {
     //     console.log('res', res);
     //   });
-    
+
     // 更新
     // util
     // .request(
@@ -105,45 +107,53 @@ Page({
     //   console.log('res', res);
     // });
   },
+  handleViewDetail() {
+    wx.showToast({ title: '功能开发中……', icon: 'none' });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-      // this.fetchData()
+  async onLoad() {
+    const { babyInfo, hasInfo } = await queryBabyDetail();
+    if (hasInfo) {
+      this.setData({ babyInfo });
+    } else {
+      wx.redirectTo({ url: '/pages/baby-register/baby-register', });
+    }
+    // 进入主页时，判断有没有宝宝信息，没有的话，跳转引导页
   },
-    
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {},
+  onReady() { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {},
+  onShow() { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() {},
+  onHide() { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() {},
+  onUnload() { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() {},
+  onPullDownRefresh() { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() {},
+  onReachBottom() { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {},
+  onShareAppMessage() { },
 });

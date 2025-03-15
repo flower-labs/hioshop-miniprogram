@@ -2,5 +2,5 @@
     "usingComponents": {
         "baby-info":"/components/baby-info/index"
     },
-    "navigationBarTitleText": "添加宝宝"
+    "navigationBarTitleText": "添加宝宝信息"
 }

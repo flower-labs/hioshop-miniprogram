@@ -21,8 +21,11 @@
         },
         "condition": false,
         "ignoreUploadUnusedFiles": false,
-        "enhance": false,
-        "packNpmRelationList": []
+        "enhance": true,
+        "packNpmRelationList": [],
+        "useCompilerPlugins": [
+            "typescript"
+        ]
     },
     "compileType": "miniprogram",
     "simulatorType": "wechat",
