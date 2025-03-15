@@ -2,7 +2,7 @@
     <view class="nav-top" bindtap="toBabySetting">
         <view class="icon-text-container">
             <view class="icon-wrapper">
-                <image class="icon-image" src="/images/icon/婴儿.png" mode="widthFix"></image>
+                <image class="icon-image" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/baby.png" mode="widthFix"></image>
             </view>
             <view class="text-wrapper">
                 <text>宝宝</text>
@@ -12,7 +12,7 @@
     <view class="nav-left" bindtap="toBabyFood">
         <view class="icon-text-container">
             <view class="icon-wrapper">
-                <image class="icon-image" src="/images/icon/婴儿辅食.png" mode="widthFix"></image>
+                <image class="icon-image" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/weaning-food.png" mode="widthFix"></image>
             </view>
             <view class="text-wrapper">
                 <text>辅食</text>
@@ -22,7 +22,7 @@
     <view class="nav-right" bindtap="toBabyUCenter">
         <view class="icon-text-container">
             <view class="icon-wrapper">
-                <image class="icon-image" src="/images/icon/我的.png" mode="widthFix"></image>
+                <image class="icon-image" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/myprofile.png" mode="widthFix"></image>
             </view>
             <view class="text-wrapper">
                 <text>信息</text>
@@ -32,7 +32,7 @@
     <view class="nav-bottom" bindtap="toBabyPhoto">
         <view class="icon-text-container">
             <view class="icon-wrapper">
-                <image class="icon-image" src="/images/icon/照片墙.png" mode="widthFix"></image>
+                <image class="icon-image" src="http://cdn.bajie.club/babycare/photowall.png" mode="widthFix"></image>
             </view>
             <view class="text-wrapper">
                 <text>照片</text>

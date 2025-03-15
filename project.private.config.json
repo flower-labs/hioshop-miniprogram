@@ -15,27 +15,6 @@
                     "scene": null
                 },
                 {
-                    "name": "babycare",
-                    "pathName": "pages/baby-setting/index",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/reserve-start/index",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
-                    "pathName": "pages/gude/gude",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
                     "name": "",
                     "pathName": "pages/baby-register/baby-register",
                     "query": "",

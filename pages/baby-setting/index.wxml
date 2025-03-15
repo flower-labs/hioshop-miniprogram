@@ -1,22 +1,19 @@
 <!--pages/baby-setting/index.wxml-->
 <t-message id="t-message" />
-<scroll-view scroll-y="true">
-  <!--新增喝奶记录表单-->
-
-  <view class="baby-info-container">
+<!--新增喝奶记录表单-->
+<view class="baby-info-container">
   <view class="user-info">
     <image class="avatar" src="http://cdn.bajie.club/babycare/baby-head-boy.png"></image>
     <text class="user-name">张三</text>
   </view>
   <!-- 右侧查看详情按钮 -->
   <!-- <button class="detail-button" bindtap="handleViewDetail">查看 baby 信息详情</button> -->
-  <t-button theme="default" t-class="see-detail-button" size="small" icon="analytics" bind:tap="handleViewDetail" >查看详情</t-button>
+  <t-button theme="default" t-class="see-detail-button" size="small" icon="analytics" bind:tap="handleViewDetail">查看详情</t-button>
+</view>
+<baby-action id="baby-action" />
+<view class="action-container">
+  <view class="action-button-group">
+    <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
+    <t-button theme="primary" icon="analytics" bind:tap="redirectToAnalysis" size="large">统计</t-button>
   </view>
-  <baby-action />
-  <view class="action-container">
-    <view class="action-button-group">
-      <t-button theme="secondary" loading="{{addLoading}}" disabled="{{addLoading}}" bind:tap="handleBabyRecordAdd" icon="{{addLoading ? '': 'add'}}" size="large">新增记录</t-button>
-      <t-button theme="primary" icon="analytics" bind:tap="redirectToAnalysis" size="large">统计</t-button>
-    </view>
-  </view>
-</scroll-view>
+</view>
