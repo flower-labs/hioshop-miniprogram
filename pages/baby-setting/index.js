@@ -10,10 +10,10 @@ Page({
    */
   data: {
     addLoading: false,
-    GetBabyList:[]
   },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
+    console.log('babyForm', babyForm);
     const formData = babyForm.getCurrentFields();
     const { extra, startTime, endTime, milkAmount, newAction, isCustomTime } = formData;
     if (newAction.length === 0) {
@@ -109,7 +109,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-      this.fetchData()
+      // this.fetchData()
   },
     
   /**

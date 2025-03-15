@@ -19,7 +19,7 @@
         <image class="avatar" src="http://cdn.bajie.club/babycare/fetus.svg"></image>
       </view>
 
-      <text class="button-text">宝宝</text>
+      <text class="button-text">孕期</text>
       <image class="right-icon" src="http://cdn.bajie.club/babycare/arrow_right.svg"></image>
     </view>
   </view>

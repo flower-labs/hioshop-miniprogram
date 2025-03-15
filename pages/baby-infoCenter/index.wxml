@@ -7,7 +7,7 @@
   </view>
     <!-- 覆盖盒子 -->
     <view class="overlay-box">
-    <image src="/images/icon/女宝宝.png" class="overlay-image"></image>
+    <image src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/big-girl.png" class="overlay-image"></image>
     <text class="overlay-text">这里是文本</text>
   </view>
   <!-- 宝宝基本信息区域 -->
@@ -15,37 +15,37 @@
     <view class="info-item">
       <text class="label">小名</text>
       <text class="value">{{baby_name}}</text>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
     <view class="info-item">
       <text class="label">性别</text>
       <text class="value">{{baby_sex}}</text>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
     <view class="info-item">
       <text class="label">生日</text>
       <text class="value">{{baby_birth}}</text>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
     <view class="info-item">
       <text class="label">血型</text>
       <text class="value">{{baby_blood_type}}</text>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
     <view class="info-item">
       <text class="label">身高</text>
       <text class="value">{{baby_height}}cm</text>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
     <view class="info-item">
       <text class="label">体重</text>
       <text class="value">{{baby_weight}}kg</text>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
     <view class="info-item">
       <text class="label">二维码</text>
-      <image class="twoCode" src="/images/icon/二维码.png" mode=""/>
-      <image class="arrow" src="/images/icon/arrow-right.png" mode=""/>
+      <image class="twoCode" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/qrcode.png" mode=""/>
+      <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode=""/>
     </view>
   </view>
 </view>
