@@ -3,15 +3,16 @@ import moment from 'moment';
 var api = require('../../config/api.js');
 var util = require('../../utils/util.js');
 import Message from 'tdesign-miniprogram/message/index';
-import { queryBabyDetail } from './utils'
+import { queryBabyDetail } from './utils';
 
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     addLoading: false,
-    babyInfo: {},
+    babyInfo: null,
   },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
@@ -68,31 +69,6 @@ Page({
   },
 
   triggerBabyInfoModify() {
-    // 获取
-    // util.request(api.GetBabyDetail, 'POST').then(res => {
-    //   console.log('res', res);
-    // });
-
-    // 新增
-    // util
-    //   .request(
-    //     api.AddBabyDetail,
-    //     {
-    //       baby_name: '刘星程',
-    //       baby_sex: 'female',
-    //       baby_birth: '2024-12-22',
-    //       baby_height: '50',
-    //       baby_weight: '6',
-    //       baby_relation: '父亲',
-    //       baby_blood_type: 'A',
-    //       extra: 'demo extra info',
-    //     },
-    //     'POST',
-    //   )
-    //   .then(res => {
-    //     console.log('res', res);
-    //   });
-
     // 更新
     // util
     // .request(
@@ -114,46 +90,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   async onLoad() {
-    const { babyInfo, hasInfo } = await queryBabyDetail();
-    if (hasInfo) {
-      this.setData({ babyInfo });
-    } else {
-      wx.redirectTo({ url: '/pages/baby-register/baby-register', });
+    if (!app.globalData.globalLoading) {
+      const userInfo = wx.getStorageSync('userInfo');
+      const { babyInfo, hasInfo } = await queryBabyDetail();
+      if (hasInfo) {
+        this.setData({ babyInfo });
+      } else {
+        // 如果注册时间大于4月1日,执行强制跳转
+        if (userInfo.register_time > 1743521412) {
+          wx.redirectTo({ url: '/pages/baby-register/baby-register' });
+        }
+      }
     }
-    // 进入主页时，判断有没有宝宝信息，没有的话，跳转引导页
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() { },
+  onReady() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() { },
+  onShow() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() { },
+  onHide() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() { },
+  onUnload() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() { },
+  onPullDownRefresh() {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() { },
+  onReachBottom() {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() { },
+  onShareAppMessage() {},
 });
