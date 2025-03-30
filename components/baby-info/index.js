@@ -141,6 +141,7 @@ Component({
                 duration: 3000,
                 content: '宝贝信息添加成功',
               });
+              wx.redirectTo({ url: '/pages/baby-setting/index' });
             } else {
               Message.warning({
                 context: this,
@@ -148,6 +149,8 @@ Component({
                 duration: 3000,
                 content: res.errmsg,
               });
+              // 异常情况下也尝试跳转
+              wx.redirectTo({ url: '/pages/baby-setting/index' });
             }
           });
       } else {

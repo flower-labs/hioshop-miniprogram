@@ -1,1 +1,4 @@
 /* pages/baby-register-babyinfo/index.wxss */
+page { 
+  --td-brand-color: #e4487c;
+}

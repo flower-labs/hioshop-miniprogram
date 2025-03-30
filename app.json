@@ -11,18 +11,11 @@
     "pages/baby-nav/index",
     "pages/baby-infoCenter/index",
     "pages/baby-photo/index",
-    "pages/gude/gude",
     "pages/app-auth/index",
     "pages/share/index",
     "pages/ucenter/about/index",
     "pages/ucenter/index/index",
-    "pages/ucenter/settings/index",
-    "pages/reserve/index",
-    "pages/reserve-result/index",
-    "pages/reserve-detail/index",
-    "pages/reserve-start/index",
-    "pages/reserve-orders/index",
-    "pages/gude-detail/index"
+    "pages/ucenter/settings/index"
   ],
   "subpackages": [
     {

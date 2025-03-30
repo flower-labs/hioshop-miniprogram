@@ -1,15 +1,18 @@
 // pages/baby-setting/index.js
+import moment from 'moment';
 var api = require('../../config/api.js');
 var util = require('../../utils/util.js');
 import Message from 'tdesign-miniprogram/message/index';
-import moment from 'moment';
+import { queryBabyDetail } from './utils';
 
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     addLoading: false,
+    babyInfo: null,
   },
   handleViewDetail() {
     wx.showToast({
@@ -72,31 +75,6 @@ Page({
   },
 
   triggerBabyInfoModify() {
-    // 获取
-    // util.request(api.GetBabyDetail, 'POST').then(res => {
-    //   console.log('res', res);
-    // });
-
-    // 新增
-    // util
-    //   .request(
-    //     api.AddBabyDetail,
-    //     {
-    //       baby_name: '刘星程',
-    //       baby_sex: 'female',
-    //       baby_birth: '2024-12-22',
-    //       baby_height: '50',
-    //       baby_weight: '6',
-    //       baby_relation: '父亲',
-    //       baby_blood_type: 'A',
-    //       extra: 'demo extra info',
-    //     },
-    //     'POST',
-    //   )
-    //   .then(res => {
-    //     console.log('res', res);
-    //   });
-    
     // 更新
     // util
     // .request(
@@ -111,11 +89,26 @@ Page({
     //   console.log('res', res);
     // });
   },
+  handleViewDetail() {
+    wx.showToast({ title: '功能开发中……', icon: 'none' });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
-    
+  async onLoad() {
+    if (!app.globalData.globalLoading) {
+      const userInfo = wx.getStorageSync('userInfo');
+      const { babyInfo, hasInfo } = await queryBabyDetail();
+      if (hasInfo) {
+        this.setData({ babyInfo });
+      } else {
+        // 如果注册时间大于4月1日,执行强制跳转
+        if (userInfo.register_time > 1743521412) {
+          wx.redirectTo({ url: '/pages/baby-register/baby-register' });
+        }
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
