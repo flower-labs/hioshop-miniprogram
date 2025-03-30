@@ -73,7 +73,7 @@ page {
 }
 
 .active{
-    background: linear-gradient(to right, #ff3456, #ff347d);
+    background: linear-gradient(-90deg, #81a8cb, #4477a1);
     box-shadow: 0rpx 10rpx 20rpx #f1f1f1;
     color: #fff;
 }
@@ -96,7 +96,6 @@ page {
     font-size: 26rpx;
     color: rgb(196, 54, 54);
     line-height: 50rpx;
-
 }
 
 .tips .title{

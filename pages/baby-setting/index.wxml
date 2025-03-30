@@ -7,8 +7,6 @@
     <image wx:else class="avatar" src="http://cdn.bajie.club/babycare/baby-head-girl.png"></image>
     <text class="user-name">{{babyInfo.baby_name}}</text>
   </view>
-  <!-- 右侧查看详情按钮 -->
-  <!-- <button class="detail-button" bindtap="handleViewDetail">查看 baby 信息详情</button> -->
   <t-button theme="default" t-class="see-detail-button" size="small" icon="analytics" bind:tap="handleViewDetail">查看详情</t-button>
 </view>
 <baby-action id="baby-action" />

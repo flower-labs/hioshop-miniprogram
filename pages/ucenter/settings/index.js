@@ -22,6 +22,9 @@ Page({
       url: api.UploadAvatar,
       filePath: avatarUrl,
       name: 'upload_file',
+      header: {
+        'X-Hioshop-Token': wx.getStorageSync('token'),
+      },
       formData: {
         // 'userId': 'test'
       },

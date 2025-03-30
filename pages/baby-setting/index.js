@@ -14,6 +14,12 @@ Page({
     addLoading: false,
     babyInfo: null,
   },
+  handleViewDetail() {
+    wx.showToast({
+      title: '开发中，敬请期待',
+      icon: 'none'
+    });
+  },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
     console.log('babyForm', babyForm);

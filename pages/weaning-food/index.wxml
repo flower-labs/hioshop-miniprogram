@@ -15,7 +15,7 @@
   </view>
 
   <view style="margin-top: -30rpx;">
-    <t-input type="number" maxlength="{{3}}" value="{{weaningAmout}}" bind:change="handleAmoutInput" label="重量" placeholder="请输入辅食量" suffix="克/ml" />
+    <t-input type="number" maxlength="{{3}}" value="{{weaningAmout}}" bind:change="handleAmoutInput" label="重量" placeholder="请输入辅食重量" suffix="克" />
   </view>
 
   <view class="textarea-wrapper">

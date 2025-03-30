@@ -29,7 +29,7 @@
         </view>
         <view class="head_right">
           <view class="head_right_description">
-            <view wx:if="{{tools.contain(item.type, 'milk') || tools.contain(item.type, 'weaning-food')}}" class="baby_drink_amount">{{item.drink_amount}} {{tools.contain(item.type, 'weaning-food') ? 'ml/g':'ml'}}</view>
+            <view wx:if="{{tools.contain(item.type, 'milk') || tools.contain(item.type, 'weaning-food')}}" class="baby_drink_amount">{{item.drink_amount}} {{tools.contain(item.type, 'weaning-food') ? 'g':'ml'}}</view>
             <view wx:else class="baby_drink_amount"></view>
             <view class="order_start_time">{{item.startTime}}</view>
           </view>
