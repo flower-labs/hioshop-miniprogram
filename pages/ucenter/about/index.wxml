@@ -2,7 +2,7 @@
     <view class='about-wrap'>
         <view class='title'>宝贝加一</view>
         <view class='content'>
-          Baby Plus 一站式宝贝呵护小程序
+          一站式宝贝呵护小程序
         </view>
         <view class="img-wrap">
             <image mode="aspectFill" class="code-img" src="http://cdn.bajie.club/babycare/gpt-baby.png" show-menu-by-longpress="{{true}}"></image>

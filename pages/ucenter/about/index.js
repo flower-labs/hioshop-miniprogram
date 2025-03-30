@@ -1,9 +1,6 @@
-const app = getApp()
+const app = getApp();
 
 Page({
-    data: {
-    },
-    onLoad: function () {
-
-    },
-})
+  data: {},
+  onLoad: function () {},
+});

@@ -11,6 +11,12 @@ Page({
   data: {
     addLoading: false,
   },
+  handleViewDetail() {
+    wx.showToast({
+      title: '开发中，敬请期待',
+      icon: 'none'
+    });
+  },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
     console.log('babyForm', babyForm);
@@ -108,9 +114,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-      // this.fetchData()
-  },
+  onLoad(options) {},
     
   /**
    * 生命周期函数--监听页面初次渲染完成

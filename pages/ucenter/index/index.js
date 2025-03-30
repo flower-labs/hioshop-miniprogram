@@ -121,7 +121,7 @@ Page({
       });
   },
   onLoad: function (options) {
-    this.goAuth();
+    // this.goAuth();
   },
   onShow: function () {
     this.getOrderInfo();
