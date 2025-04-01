@@ -91,7 +91,6 @@ Page({
   },
   handleViewDetail() {
     wx.redirectTo({ url: '/pages/baby-infoCenter/index', });
-    // wx.showToast({ title: '功能开发中……', icon: 'none' });
   },
   /**
    * 生命周期函数--监听页面加载
