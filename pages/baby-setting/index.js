@@ -19,6 +19,7 @@ Page({
       title: '开发中，敬请期待',
       icon: 'none'
     });
+    // wx.redirectTo({ url: '/pages/baby-infoCenter/index', });
   },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
@@ -88,9 +89,6 @@ Page({
     // .then(res => {
     //   console.log('res', res);
     // });
-  },
-  handleViewDetail() {
-    wx.redirectTo({ url: '/pages/baby-infoCenter/index', });
   },
   /**
    * 生命周期函数--监听页面加载

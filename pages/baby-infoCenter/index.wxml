@@ -50,10 +50,5 @@
             </view>
             <button class="btn" formType="submit">保存修改</button>
         </form>
-        <!-- <view class="info-item">
-            <text class="label">二维码</text>
-            <image class="twoCode" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/qrcode.png" mode="" />
-            <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-        </view> -->
     </view>
 </view>
