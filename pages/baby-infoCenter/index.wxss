@@ -1,7 +1,6 @@
 /* pages/baby-infoCenter/index.wxss */
 .page-container {
-  /* background: linear-gradient(to bottom, pink, white); */
-  background-color: #000;
+  background: linear-gradient(to bottom, pink, white);
   height: 100vh;
 }
 .cover-container {
@@ -57,10 +56,18 @@
 }
 .overlay-text {
   font-size: 32rpx;
-  font-weight: light;
+  color: rgb(226, 118, 134);
+  font-weight: bolder;
 }
 .info-container {
-  /* padding: 15px; */
+  margin: 32rpx;
+  background-color: #fefefe; 
+  border-radius: 32rpx;
+  position: relative;
+  top: -60rpx;
+  display: flex;
+  flex-direction: column;
+  height: 60%;
 }
 .info-item {
   position: relative;
@@ -68,7 +75,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20rpx 0;
-  background-color: rgb(17, 17, 17);
+  /* background-color: rgb(17, 17, 17); */
 }
 .info-item:last-child{
     margin-top: 20rpx;
@@ -77,16 +84,14 @@
 
 .label {
   font-size: 16px;
-  color: white;
+  color: black;
   padding: 2rpx 20rpx;
-  font-weight: lighter;
 }
 .value {
   font-size: 16px;
-  font-weight: lighter;
-  color: rgba(218, 216, 216, 0.7);
+  color: black;
   position: absolute;
-  right: 10%;
+  right:10%;
 }
 .twoCode{
     position: absolute;
@@ -101,3 +106,12 @@
   right: 5%;
   position: absolute;
 }
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: pink;
+    color: white;
+    border: none;
+    border-radius: 0 0 32rpx 32rpx;
+    font-weight: bolder;
+}  

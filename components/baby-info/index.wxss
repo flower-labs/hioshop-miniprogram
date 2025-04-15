@@ -15,7 +15,7 @@
 }
 
 .baby-info-input .baby-name {
-  margin-top: 200rpx;
+  margin-top: 150rpx;
   border-radius: 48rpx;
 }
 
