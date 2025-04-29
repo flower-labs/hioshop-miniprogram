@@ -1,0 +1,9 @@
+.container {
+  margin: 0 32rpx;
+}
+
+page {
+  --td-brand-color: #0052d9;
+  --td-button-primary-active-bg-color: #4785e9;
+  --td-button-primary-active-border-color: rgba(31, 214, 15, 0.075);
+}

@@ -15,11 +15,11 @@ Page({
     babyInfo: null,
   },
   handleViewDetail() {
-    wx.showToast({
-      title: '开发中，敬请期待',
-      icon: 'none'
-    });
-    // wx.redirectTo({ url: '/pages/baby-infoCenter/index', });
+    // wx.showToast({
+    //   title: '开发中，敬请期待',
+    //   icon: 'none'
+    // });
+    wx.redirectTo({ url: '/pages/baby-infoCenter/index', });
   },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');

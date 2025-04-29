@@ -5,13 +5,14 @@ App({
     deviceInfo: {}
   },
   onLaunch: function () {
-    this.data.deviceInfo = wx.getSystemInfoSync();
-    console.log(this.data.deviceInfo);
+    const platform = wx.getDeviceInfo().platform;
+    /** 判断是否运行在开发工具中 */
+    const isDevtoolsMode = platform === 'devtools';
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    handleInitLogin(this);
+    wx.setStorageSync('logs', logs);
+    !isDevtoolsMode && handleInitLogin(this);
     let that = this;
     wx.getSystemInfo({ //  获取页面的有关信息
       success: function (res) {

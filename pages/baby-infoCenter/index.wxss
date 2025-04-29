@@ -1,8 +1,9 @@
 /* pages/baby-infoCenter/index.wxss */
 .page-container {
-  background: linear-gradient(to bottom, pink, white);
+  background: linear-gradient(to bottom, rgb(247, 165, 179), white);
   height: 100vh;
 }
+
 .cover-container {
   position: relative;
   width: 100%;
@@ -12,11 +13,13 @@
   justify-content: center;
   align-items: center;
 }
+
 .cover-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .cover-tip {
   position: absolute;
   top: 30%;
@@ -27,6 +30,7 @@
   border-radius: 5px;
   color: #333;
 }
+
 .cover-tip::after {
   content: '';
   position: absolute;
@@ -39,6 +43,7 @@
   border-right: 20rpx solid transparent;
   border-top: 20rpx solid rgba(255, 255, 255, 0.7);
 }
+
 .overlay-box {
   position: absolute;
   top: 220rpx;
@@ -49,69 +54,20 @@
   padding: 10px;
   color: black;
 }
+
 .overlay-image {
   width: 120rpx;
   height: 120rpx;
   margin-right: 10rpx;
 }
+
 .overlay-text {
   font-size: 32rpx;
+  margin-left: 12rpx;
   color: rgb(226, 118, 134);
   font-weight: bolder;
 }
-.info-container {
-  margin: 32rpx;
-  background-color: #fefefe; 
-  border-radius: 32rpx;
-  position: relative;
-  top: -60rpx;
-  display: flex;
-  flex-direction: column;
-  height: 60%;
-}
-.info-item {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20rpx 0;
-  /* background-color: rgb(17, 17, 17); */
-}
-.info-item:last-child{
-    margin-top: 20rpx;
-}
 
-
-.label {
-  font-size: 16px;
-  color: black;
-  padding: 2rpx 20rpx;
+.baby-info-container {
+  margin-bottom: 150rpx;
 }
-.value {
-  font-size: 16px;
-  color: black;
-  position: absolute;
-  right:10%;
-}
-.twoCode{
-    position: absolute;
-    right: 10%;
-    width: 80rpx;
-    height: 80rpx;
-}
-.arrow {
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-  right: 5%;
-  position: absolute;
-}
-.btn {
-    width: 100%;
-    padding: 10px;
-    background-color: pink;
-    color: white;
-    border: none;
-    border-radius: 0 0 32rpx 32rpx;
-    font-weight: bolder;
-}  

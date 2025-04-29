@@ -14,7 +14,8 @@
     "pages/share/index",
     "pages/ucenter/about/index",
     "pages/ucenter/index/index",
-    "pages/ucenter/settings/index"
+    "pages/ucenter/settings/index",
+    "pages/edit/edit"
   ],
   "subpackages": [
     {
