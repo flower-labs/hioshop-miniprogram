@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "moment": "^2.29.4",
-    "tdesign-miniprogram": "^1.2.1"
+    "tdesign-miniprogram": "^1.8.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

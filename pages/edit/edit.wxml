@@ -1,0 +1,4 @@
+<view class="container">
+    <t-input style="border-radius: 18rpx;"  value="{{value}}" bindchange="handleInputChange"  placeholder="请输入文字" clearable />
+    <t-button style="margin-top: 20px;" theme="primary" bind:tap="saveInfo" size="large" block>保存</t-button>
+</view>

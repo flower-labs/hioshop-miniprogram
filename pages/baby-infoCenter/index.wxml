@@ -1,54 +1,29 @@
 <!--pages/baby-infoCenter/index.wxml-->
+<t-action-sheet id="t-opreation-sheet" usingCustomNavbar bind:selected="handleActionSelected" />
 <view class="page-container">
-    <!-- 封面区域 -->
-    <view class="cover-container" bindtap="setCover">
-        <image src="{{coverImage}}" class="cover-image"></image>
-        <view class="cover-tip" wx:if="{{coverImage}}">点击设置封面</view>
-    </view>
-    <!-- 覆盖盒子 -->
-    <view class="overlay-box">
-        <image src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/big-girl.png" class="overlay-image"></image>
-        <text class="overlay-text" >小孩出生了{{years}}年{{months}}月{{days}}日</text>
-    </view>
-    <!-- 宝宝基本信息区域 -->
-    <view class="info-container">
-        <form bindsubmit="submitForm">
-            <view class="info-item">
-                <text class="label">小名</text>
-                <input class="value" type="text" name="baby_name" placeholder="请输入姓名" value="{{babyInfo.baby_name}}"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <view class="info-item">
-                <text class="label">性别</text>
-                <input class="value" type="text" name="baby_sex" placeholder="请输入姓别男或女" value="{{babyInfo.baby_sex}}" bindinput="validateGender"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <view class="info-item">
-                <text class="label">生日</text>
-                <input class="value" type="text" name="baby_birth" placeholder="请输入生日xxxx-xx-xx" value="{{babyInfo.baby_birth}}" bindinput="validateBirthday"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <view class="info-item">
-                <text class="label">血型</text>
-                <input class="value" type="text" name="baby_blood_type" placeholder="请输入血型" value="{{babyInfo.baby_blood_type}}"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <view class="info-item">
-                <text class="label">身高cm</text>
-                <input class="value" type="text" name="baby_height" placeholder="请输入身高" value="{{babyInfo.baby_height}}"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <view class="info-item">
-                <text class="label">体重kg</text>
-                <input class="value" type="text" name="baby_weight" placeholder="请输入体重" value="{{babyInfo.baby_weight}}"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <view class="info-item">
-                <text class="label">其它</text>
-                <input class="value" type="text" name="baby_extra" placeholder="请输入其它" value="{{babyInfo.baby_extra}}"/>
-                <image class="arrow" src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/arrow-right.png" mode="" />
-            </view>
-            <button class="btn" formType="submit">保存修改</button>
-        </form>
-    </view>
+  <!-- 封面区域 -->
+  <view class="cover-container" bindtap="setCover">
+    <image src="{{coverImage}}" class="cover-image"></image>
+    <view class="cover-tip" wx:if="{{!coverImage}}">点击设置封面</view>
+  </view>
+  <!-- 覆盖盒子 -->
+  <view wx:if="{{hasInfo}}" class="overlay-box">
+    <image src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/big-girl.png" class="overlay-image" />
+    <text class="overlay-text">已经出生 {{babyBirth.months}} 个月 {{babyBirth.days}} 天</text>
+  </view>
+
+  <view class="baby-info-container">
+    <t-cell-group theme="card">
+      <t-cell title="昵称" data-field="baby_name" bind:tap="handleEdit" note="{{babyInfo.baby_name}}" hover arrow />
+      <t-cell title="性别" data-field="baby_sex" bind:tap="handleBabySexModify" note="{{babyInfo.baby_sex === 1 ? '小帅哥': '小美女'}}" hover arrow />
+      <t-cell title="生日" data-field="baby_birth" data-mode="date" bindtap="showPicker" note="{{babyInfo.baby_birth}}" hover arrow />
+      <t-cell title="血型" data-field="baby_blood_type" bind:tap="handleBabyBloodTypeModify" note="{{babyInfo.baby_blood_type}}" hover arrow />
+      <t-cell title="身高" data-field="baby_height" bind:tap="handleEdit" hover note="{{babyInfo.baby_height}}cm" arrow />
+      <t-cell title="体重" data-field="baby_weight" bind:tap="handleEdit" hover note="{{babyInfo.baby_weight}}kg" arrow />
+      <t-cell title="备注" data-field="baby_extra" bind:tap="handleEdit" hover note="{{babyInfo.baby_extra}}" arrow />
+    </t-cell-group>
+  </view>
+
+  <!-- 生日选择器 -->
+  <t-date-time-picker auto-close visible="{{dateVisible}}" mode="date" value="{{date}}" format="YYYY-MM-DD" bindchange="onConfirm" bindcancel="hidePicker" />
 </view>
