@@ -1,0 +1,9 @@
+
+{
+    "usingComponents": {
+        "t-input": "tdesign-miniprogram/input/input",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog",
+        "t-image": "tdesign-miniprogram/image/image",
+        "t-button": "tdesign-miniprogram/button/button"
+    }
+}
