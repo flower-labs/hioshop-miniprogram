@@ -1,44 +1,146 @@
-page {
-  --td-brand-color: #0052d9;
-  --td-button-primary-active-bg-color: #4785e9;
-  --td-button-primary-active-border-color: rgba(31, 214, 15, 0.075);
-}
+/* pages/baby-group/index.wxss */
 
-
-/* 空群组页面样式 */
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  padding: 24rpx;
+  min-height: 100vh;
+  background-color: #f7f8fa;
 }
 
 .button-group {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  margin-top: 100rpx;
+  padding: 0 30rpx;
 }
 
-button {
-  width: 260rpx;
-  height: 100rpx;
-  margin-top: 60rpx;
-  font-size: 39rpx;
-  background-color: #fff;
-  border: 2rpx solid #ccc;
-  border-radius: 10rpx;
+.create-button, .join-button {
+  width: 280rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  transition: all 0.3s;
+  margin: 0 20rpx;
+}
+
+.create-button {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: white;
+  box-shadow: 0 8rpx 20rpx rgba(255, 107, 107, 0.3);
+}
+
+.join-button {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  box-shadow: 0 8rpx 20rpx rgba(79, 172, 254, 0.3);
+}
+
+.create-button:active, .join-button:active {
+  transform: scale(0.96);
+}
+
+.group-card {
+  background-color: white;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-top: 24rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.05);
+}
+
+.group-name {
+  font-size: 36rpx;
+  font-weight: bold;
   color: #333;
+  margin-bottom: 16rpx;
 }
 
-
-button.active {
-  background-color: #007aff;
-  border-color: #007aff;
-  color: #fff;
+.group-remark {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #eee;
 }
 
-/* loading相关样式 */
+.group-info {
+  margin-bottom: 32rpx;
+}
+
+.group-info-item {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #555;
+  margin-bottom: 16rpx;
+}
+
+.group-info-label {
+  width: 180rpx;
+  color: #888;
+}
+
+.group-info-value {
+  flex: 1;
+  word-break: break-all;
+}
+
+.invite-action {
+  display: flex;
+  justify-content: center;
+}
+
+.invite-action button {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  border-radius: 40rpx;
+  padding: 0 40rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  box-shadow: 0 8rpx 20rpx rgba(79, 172, 254, 0.3);
+  transition: all 0.3s;
+}
+
+.invite-action button:active {
+  transform: scale(0.96);
+}
+
+.dialog-input {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 12rpx;
+  background-color: #f5f5f5;
+}
+
+.code-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx 0;
+}
+
+.description {
+  padding: 20rpx 40rpx;
+  background-color: #f5f5f5;
+  border-radius: 12rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+  min-width: 300rpx;
+  text-align: center;
+}
+
+.dialog-image {
+  width: 100%;
+  height: 300rpx;
+  object-fit: contain;
+  margin-bottom: 20rpx;
+}
+
 .loading {
   position: fixed;
   top: 0;
@@ -47,103 +149,19 @@ button.active {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 999;
 }
 
 .loading-image {
-  width: 80rpx;
-  height: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
 }
 
 .loading-text {
-  margin-top: 20rpx;
-  font-size: 28rpx;
-  color: #333;
-}
-
-/* 群组相关 */
-.group-card {
-  background-color: #fff;
-  position: relative;
-  border: 1rpx solid #ccc;
-  margin: 0 auto;
-  width: calc(100% - 100rpx);
-  border-radius: 10rpx;
-  padding: 20rpx;
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
-}
-
-.group-name {
-  font-size: 46rpx;
-  font-weight: bold;
-  color: #333;
-}
-
-.group-remark {
-  margin-top: 10rpx;
-  font-size: 32rpx;
+  font-size: 30rpx;
   color: #666;
-}
-
-.group-info {
-  margin-top: 20rpx;
-  display: flex;
-  flex-direction: column;
-}
-
-.group-info-item {
-  display: flex;
-  align-items: center;
-  margin-top: 10rpx;
-}
-
-.group-info-label {
-  font-size: 34rpx;
-  color: #666;
-}
-
-.group-info-value {
-  font-size: 34rpx;
-  color: #333;
-}
-
-
-/* tdesign 组件 */
-.dialog-input {
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
-  margin-top: 32rpx !important;
-  border-radius: 8rpx;
-  background-color: #f3f3f3 !important;
-}
-
-.invite-action {
-  position: absolute;
-  right: 40rpx;
-  top: -30rpx;
-}
-
-.invite-action button {
-  width: 180rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  color: #fff;
-  font-size: 25rpx;
-  background-color: #007aff;
-  border-color: #007aff;
-  border: 2rpx solid #007aff;
-  border-radius: 10rpx;
-}
-
-.dialog-image {
-  width: 100%;
-  height: 160px;
-}
-
-.code-wrapper{
-  display: flex;
-  align-items: center;
 }

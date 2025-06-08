@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64';
 const api = require('../../config/api.js');
 const util = require('../../utils/util.js');
 const moment = require('moment');
@@ -104,12 +105,26 @@ Page({
     this.setData({ loading: true });
     util.request(api.BabyGroupList, 'POST').then(response => {
       this.setData({ loading: false });
+   
       if (response.data.groupList.length > 0) {
+        const userInfoList = response.data.userInfoList;
         const { id, group_name, owner_id, user_ids, extra, create_time } = response.data.groupList[0];
+        const ownerName = userInfoList.find(item => item.id === owner_id)?.nickname ?? '';
+        const memberIds = user_ids.split(',').map(item => Number(item));
+        const memberNames = memberIds.map(memberId => userInfoList.find(item => item.id === memberId)?.nickname);
         const formattedTime = moment(create_time * 1000).format('YYYY-MM-DD HH:mm:ss');
         this.setData({
           isGroupExist: true,
-          groupInfo: { name: group_name, extra, owner: owner_id, members: user_ids, createTime: formattedTime, id },
+          groupInfo: {
+            name: group_name,
+            extra,
+            owner: owner_id,
+            ownerName: Base64.decode(ownerName),
+            memberNames: memberNames.map(item => Base64.decode(item)).join(", "),
+            members: user_ids,
+            createTime: formattedTime,
+            id,
+          },
         });
       } else {
         this.setData({ isGroupExist: false });
