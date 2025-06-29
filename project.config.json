@@ -25,7 +25,8 @@
         "packNpmRelationList": [],
         "useCompilerPlugins": [
             "typescript"
-        ]
+        ],
+        "ignoreDevUnusedFiles": false
     },
     "compileType": "miniprogram",
     "simulatorType": "wechat",

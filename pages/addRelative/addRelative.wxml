@@ -1,0 +1,41 @@
+<!--pages/addRelative/addRelative.wxml-->
+<!-- pages/invite/invite.wxml -->
+<!-- 自定义导航栏 -->
+<view class="custom-navbar">
+  <view class="back-btn" bindtap="goBack"></view>
+  <view class="title">返回</view>
+</view>
+
+<!-- 页面内容 -->
+
+<view class="container">
+  <!-- 标题 -->
+  <view class="header">
+    <text class="subtitle">邀请家人亲友关注元元的亲宝宝空间，一起记录、分享宝宝成长。</text>
+  </view>
+
+  <!-- 邀请按钮区域 -->
+  <view class="invite-buttons">
+    <!-- 微信邀请 -->
+    <button class="invite-btn wechat-btn" bindtap="onWechatInvite">
+      <image src="/images/icon/微信 .png" class="btn-icon"></image>
+      <text>微信邀请</text>
+    </button>
+
+    <!-- 面对面邀请 -->
+    <button class="invite-btn qrcode-btn" bindtap="onFaceToFaceInvite">
+      <image src="/images/icon/二维码.png" class="btn-icon"></image>
+      <text>面对面邀请</text>
+    </button>
+  </view>
+
+  <!-- 二维码弹窗 -->
+  <view class="modal" wx:if="{{showQRCode}}">
+    <view class="modal-content">
+      <image src="{{qrCodeUrl}}" mode="widthFix" class="qrcode-image"></image>
+      <text class="tip">扫码关注元元的空间</text>
+      <button class="save-btn" bindtap="saveQRCode">保存到相册</button>
+      <button class="close-btn" bindtap="closeModal">关闭</button>
+    </view>
+  </view>
+</view>
