@@ -60,12 +60,14 @@ Page({
     console.log('trigger');
     this.setData({ addLoading: true });
     const { weaningName, weaningAmout, weaningTime, extra } = this.data;
+    const defaultBabyId =  wx.getStorageSync('defaultBabyId');
     util
       .request(
         api.AddBabyRecord,
         {
           type: `weaning-food`,
           record_name: weaningName,
+          baby_info_id: defaultBabyId,
           drink_amount: Number(weaningAmout) || 0,
           start_time: util.transferTimeToUnix(weaningTime),
           end_time: util.transferTimeToUnix(weaningTime),

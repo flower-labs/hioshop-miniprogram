@@ -24,6 +24,7 @@ Page({
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
     console.log('babyForm', babyForm);
+    const defaultBabyId =  wx.getStorageSync('defaultBabyId');
     const formData = babyForm.getCurrentFields();
     const { extra, startTime, endTime, milkAmount, newAction, isCustomTime } = formData;
     if (newAction.length === 0) {
@@ -47,6 +48,7 @@ Page({
           type: newAction.join(' '),
           count: 1,
           extra,
+          baby_info_id: defaultBabyId,
           drink_amount: numberMilkAmount || 0,
           start_time: isCustomTime ? util.transferTimeToUnix(startTime) : moment().unix(),
           end_time: isCustomTime ? util.transferTimeToUnix(endTime) : moment().add(15, 'minutes').unix(),
