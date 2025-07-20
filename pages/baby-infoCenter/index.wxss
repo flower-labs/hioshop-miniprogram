@@ -68,6 +68,9 @@
   font-weight: bolder;
 }
 
+.baby-relation-button {
+  margin-left: 30rpx;
+}
 .baby-info-container {
   margin-bottom: 150rpx;
 }

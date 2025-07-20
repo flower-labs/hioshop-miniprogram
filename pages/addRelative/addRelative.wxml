@@ -33,7 +33,7 @@
   <view class="modal" wx:if="{{showQRCode}}">
     <view class="modal-content">
       <image src="{{qrCodeUrl}}" mode="widthFix" class="qrcode-image"></image>
-      <text class="tip">扫码关注元元的空间</text>
+      <text class="tip">扫码关注</text>
       <button class="save-btn" bindtap="saveQRCode">保存到相册</button>
       <button class="close-btn" bindtap="closeModal">关闭</button>
     </view>

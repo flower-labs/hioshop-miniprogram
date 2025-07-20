@@ -37,6 +37,8 @@ module.exports = {
   GetCurrentList: ApiRootUrl + 'catalog/currentlist',
   // 宝贝信息
   GetBabyDetail: ApiRootUrl + 'baby/getBabyDetail',
+  // 获取宝贝监护人信息
+  GetBabyRelation: ApiRootUrl + 'baby/getBabyRelation',
   AddBabyDetail: ApiRootUrl + 'baby/addBabyDetail',
   EditBabyDetail: ApiRootUrl + 'baby/editBabyDetail',
   // 购物车

@@ -10,6 +10,7 @@
   <view wx:if="{{hasInfo}}" class="overlay-box">
     <image src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/big-girl.png" class="overlay-image" />
     <text class="overlay-text">已经出生 {{babyBirth.months}} 个月 {{babyBirth.days}} 天</text>
+    <button bind:tap="gotoRelationPage" class="baby-relation-button" size="mini" type="primary" plain>亲友团</button>
   </view>
 
   <view class="baby-info-container">

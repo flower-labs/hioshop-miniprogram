@@ -131,6 +131,9 @@ Page({
       ],
     });
   },
+  gotoRelationPage() {
+    wx.redirectTo({ url: '/pages/rela-group/rela-group' });
+  },
   handleBabyBloodTypeModify() {
     this.setData({ actionPanelType: 'blood' });
     ActionSheet.show({

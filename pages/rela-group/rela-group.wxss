@@ -25,14 +25,13 @@
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
-  margin-right: 20rpx;
 }
 .card-info {
   flex: 1;
 }
 .name-visit {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 10rpx;
 }
