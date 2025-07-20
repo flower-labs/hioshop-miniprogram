@@ -1,0 +1,133 @@
+/* pages/babySwitch/babySwitch.wxss */
+.container {
+    padding: 20rpx;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  /* 功能模块样式 */
+  .function-module {
+    display: flex;
+    justify-content: space-around;
+    padding: 30rpx 0;
+    background-color: #fff;
+    border-radius: 12rpx;
+    box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+    margin-bottom: 30rpx;
+  }
+  
+  .function-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    padding: 20rpx 0;
+    border-radius: 12rpx;
+    transition: all 0.3s;
+  }
+  
+  .function-item:active {
+    background-color: #f8f8f8;
+  }
+  
+  .function-icon {
+    width: 80rpx;
+    height: 80rpx;
+    margin-bottom: 12rpx;
+  }
+  
+  .function-text {
+    font-size: 28rpx;
+    color: #333;
+  }
+  
+  .invite-btn .function-text {
+    color: #07c160;
+  }
+  
+  .scan-btn .function-text {
+    color: #10aeff;
+  }
+  
+  /* 信息列表模块样式 */
+  .info-list-module {
+    background-color: #fff;
+    border-radius: 12rpx;
+    box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+    padding: 20rpx;
+  }
+  
+  .list-title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #333;
+    padding: 10rpx 0 20rpx 10rpx;
+    border-bottom: 1rpx solid #eee;
+  }
+  
+  .user-list {
+    padding: 10rpx 0;
+  }
+  
+  .user-item {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 10rpx;
+    border-bottom: 1rpx solid #f5f5f5;
+    transition: all 0.3s;
+  }
+  
+  .user-item:active {
+    background-color: #f8f8f8;
+  }
+  
+  .user-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    border: 1rpx solid #eee;
+  }
+  
+  .user-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .user-name {
+    font-size: 30rpx;
+    font-weight: 500;
+    color: #333;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .user-desc {
+    font-size: 24rpx;
+    color: #999;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 6rpx;
+  }
+  
+  .user-status {
+    font-size: 24rpx;
+    padding: 8rpx 16rpx;
+    border-radius: 20rpx;
+  }
+  
+  .active {
+    color: #07c160;
+    background-color: rgba(7, 193, 96, 0.1);
+  }
+  
+  .inactive {
+    color: #ff9900;
+    background-color: rgba(255, 153, 0, 0.1);
+  }
+      

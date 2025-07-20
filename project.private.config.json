@@ -90,6 +90,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/babySwitch/babySwitch",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

@@ -18,7 +18,8 @@
     "pages/ucenter/settings/index",
     "pages/edit/edit",
     "pages/rela-group/rela-group",
-    "pages/addRelative/addRelative"
+    "pages/addRelative/addRelative",
+    "pages/babySwitch/babySwitch"
   ],
   "subpackages": [
     {
