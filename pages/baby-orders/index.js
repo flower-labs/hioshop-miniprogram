@@ -35,6 +35,7 @@ Page({
   /** 获取baby记录列表 */
   getBabyOrder(isRefresh = false) {
     const { activeTab } = this.data;
+    const defaultBabyId = wx.getStorageSync('defaultBabyId');
     const isToday = activeTab === 'today';
     this.setData({ isLoading: true });
     util
@@ -42,6 +43,7 @@ Page({
         api.BabyOrderList,
         {
           size: 30,
+          baby_info_id: defaultBabyId,
           page: this.data.page,
           is_today: isToday,
         },
