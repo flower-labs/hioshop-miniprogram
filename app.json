@@ -5,6 +5,7 @@
     "pages/baby-record-editing/index",
     "pages/baby-orders/index",
     "pages/baby-group/index",
+    "pages/group-demo/index",
     "pages/baby-register/baby-register",
     "pages/baby-register-babyinfo/index",
     "pages/baby-nav/index",
@@ -15,7 +16,10 @@
     "pages/ucenter/about/index",
     "pages/ucenter/index/index",
     "pages/ucenter/settings/index",
-    "pages/edit/edit"
+    "pages/edit/edit",
+    "pages/rela-group/rela-group",
+    "pages/addRelative/addRelative",
+    "pages/babySwitch/babySwitch"
   ],
   "subpackages": [
     {

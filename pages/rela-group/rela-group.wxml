@@ -1,0 +1,45 @@
+<!--pages/rela-group/rela-group.wxml-->
+<view class="relative-group-container">
+  <!-- 顶部导航 -->
+
+  <!-- 亲友卡片区域 -->
+  <view class="card-list">
+    <!-- 妈妈卡片 -->
+    <view class="card-item" wx:for="{{relationList}}">
+      <image src="/images/icon/妈妈肖像头像.png" class="avatar"></image>
+      <!-- 名称、头像、昵称、与自己的关系 -->
+      <view class="name-visit">
+        {{item.relation_name}}
+      </view>
+      <view class="visit-time" bind:tap="getRelationList">注册时间: {{item.register_time}}</view>
+      <!-- <view class="invite-btn" bindtap="onInviteMom">去邀请</view> -->
+    </view>
+    <!-- 爸爸卡片 -->
+    <!-- <view class="card-item">
+      <image src="/images/dad_avatar.png" class="avatar" wx:if="{{dadAvatar}}"></image>
+      <image src="/images/icon/爸爸父亲.png" class="avatar" wx:else></image>
+      <view wx:if="{{dadIsInvite}}" class="card-info">
+        <view class="name-visit">
+          <text class="name">爸爸</text>
+          <text class="visit-status">来过 {{dadVisitCount}} 次 <text class="isCurrentUser"> {{isCurrentUser ? '我' : ''}}</text></text>
+        </view>
+        <view class="visit-time">最近: {{dadLastVisitTime}}</view>
+      </view>
+      <view wx:else class="card-info">
+        <view class="name-visit">
+          <text class="name">爸爸</text>
+          <text class="visit-status">还没来过</text>
+        </view>
+        <view class="invite-btn" bindtap="onInviteDad">去邀请</view>
+      </view>
+    </view> -->
+  </view>
+  <!-- 亲友记录区域 -->
+
+  <!-- 亲友添加按钮区域 -->
+  <view class="add-btn-group">
+    <view class="add-btn" bindtap="onAddRelative" data-type="{{item.type}}" data-index="{{index}}" wx:for="{{relativeTypes}}" wx:key="index">
+      + {{item.name}}
+    </view>
+  </view>
+</view>

@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
+    "js-base64": "^3.7.7",
     "moment": "^2.29.4",
     "tdesign-miniprogram": "^1.8.0"
   },
