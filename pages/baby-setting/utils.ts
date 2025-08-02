@@ -5,12 +5,12 @@ export const queryBabyDetail = async () => {
   const resp = await util.request(api.GetBabyDetail, 'POST');
   if (resp.errno === 0) {
     if (resp.data.length !== 0) {
-      const sortBabyList = (resp.data || []).toSorted((a,b)=> a.create_time - b.create_time);
-      const defaultBaby = sortBabyList?.[0];
-      wx.setStorageSync('defaultBabyId', defaultBaby?.id);
+      const defaultBabyId = wx.getStorageSync('defaultBabyId');
+      const defaultBabyInfo = (resp.data || []).find(item => item.id === defaultBabyId);
+      const defaultBaby = defaultBabyInfo || resp.data?.[0];
+
       return {
         hasInfo: true,
-        // TOOD: 更新取默认baby信息逻辑
         babyInfo: defaultBaby,
       };
     } else {

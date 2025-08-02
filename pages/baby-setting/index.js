@@ -21,6 +21,12 @@ Page({
     // });
     wx.redirectTo({ url: '/pages/baby-infoCenter/index', });
   },
+  handleViwBabySwitch () {
+    wx.redirectTo({ url: '/pages/babySwitch/babySwitch', });
+  },
+  onIconTap(){
+    console.log('trigger tap.')
+  },
   handleBabyRecordAdd() {
     const babyForm = this.selectComponent('#baby-action');
     console.log('babyForm', babyForm);

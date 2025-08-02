@@ -117,6 +117,12 @@ Page({
   // 添加亲友逻辑
   // 添加亲友
   onAddRelative(e) {
+    wx.showToast({
+      title: '开发中，敬请期待',
+      icon: 'none',
+    });
+    return;
+    
     const { type, index } = e.currentTarget.dataset;
     const selectedRelative = this.data.relativeTypes[index];
 

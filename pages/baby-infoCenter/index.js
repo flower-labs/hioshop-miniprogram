@@ -84,7 +84,10 @@ Page({
       wx.hideLoading();
       // 检查请求结果
       if (resp.errno === 0 && Array.isArray(resp.data) && resp.data.length > 0) {
-        const babyInfo = resp.data[0];
+        const defaultBabyId = wx.getStorageSync('defaultBabyId');
+        const defaultBabyInfo = (resp.data || []).find(item => item.id === defaultBabyId);
+        const babyInfo = defaultBabyInfo || resp.data[0];
+        
         this.setData({
           hasInfo: true,
           babyInfo: babyInfo,

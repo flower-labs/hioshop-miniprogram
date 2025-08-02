@@ -7,5 +7,6 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet",
     "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
-  }
+  },
+  "navigationBarTitleText": "宝宝详情"
 }
