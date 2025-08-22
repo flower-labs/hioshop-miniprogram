@@ -4,7 +4,7 @@ const ApiRoot = 'https://api.bajie.club';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/';
 
-export const CDN_URL = 'http://cdn.bajie.club';
+export const CDN_URL = 'https://cdn.bajie.club';
 
 module.exports = {
   ApiRoot: ApiRoot,

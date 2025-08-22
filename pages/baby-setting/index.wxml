@@ -3,8 +3,8 @@
 <!--新增喝奶记录表单-->
 <view wx:if="{{babyInfo.baby_sex}}" class="baby-info-container">
   <view class="user-info">
-    <image wx:if="{{babyInfo.baby_sex === 1}}" class="avatar" src="http://cdn.bajie.club/babycare/baby-head-boy.png"></image>
-    <image wx:else class="avatar" src="http://cdn.bajie.club/babycare/baby-head-girl.png"></image>
+    <image wx:if="{{babyInfo.baby_sex === 1}}" class="avatar" src="https://cdn.bajie.club/babycare/baby-head-boy.png"></image>
+    <image wx:else class="avatar" src="https://cdn.bajie.club/babycare/baby-head-girl.png"></image>
     <text class="user-name">{{babyInfo.baby_name}}</text>
   </view>
   <t-button theme="default" t-class="see-detail-button" size="small" icon="arrow-left-right-circle" bind:tap="handleViwBabySwitch" />
