@@ -2,7 +2,7 @@
 <t-action-sheet id="t-opreation-sheet" usingCustomNavbar bind:selected="handleActionSelected" />
 <view class="page-container">
   <!-- 封面区域 -->
-  <view class="cover-container" bindtap="setCover">
+  <view class="cover-container" bindtap="setCoverImage">
     <image src="{{coverImage}}" class="cover-image"></image>
     <view class="cover-tip" wx:if="{{!coverImage}}">点击设置封面</view>
   </view>

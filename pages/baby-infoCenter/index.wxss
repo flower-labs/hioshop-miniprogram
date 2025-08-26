@@ -73,4 +73,5 @@
 }
 .baby-info-container {
   margin-bottom: 150rpx;
+  margin-top: 30rpx;
 }

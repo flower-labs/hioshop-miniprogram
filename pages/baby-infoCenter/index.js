@@ -4,6 +4,7 @@ const util = require('../../utils/util.js');
 import { ACTION_TITLE_MAP, calculateDateDifference } from './utils';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { handleBabyModify } from '../edit/utils';
+import { handleBackgroundSave } from './utils';
 
 Page({
   data: {
@@ -18,64 +19,82 @@ Page({
     dateVisible: false,
     date: new Date().getTime(), // 支持时间戳传入
     dateText: '',
+    qiniuToken: {
+      token: '',
+      url: '',
+    },
   },
-  setCover() {
-    let that = this;
-    wx.chooseMedia({
-      count: 1, // 最多可以选择的图片张数，默认9
-      sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
-      soureType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-      success: function (res) {
-        //  对上传文件的格式进行校验
-        console.log(res);
-        var picType = false;
-        for (var i = 0; i < res.tempFiles.length; i++) {
-          if (
-            res.tempFiles[i].tempFilePath.includes('.png') ||
-            res.tempFiles[i].tempFilePath.includes('.jpg') ||
-            res.tempFiles[i].tempFilePath.includes('.jpeg') ||
-            res.tempFiles[i].tempFilePath.includes('.gif')
-          ) {
-            picType = true;
-            that.setData({
-              coverImage: res.tempFiles[i].tempFilePath,
-            });
-            wx.setStorageSync('coverImage', that.data.coverImage);
-          } else {
-            picType = false;
-            break;
+
+  async setCoverImage() {
+    if (this.data.coverImage) {
+      return;
+    }
+    try {
+      await this.getQiniuToken();
+
+      const res = await new Promise((resolve, reject) => {
+        wx.chooseMedia({
+          count: 1,
+          sizeType: ['compressed'],
+          sourceType: ['album', 'camera'], // 修正原代码中的拼写错误soureType
+          extensions: ['jpg', 'png', 'jpeg', 'gif'],
+          success: resolve,
+          fail: reject,
+        });
+      });
+
+      const defaultImage = res.tempFiles[0];
+      const { token } = this.data.qiniuToken;
+
+      const uploadRes = await new Promise((resolve, reject) => {
+        wx.uploadFile({
+          url: 'https://up-z0.qiniup.com',
+          filePath: defaultImage.tempFilePath,
+          name: 'file',
+          formData: { token },
+          success: resolve,
+          fail: reject,
+        });
+      });
+
+      // 处理上传结果
+      if (uploadRes.statusCode === 200) {
+        const document = JSON.parse(uploadRes.data);
+        if (document.key) {
+          const saveResult = await handleBackgroundSave(document.key);
+          console.log('saveResult', saveResult);
+          if (saveResult) {
+            this.getCoverImage();
           }
         }
-        if (!picType) {
-          wx.showToast({
-            title: '支持.png/ .jpg/ .jpeg/ .gif 格式图片',
-            icon: 'none',
-          });
-          return;
-        }
-      },
-      fail: function () {
-        // fail
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-        });
-      },
-      complete: function () {
-        // complete
-      },
-    });
+      } else {
+        throw new Error('上传失败，状态码非200');
+      }
+    } catch (error) {
+      // 统一处理所有环节的错误
+      console.error('设置封面失败:', error);
+      wx.showToast({
+        title: '上传失败',
+        icon: 'none',
+      });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   async onLoad() {
     this.getBabyDetail();
-
-    const coverImage = wx.getStorageSync('coverImage');
-    this.setData({ coverImage });
+    this.getCoverImage();
   },
 
+  async getCoverImage() {
+    const resp = await util.request(api.GetBackground, 'POST');
+    const content = resp.data;
+    const prefix = `https://cdn.bajie.club/`;
+    if (resp.data) {
+      this.setData({ coverImage: prefix + content.background_image });
+    }
+  },
   async getBabyDetail() {
     try {
       wx.showLoading({ title: '加载中…' });
@@ -87,7 +106,7 @@ Page({
         const defaultBabyId = wx.getStorageSync('defaultBabyId');
         const defaultBabyInfo = (resp.data || []).find(item => item.id === defaultBabyId);
         const babyInfo = defaultBabyInfo || resp.data[0];
-        
+
         this.setData({
           hasInfo: true,
           babyInfo: babyInfo,
@@ -97,7 +116,7 @@ Page({
         });
       } else {
         wx.redirectTo({ url: '/pages/baby-register/baby-register' });
-        return; 
+        return;
       }
     } catch (error) {
       console.error('请求宝宝详情失败:', error);
@@ -219,40 +238,57 @@ Page({
     this.getBabyDetail();
   },
 
+  async getQiniuToken() {
+    const resp = await util.request(api.GetQiniuToken, 'POST');
+    if (resp) {
+      this.setData({
+        qiniuToken: resp.data,
+      });
+    }
+  },
+
+  async getBackgroundImage() {
+    const resp = await util.request(api.GetBackground, 'POST');
+    console.log('getBackgroundImage, resp', resp.data);
+    if (resp) {
+      console.log('getBackgroundImage', resp.data);
+      this.setData({
+        qiniuToken: resp.data,
+      });
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() { },
+  onReady() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
-    this.getBabyDetail();
-  },
+  onShow() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() { },
+  onHide() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() { },
+  onUnload() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() { },
+  onPullDownRefresh() {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() { },
+  onReachBottom() {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() { },
+  onShareAppMessage() {},
 });
