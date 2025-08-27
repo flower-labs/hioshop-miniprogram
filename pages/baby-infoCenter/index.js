@@ -26,9 +26,6 @@ Page({
   },
 
   async setCoverImage() {
-    if (this.data.coverImage) {
-      return;
-    }
     try {
       await this.getQiniuToken();
 
@@ -36,6 +33,7 @@ Page({
         wx.chooseMedia({
           count: 1,
           sizeType: ['compressed'],
+          mediaType: ['image'],
           sourceType: ['album', 'camera'], // 修正原代码中的拼写错误soureType
           extensions: ['jpg', 'png', 'jpeg', 'gif'],
           success: resolve,
@@ -44,6 +42,13 @@ Page({
       });
 
       const defaultImage = res.tempFiles[0];
+      const fileSize = defaultImage.size / 1024 / 1024;
+
+      if (fileSize > 1.5) {
+        wx.showToast({ title: '图片过大，请切换后重试', icon: 'none' });
+        return 
+      }
+
       const { token } = this.data.qiniuToken;
 
       const uploadRes = await new Promise((resolve, reject) => {
@@ -62,7 +67,6 @@ Page({
         const document = JSON.parse(uploadRes.data);
         if (document.key) {
           const saveResult = await handleBackgroundSave(document.key);
-          console.log('saveResult', saveResult);
           if (saveResult) {
             this.getCoverImage();
           }
@@ -73,10 +77,7 @@ Page({
     } catch (error) {
       // 统一处理所有环节的错误
       console.error('设置封面失败:', error);
-      wx.showToast({
-        title: '上传失败',
-        icon: 'none',
-      });
+      wx.showToast({ title: '上传失败', icon: 'none' });
     }
   },
   /**
@@ -91,7 +92,7 @@ Page({
     const resp = await util.request(api.GetBackground, 'POST');
     const content = resp.data;
     const prefix = `https://cdn.bajie.club/`;
-    if (resp.data) {
+    if (content.background_image) {
       this.setData({ coverImage: prefix + content.background_image });
     }
   },
