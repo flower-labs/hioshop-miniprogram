@@ -2,6 +2,7 @@
 const api = require('../../config/api.js');
 const util = require('../../utils/util.js');
 import { ACTION_TITLE_MAP, calculateDateDifference } from './utils';
+import moment from 'moment';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { handleBabyModify } from '../edit/utils';
 import { handleBackgroundSave } from './utils';
@@ -14,6 +15,7 @@ Page({
     babyBirth: {},
     actionPanelType: '',
     uuid: '',
+    isChangeVisible: false, // 是否显示切换背景按钮
     coverImage: '', // 封面图片地址
     mode: '',
     dateVisible: false,
@@ -44,9 +46,9 @@ Page({
       const defaultImage = res.tempFiles[0];
       const fileSize = defaultImage.size / 1024 / 1024;
 
-      if (fileSize > 1.5) {
+      if (fileSize > 3) {
         wx.showToast({ title: '图片过大，请切换后重试', icon: 'none' });
-        return 
+        return
       }
 
       const { token } = this.data.qiniuToken;
@@ -92,8 +94,22 @@ Page({
     const resp = await util.request(api.GetBackground, 'POST');
     const content = resp.data;
     const prefix = `https://cdn.bajie.club/`;
+    const updateTime = content?.background_update_time;
+
     if (content.background_image) {
       this.setData({ coverImage: prefix + content.background_image });
+    }
+
+    if (updateTime) {
+      const targetTime = moment.unix(updateTime);
+      const diffInDays = moment().diff(targetTime, 'days');
+      if (diffInDays > 3) {
+        this.setData({ isChangeVisible: true })
+      } else {
+        this.setData({ isChangeVisible: false })
+      }
+    } else {
+      this.setData({ isChangeVisible: true })
     }
   },
   async getBabyDetail() {
@@ -261,35 +277,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {},
+  onReady() { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {},
+  onShow() { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() {},
+  onHide() { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() {},
+  onUnload() { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh() {},
+  onPullDownRefresh() { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() {},
+  onReachBottom() { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {},
+  onShareAppMessage() { },
 });
