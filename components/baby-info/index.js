@@ -18,8 +18,8 @@ Component({
     date: new Date('2021-12-23').getTime(), // 支持时间戳传入
     dateText: '',
     genderTagList: [
-      { id: 'male', text: '男', image: 'http://cdn.bajie.club/babycare/baby-head-boy.png', isSelected: true },
-      { id: 'female', text: '女', image: 'http://cdn.bajie.club/babycare/baby-head-girl.png', isSelected: false },
+      { id: 'male', text: '男', image: 'https://cdn.bajie.club/babycare/baby-head-boy.png', isSelected: true },
+      { id: 'female', text: '女', image: 'https://cdn.bajie.club/babycare/baby-head-girl.png', isSelected: false },
     ],
     relationTagList: [
       { id: 'mother', text: '妈妈', image: '', isSelected: true },

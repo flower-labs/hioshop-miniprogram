@@ -8,19 +8,19 @@
     <view bind:tap="_handleBabyRegister" class="baby-register-button">
 
       <view class="baby-register-avatar">
-        <image class="avatar" src="http://cdn.bajie.club/babycare/baby-icon.svg"></image>
+        <image class="avatar" src="https://cdn.bajie.club/babycare/baby-icon.svg"></image>
       </view>
       <text class="button-text">宝宝</text>
-      <image class="right-icon" src="http://cdn.bajie.club/babycare/arrow_right.svg"></image>
+      <image class="right-icon" src="https://cdn.bajie.club/babycare/arrow_right.svg"></image>
     </view>
 
     <view bind:tap="_handleMomRegister" class="baby-register-button">
       <view class="baby-register-avatar">
-        <image class="avatar" src="http://cdn.bajie.club/babycare/fetus.svg"></image>
+        <image class="avatar" src="https://cdn.bajie.club/babycare/fetus.svg"></image>
       </view>
 
       <text class="button-text">孕期</text>
-      <image class="right-icon" src="http://cdn.bajie.club/babycare/arrow_right.svg"></image>
+      <image class="right-icon" src="https://cdn.bajie.club/babycare/arrow_right.svg"></image>
     </view>
   </view>
 

@@ -1,10 +1,10 @@
 // 线上地址
 const ApiRoot = 'https://api.bajie.club';
-// const ApiRoot = 'http://192.168.3.34:8360';
+// const ApiRoot = 'http://192.168.1.4:8360';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/';
 
-export const CDN_URL = 'http://cdn.bajie.club';
+export const CDN_URL = 'https://cdn.bajie.club';
 
 module.exports = {
   ApiRoot: ApiRoot,
@@ -16,6 +16,12 @@ module.exports = {
   CatalogList: ApiRootUrl + 'catalog/index', //分类目录全部分类数据接口
   // 服务列表
   ReserveList: ApiRootUrl + 'reserve/index', //分类目录全部分类数据接口
+  // 获取qiniu Token
+  GetQiniuToken: ApiRootUrl + 'baby/getQiniuToken',
+  // 获取背景图片
+  GetBackground: ApiRootUrl + 'settings/getBackground',
+  // 保存背景图片
+  SaveBackground: ApiRootUrl + 'settings/saveBackground',
   // 预约订单列表
   ReserveOrderList: ApiRootUrl + 'reserve/order', //分类目录全部分类数据接口
   // 获取可预约信息

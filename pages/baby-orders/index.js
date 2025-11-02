@@ -21,10 +21,10 @@ Page({
     hadMore: true,
     reserveOrderList: [],
     backTopVisible: false,
-    milkImage: 'http://cdn.bajie.club/babycare/milk.svg',
-    peeImage: 'http://cdn.bajie.club/babycare/pee.svg',
-    shitImage: 'http://cdn.bajie.club/babycare/shit1.svg',
-    weaningImage: 'http://cdn.bajie.club/babycare/weaning-food.svg',
+    milkImage: 'https://cdn.bajie.club/babycare/milk.svg',
+    peeImage: 'https://cdn.bajie.club/babycare/pee.svg',
+    shitImage: 'https://cdn.bajie.club/babycare/shit1.svg',
+    weaningImage: 'https://cdn.bajie.club/babycare/weaning-food.svg',
     isLoading: false,
   },
 
@@ -110,10 +110,10 @@ Page({
   filterIconArray(action) {
     const imageArray = [];
     const imageMap = {
-      milk: 'http://cdn.bajie.club/babycare/milk.svg',
-      pee: 'http://cdn.bajie.club/babycare/pee.svg',
-      shit: 'http://cdn.bajie.club/babycare/shit1.svg',
-      ['weaning-food']: 'http://cdn.bajie.club/babycare/weaning-food.svg',
+      milk: 'https://cdn.bajie.club/babycare/milk.svg',
+      pee: 'https://cdn.bajie.club/babycare/pee.svg',
+      shit: 'https://cdn.bajie.club/babycare/shit1.svg',
+      ['weaning-food']: 'https://cdn.bajie.club/babycare/weaning-food.svg',
     };
     Object.keys(imageMap).forEach(item => {
       if (action.includes(item)) {

@@ -1,34 +1,13 @@
 // pages/babySwitch/babySwitch.ts
+const api = require('../../config/api.js');
+const util = require('../../utils/util.js');
+import { getTimeDifference } from './utils';
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    userList: [
-      {
-        id: 1,
-        avatarUrl:
-          'https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoQzK1icqDlJ9pQzY7iaQ9V7wib9H2wib9H2wib9H2wib9H2wib9H2wib9H2wib9H2wib9/132',
-        nickName: '皮卡丘',
-        description: '爱好，身高，体重',
-        isActive: false,
-      },
-      {
-        id: 2,
-        avatarUrl: '',
-        nickName: '元元',
-        description: '爱好，身高，体重',
-        isActive: true,
-      },
-      {
-        id: 3,
-        avatarUrl:
-          'https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoQzK1icqDlJ9pQzY7iaQ9V7wib9H2wib9H2wib9H2wib9H2wib9H2wib9H2wib9H2wib9/132',
-        nickName: '戴维',
-        description: '爱好，身高，体重',
-        isActive: true,
-      },
-    ],
+    babyList: [],
   },
   // 邀请功能
   onInvite() {
@@ -38,45 +17,53 @@ Page({
   },
   // 扫码关注功能
   onScan() {
-    wx.scanCode({
-      onlyFromCamera: true,
-      success: res => {
-        wx.showToast({
-          title: `扫码成功: ${res.result}`,
-          icon: 'none',
-        });
-      },
-      fail: err => {
-        console.error('扫码失败', err);
-        wx.showToast({
-          title: '扫码失败，请重试',
-          icon: 'none',
-        });
-      },
+    wx.showToast({
+      title: '开发中，敬请期待',
+      icon: 'none',
     });
+
+    // wx.scanCode({
+    //   onlyFromCamera: true,
+    //   success: res => {
+    //     wx.showToast({
+    //       title: `扫码成功: ${res.result}`,
+    //       icon: 'none',
+    //     });
+    //   },
+    //   fail: err => {
+    //     console.error('扫码失败', err);
+    //     wx.showToast({
+    //       title: '扫码失败，请重试',
+    //       icon: 'none',
+    //     });
+    //   },
+    // });
   },
   // 用户详情页
   onUserDetail(e) {
     const userId = e.currentTarget.dataset.id;
-    wx.switchTab({
-      url: `/pages/baby-setting/index?id=${userId}`,
-    });
+    wx.setStorageSync('defaultBabyId', userId);
+    wx.switchTab({  url: `/pages/baby-setting/index` });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // 页面初始化时可以加载用户数据
-    this.loadUserData();
+    this.queryBabyDetail();
   },
-  // 加载用户数据
-  loadUserData() {
-    // 模拟从服务器获取用户数据
-    // 实际开发中可以使用 wx.request 调用API
-    setTimeout(() => {
-      // 这里使用data中的模拟数据，实际项目中替换为API返回数据
-      console.log('用户数据加载成功');
-    }, 300);
+  async queryBabyDetail() {
+    wx.showLoading({ title: '加载中...', mask: true });
+    const resp = await util.request(api.GetBabyDetail, 'POST');
+    const defaultId =  wx.getStorageSync('defaultBabyId');
+    if (resp.errno === 0) {
+      const formattedBabyList = (resp.data || []).map(item => ({
+        ...item,
+        description: getTimeDifference(item.baby_birth),
+        isDefault: defaultId === item.id,
+      }));
+      this.setData({ babyList: formattedBabyList });
+      wx.hideLoading();
+    }
   },
 
   /**

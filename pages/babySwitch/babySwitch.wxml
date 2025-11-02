@@ -17,17 +17,17 @@
   <view class="info-list-module">
     <view class="list-title">宝宝列表</view>
     <view class="user-list">
-      <view class="user-item" wx:for="{{userList}}" wx:key="id" bindtap="onUserDetail" data-id="{{item.id}}">
-        <image src="{{item.avatarUrl || '/images/icon/default_avatar_big.png'}}" mode="aspectFill" class="user-avatar"></image>
+      <view class="user-item" wx:for="{{ babyList }}" wx:key="id" bindtap="onUserDetail" data-id="{{item.id}}">
+        <image wx:if="{{item.baby_sex === 1}}" src="https://cdn.bajie.club/babycare/baby-head-boy.png" mode="aspectFill" class="user-avatar"></image>
+        <image wx:if="{{item.baby_sex === 2}}" src="https://cdn.bajie.club/babycare/baby-head-girl.png" mode="aspectFill" class="user-avatar"></image>
         <view class="user-info">
-          <text class="user-name">{{item.nickName || '未命名用户'}}</text>
+          <text class="user-name">{{item.baby_name || '未命名用户'}}</text>
           <text class="user-desc">{{item.description || '暂无描述'}}</text>
         </view>
-        <view class="user-status {{item.isActive ? 'active' : 'inactive'}}">
-          {{item.isActive ? '已授权' : '未授权'}}
+        <view wx:if="{{item.isDefault}}" class="user-status active">
+          当前
         </view>
       </view>
     </view>
   </view>
 </view>
-    

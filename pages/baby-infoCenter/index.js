@@ -2,8 +2,10 @@
 const api = require('../../config/api.js');
 const util = require('../../utils/util.js');
 import { ACTION_TITLE_MAP, calculateDateDifference } from './utils';
+import moment from 'moment';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import { handleBabyModify } from '../edit/utils';
+import { handleBackgroundSave } from './utils';
 
 Page({
   data: {
@@ -13,69 +15,103 @@ Page({
     babyBirth: {},
     actionPanelType: '',
     uuid: '',
+    isChangeVisible: false, // 是否显示切换背景按钮
     coverImage: '', // 封面图片地址
     mode: '',
     dateVisible: false,
     date: new Date().getTime(), // 支持时间戳传入
     dateText: '',
+    qiniuToken: {
+      token: '',
+      url: '',
+    },
   },
-  setCover() {
-    let that = this;
-    wx.chooseMedia({
-      count: 1, // 最多可以选择的图片张数，默认9
-      sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
-      soureType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-      success: function (res) {
-        //  对上传文件的格式进行校验
-        console.log(res);
-        var picType = false;
-        for (var i = 0; i < res.tempFiles.length; i++) {
-          if (
-            res.tempFiles[i].tempFilePath.includes('.png') ||
-            res.tempFiles[i].tempFilePath.includes('.jpg') ||
-            res.tempFiles[i].tempFilePath.includes('.jpeg') ||
-            res.tempFiles[i].tempFilePath.includes('.gif')
-          ) {
-            picType = true;
-            that.setData({
-              coverImage: res.tempFiles[i].tempFilePath,
-            });
-            wx.setStorageSync('coverImage', that.data.coverImage);
-          } else {
-            picType = false;
-            break;
+
+  async setCoverImage() {
+    try {
+      await this.getQiniuToken();
+
+      const res = await new Promise((resolve, reject) => {
+        wx.chooseMedia({
+          count: 1,
+          sizeType: ['compressed'],
+          mediaType: ['image'],
+          sourceType: ['album', 'camera'], // 修正原代码中的拼写错误soureType
+          extensions: ['jpg', 'png', 'jpeg', 'gif'],
+          success: resolve,
+          fail: reject,
+        });
+      });
+
+      const defaultImage = res.tempFiles[0];
+      const fileSize = defaultImage.size / 1024 / 1024;
+
+      if (fileSize > 3) {
+        wx.showToast({ title: '图片过大，请切换后重试', icon: 'none' });
+        return
+      }
+
+      const { token } = this.data.qiniuToken;
+
+      const uploadRes = await new Promise((resolve, reject) => {
+        wx.uploadFile({
+          url: 'https://up-z0.qiniup.com',
+          filePath: defaultImage.tempFilePath,
+          name: 'file',
+          formData: { token },
+          success: resolve,
+          fail: reject,
+        });
+      });
+
+      // 处理上传结果
+      if (uploadRes.statusCode === 200) {
+        const document = JSON.parse(uploadRes.data);
+        if (document.key) {
+          const saveResult = await handleBackgroundSave(document.key);
+          if (saveResult) {
+            this.getCoverImage();
           }
         }
-        if (!picType) {
-          wx.showToast({
-            title: '支持.png/ .jpg/ .jpeg/ .gif 格式图片',
-            icon: 'none',
-          });
-          return;
-        }
-      },
-      fail: function () {
-        // fail
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-        });
-      },
-      complete: function () {
-        // complete
-      },
-    });
+      } else {
+        throw new Error('上传失败，状态码非200');
+      }
+    } catch (error) {
+      // 统一处理所有环节的错误
+      console.error('设置封面失败:', error);
+      wx.showToast({ title: '上传失败', icon: 'none' });
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   async onLoad() {
     this.getBabyDetail();
-
-    const coverImage = wx.getStorageSync('coverImage');
-    this.setData({ coverImage });
+    this.getCoverImage();
   },
 
+  async getCoverImage() {
+    const resp = await util.request(api.GetBackground, 'POST');
+    const content = resp.data;
+    const prefix = `https://cdn.bajie.club/`;
+    const updateTime = content?.background_update_time;
+
+    if (content.background_image) {
+      this.setData({ coverImage: prefix + content.background_image });
+    }
+
+    if (updateTime) {
+      const targetTime = moment.unix(updateTime);
+      const diffInDays = moment().diff(targetTime, 'days');
+      if (diffInDays > 3) {
+        this.setData({ isChangeVisible: true })
+      } else {
+        this.setData({ isChangeVisible: false })
+      }
+    } else {
+      this.setData({ isChangeVisible: true })
+    }
+  },
   async getBabyDetail() {
     try {
       wx.showLoading({ title: '加载中…' });
@@ -84,7 +120,10 @@ Page({
       wx.hideLoading();
       // 检查请求结果
       if (resp.errno === 0 && Array.isArray(resp.data) && resp.data.length > 0) {
-        const babyInfo = resp.data[0];
+        const defaultBabyId = wx.getStorageSync('defaultBabyId');
+        const defaultBabyInfo = (resp.data || []).find(item => item.id === defaultBabyId);
+        const babyInfo = defaultBabyInfo || resp.data[0];
+
         this.setData({
           hasInfo: true,
           babyInfo: babyInfo,
@@ -94,7 +133,7 @@ Page({
         });
       } else {
         wx.redirectTo({ url: '/pages/baby-register/baby-register' });
-        return; 
+        return;
       }
     } catch (error) {
       console.error('请求宝宝详情失败:', error);
@@ -216,6 +255,25 @@ Page({
     this.getBabyDetail();
   },
 
+  async getQiniuToken() {
+    const resp = await util.request(api.GetQiniuToken, 'POST');
+    if (resp) {
+      this.setData({
+        qiniuToken: resp.data,
+      });
+    }
+  },
+
+  async getBackgroundImage() {
+    const resp = await util.request(api.GetBackground, 'POST');
+    console.log('getBackgroundImage, resp', resp.data);
+    if (resp) {
+      console.log('getBackgroundImage', resp.data);
+      this.setData({
+        qiniuToken: resp.data,
+      });
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -224,9 +282,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
-    this.getBabyDetail();
-  },
+  onShow() { },
 
   /**
    * 生命周期函数--监听页面隐藏

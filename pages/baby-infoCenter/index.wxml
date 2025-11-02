@@ -2,13 +2,17 @@
 <t-action-sheet id="t-opreation-sheet" usingCustomNavbar bind:selected="handleActionSelected" />
 <view class="page-container">
   <!-- 封面区域 -->
-  <view class="cover-container" bindtap="setCover">
+  <view class="cover-container">
     <image src="{{coverImage}}" class="cover-image"></image>
-    <view class="cover-tip" wx:if="{{!coverImage}}">点击设置封面</view>
+    <view wx:if="{{isChangeVisible}}">
+      <view wx:if="{{coverImage}}" bindtap="setCoverImage" class="change-bg-btn">换背景</view>
+      <view wx:else bindtap="setCoverImage" class="change-bg-btn">设置背景</view>
+    </view>
   </view>
   <!-- 覆盖盒子 -->
   <view wx:if="{{hasInfo}}" class="overlay-box">
-    <image src="http://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/big-girl.png" class="overlay-image" />
+    <image wx:if="{{babyInfo.baby_sex === 1}}" src="https://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/baby-boy-3d.png" class="overlay-image" />
+    <image wx:if="{{babyInfo.baby_sex === 2}}" src="https://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/baby-girl-3d.png" class="overlay-image" />
     <text class="overlay-text">已经出生 {{babyBirth.months}} 个月 {{babyBirth.days}} 天</text>
     <button bind:tap="gotoRelationPage" class="baby-relation-button" size="mini" type="primary" plain>亲友团</button>
   </view>
