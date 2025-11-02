@@ -1,0 +1,138 @@
+<!-- pages/growthRecord/growthRecord.wxml -->
+<view class="container">
+  <!-- 顶部标题 -->
+
+  <!-- 顶部标签栏 -->
+  <view class="tab-bar">
+    <view 
+      class="tab-item {{currentTab === 0 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="0"
+    >
+      记录列表
+    </view>
+    <view 
+      class="tab-item {{currentTab === 1 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="1"
+    >
+      身高曲线
+    </view>
+    <view 
+      class="tab-item {{currentTab === 2 ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-index="2"
+    >
+      体重曲线
+    </view>
+  </view>
+
+  <!-- 时间筛选器 (仅在曲线页面显示) -->
+  <view class="filter-bar" wx:if="{{currentTab !== 0}}">
+    <view class="filter-item {{timeFilter === 'month' ? 'filter-active' : ''}}" bindtap="setTimeFilter" data-filter="month">近1个月</view>
+    <view class="filter-item {{timeFilter === '3months' ? 'filter-active' : ''}}" bindtap="setTimeFilter" data-filter="3months">近3个月</view>
+    <view class="filter-item {{timeFilter === '6months' ? 'filter-active' : ''}}" bindtap="setTimeFilter" data-filter="6months">近6个月</view>
+    <view class="filter-item {{timeFilter === 'year' ? 'filter-active' : ''}}" bindtap="setTimeFilter" data-filter="year">近1年</view>
+    <view class="filter-item {{timeFilter === 'all' ? 'filter-active' : ''}}" bindtap="setTimeFilter" data-filter="all">全部</view>
+  </view>
+
+  <!-- 内容滑动区域 -->
+  <swiper 
+    current="{{currentTab}}" 
+    duration="300" 
+    bindchange="swiperChange"
+    style="flex: 1;"
+  >
+    <!-- 记录列表页 -->
+    <swiper-item>
+      <view class="list-container">
+        <button class="add-record-btn" bindtap="addNewRecord">
+          <icon type="plus" size="20" color="#fff" />
+          <text>添加记录</text>
+        </button>
+        
+        <view class="records-list">
+          <view class="list-header">
+            <view class="date-column">日期</view>
+            <view class="height-column">身高(cm)</view>
+            <view class="weight-column">体重(kg)</view>
+          </view>
+          
+          <view class="record-item" wx:for="{{growthRecords}}" wx:key="index">
+            <view class="date-column">{{item.date}}</view>
+            <view class="height-column">{{item.height}}</view>
+            <view class="weight-column">{{item.weight}}</view>
+          </view>
+          
+          <view class="empty-tip" wx:if="{{growthRecords.length === 0}}">
+            暂无记录，点击"添加记录"开始记录生长数据
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 身高曲线页 -->
+    <swiper-item>
+      <view class="chart-container">
+        <view class="chart-header">
+          <text class="chart-title">身高变化曲线</text>
+          <text class="latest-data">最新: {{latestHeight}} cm</text>
+        </view>
+        
+        <!-- 身高图表 -->
+        <view class="chart-wrapper">
+          <ec-canvas 
+            id="heightChart" 
+            canvas-id="heightChartCanvas" 
+            ec="{{ecHeightChartOption}}"
+  
+          ></ec-canvas>
+        </view>
+        
+        <!-- 数据说明 -->
+        <view class="chart-info">
+          <view class="info-item">
+            <view class="info-label">平均增长:</view>
+            <view class="info-value">{{avgHeightGrowth}} cm/月</view>
+          </view>
+          <view class="info-item">
+            <view class="info-label">最大增长:</view>
+            <view class="info-value">{{maxHeightGrowth}} cm</view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 体重曲线页 -->
+    <swiper-item>
+      <view class="chart-container">
+        <view class="chart-header">
+          <text class="chart-title">体重变化曲线</text>
+          <text class="latest-data">最新: {{latestWeight}} kg</text>
+        </view>
+        
+        <!-- 体重图表 -->
+        <view class="chart-wrapper">
+          <ec-canvas 
+            id="weightChart" 
+            canvas-id="weightChartCanvas" 
+            ec="{{weightChartOption}}"
+            bind:init="onWeightChartInit"
+          ></ec-canvas>
+        </view>
+        
+        <!-- 数据说明 -->
+        <view class="chart-info">
+          <view class="info-item">
+            <view class="info-label">平均增长:</view>
+            <view class="info-value">{{avgWeightGrowth}} kg/月</view>
+          </view>
+          <view class="info-item">
+            <view class="info-label">最大增长:</view>
+            <view class="info-value">{{maxWeightGrowth}} kg</view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

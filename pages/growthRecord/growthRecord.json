@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "ev-canvas":"./ec-canvas//ec-canvas"
+    },
+    "navigationBarTitleText": "生长记录"
+}
