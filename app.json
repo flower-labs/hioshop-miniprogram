@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/baby-social/baby-social",
     "pages/baby-setting/index",
     "pages/weaning-food/index",
     "pages/baby-record-editing/index",

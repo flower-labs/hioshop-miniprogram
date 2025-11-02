@@ -1,0 +1,71 @@
+<!-- 社交圈页面 -->
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="header-right">
+      <image class="camera-icon" src="/images/iconTemp/camera.png" mode="aspectFit" bindtap="openPublishModal"></image>
+    </view>
+  </view>
+
+  <!-- 社交圈列表 -->
+  <scroll-view class="social-list" scroll-y="true" bindscrolltolower="loadMore">
+    <view class="social-item" wx:for="{{socialList}}" wx:key="id">
+      <!-- 日期标题 -->
+      <view class="date-header">
+        <view class="date-dot"></view>
+        <text class="date-text">{{item.dateText}}</text>
+      </view>
+
+      <!-- 内容卡片 -->
+      <view class="content-card">
+        <!-- 图片/视频展示 -->
+        <view class="media-container" wx:if="{{item.mediaList && item.mediaList.length > 0}}">
+          <block wx:for="{{item.mediaList}}" wx:for-item="media" wx:key="index" wx:for-index="mediaIndex">
+            <!-- 图片 -->
+            <image wx:if="{{media.type === 'image'}}" 
+                   class="media-image" 
+                   src="{{media.url}}" 
+                   mode="aspectFill"
+                   bindtap="previewMedia"
+                   data-index="{{mediaIndex}}"
+                   data-list="{{item.mediaList}}"
+                   data-id="{{item.id}}"></image>
+            <!-- 视频 -->
+            <video wx:if="{{media.type === 'video'}}" 
+                   class="media-video" 
+                   src="{{media.url}}"
+                   poster="{{media.poster}}"
+                   object-fit="cover"></video>
+          </block>
+        </view>
+
+        <!-- 文本内容 -->
+        <view class="text-content" wx:if="{{item.content}}">
+          <text>{{item.content}}</text>
+        </view>
+
+        <!-- 标签 -->
+        <view class="tags" wx:if="{{item.tags && item.tags.length > 0}}">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</text>
+        </view>
+
+        <!-- 底部信息 -->
+        <view class="bottom-info">
+          <text class="author">{{item.author}}</text>
+          <text class="time">{{item.publishTime}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载提示 -->
+    <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
+    <view class="no-more" wx:if="{{noMore}}">没有更多了</view>
+  </scroll-view>
+
+  <!-- 使用社交圈发布组件 -->
+  <social-post 
+    visible="{{showPublish}}" 
+    bind:cancel="closePublishModal"
+    bind:save="handlePublish"
+  ></social-post>
+</view>

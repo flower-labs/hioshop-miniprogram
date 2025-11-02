@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "宝贝社交圈",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#E8F4F8",
+  "navigationBarBackgroundColor": "#4A90E2",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "social-post": "/components/social-post/social-post"
+  }
+}

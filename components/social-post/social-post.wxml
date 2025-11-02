@@ -1,0 +1,177 @@
+<!-- 新增社交圈内容组件 -->
+<view class="social-post-container" wx:if="{{visible}}" catchtouchmove="preventTouchMove">
+  <!-- 遮罩层 -->
+  <view class="mask" bindtap="onCancel"></view>
+  
+  <!-- 内容区域 -->
+  <view class="content-wrapper">
+    <!-- 顶部操作栏 -->
+    <view class="header">
+      <text class="cancel-btn" bindtap="onCancel">取消</text>
+      <text class="save-btn" bindtap="onSave">保存</text>
+    </view>
+
+    <!-- 滚动内容区 -->
+    <scroll-view class="scroll-content" scroll-y="true">
+      <!-- 文本输入区 -->
+      <view class="input-section">
+        <textarea 
+          class="content-input" 
+          placeholder="请输入内容" 
+          placeholder-class="placeholder"
+          value="{{formData.content}}"
+          bindinput="onContentInput"
+          maxlength="1000"
+          auto-height
+          show-confirm-bar="{{false}}"
+        ></textarea>
+      </view>
+
+      <!-- 媒体展示区 -->
+      <view class="media-section">
+        <view class="media-grid">
+          <!-- 已选择的媒体 -->
+          <block wx:for="{{formData.mediaList}}" wx:key="index">
+            <view class="media-item">
+              <!-- 图片 -->
+              <image 
+                wx:if="{{item.type === 'image'}}" 
+                class="media-thumb" 
+                src="{{item.url}}" 
+                mode="aspectFill"
+              ></image>
+              <!-- 视频 -->
+              <video 
+                wx:if="{{item.type === 'video'}}" 
+                class="media-thumb" 
+                src="{{item.url}}"
+                poster="{{item.poster}}"
+                object-fit="cover"
+                show-center-play-btn="{{false}}"
+              ></video>
+              <!-- 删除按钮 -->
+              <view class="delete-btn" bindtap="deleteMedia" data-index="{{index}}">
+                <image class="delete-icon" src="/images/iconTemp/close.png" mode="aspectFit"></image>
+              </view>
+            </view>
+          </block>
+          
+          <!-- 添加媒体按钮 -->
+          <view 
+            class="add-media-btn" 
+            bindtap="chooseMedia" 
+            wx:if="{{formData.mediaList.length < 9}}"
+          >
+            <image class="camera-icon" src="/images/iconTemp/add.png" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+
+      <!-- 标签按钮区 -->
+      <view class="tag-section">
+        <view class="tag-btn" bindtap="addFirstTag">
+          <text class="plus-icon">+</text>
+          <text class="tag-text">日常记录</text>
+        </view>
+        <view class="tag-btn" bindtap="addCustomTag">
+          <text class="plus-icon">+</text>
+          <text class="tag-text">标签</text>
+        </view>
+      </view>
+
+      <!-- 已添加的标签 -->
+      <view class="selected-tags" wx:if="{{formData.tags.length > 0}}">
+        <view class="tag-item" wx:for="{{formData.tags}}" wx:key="index">
+          <text class="tag-name">{{item}}</text>
+          <text class="tag-remove" bindtap="removeTag" data-index="{{index}}">×</text>
+        </view>
+      </view>
+
+      <!-- 选项列表 -->
+      <view class="options-section">
+        <!-- 所在位置 -->
+        <view class="option-item" bindtap="chooseLocation">
+          <view class="option-left">
+            <image class="option-icon" src="/images/iconTemp/location.png" mode="aspectFit"></image>
+            <text class="option-label">所在位置</text>
+          </view>
+          <view class="option-right">
+            <text class="option-value">{{formData.location || ''}}</text>
+            <image class="arrow-icon" src="/images/iconTemp/arrow-right.png" mode="aspectFit"></image>
+          </view>
+        </view>
+
+        <!-- 谁可以看 -->
+        <view class="option-item" bindtap="chooseVisibility">
+          <view class="option-left">
+            <image class="option-icon" src="/images/iconTemp/lock.png" mode="aspectFit"></image>
+            <text class="option-label">谁可以看</text>
+          </view>
+          <view class="option-right">
+            <text class="option-value">{{formData.visibilityText}}</text>
+            <image class="arrow-icon" src="/images/iconTemp/arrow-right.png" mode="aspectFit"></image>
+          </view>
+        </view>
+
+        <!-- 记录时间 -->
+        <view class="option-item" bindtap="chooseTime">
+          <view class="option-left">
+            <image class="option-icon" src="/images/iconTemp/time.png" mode="aspectFit"></image>
+            <text class="option-label">记录时间</text>
+          </view>
+          <view class="option-right">
+            <text class="option-value">{{formData.recordTime}}</text>
+            <image class="arrow-icon" src="/images/iconTemp/arrow-right.png" mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 可见性选择弹窗 -->
+  <view class="visibility-modal" wx:if="{{showVisibility}}" catchtouchmove="preventTouchMove">
+    <view class="visibility-mask" bindtap="hideVisibilityModal"></view>
+    <view class="visibility-content">
+      <view class="visibility-header">
+        <text class="visibility-title">谁可以看</text>
+      </view>
+      <view class="visibility-options">
+        <view
+          class="visibility-option {{formData.visibility === 'self' ? 'active' : ''}}" 
+          bindtap="selectVisibility" 
+          data-value="self"
+        >
+          <text class="visibility-label">自己</text>
+          <image 
+            wx:if="{{formData.visibility === 'self'}}" 
+            class="check-icon" 
+            src="/images/icon/check-blue.png" 
+            mode="aspectFit"
+          ></image>
+        </view>
+        <view 
+          class="visibility-option {{formData.visibility === 'family' ? 'active' : ''}}" 
+          bindtap="selectVisibility" 
+          data-value="family"
+        >
+          <text class="visibility-label">家人</text>
+          <image 
+            wx:if="{{formData.visibility === 'family'}}" 
+            class="check-icon" 
+            src="/images/icon/check-blue.png" 
+            mode="aspectFit"
+          ></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间选择器 -->
+  <picker
+    mode="date" 
+    value="{{formData.recordTime}}" 
+    bindchange="onTimeChange"
+  >
+    <view class="picker-trigger" wx:if="{{showTimePicker}}"></view>
+  </picker>
+</view>
