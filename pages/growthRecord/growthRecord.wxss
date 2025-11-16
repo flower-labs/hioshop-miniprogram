@@ -1,220 +1,309 @@
 /* pages/growthRecord/growthRecord.wxss */
-/* pages/growthRecord/growthRecord.wxss */
-.container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f8f8;
-  }
-  
-  .page-header {
-    padding: 20rpx 0;
-    text-align: center;
-    border-bottom: 1rpx solid #eee;
-    background-color: #fff;
-  }
-  
-  .header-title {
-    font-size: 36rpx;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .tab-bar {
-    display: flex;
-    height: 90rpx;
-    line-height: 90rpx;
-    background-color: #fff;
-    border-bottom: 1rpx solid #eee;
-  }
-  
-  .tab-item {
-    flex: 1;
-    text-align: center;
-    font-size: 32rpx;
-    color: #666;
-    position: relative;
-  }
-  
-  .tab-item.active {
-    color: #3478f6;
-  }
-  
-  .tab-item.active::after {
-    content: '';
-    position: absolute;
+/* 弹窗遮罩 */
+.dialog-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60rpx;
-    height: 6rpx;
-    background-color: #3478f6;
-    border-radius: 3rpx;
-  }
-  
-  .filter-bar {
+    background-color: rgba(0,0,0,0.5);
     display: flex;
-    padding: 15rpx 10rpx;
-    background-color: #fff;
-    border-bottom: 1rpx solid #eee;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  
-  .filter-item {
-    display: inline-block;
-    padding: 8rpx 20rpx;
-    margin: 0 8rpx;
-    font-size: 26rpx;
-    border-radius: 20rpx;
-    color: #666;
-    background-color: #f2f2f2;
-  }
-  
-  .filter-item.filter-active {
-    color: #fff;
-    background-color: #3478f6;
-  }
-  
-  /* 记录列表样式 */
-  .list-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f8f8;
-  }
-  
-  .add-record-btn {
-    width: 90%;
-    margin: 20rpx auto;
-    padding: 15rpx 0;
-    background-color: #3478f6;
-    color: #fff;
-    font-size: 30rpx;
-    border-radius: 10rpx;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    z-index: 100;
   }
   
-  .add-record-btn icon {
-    margin-right: 10rpx;
+  /* 弹窗容器 */
+  .dialog-container {
+    width: 80%;
+    max-width: 500rpx;
+    background-color: white;
+    border-radius: 16rpx;
+    padding: 30rpx;
   }
-  
-  .records-list {
-    flex: 1;
-    margin: 0 20rpx;
-    background-color: #fff;
-    border-radius: 10rpx;
-    overflow: hidden;
-  }
-  
-  .list-header {
+  /* 按钮区域 */
+  .dialog-btns {
     display: flex;
-    padding: 0 20rpx;
+    gap: 20rpx;
+  }
+  
+  .cancel-btn, .confirm-btn {
+    flex: 1;
     height: 80rpx;
     line-height: 80rpx;
-    background-color: #f5f7fa;
-    border-bottom: 1rpx solid #eee;
+    padding: 0;
+    border-radius: 8rpx;
     font-size: 28rpx;
-    color: #999;
   }
   
-  .date-column {
-    flex: 3;
+  .cancel-btn {
+    background-color: #f5f5f5;
+    color: #666;
   }
   
-  .height-column, .weight-column {
-    flex: 2;
-    text-align: center;
+  .confirm-btn {
+    background-color: #1aad19;
+    color: white;
   }
-  
-  .record-item {
-    display: flex;
-    padding: 0 20rpx;
-    height: 90rpx;
-    line-height: 90rpx;
-    border-bottom: 1rpx solid #eee;
+  /* 弹窗标题 */
+  .dialog-title {
     font-size: 30rpx;
-    color: #333;
-  }
-  
-  .empty-tip {
-    height: 200rpx;
-    line-height: 200rpx;
+    font-weight: bold;
     text-align: center;
-    font-size: 28rpx;
-    color: #999;
-  }
-  
-  /* 图表页面样式 */
-  .chart-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 20rpx;
-    box-sizing: border-box;
-    background-color: #f8f8f8;
-  }
-  
-  .chart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20rpx;
-  }
-  
-  .chart-title {
-    font-size: 32rpx;
+    margin-bottom: 30rpx;
     color: #333;
+  }
+  /* 添加数据表单样式 */
+  .add-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .form-title {
+    font-size: 16px;
     font-weight: bold;
-  }
-  
-  .latest-data {
-    font-size: 28rpx;
-    color: #3478f6;
-    background-color: #e8f3ff;
-    padding: 5rpx 15rpx;
-    border-radius: 20rpx;
-  }
-  
-  .chart-wrapper {
-    flex: 1;
-    background-color: #fff;
-    border-radius: 10rpx;
-    padding: 10rpx;
-    margin-bottom: 20rpx;
-  }
-  
-  ec-canvas {
-    width: 100rpx;
-    height: 100rpx;
-  }
-  
-  .chart-info {
-    display: flex;
-    justify-content: space-around;
-    background-color: #fff;
-    border-radius: 10rpx;
-    padding: 20rpx 0;
-  }
-  
-  .info-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .info-label {
-    font-size: 26rpx;
-    color: #999;
-    margin-bottom: 5rpx;
-  }
-  
-  .info-value {
-    font-size: 30rpx;
+    margin-bottom: 16px;
     color: #333;
-    font-weight: bold;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
   }
   
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  
+  .form-label {
+    width: 90px;
+    font-size: 14px;
+    color: #666;
+  }
+  .form-input {  
+    flex: 1;  
+    padding: 10px;  
+    border: 1px solid #eee;  
+    border-radius: 4px;  
+    font-size: 14px;
+    }
+  /* pages/growthRecord/growthRecord.wxss */
+  .container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f8f8;
+    }
+    
+    .page-header {
+      padding: 20rpx 0;
+      text-align: center;
+      border-bottom: 1rpx solid #eee;
+      background-color: #fff;
+    }
+    
+    .header-title {
+      font-size: 36rpx;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .tab-bar {
+      display: flex;
+      height: 90rpx;
+      line-height: 90rpx;
+      background-color: #fff;
+      border-bottom: 1rpx solid #eee;
+    }
+    
+    .tab-item {
+      flex: 1;
+      text-align: center;
+      font-size: 32rpx;
+      color: #666;
+      position: relative;
+    }
+    
+    .tab-item.active {
+      color: #3478f6;
+    }
+    
+    .tab-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60rpx;
+      height: 6rpx;
+      background-color: #3478f6;
+      border-radius: 3rpx;
+    }
+    
+    .filter-bar {
+      display: flex;
+      padding: 15rpx 10rpx;
+      background-color: #fff;
+      border-bottom: 1rpx solid #eee;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    .filter-item {
+      display: inline-block;
+      padding: 8rpx 20rpx;
+      margin: 0 8rpx;
+      font-size: 26rpx;
+      border-radius: 20rpx;
+      color: #666;
+      background-color: #f2f2f2;
+    }
+    
+    .filter-item.filter-active {
+      color: #fff;
+      background-color: #3478f6;
+    }
+    
+    /* 记录列表样式 */
+    .list-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f8f8;
+    }
+    
+    .add-record-btn {
+      width: 90%;
+      margin: 20rpx auto;
+      padding: 15rpx 0;
+      background-color: #3478f6;
+      color: #fff;
+      font-size: 30rpx;
+      border-radius: 10rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .add-record-btn icon {
+      margin-right: 10rpx;
+    }
+    
+    .records-list {
+      flex: 1;
+      margin: 0 20rpx;
+      background-color: #fff;
+      border-radius: 10rpx;
+      overflow: hidden;
+    }
+    
+    .list-header {
+      display: flex;
+      padding: 0 20rpx;
+      height: 80rpx;
+      line-height: 80rpx;
+      background-color: #f5f7fa;
+      border-bottom: 1rpx solid #eee;
+      font-size: 28rpx;
+      color: #999;
+    }
+    
+    .date-column {
+      flex: 3;
+    }
+    
+    .height-column, .weight-column {
+      flex: 2;
+      text-align: center;
+    }
+    
+    .record-item {
+      display: flex;
+      padding: 0 20rpx;
+      height: 90rpx;
+      line-height: 90rpx;
+      border-bottom: 1rpx solid #eee;
+      font-size: 30rpx;
+      color: #333;
+    }
+    
+    .empty-tip {
+      height: 200rpx;
+      line-height: 200rpx;
+      text-align: center;
+      font-size: 28rpx;
+      color: #999;
+    }
+    
+    /* 图表页面样式 */
+    .chart-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 20rpx;
+      box-sizing: border-box;
+      background-color: #f8f8f8;
+    }
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20rpx;
+    }
+    
+    .chart-title {
+      font-size: 32rpx;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .latest-data {
+      font-size: 28rpx;
+      color: #3478f6;
+      background-color: #e8f3ff;
+      padding: 5rpx 15rpx;
+      border-radius: 20rpx;
+    }
+    
+    .chart-wrapper {
+      flex: 1;
+      background-color: #fff;
+      border-radius: 10rpx;
+      padding: 10rpx;
+      margin-bottom: 20rpx;
+    }
+    
+    ec-canvas {
+      width: 100rpx;
+      height: 100rpx;
+    }
+    
+    .chart-info {
+      display: flex;
+      justify-content: space-around;
+      background-color: #fff;
+      border-radius: 10rpx;
+      padding: 20rpx 0;
+    }
+    
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .info-label {
+      font-size: 26rpx;
+      color: #999;
+      margin-bottom: 5rpx;
+    }
+    
+    .info-value {
+      font-size: 30rpx;
+      color: #333;
+      font-weight: bold;
+    }
