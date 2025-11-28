@@ -47,6 +47,11 @@ module.exports = {
   GetBabyRelation: ApiRootUrl + 'baby/getBabyRelation',
   AddBabyDetail: ApiRootUrl + 'baby/addBabyDetail',
   EditBabyDetail: ApiRootUrl + 'baby/editBabyDetail',
+  // 生长记录相关
+  AddBabyBodyRecord: ApiRootUrl + 'baby_body_info/add', // 新增baby生长记录
+  EditBabyBobyRecord: ApiRootUrl + 'baby_body_info/update', // 编辑baby生长记录
+  DeleteBabyBodyRecord: ApiRootUrl + 'baby_body_info/delete', // 删除baby生长记录
+  ListBabyBodyRecord: ApiRootUrl + 'baby_body_info/list', // 查询baby生长记录列表
   // 购物车
   CartAdd: ApiRootUrl + 'cart/add', // 添加商品到购物车
   CartList: ApiRootUrl + 'cart/index', //获取购物车的数据
