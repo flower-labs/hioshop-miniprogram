@@ -22,6 +22,9 @@ module.exports = {
   GetBackground: ApiRootUrl + 'settings/getBackground',
   // 保存背景图片
   SaveBackground: ApiRootUrl + 'settings/saveBackground',
+  AddBabySocialRecord: ApiRootUrl + 'baby_social/add', // 新增baby朋友圈记录
+  BabySocialList: ApiRootUrl + 'baby_social/list', // 获取baby朋友圈列表
+  DeleteBabySocialRecord: ApiRootUrl + 'baby_social/delete', // 删除baby朋友圈记录
   // 预约订单列表
   ReserveOrderList: ApiRootUrl + 'reserve/order', //分类目录全部分类数据接口
   // 获取可预约信息

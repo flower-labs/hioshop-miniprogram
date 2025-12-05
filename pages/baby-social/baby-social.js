@@ -1,4 +1,7 @@
 // pages/baby-social/baby-social.js
+const api = require('../../config/api.js');
+const util = require('../../utils/util.js');
+
 Page({
   data: {
     currentDate: '',
@@ -10,7 +13,7 @@ Page({
     showPublish: false
   },
 
-  onLoad(options) {
+  onLoad() {
     this.initCurrentDate();
     this.loadSocialList();
   },
@@ -34,55 +37,116 @@ Page({
   },
 
   // 加载社交圈列表
-  loadSocialList() {
+  async loadSocialList() {
     if (this.data.loading || this.data.noMore) return;
 
     this.setData({ loading: true });
 
-    // 模拟数据加载
-    setTimeout(() => {
-      const mockData = this.generateMockData();
-      const newList = this.data.page === 1 ? mockData : [...this.data.socialList, ...mockData];
+    try {
+      const res = await util.request(api.BabySocialList, {}, 'POST');
 
-      this.setData({
-        socialList: newList,
-        loading: false,
-        noMore: mockData.length < this.data.pageSize,
-        page: this.data.page + 1
+      if (res.errno === 0) {
+        const list = res.data.list || [];
+
+        console.log('resp list', list);
+        
+        // 格式化数据
+        const formattedList = this.formatSocialList(list);
+        console.log("🚀 ~ loadSocialList ~ formattedList:", formattedList)
+
+        this.setData({
+          socialList: formattedList,
+          loading: false,
+          noMore: true // 暂时不支持分页，所有数据一次加载
+        });
+      } else {
+        wx.showToast({
+          title: res.errmsg || '加载失败',
+          icon: 'none'
+        });
+        this.setData({ loading: false });
+      }
+    } catch (error) {
+      console.error('加载社交圈列表失败:', error);
+      wx.showToast({
+        title: '加载失败',
+        icon: 'none'
       });
-
+      this.setData({ loading: false });
+    } finally {
       wx.stopPullDownRefresh();
-    }, 500);
+    }
   },
 
-  // 生成模拟数据
-  generateMockData() {
-    const mockList = [];
-    const now = new Date();
+  // 格式化社交圈列表数据
+  formatSocialList(list) {
+    return list.map(item => {
+      // 解析图片数组
+      let mediaList = [];
+      if (item.images) {
+        try {
+          const images = typeof item.images === 'string' ? JSON.parse(item.images) : item.images;
+          mediaList = images.map(url => ({
+            type: 'image',
+            url: url
+          }));
+        } catch (e) {
+          console.error('解析图片失败:', e);
+        }
+      }
 
-    for (let i = 0; i < 5; i++) {
-      const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
+      // 格式化时间
+      const createTime = item.create_time || '';
+      const timeText = this.formatTimeText(createTime);
+
+      return {
+        id: item.id,
+        dateText: this.formatDateText(createTime),
+        content: item.content || '',
+        mediaList: mediaList,
+        tags: item.tags || [],
+        location: item.location || '',
+        author: item.author || '当前用户',
+        publishTime: timeText
+      };
+    });
+  },
+
+  // 格式化日期文本（如：12月5日 3个月15天）
+  formatDateText(timeStr) {
+    if (!timeStr) return '';
+    
+    const date = new Date(timeStr);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    
+    // 这里可以根据宝宝生日计算月龄，暂时简化处理
+    return `${month}月${day}日`;
+  },
+
+  // 格式化时间文本（如：1天前 14:30）
+  formatTimeText(timeStr) {
+    if (!timeStr) return '';
+    
+    const date = new Date(timeStr);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    
+    if (diffDays === 0) {
+      return `今天 ${hours}:${minutes}`;
+    } else if (diffDays === 1) {
+      return `昨天 ${hours}:${minutes}`;
+    } else if (diffDays < 7) {
+      return `${diffDays}天前 ${hours}:${minutes}`;
+    } else {
       const month = date.getMonth() + 1;
       const day = date.getDate();
-      const age = Math.floor(Math.random() * 30) + 1;
-
-      mockList.push({
-        id: Date.now() + i,
-        dateText: `${month}月${day}日 ${age}个月${Math.floor(Math.random() * 30)}天`,
-        content: '如何\n定义下一代\nLLM?',
-        mediaList: [
-          {
-            type: 'image',
-            url: 'https://picsum.photos/200/300'
-          }
-        ],
-        tags: ['日常记录'],
-        author: `用户 ${Math.floor(Math.random() * 10000000000)}`,
-        publishTime: `${Math.floor(Math.random() * 7) + 1}天前 ${Math.floor(Math.random() * 24)}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}`
-      });
+      return `${month}月${day}日 ${hours}:${minutes}`;
     }
-
-    return mockList;
   },
 
   // 刷新列表
@@ -122,35 +186,62 @@ Page({
 
   // 处理发布
   handlePublish(e) {
-    const { content, mediaList, tags, location, visibility, recordTime } = e.detail;
+    console.log('发布成功，刷新列表');
 
-    console.log('发布内容:', {
-      content,
-      mediaList,
-      tags,
-      location,
-      visibility,
-      recordTime
+    // 关闭弹窗
+    this.closePublishModal();
+
+    // 刷新列表
+    this.refreshList();
+  },
+
+  // 删除记录
+  deleteSocialRecord(e) {
+    const id = e.currentTarget.dataset.id;
+    const that = this;
+
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除这条记录吗？',
+      success: async function (res) {
+        if (res.confirm) {
+          try {
+            wx.showLoading({
+              title: '删除中...',
+              mask: true
+            });
+
+            const result = await util.request(api.DeleteBabySocialRecord, {
+              id: id
+            }, 'POST');
+
+            wx.hideLoading();
+
+            if (result.errno === 0) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success'
+              });
+
+              // 刷新列表
+              that.refreshList();
+            } else {
+              wx.showToast({
+                title: result.errmsg || '删除失败',
+                icon: 'none'
+              });
+            }
+          } catch (error) {
+            wx.hideLoading();
+            console.error('删除失败:', error);
+            wx.showToast({
+              title: '删除失败',
+              icon: 'none'
+            });
+          }
+        }
+      }
     });
-
-    wx.showLoading({
-      title: '发布中...'
-    });
-
-    // 模拟发布
-    setTimeout(() => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '发布成功',
-        icon: 'success'
-      });
-
-      // 关闭弹窗
-      this.closePublishModal();
-
-      // 刷新列表
-      this.refreshList();
-    }, 1000);
   },
 
   // 预览媒体
@@ -167,3 +258,4 @@ Page({
     }
   }
 });
+        console.log("🚀 ~ loadSocialList ~ list:", list)

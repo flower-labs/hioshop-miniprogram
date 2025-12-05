@@ -18,13 +18,24 @@
 
       <!-- 内容卡片 -->
       <view class="content-card">
+        <!-- 卡片头部 - 添加删除按钮 -->
+        <view class="card-header">
+          <view class="card-info">
+            <text class="author">{{item.author}}</text>
+            <text class="time">{{item.publishTime}}</text>
+          </view>
+          <view class="card-actions">
+            <image class="delete-icon" src="/images/icon/close.png" mode="aspectFit" bindtap="deleteSocialRecord" data-id="{{item.id}}"></image>
+          </view>
+        </view>
+
         <!-- 图片/视频展示 -->
         <view class="media-container" wx:if="{{item.mediaList && item.mediaList.length > 0}}">
           <block wx:for="{{item.mediaList}}" wx:for-item="media" wx:key="index" wx:for-index="mediaIndex">
             <!-- 图片 -->
             <image wx:if="{{media.type === 'image'}}" 
                    class="media-image" 
-                   src="{{media.url}}" 
+                   src="{{media.url.image_url}}" 
                    mode="aspectFill"
                    bindtap="previewMedia"
                    data-index="{{mediaIndex}}"
@@ -49,10 +60,10 @@
           <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</text>
         </view>
 
-        <!-- 底部信息 -->
-        <view class="bottom-info">
-          <text class="author">{{item.author}}</text>
-          <text class="time">{{item.publishTime}}</text>
+        <!-- 位置信息 -->
+        <view class="location-info" wx:if="{{item.location}}">
+          <text class="location-icon">📍</text>
+          <text class="location-text">{{item.location}}</text>
         </view>
       </view>
     </view>

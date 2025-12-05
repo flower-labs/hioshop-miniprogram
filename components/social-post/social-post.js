@@ -1,4 +1,7 @@
 // components/social-post/social-post.js
+const api = require('../../config/api.js');
+const util = require('../../utils/util.js');
+
 Component({
   /**
    * 组件的属性列表
@@ -24,7 +27,11 @@ Component({
       recordTime: ''
     },
     showVisibility: false,
-    showTimePicker: false
+    showTimePicker: false,
+    qiniuToken: {
+      token: '',
+      url: ''
+    }
   },
 
   /**
@@ -52,6 +59,26 @@ Component({
       });
     },
 
+    // 获取七牛云token
+    async getQiniuToken() {
+      try {
+        const resp = await util.request(api.GetQiniuToken, {}, 'POST');
+        if (resp && resp.data) {
+          this.setData({
+            qiniuToken: resp.data
+          });
+          return resp.data;
+        }
+      } catch (error) {
+        console.error('获取七牛Token失败:', error);
+        wx.showToast({
+          title: '获取上传凭证失败',
+          icon: 'none'
+        });
+        throw error;
+      }
+    },
+
     // 阻止触摸穿透
     preventTouchMove() {
       return false;
@@ -65,7 +92,7 @@ Component({
     },
 
     // 选择媒体（图片/视频）
-    chooseMedia() {
+    async chooseMedia() {
       const that = this;
       const maxCount = 9 - this.data.formData.mediaList.length;
       
@@ -77,27 +104,118 @@ Component({
         return;
       }
 
-      wx.chooseMedia({
-        count: maxCount,
-        mediaType: ['image', 'video'],
-        sourceType: ['album', 'camera'],
-        maxDuration: 60,
-        camera: 'back',
-        success(res) {
-          const mediaList = res.tempFiles.map(file => ({
-            type: file.fileType,
-            url: file.tempFilePath,
-            poster: file.thumbTempFilePath || file.tempFilePath
-          }));
-          
-          that.setData({
-            'formData.mediaList': [...that.data.formData.mediaList, ...mediaList]
+      try {
+        // 获取七牛云token
+        await this.getQiniuToken();
+
+        // 选择媒体
+        const res = await new Promise((resolve, reject) => {
+          wx.chooseMedia({
+            count: maxCount,
+            mediaType: ['image', 'video'],
+            sourceType: ['album', 'camera'],
+            sizeType: ['compressed'],
+            maxDuration: 60,
+            camera: 'back',
+            success: resolve,
+            fail: reject
           });
-        },
-        fail(err) {
-          console.error('选择媒体失败:', err);
+        });
+
+        // 检查文件大小
+        const validFiles = [];
+        for (let file of res.tempFiles) {
+          const fileSize = file.size / 1024 / 1024; // 转换为MB
+          if (fileSize > 10) {
+            wx.showToast({
+              title: '文件过大，请选择小于10MB的文件',
+              icon: 'none'
+            });
+            continue;
+          }
+          validFiles.push(file);
         }
-      });
+
+        if (validFiles.length === 0) {
+          return;
+        }
+
+        // 显示上传loading
+        wx.showLoading({
+          title: '上传中...',
+          mask: true
+        });
+
+        // 上传文件到七牛云
+        const uploadPromises = validFiles.map(file => this.uploadToQiniu(file));
+        const uploadResults = await Promise.all(uploadPromises);
+
+        // 过滤上传成功的文件
+        const successFiles = uploadResults.filter(item => item !== null);
+        console.log("🚀 ~ chooseMedia ~ successFiles:", successFiles)
+
+        if (successFiles.length > 0) {
+          // 添加到媒体列表
+          that.setData({
+            'formData.mediaList': [...that.data.formData.mediaList, ...successFiles]
+          });
+
+          wx.showToast({
+            title: `成功上传${successFiles.length}个文件`,
+            icon: 'success'
+          });
+        } else {
+          wx.showToast({
+            title: '上传失败，请重试',
+            icon: 'none'
+          });
+        }
+
+      } catch (err) {
+        console.error('选择媒体失败:', err);
+        wx.hideLoading();
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none'
+        });
+      }
+    },
+
+    // 上传文件到七牛云
+    async uploadToQiniu(file) {
+      const { token } = this.data.qiniuToken;
+      const CDN_PREFIX = 'https://cdn.bajie.club/';
+
+      try {
+        const uploadRes = await new Promise((resolve, reject) => {
+          wx.uploadFile({
+            url: 'https://up-z0.qiniup.com',
+            filePath: file.tempFilePath,
+            name: 'file',
+            formData: { token },
+            success: resolve,
+            fail: reject
+          });
+        });
+
+        // 处理上传结果
+        if (uploadRes.statusCode === 200) {
+          const document = JSON.parse(uploadRes.data);
+          if (document.key) {
+            return {
+              type: file.fileType, // 'image' 或 'video'
+              url: CDN_PREFIX + document.key, // 使用七牛云返回的key构建完整URL
+              poster: file.thumbTempFilePath || (CDN_PREFIX + document.key),
+              key: document.key // 保存key以便后续使用
+            };
+          }
+        }
+
+        throw new Error('上传失败，状态码非200');
+      } catch (error) {
+        console.error('上传到七牛云失败:', error);
+        return null;
+      }
     },
 
     // 删除媒体
@@ -254,7 +372,7 @@ Component({
     },
 
     // 保存
-    onSave() {
+    async onSave() {
       const { content, mediaList, tags, location, visibility, recordTime } = this.data.formData;
       
       // 验证
@@ -266,18 +384,62 @@ Component({
         return;
       }
 
-      // 触发保存事件
-      this.triggerEvent('save', {
-        content,
-        mediaList,
-        tags,
-        location,
-        visibility,
-        recordTime
-      });
+      try {
+        wx.showLoading({
+          title: '发布中...',
+          mask: true
+        });
 
-      // 重置表单
-      this.resetForm();
+        // 提取图片URL（只传图片，不传视频）
+        const images = mediaList
+          .filter(item => item.type === 'image')
+          .map(item => item.url);
+
+        // 映射可见性
+        const privacyType = visibility === 'self' ? 'SELF' : 'FAMILY';
+
+        // 调用接口
+        const res = await util.request(api.AddBabySocialRecord, {
+          content,
+          location,
+          privacy_type: privacyType,
+          images
+        }, 'POST');
+
+        wx.hideLoading();
+
+        if (res.errno === 0) {
+          wx.showToast({
+            title: '发布成功',
+            icon: 'success'
+          });
+
+          // 触发保存事件
+          this.triggerEvent('save', {
+            content,
+            mediaList,
+            tags,
+            location,
+            visibility,
+            recordTime
+          });
+
+          // 重置表单
+          this.resetForm();
+        } else {
+          wx.showToast({
+            title: res.errmsg || '发布失败',
+            icon: 'none'
+          });
+        }
+      } catch (error) {
+        wx.hideLoading();
+        console.error('发布失败:', error);
+        wx.showToast({
+          title: '发布失败，请重试',
+          icon: 'none'
+        });
+      }
     },
 
     // 重置表单
