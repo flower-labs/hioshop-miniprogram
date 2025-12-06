@@ -112,10 +112,9 @@ Component({
         const res = await new Promise((resolve, reject) => {
           wx.chooseMedia({
             count: maxCount,
-            mediaType: ['image', 'video'],
+            mediaType: ['image'],
             sourceType: ['album', 'camera'],
             sizeType: ['compressed'],
-            maxDuration: 60,
             camera: 'back',
             success: resolve,
             fail: reject
@@ -345,7 +344,6 @@ Component({
 
     // 选择时间
     chooseTime() {
-      console.log('trigger')
       this.setData({
         showTimePicker: true
       });
@@ -392,13 +390,11 @@ Component({
 
         // 提取图片URL（只传图片，不传视频）
         const images = mediaList
-          .filter(item => item.type === 'image')
+          .filter(item => ['image'].includes(item.type))
           .map(item => item.url);
 
-        // 映射可见性
-        const privacyType = visibility === 'self' ? 'SELF' : 'FAMILY';
+        const privacyType = visibility === 'self' ? 'PRIVATE' : 'FAMILY';
 
-        // 调用接口
         const res = await util.request(api.AddBabySocialRecord, {
           content,
           location,

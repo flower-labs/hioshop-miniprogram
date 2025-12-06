@@ -48,11 +48,8 @@ Page({
       if (res.errno === 0) {
         const list = res.data.list || [];
 
-        console.log('resp list', list);
-        
         // 格式化数据
         const formattedList = this.formatSocialList(list);
-        console.log("🚀 ~ loadSocialList ~ formattedList:", formattedList)
 
         this.setData({
           socialList: formattedList,
@@ -249,13 +246,13 @@ Page({
     const index = e.currentTarget.dataset.index;
     const list = e.currentTarget.dataset.list;
     const urls = list.filter(item => item.type === 'image').map(item => item.url);
+    const formattedUriList = urls.map(item => item.image_url);
 
     if (urls.length > 0) {
       wx.previewImage({
-        current: urls[index],
-        urls: urls
+        current: formattedUriList?.[index],
+        urls: formattedUriList
       });
     }
   }
 });
-        console.log("🚀 ~ loadSocialList ~ list:", list)

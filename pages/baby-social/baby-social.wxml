@@ -25,7 +25,7 @@
             <text class="time">{{item.publishTime}}</text>
           </view>
           <view class="card-actions">
-            <image class="delete-icon" src="/images/icon/close.png" mode="aspectFit" bindtap="deleteSocialRecord" data-id="{{item.id}}"></image>
+            <image class="delete-icon" src="/images/iconTemp/close.png" mode="aspectFit" bindtap="deleteSocialRecord" data-id="{{item.id}}"></image>
           </view>
         </view>
 

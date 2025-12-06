@@ -8,7 +8,7 @@
     <!-- 顶部操作栏 -->
     <view class="header">
       <text class="cancel-btn" bindtap="onCancel">取消</text>
-      <text class="save-btn" bindtap="onSave">保存</text>
+      <text class="save-btn" bindtap="onSave">发布</text>
     </view>
 
     <!-- 滚动内容区 -->
@@ -51,7 +51,7 @@
               ></video>
               <!-- 删除按钮 -->
               <view class="delete-btn" bindtap="deleteMedia" data-index="{{index}}">
-                <image class="delete-icon" src="/images/iconTemp/close.png" mode="aspectFit"></image>
+                <image class="delete-icon" src="/images/iconTemp/close.svg" mode="aspectFit"></image>
               </view>
             </view>
           </block>
@@ -60,7 +60,7 @@
           <view 
             class="add-media-btn" 
             bindtap="chooseMedia" 
-            wx:if="{{formData.mediaList.length < 9}}"
+            wx:if="{{formData.mediaList.length < 5}}"
           >
             <image class="camera-icon" src="/images/iconTemp/add.png" mode="aspectFit"></image>
           </view>
