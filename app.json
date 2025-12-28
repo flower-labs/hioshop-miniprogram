@@ -55,6 +55,12 @@
         "text": "辅食"
       },
       {
+        "pagePath": "pages/baby-social/baby-social",
+        "iconPath": "images/nav/icon-center-b.png",
+        "selectedIconPath": "images/nav/icon-center-r.png",
+        "text": "社交圈"
+      },
+      {
         "pagePath": "pages/ucenter/index/index",
         "iconPath": "images/nav/icon-center-b.png",
         "selectedIconPath": "images/nav/icon-center-r.png",

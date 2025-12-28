@@ -200,6 +200,36 @@
   color: #4A90E2;
 }
 
+.loading-tip {
+  color: #666;
+}
+
+.no-more {
+  color: #999;
+  font-size: 24rpx;
+}
+
+/* 加载更多按钮 */
+.load-more-container {
+  padding: 24rpx 42rpx;
+  text-align: center;
+}
+
+.load-more-link {
+  display: inline-block;
+  font-size: 26rpx;
+  color: #999;
+  padding: 16rpx 32rpx;
+  border-radius: 4rpx;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.load-more-link:active {
+  color: #4A90E2;
+  background-color: rgba(74, 144, 226, 0.05);
+}
+
 
 
 

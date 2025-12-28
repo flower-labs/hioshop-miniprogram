@@ -10,6 +10,7 @@ Page({
     noMore: false,
     page: 1,
     pageSize: 10,
+    totalCount: 0,
     showPublish: false
   },
 
@@ -37,24 +38,46 @@ Page({
   },
 
   // 加载社交圈列表
-  async loadSocialList() {
-    if (this.data.loading || this.data.noMore) return;
+  async loadSocialList(isRefresh = false) {
+    if (this.data.loading || (!isRefresh && this.data.noMore)) return;
 
     this.setData({ loading: true });
 
     try {
-      const res = await util.request(api.BabySocialList, {}, 'POST');
+      const params = {
+        page: this.data.page,
+        page_size: this.data.pageSize
+      };
 
+
+      const res = await util.request(api.BabySocialList, params, 'POST');
+      
       if (res.errno === 0) {
         const list = res.data.list || [];
+        const pagination = res.data.pagination || {};
+        const totalCount = pagination.totalCount || 0;
 
         // 格式化数据
         const formattedList = this.formatSocialList(list);
 
+        let socialList = [];
+        if (isRefresh || this.data.page === 1) {
+          // 刷新或首次加载，直接替换数据
+          socialList = formattedList;
+        } else {
+          // 加载更多，追加数据
+          socialList = [...this.data.socialList, ...formattedList];
+        }
+
+        // 判断是否还有更多数据
+        const hasMore = socialList.length < totalCount && list.length === this.data.pageSize;
+
         this.setData({
-          socialList: formattedList,
+          socialList: socialList,
           loading: false,
-          noMore: true // 暂时不支持分页，所有数据一次加载
+          noMore: !hasMore,
+          totalCount: totalCount,
+          page: hasMore ? this.data.page + 1 : this.data.page
         });
       } else {
         wx.showToast({
@@ -151,14 +174,15 @@ Page({
     this.setData({
       socialList: [],
       page: 1,
-      noMore: false
+      noMore: false,
+      totalCount: 0
     });
-    this.loadSocialList();
+    this.loadSocialList(true);
   },
 
-  // 加载更多
+  // 加载更多（手动点击触发）
   loadMore() {
-    this.loadSocialList();
+    this.loadSocialList(false);
   },
 
   // 返回
