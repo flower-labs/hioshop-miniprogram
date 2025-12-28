@@ -6,41 +6,14 @@
   color: #333;
 }
 
-/* 顶部导航栏 */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 88rpx;
-  background: linear-gradient(135deg, #4A90E2 0%, #67B5E8 100%);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 32rpx;
-  z-index: 100;
-  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.15);
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 32rpx;
-}
-
-.camera-icon {
-  width: 48rpx;
-  height: 48rpx;
-}
-
 /* 社交圈列表 */
 .social-list {
-  margin-top: 130rpx;
-  padding: 0 42rpx;
-  height: calc(100vh - 88rpx);
+  padding: 0rpx 42rpx 32rpx 42rpx;
+  height: 100vh;
 }
 
 .social-item {
+  padding-top: 20rpx;
   margin-bottom: 48rpx;
   padding-right: 80rpx;
 }
@@ -228,6 +201,47 @@
 .load-more-link:active {
   color: #4A90E2;
   background-color: rgba(74, 144, 226, 0.05);
+}
+
+/* 悬浮发布按钮 */
+.floating-publish-btn {
+  position: fixed;
+  bottom: 42rpx;
+  right: 42rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #6aa4e6 0%, #67B5E8 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+  z-index: 999;
+  transition: all 0.3s ease;
+  animation: floating 5s ease-in-out infinite;
+}
+
+.floating-publish-btn:active {
+  transform: scale(0.9);
+  box-shadow: 0 4rpx 16rpx rgba(74, 144, 226, 0.6);
+  animation: none;
+}
+
+.publish-icon {
+  width: 45rpx;
+  height: 45rpx;
+}
+
+/* 悬浮按钮呼吸动画 */
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+  }
+  50% {
+    transform: translateY(-8rpx);
+    box-shadow: 0 12rpx 32rpx rgba(74, 144, 226, 0.5);
+  }
 }
 
 

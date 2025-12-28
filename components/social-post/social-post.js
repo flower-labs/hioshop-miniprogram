@@ -372,7 +372,7 @@ Component({
     // 保存
     async onSave() {
       const { content, mediaList, tags, location, visibility, recordTime } = this.data.formData;
-      
+
       // 验证
       if (!content && mediaList.length === 0) {
         wx.showToast({
@@ -399,7 +399,8 @@ Component({
           content,
           location,
           privacy_type: privacyType,
-          images
+          images,
+          tags,
         }, 'POST');
 
         wx.hideLoading();

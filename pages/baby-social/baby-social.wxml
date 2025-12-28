@@ -1,12 +1,5 @@
 <!-- 社交圈页面 -->
 <view class="container">
-  <!-- 顶部导航栏 -->
-  <view class="header">
-    <view class="header-right">
-      <image class="camera-icon" src="/images/iconTemp/camera.png" mode="aspectFit" bindtap="openPublishModal"></image>
-    </view>
-  </view>
-
   <!-- 社交圈列表 -->
   <scroll-view class="social-list" scroll-y="true">
     <view class="social-item" wx:for="{{socialList}}" wx:key="id">
@@ -57,7 +50,7 @@
 
         <!-- 标签 -->
         <view class="tags" wx:if="{{item.tags && item.tags.length > 0}}">
-          <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</text>
+          <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item.tag_name}}</text>
         </view>
 
         <!-- 位置信息 -->
@@ -86,6 +79,11 @@
       暂无记录
     </view>
   </scroll-view>
+
+  <!-- 悬浮发布按钮 -->
+  <view class="floating-publish-btn" bindtap="openPublishModal">
+    <image class="publish-icon" src="/images/iconTemp/camera.png" mode="aspectFit"></image>
+  </view>
 
   <!-- 使用社交圈发布组件 -->
   <social-post 
