@@ -56,8 +56,8 @@
       },
       {
         "pagePath": "pages/baby-social/baby-social",
-        "iconPath": "images/nav/icon-center-b.png",
-        "selectedIconPath": "images/nav/icon-center-r.png",
+        "iconPath": "images/nav/icon-social-off.png",
+        "selectedIconPath": "images/nav/icon-social-on.png",
         "text": "社交圈"
       },
       {

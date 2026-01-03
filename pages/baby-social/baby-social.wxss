@@ -8,14 +8,14 @@
 
 /* 社交圈列表 */
 .social-list {
-  padding: 0rpx 42rpx 32rpx 42rpx;
   height: 100vh;
 }
 
 .social-item {
-  padding-top: 20rpx;
-  margin-bottom: 48rpx;
-  padding-right: 80rpx;
+  margin-left: 40rpx;
+  width: calc(100% - 80rpx);
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
 }
 
 /* 日期标题 */
