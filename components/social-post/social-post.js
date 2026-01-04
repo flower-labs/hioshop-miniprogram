@@ -23,7 +23,7 @@ Component({
       tags: [],
       location: '',
       visibility: 'family', // self: 自己, family: 家人
-      visibilityText: '所有亲',
+      visibilityText: '家人',
       recordTime: ''
     },
     showVisibility: false,
@@ -333,7 +333,7 @@ Component({
     // 选择可见性选项
     selectVisibility(e) {
       const value = e.currentTarget.dataset.value;
-      const visibilityText = value === 'self' ? '自己' : '所有亲';
+      const visibilityText = value === 'self' ? '自己' : '家人';
       
       this.setData({
         'formData.visibility': value,
@@ -447,7 +447,7 @@ Component({
         'formData.tags': [],
         'formData.location': '',
         'formData.visibility': 'family',
-        'formData.visibilityText': '所有亲'
+        'formData.visibilityText': '家人'
       });
       this.initRecordTime();
     }

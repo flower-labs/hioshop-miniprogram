@@ -1,7 +1,12 @@
 <!-- 社交圈页面 -->
 <view class="container">
   <!-- 社交圈列表 -->
-  <scroll-view class="social-list" scroll-y="true">
+  <view class="social-list">
+    <!-- 空状态提示 -->
+    <view class="empty-hint" wx:if="{{!loading && socialList.length === 0}}">
+      <text class="empty-text">暂无朋友圈动态</text>
+    </view>
+
     <view class="social-item" wx:for="{{socialList}}" wx:key="id">
       <!-- 日期标题 -->
       <view class="date-header">
@@ -64,9 +69,9 @@
     <!-- 加载提示和加载更多按钮 -->
     <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
     
-    <!-- 加载更多按钮 -->
+    <!-- 加载更多按钮） -->
     <view class="load-more-container" wx:if="{{!loading && !noMore && socialList.length > 0}}">
-      <text class="load-more-link" bindtap="loadMore">加载更多</text>
+      <text class="load-more-link" bindtap="loadMore">点击加载更多</text>
     </view>
     
     <!-- 已加载全部提示 -->
@@ -74,11 +79,7 @@
       已加载全部 {{totalCount}} 条记录
     </view>
     
-    <!-- 暂无记录提示 -->
-    <view class="no-more" wx:if="{{!loading && socialList.length === 0}}">
-      暂无记录
-    </view>
-  </scroll-view>
+  </view>
 
   <!-- 悬浮发布按钮 -->
   <view class="floating-publish-btn" bindtap="openPublishModal">

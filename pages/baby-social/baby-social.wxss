@@ -8,7 +8,8 @@
 
 /* 社交圈列表 */
 .social-list {
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 45rpx; /* 为悬浮按钮留出空间 */
 }
 
 .social-item {
@@ -16,6 +17,20 @@
   width: calc(100% - 80rpx);
   margin-top: 20rpx;
   margin-bottom: 40rpx;
+}
+
+/* 空状态提示 */
+.empty-hint {
+  text-align: center;
+  padding: 120rpx 60rpx;
+  margin-top: 100rpx;
+}
+
+.empty-text {
+  display: block;
+  font-size: 32rpx;
+  color: #666;
+  margin-bottom: 16rpx;
 }
 
 /* 日期标题 */
@@ -189,17 +204,17 @@
 }
 
 .load-more-link {
-  display: inline-block;
+  display: block;
   font-size: 26rpx;
-  color: #999;
+  color: #4A90E2;
   padding: 16rpx 32rpx;
   border-radius: 4rpx;
   transition: all 0.2s ease;
-  position: relative;
+  margin-bottom: 8rpx;
 }
 
 .load-more-link:active {
-  color: #4A90E2;
+  color: #67B5E8;
   background-color: rgba(74, 144, 226, 0.05);
 }
 

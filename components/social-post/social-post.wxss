@@ -42,19 +42,20 @@
 }
 
 .cancel-btn {
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: 500;
   padding: 12rpx 40rpx;
+  border-radius: 15rpx;
+  /* background: linear-gradient(135deg, #696c6e 0%, #393b3d 100%); */
 }
 
 .save-btn {
-  font-size: 32rpx;
+  font-size: 30rpx;
   color: #fff;
-  background: linear-gradient(135deg, #4A90E2 0%, #67B5E8 100%);
-  padding: 12rpx 40rpx;
-  border-radius: 48rpx;
+  background: linear-gradient(135deg, #4A90E2 0%, #0099ff 100%);
+  padding: 12rpx 30rpx;
+  border-radius: 15rpx;
   font-weight: 500;
-  box-shadow: 0 4rpx 12rpx rgba(74, 144, 226, 0.3);
 }
 
 /* 滚动内容区 */

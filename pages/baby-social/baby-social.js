@@ -27,6 +27,14 @@ Page({
     this.refreshList();
   },
 
+  // onReachBottom() {
+  //   console.log('页面滚动到底部');
+  //   // 页面滚动到底部时自动加载更多
+  //   if (!this.data.loading && !this.data.noMore) {
+  //     this.loadSocialList(false);
+  //   }
+  // },
+
   // 初始化当前日期
   initCurrentDate() {
     const now = new Date();
@@ -182,7 +190,11 @@ Page({
 
   // 加载更多（手动点击触发）
   loadMore() {
-    this.loadSocialList(false);
+    if (!this.data.loading && !this.data.noMore) {
+      this.loadSocialList(false);
+    } else {
+      console.log('当前状态不允许加载:', { loading: this.data.loading, noMore: this.data.noMore });
+    }
   },
 
   // 返回
