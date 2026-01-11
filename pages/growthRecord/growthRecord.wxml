@@ -38,11 +38,11 @@
         </view>
         <view class="form-row">
           <text class="form-label">身高(cm)：</text>
-          <input type="number" placeholder="输入身高（50-200）" value="{{formData.height}}" bindinput="onHeightInput" class="form-input"></input>
+          <input type="number" placeholder="输入身高（50-200）" value="{{formData.height}}" bind:input="onHeightInput" class="form-input"></input>
         </view>
         <view class="form-row">
           <text class="form-label">体重(kg)：</text>
-          <input type="number" placeholder="输入体重（2-100）" value="{{formData.weight}}" bindinput="onWeightInput" class="form-input"></input>
+          <input type="number" placeholder="输入体重（2-100）" value="{{formData.weight}}" bind:input="onWeightInput" class="form-input"></input>
         </view>
 
         <!-- 按钮区域 -->
