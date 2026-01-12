@@ -215,7 +215,7 @@
       flex: 3;
     }
     
-    .height-column, .weight-column {
+    .height-column, .weight-column,.delete-data {
       flex: 2;
       text-align: center;
     }

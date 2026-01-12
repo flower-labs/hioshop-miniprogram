@@ -69,12 +69,14 @@
             <view class="date-column">日期</view>
             <view class="height-column">身高(cm)</view>
             <view class="weight-column">体重(kg)</view>
+            <view class="delete-data">编辑</view>
           </view>
 
           <view class="record-item" wx:for="{{growthRecords}}" wx:key="index">
             <view class="date-column">{{item.date}}</view>
             <view class="height-column">{{item.height}}</view>
             <view class="weight-column">{{item.weight}}</view>
+            <view class="delete-data" data-id="{{item.id}}" bindtap="handleDelete" >删除</view>
           </view>
 
           <view class="empty-tip" wx:if="{{growthRecords.length === 0}}">
