@@ -1,7 +1,19 @@
 /* pages/baby-infoCenter/index.wxss */
+page {
+  /* 基础字体家族：优先使用微信默认无衬线字体，兼容不同系统 */
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  /* 基础字号：以750rpx设计稿为基准，16px对应32rpx，保证可读性 */
+  font-size: 32rpx;
+  /* 行高：1.5倍行高，提升文字阅读体验 */
+  line-height: 1.5;
+  /* 字体颜色：主文本色，避免纯黑（#000）视觉压迫 */
+  color: #333333;
+}
 .page-container {
-  background: linear-gradient(to bottom, rgb(247, 165, 179), white);
+  background: #f0f0f0;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .cover-container {
@@ -19,12 +31,14 @@
   border-radius: 20rpx;
   font-size: 16rpx;
   position: absolute;
-  color: #fff;
-  background-color: rgba(63, 56, 56, 0.5);
+  color:#fff;
+  background-color: #3478f6;
   right: 25rpx;
   top: 25rpx;
 }
-
+.change-bg-btn :hover{
+  background-color:#00C853;
+}
 .cover-image {
   width: 100%;
   height: 100%;
@@ -33,8 +47,8 @@
 
 .overlay-box {
   position: absolute;
-  top: 220rpx;
-  left: 20rpx;
+  top: 64rpx;
+  left: 84rpx;
   /* background-color: rgba(0, 0, 0, 0.5); */
   display: flex;
   align-items: center;
@@ -51,14 +65,30 @@
 .overlay-text {
   font-size: 32rpx;
   margin-left: 12rpx;
-  color: rgb(226, 118, 134);
+  color: black;
   font-weight: bolder;
 }
 
 .baby-relation-button {
-  margin-left: 30rpx;
+  position: relative;
+  margin-top: 30rpx;
+  top: -120rpx;
+  width: 420rpx;
+  height: 84rpx;
+  font-size: 32rpx; 
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 42rpx;
+  color: #fff;
+  background-color:#3478f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.baby-relation-button:hover{
+  background-color:#00C853;
 }
 .baby-info-container {
-  margin-bottom: 150rpx;
-  margin-top: 30rpx;
+  position: relative;
+  top: -120rpx;
 }
