@@ -61,13 +61,11 @@ Page({
       });
     }
   },
-   // 跳转群组管理页
-   toGrupPage: function () {
+  // 跳转群组管理页
+  toGrupPage: function () {
     let res = util.loginNow();
     if (res == true) {
-      wx.navigateTo({
-        url: '/pages/baby-group/index',
-      });
+      wx.navigateTo({ url: '/pages/group-demo/index' });
     }
   },
   // toFootprint: function (e) {

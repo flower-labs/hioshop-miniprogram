@@ -26,6 +26,11 @@
 
 <img width="1200" src="https://images.gitee.com/uploads/images/2020/1118/090359_21c0304e_1794996.jpeg"/>
 
+### 临时屏蔽页面
+
+"pages/baby-group/index", （废弃）
+"pages/group-demo/index", （废弃）
+
 ### 功能列表
 + 首页：搜索、Banner、公告、分类Icons、分类商品列表
 + 详情页：加入购物车、立即购买、选择规格

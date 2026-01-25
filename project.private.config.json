@@ -65,13 +65,6 @@
                 },
                 {
                     "name": "",
-                    "pathName": "pages/baby-group/index",
-                    "query": "",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
-                    "name": "",
                     "pathName": "pages/rela-group/rela-group",
                     "query": "",
                     "launchMode": "default",
