@@ -1,4 +1,4 @@
-<!-- 新增社交圈内容组件 -->
+<!-- 新增相册圈内容组件 -->
 <view class="social-post-container" wx:if="{{visible}}" catchtouchmove="preventTouchMove">
   <!-- 遮罩层 -->
   <view class="mask" bindtap="onCancel"></view>

@@ -1,6 +1,6 @@
-<!-- 社交圈页面 -->
+<!-- 相册圈页面 -->
 <view class="container">
-  <!-- 社交圈列表 -->
+  <!-- 相册圈列表 -->
   <view class="social-list">
     <!-- 空状态提示 -->
     <view class="empty-hint" wx:if="{{!loading && socialList.length === 0}}">
@@ -86,7 +86,7 @@
     <image class="publish-icon" src="/images/iconTemp/camera.png" mode="aspectFit"></image>
   </view>
 
-  <!-- 使用社交圈发布组件 -->
+  <!-- 使用相册圈发布组件 -->
   <social-post 
     visible="{{showPublish}}" 
     bind:cancel="closePublishModal"

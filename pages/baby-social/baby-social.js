@@ -45,7 +45,7 @@ Page({
     });
   },
 
-  // 加载社交圈列表
+  // 加载相册圈列表
   async loadSocialList(isRefresh = false) {
     if (this.data.loading || (!isRefresh && this.data.noMore)) return;
 
@@ -95,7 +95,7 @@ Page({
         this.setData({ loading: false });
       }
     } catch (error) {
-      console.error('加载社交圈列表失败:', error);
+      console.error('加载相册列表失败:', error);
       wx.showToast({
         title: '加载失败',
         icon: 'none'
@@ -106,7 +106,7 @@ Page({
     }
   },
 
-  // 格式化社交圈列表数据
+  // 格式化相册圈列表数据
   formatSocialList(list) {
     return list.map(item => {
       // 解析图片数组

@@ -1,4 +1,4 @@
-/* 新增社交圈内容组件样式 */
+/* 新增相册圈内容组件样式 */
 .social-post-container {
   position: fixed;
   top: 0;

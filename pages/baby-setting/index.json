@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "宝宝记录",
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "baby-action": "/components/baby-action/index",
     "t-button": "tdesign-miniprogram/button/button",

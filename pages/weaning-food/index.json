@@ -1,6 +1,7 @@
 {
   "disableScroll": true,
   "navigationBarTitleText": "辅食记录",
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "t-tag": "tdesign-miniprogram/tag/tag",
     "t-cell": "tdesign-miniprogram/cell/cell",
