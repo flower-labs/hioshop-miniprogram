@@ -11,41 +11,46 @@ Page({
     page: 1,
     pageSize: 10,
     totalCount: 0,
-    showPublish: false
+    showPublish: false,
+    currentUserId: 0,
+    showCommentEditor: false,
+    commentEditorMode: 'add',
+    commentContent: '',
+    commentTextLength: 0,
+    activeSocialId: null,
+    activeCommentId: null,
+    commentSubmitting: false,
   },
 
   onLoad() {
     this.initCurrentDate();
+    this.syncCurrentUser();
     this.loadSocialList();
   },
 
   onShow() {
-    // 页面显示时可以刷新列表
+    this.syncCurrentUser();
   },
 
   onPullDownRefresh() {
     this.refreshList();
   },
 
-  // onReachBottom() {
-  //   console.log('页面滚动到底部');
-  //   // 页面滚动到底部时自动加载更多
-  //   if (!this.data.loading && !this.data.noMore) {
-  //     this.loadSocialList(false);
-  //   }
-  // },
-
-  // 初始化当前日期
   initCurrentDate() {
     const now = new Date();
     const month = now.getMonth() + 1;
     const day = now.getDate();
     this.setData({
-      currentDate: `${month}月${day}日`
+      currentDate: `${month}月${day}日`,
     });
   },
 
-  // 加载相册圈列表
+  syncCurrentUser() {
+    const userInfo = wx.getStorageSync('userInfo') || {};
+    const currentUserId = Number(userInfo.id || userInfo.user_id || 0);
+    this.setData({ currentUserId });
+  },
+
   async loadSocialList(isRefresh = false) {
     if (this.data.loading || (!isRefresh && this.data.noMore)) return;
 
@@ -54,43 +59,33 @@ Page({
     try {
       const params = {
         page: this.data.page,
-        page_size: this.data.pageSize
+        page_size: this.data.pageSize,
       };
 
-
       const res = await util.request(api.BabySocialList, params, 'POST');
-      
+
       if (res.errno === 0) {
         const list = res.data.list || [];
         const pagination = res.data.pagination || {};
         const totalCount = pagination.totalCount || 0;
-
-        // 格式化数据
         const formattedList = this.formatSocialList(list);
 
-        let socialList = [];
-        if (isRefresh || this.data.page === 1) {
-          // 刷新或首次加载，直接替换数据
-          socialList = formattedList;
-        } else {
-          // 加载更多，追加数据
-          socialList = [...this.data.socialList, ...formattedList];
-        }
+        const socialList =
+          isRefresh || this.data.page === 1 ? formattedList : [...this.data.socialList, ...formattedList];
 
-        // 判断是否还有更多数据
         const hasMore = socialList.length < totalCount && list.length === this.data.pageSize;
 
         this.setData({
-          socialList: socialList,
+          socialList,
           loading: false,
           noMore: !hasMore,
-          totalCount: totalCount,
-          page: hasMore ? this.data.page + 1 : this.data.page
+          totalCount,
+          page: hasMore ? this.data.page + 1 : this.data.page,
         });
       } else {
         wx.showToast({
           title: res.errmsg || '加载失败',
-          icon: 'none'
+          icon: 'none',
         });
         this.setData({ loading: false });
       }
@@ -98,7 +93,7 @@ Page({
       console.error('加载相册列表失败:', error);
       wx.showToast({
         title: '加载失败',
-        icon: 'none'
+        icon: 'none',
       });
       this.setData({ loading: false });
     } finally {
@@ -106,129 +101,459 @@ Page({
     }
   },
 
-  // 格式化相册圈列表数据
+  getCommentToggleText(item = {}) {
+    if (item.commentsVisible) {
+      return '收起评论';
+    }
+
+    if (item.commentTotalCount > 0) {
+      return `查看评论（${item.commentTotalCount}）`;
+    }
+
+    return '查看评论';
+  },
+
+  normalizeSocialItem(item = {}) {
+    return {
+      ...item,
+      commentToggleText: this.getCommentToggleText(item),
+    };
+  },
+
   formatSocialList(list) {
     return list.map(item => {
-      // 解析图片数组
       let mediaList = [];
       if (item.images) {
         try {
           const images = typeof item.images === 'string' ? JSON.parse(item.images) : item.images;
           mediaList = images.map(url => ({
             type: 'image',
-            url: url
+            url,
           }));
         } catch (e) {
           console.error('解析图片失败:', e);
         }
       }
 
-      // 格式化时间
       const createTime = item.create_time || '';
       const timeText = this.formatTimeText(createTime);
 
-      return {
+      return this.normalizeSocialItem({
         id: item.id,
         dateText: this.formatDateText(createTime),
         content: item.content || '',
-        mediaList: mediaList,
+        mediaList,
         tags: item.tags || [],
         location: item.location || '',
         author: item.author || '当前用户',
-        publishTime: timeText
+        publishTime: timeText,
+        comments: [],
+        commentsVisible: false,
+        commentsLoaded: false,
+        commentLoading: false,
+        commentPage: 1,
+        commentPageSize: 10,
+        commentNoMore: false,
+        commentTotalCount: 0,
+      });
+    });
+  },
+
+  formatCommentList(list) {
+    const currentUserId = Number(this.data.currentUserId || 0);
+    return (list || []).map(item => {
+      const userInfo = item.user_info || {};
+      return {
+        ...item,
+        displayName: userInfo.nickname || userInfo.name || `用户${item.user_id}`,
+        timeText: this.formatTimeText(item.create_time),
+        canEdit: Number(item.user_id) === currentUserId,
       };
     });
   },
 
-  // 格式化日期文本（如：12月5日 3个月15天）
   formatDateText(timeStr) {
     if (!timeStr) return '';
-    
+
     const date = new Date(timeStr);
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    
-    // 这里可以根据宝宝生日计算月龄，暂时简化处理
     return `${month}月${day}日`;
   },
 
-  // 格式化时间文本（如：1天前 14:30）
   formatTimeText(timeStr) {
     if (!timeStr) return '';
-    
+
     const date = new Date(timeStr);
     const now = new Date();
     const diffMs = now - date;
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    
+
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
-    
+
     if (diffDays === 0) {
       return `今天 ${hours}:${minutes}`;
-    } else if (diffDays === 1) {
-      return `昨天 ${hours}:${minutes}`;
-    } else if (diffDays < 7) {
-      return `${diffDays}天前 ${hours}:${minutes}`;
-    } else {
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      return `${month}月${day}日 ${hours}:${minutes}`;
     }
+
+    if (diffDays === 1) {
+      return `昨天 ${hours}:${minutes}`;
+    }
+
+    if (diffDays < 7) {
+      return `${diffDays}天前 ${hours}:${minutes}`;
+    }
+
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month}月${day}日 ${hours}:${minutes}`;
   },
 
-  // 刷新列表
+  getSocialIndexById(socialId) {
+    return this.data.socialList.findIndex(item => Number(item.id) === Number(socialId));
+  },
+
+  updateSocialItem(socialId, updater) {
+    const index = this.getSocialIndexById(socialId);
+    if (index === -1) return null;
+
+    const socialList = [...this.data.socialList];
+    const currentItem = socialList[index];
+    const nextItem = typeof updater === 'function' ? updater({ ...currentItem }) : { ...currentItem, ...updater };
+
+    socialList[index] = this.normalizeSocialItem(nextItem);
+    this.setData({ socialList });
+    return socialList[index];
+  },
+
+  getSocialItem(socialId) {
+    const index = this.getSocialIndexById(socialId);
+    return index === -1 ? null : this.data.socialList[index];
+  },
+
   refreshList() {
     this.setData({
       socialList: [],
       page: 1,
       noMore: false,
-      totalCount: 0
+      totalCount: 0,
     });
     this.loadSocialList(true);
   },
 
-  // 加载更多（手动点击触发）
   loadMore() {
     if (!this.data.loading && !this.data.noMore) {
       this.loadSocialList(false);
-    } else {
-      console.log('当前状态不允许加载:', { loading: this.data.loading, noMore: this.data.noMore });
     }
   },
 
-  // 返回
   goBack() {
     wx.navigateBack();
   },
 
-
-  // 打开发布弹窗
   openPublishModal() {
     this.setData({
-      showPublish: true
+      showPublish: true,
     });
   },
 
-  // 关闭发布弹窗
   closePublishModal() {
     this.setData({
-      showPublish: false
+      showPublish: false,
     });
   },
 
-  // 处理发布
-  handlePublish(e) {
-    console.log('发布成功，刷新列表');
-
-    // 关闭弹窗
+  /** 评论发布 */
+  handlePublish() {
     this.closePublishModal();
-
-    // 刷新列表
     this.refreshList();
   },
 
-  // 删除记录
+  async loadCommentList(socialId, options = {}) {
+    const { refresh = false, show = true } = options;
+    const currentItem = this.getSocialItem(socialId);
+    if (!currentItem) return;
+
+    if (currentItem.commentLoading || (!refresh && currentItem.commentNoMore)) {
+      return;
+    }
+
+    const requestPage = refresh ? 1 : currentItem.commentPage || 1;
+
+    this.updateSocialItem(socialId, item => ({
+      ...item,
+      commentLoading: true,
+      commentsVisible: show ? true : item.commentsVisible,
+    }));
+
+    try {
+      const res = await util.request(
+        api.BabySocialCommentList,
+        {
+          social_id: socialId,
+          page: requestPage,
+          page_size: currentItem.commentPageSize || 10,
+        },
+        'POST',
+      );
+
+      if (res.errno === 0) {
+        const pagination = res.data.pagination || {};
+        const commentList = this.formatCommentList(res.data.list || []);
+        const latestItem = this.getSocialItem(socialId) || currentItem;
+        const mergedComments =
+          refresh || requestPage === 1 ? commentList : [...(latestItem.comments || []), ...commentList];
+        const hasMore =
+          typeof pagination.hasNext === 'boolean'
+            ? pagination.hasNext
+            : mergedComments.length < (pagination.totalCount || 0);
+
+        this.updateSocialItem(socialId, item => ({
+          ...item,
+          comments: mergedComments,
+          commentsVisible: show ? true : item.commentsVisible,
+          commentsLoaded: true,
+          commentLoading: false,
+          commentNoMore: !hasMore,
+          commentPage: hasMore ? requestPage + 1 : requestPage,
+          commentTotalCount: pagination.totalCount || mergedComments.length,
+        }));
+      } else {
+        this.updateSocialItem(socialId, { commentLoading: false });
+        wx.showToast({
+          title: res.errmsg || '评论加载失败',
+          icon: 'none',
+        });
+      }
+    } catch (error) {
+      console.error('加载评论失败:', error);
+      this.updateSocialItem(socialId, { commentLoading: false });
+      wx.showToast({
+        title: '评论加载失败',
+        icon: 'none',
+      });
+    }
+  },
+
+  async toggleCommentList(e) {
+    const socialId = Number(e.currentTarget.dataset.socialId);
+    const currentItem = this.getSocialItem(socialId);
+    if (!currentItem) return;
+
+    if (currentItem.commentsVisible) {
+      this.updateSocialItem(socialId, { commentsVisible: false });
+      return;
+    }
+
+    if (currentItem.commentsLoaded) {
+      this.updateSocialItem(socialId, { commentsVisible: true });
+      return;
+    }
+
+    await this.loadCommentList(socialId, { refresh: true, show: true });
+  },
+
+  async loadMoreComments(e) {
+    const socialId = Number(e.currentTarget.dataset.socialId);
+    await this.loadCommentList(socialId, { refresh: false, show: true });
+  },
+
+  onCommentInput(e) {
+    const commentContent = e.detail.value;
+    this.setData({
+      commentContent,
+      commentTextLength: commentContent.length,
+    });
+  },
+
+  preventTouchMove() {
+    return false;
+  },
+
+  resetCommentEditor() {
+    this.setData({
+      showCommentEditor: false,
+      commentEditorMode: 'add',
+      commentContent: '',
+      commentTextLength: 0,
+      activeSocialId: null,
+      activeCommentId: null,
+      commentSubmitting: false,
+    });
+  },
+
+  closeCommentEditor() {
+    if (this.data.commentSubmitting) return;
+    this.resetCommentEditor();
+  },
+
+  async openCommentEditor(e) {
+    const socialId = Number(e.currentTarget.dataset.socialId);
+    const mode = e.currentTarget.dataset.mode || 'add';
+    const commentId = Number(e.currentTarget.dataset.commentId || 0);
+    let commentContent = e.currentTarget.dataset.content || '';
+
+    if (!socialId) {
+      wx.showToast({
+        title: '记录信息异常',
+        icon: 'none',
+      });
+      return;
+    }
+
+    if (mode === 'edit' && commentId) {
+      try {
+        wx.showLoading({
+          title: '加载中...',
+          mask: true,
+        });
+        const res = await util.request(api.BabySocialCommentDetail, { id: commentId }, 'POST');
+        wx.hideLoading();
+
+        if (res.errno !== 0) {
+          wx.showToast({
+            title: res.errmsg || '加载评论失败',
+            icon: 'none',
+          });
+          return;
+        }
+
+        commentContent = (res.data && res.data.content) || commentContent;
+      } catch (error) {
+        wx.hideLoading();
+        console.error('获取评论详情失败:', error);
+        wx.showToast({
+          title: '加载评论失败',
+          icon: 'none',
+        });
+        return;
+      }
+    }
+
+    this.setData({
+      showCommentEditor: true,
+      commentEditorMode: mode,
+      commentContent,
+      commentTextLength: commentContent.length,
+      activeSocialId: socialId,
+      activeCommentId: commentId || null,
+      commentSubmitting: false,
+    });
+  },
+
+  async submitComment() {
+    if (this.data.commentSubmitting) return;
+
+    const content = (this.data.commentContent || '').trim();
+    if (!content) {
+      wx.showToast({
+        title: '评论内容不能为空',
+        icon: 'none',
+      });
+      return;
+    }
+
+    if (content.length > 300) {
+      wx.showToast({
+        title: '评论内容不能超过300个字符',
+        icon: 'none',
+      });
+      return;
+    }
+
+    const mode = this.data.commentEditorMode;
+    const socialId = this.data.activeSocialId;
+    const commentId = this.data.activeCommentId;
+
+    this.setData({ commentSubmitting: true });
+
+    try {
+      const requestUrl = mode === 'edit' ? api.UpdateBabySocialComment : api.AddBabySocialComment;
+      const requestData = mode === 'edit' ? { id: commentId, content } : { social_id: socialId, content };
+
+      const res = await util.request(requestUrl, requestData, 'POST');
+
+      if (res.errno === 0) {
+        wx.showToast({
+          title: mode === 'edit' ? '评论已更新' : '评论成功',
+          icon: 'success',
+        });
+        this.resetCommentEditor();
+        await this.loadCommentList(socialId, { refresh: true, show: true });
+      } else {
+        this.setData({ commentSubmitting: false });
+        wx.showToast({
+          title: res.errmsg || '操作失败',
+          icon: 'none',
+        });
+      }
+    } catch (error) {
+      console.error('提交评论失败:', error);
+      this.setData({ commentSubmitting: false });
+      wx.showToast({
+        title: '操作失败，请重试',
+        icon: 'none',
+      });
+    }
+  },
+
+  deleteComment(e) {
+    const socialId = Number(e.currentTarget.dataset.socialId);
+    const commentId = Number(e.currentTarget.dataset.commentId);
+    const that = this;
+
+    if (!socialId || !commentId) {
+      wx.showToast({
+        title: '评论信息异常',
+        icon: 'none',
+      });
+      return;
+    }
+
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除这条评论吗？',
+      success: async function (res) {
+        if (!res.confirm) return;
+
+        try {
+          wx.showLoading({
+            title: '删除中...',
+            mask: true,
+          });
+          const result = await util.request(
+            api.DeleteBabySocialComment,
+            {
+              id: commentId,
+            },
+            'POST',
+          );
+          wx.hideLoading();
+
+          if (result.errno === 0) {
+            wx.showToast({
+              title: '删除成功',
+              icon: 'success',
+            });
+            await that.loadCommentList(socialId, { refresh: true, show: true });
+          } else {
+            wx.showToast({
+              title: result.errmsg || '删除失败',
+              icon: 'none',
+            });
+          }
+        } catch (error) {
+          wx.hideLoading();
+          console.error('删除评论失败:', error);
+          wx.showToast({
+            title: '删除失败',
+            icon: 'none',
+          });
+        }
+      },
+    });
+  },
+
   deleteSocialRecord(e) {
     const id = e.currentTarget.dataset.id;
     const that = this;
@@ -241,27 +566,29 @@ Page({
           try {
             wx.showLoading({
               title: '删除中...',
-              mask: true
+              mask: true,
             });
 
-            const result = await util.request(api.DeleteBabySocialRecord, {
-              id: id
-            }, 'POST');
+            const result = await util.request(
+              api.DeleteBabySocialRecord,
+              {
+                id,
+              },
+              'POST',
+            );
 
             wx.hideLoading();
 
             if (result.errno === 0) {
               wx.showToast({
                 title: '删除成功',
-                icon: 'success'
+                icon: 'success',
               });
-
-              // 刷新列表
               that.refreshList();
             } else {
               wx.showToast({
                 title: result.errmsg || '删除失败',
-                icon: 'none'
+                icon: 'none',
               });
             }
           } catch (error) {
@@ -269,26 +596,25 @@ Page({
             console.error('删除失败:', error);
             wx.showToast({
               title: '删除失败',
-              icon: 'none'
+              icon: 'none',
             });
           }
         }
-      }
+      },
     });
   },
 
-  // 预览媒体
   previewMedia(e) {
     const index = e.currentTarget.dataset.index;
     const list = e.currentTarget.dataset.list;
     const urls = list.filter(item => item.type === 'image').map(item => item.url);
     const formattedUriList = urls.map(item => item.image_url);
 
-    if (urls.length > 0) {
+    if (formattedUriList.length > 0) {
       wx.previewImage({
-        current: formattedUriList?.[index],
-        urls: formattedUriList
+        current: formattedUriList[index],
+        urls: formattedUriList,
       });
     }
-  }
+  },
 });

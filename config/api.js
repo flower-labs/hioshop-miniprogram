@@ -25,6 +25,11 @@ module.exports = {
   AddBabySocialRecord: ApiRootUrl + 'baby_social/add', // 新增baby朋友圈记录
   BabySocialList: ApiRootUrl + 'baby_social/list', // 获取baby朋友圈列表
   DeleteBabySocialRecord: ApiRootUrl + 'baby_social/delete', // 删除baby朋友圈记录
+  AddBabySocialComment: ApiRootUrl + 'baby_social_comment/add', // 新增朋友圈评论
+  BabySocialCommentList: ApiRootUrl + 'baby_social_comment/list', // 获取朋友圈评论列表
+  BabySocialCommentDetail: ApiRootUrl + 'baby_social_comment/detail', // 获取朋友圈评论详情
+  UpdateBabySocialComment: ApiRootUrl + 'baby_social_comment/update', // 编辑朋友圈评论
+  DeleteBabySocialComment: ApiRootUrl + 'baby_social_comment/delete', // 删除朋友圈评论
   // 预约订单列表
   ReserveOrderList: ApiRootUrl + 'reserve/order', //分类目录全部分类数据接口
   // 获取可预约信息

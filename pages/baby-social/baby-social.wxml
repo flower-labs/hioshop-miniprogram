@@ -1,95 +1,129 @@
 <!-- 相册圈页面 -->
 <view class="container">
-  <!-- 相册圈列表 -->
   <view class="social-list">
-    <!-- 空状态提示 -->
     <view class="empty-hint" wx:if="{{!loading && socialList.length === 0}}">
       <text class="empty-text">暂无朋友圈动态</text>
     </view>
 
     <view class="social-item" wx:for="{{socialList}}" wx:key="id">
-      <!-- 日期标题 -->
       <view class="date-header">
         <view class="date-dot"></view>
         <text class="date-text">{{item.dateText}}</text>
       </view>
 
-      <!-- 内容卡片 -->
       <view class="content-card">
-        <!-- 卡片头部 - 添加删除按钮 -->
         <view class="card-header">
           <view class="card-info">
             <text class="author">{{item.author}}</text>
             <text class="time">{{item.publishTime}}</text>
           </view>
           <view class="card-actions">
-            <image class="delete-icon" src="/images/iconTemp/close.png" mode="aspectFit" bindtap="deleteSocialRecord" data-id="{{item.id}}"></image>
+            <image class="delete-icon" src="/images/iconTemp/close.png" mode="aspectFit" bindtap="deleteSocialRecord"
+              data-id="{{item.id}}"></image>
           </view>
         </view>
 
-        <!-- 图片/视频展示 -->
         <view class="media-container" wx:if="{{item.mediaList && item.mediaList.length > 0}}">
           <block wx:for="{{item.mediaList}}" wx:for-item="media" wx:key="index" wx:for-index="mediaIndex">
-            <!-- 图片 -->
-            <image wx:if="{{media.type === 'image'}}" 
-                   class="media-image" 
-                   src="{{media.url.image_url}}" 
-                   mode="aspectFill"
-                   bindtap="previewMedia"
-                   data-index="{{mediaIndex}}"
-                   data-list="{{item.mediaList}}"
-                   data-id="{{item.id}}"></image>
-            <!-- 视频 -->
-            <video wx:if="{{media.type === 'video'}}" 
-                   class="media-video" 
-                   src="{{media.url}}"
-                   poster="{{media.poster}}"
-                   object-fit="cover"></video>
+            <image wx:if="{{media.type === 'image'}}" class="media-image" src="{{media.url.image_url}}"
+              mode="aspectFill" bindtap="previewMedia" data-index="{{mediaIndex}}" data-list="{{item.mediaList}}"
+              data-id="{{item.id}}"></image>
+            <video wx:if="{{media.type === 'video'}}" class="media-video" src="{{media.url}}" poster="{{media.poster}}"
+              object-fit="cover"></video>
           </block>
         </view>
 
-        <!-- 文本内容 -->
         <view class="text-content" wx:if="{{item.content}}">
           <text>{{item.content}}</text>
         </view>
 
-        <!-- 标签 -->
         <view class="tags" wx:if="{{item.tags && item.tags.length > 0}}">
           <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item.tag_name}}</text>
         </view>
 
-        <!-- 位置信息 -->
         <view class="location-info" wx:if="{{item.location}}">
           <text class="location-icon">📍</text>
           <text class="location-text">{{item.location}}</text>
         </view>
+
+        <view class="comment-toolbar">
+          <view class="comment-action-btn" bindtap="openCommentEditor" data-social-id="{{item.id}}">
+            <text class="comment-action-text">写评论</text>
+          </view>
+          <view class="comment-action-btn comment-action-secondary" bindtap="toggleCommentList"
+            data-social-id="{{item.id}}">
+            <text class="comment-action-text">{{item.commentToggleText}}</text>
+          </view>
+        </view>
+
+        <view class="comment-section" wx:if="{{item.commentsVisible}}">
+          <view class="comment-loading" wx:if="{{item.commentLoading}}">评论加载中...</view>
+
+          <view class="comment-empty"
+            wx:if="{{!item.commentLoading && (!item.comments || item.comments.length === 0)}}">
+            还没有评论，来抢沙发吧
+          </view>
+
+          <view class="comment-list" wx:if="{{item.comments && item.comments.length > 0}}">
+            <view class="comment-item" wx:for="{{item.comments}}" wx:for-item="comment" wx:key="id">
+              <view class="comment-main">
+                <view class="comment-meta">
+                  <text class="comment-author">{{comment.displayName}}</text>
+                  <text class="comment-time">{{comment.timeText}}</text>
+                </view>
+                <text class="comment-content">{{comment.content}}</text>
+              </view>
+
+              <view class="comment-actions" wx:if="{{comment.canEdit}}">
+                <text class="comment-action-link" bindtap="openCommentEditor" data-mode="edit"
+                  data-social-id="{{item.id}}" data-comment-id="{{comment.id}}"
+                  data-content="{{comment.content}}">编辑</text>
+                <text class="comment-action-link comment-action-danger" bindtap="deleteComment"
+                  data-social-id="{{item.id}}" data-comment-id="{{comment.id}}">删除</text>
+              </view>
+            </view>
+          </view>
+
+          <view class="comment-load-more"
+            wx:if="{{!item.commentLoading && !item.commentNoMore && item.comments && item.comments.length > 0}}"
+            bindtap="loadMoreComments" data-social-id="{{item.id}}">
+            加载更多评论
+          </view>
+        </view>
       </view>
     </view>
 
-    <!-- 加载提示和加载更多按钮 -->
     <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
-    
-    <!-- 加载更多按钮） -->
+
     <view class="load-more-container" wx:if="{{!loading && !noMore && socialList.length > 0}}">
       <text class="load-more-link" bindtap="loadMore">点击加载更多</text>
     </view>
-    
-    <!-- 已加载全部提示 -->
+
     <view class="no-more" wx:if="{{noMore && socialList.length > 0}}">
       已加载全部 {{totalCount}} 条记录
     </view>
-    
   </view>
 
-  <!-- 悬浮发布按钮 -->
   <view class="floating-publish-btn" bindtap="openPublishModal">
     <image class="publish-icon" src="/images/iconTemp/camera.png" mode="aspectFit"></image>
   </view>
 
-  <!-- 使用相册圈发布组件 -->
-  <social-post 
-    visible="{{showPublish}}" 
-    bind:cancel="closePublishModal"
-    bind:save="handlePublish"
-  ></social-post>
+  <social-post visible="{{showPublish}}" bind:cancel="closePublishModal" bind:save="handlePublish"></social-post>
+
+  <view class="comment-editor-mask" wx:if="{{showCommentEditor}}" catchtap="closeCommentEditor">
+    <view class="comment-editor-panel" catchtap="preventTouchMove">
+      <view class="comment-editor-header">
+        <text class="comment-editor-title">{{commentEditorMode === 'edit' ? '编辑评论' : '发表评论'}}</text>
+        <text class="comment-editor-count">{{commentTextLength}}/300</text>
+      </view>
+      <textarea class="comment-editor-textarea" value="{{commentContent}}" placeholder="写下你的想法吧~" maxlength="300"
+        auto-height="true" focus="{{showCommentEditor}}" bindinput="onCommentInput"></textarea>
+      <view class="comment-editor-footer">
+        <view class="comment-editor-btn comment-editor-cancel" bindtap="closeCommentEditor">取消</view>
+        <view class="comment-editor-btn comment-editor-confirm" bindtap="submitComment">
+          {{commentSubmitting ? '提交中...' : '确定'}}
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

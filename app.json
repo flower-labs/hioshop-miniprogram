@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/baby-social/baby-social",
     "pages/baby-setting/index",
     "pages/weaning-food/index",
+    "pages/baby-social/baby-social",
     "pages/baby-record-editing/index",
     "pages/baby-orders/index",
     "pages/baby-register/baby-register",
