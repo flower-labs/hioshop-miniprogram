@@ -18,13 +18,12 @@
     "pages/edit/edit",
     "pages/rela-group/rela-group",
     "pages/addRelative/addRelative",
-    "pages/babySwitch/babySwitch",
-    "pages/growthRecord/growthRecord"
+    "pages/babySwitch/babySwitch"
   ],
   "subpackages": [
     {
       "root": "moduleAnalysis",
-      "pages": ["pages/baby-analysis/index"],
+      "pages": ["pages/baby-analysis/index","pages/growthRecord/growthRecord"],
       "independent": true
     }
   ],

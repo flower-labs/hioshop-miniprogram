@@ -174,7 +174,9 @@ Page({
     wx.redirectTo({ url: '/pages/rela-group/rela-group' });
   },
   gotoRecordPage(){
-    wx.redirectTo({ url: '/pages/growthRecord/growthRecord' });
+    wx.navigateTo({
+      url: '/moduleAnalysis/pages/growthRecord/growthRecord',
+    });
   },
   handleBabyBloodTypeModify() {
     this.setData({ actionPanelType: 'blood' });
