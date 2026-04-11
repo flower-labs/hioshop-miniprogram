@@ -14,7 +14,6 @@
     <image wx:if="{{babyInfo.baby_sex === 1}}" src="https://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/baby-boy-3d.png" class="overlay-image" />
     <image wx:if="{{babyInfo.baby_sex === 2}}" src="https://cdn.bajie.club/babycare/%E5%BC%95%E5%AF%BC%E7%9B%B8%E5%85%B3/baby-girl-3d.png" class="overlay-image" />
     <text class="overlay-text">已经出生 {{babyBirth.months}} 个月 {{babyBirth.days}} 天</text>
-    <button bind:tap="gotoRelationPage" class="baby-relation-button" size="mini" type="primary" plain>亲友团</button>
   </view>
 
   <view class="baby-info-container">
@@ -28,7 +27,8 @@
       <t-cell title="备注" data-field="baby_extra" bind:tap="handleEdit" hover note="{{babyInfo.baby_extra}}" arrow />
     </t-cell-group>
   </view>
-
+  <button bind:tap="gotoRelationPage" class="baby-relation-button">亲友团</button>
+  <button bind:tap="gotoRecordPage" class="baby-relation-button">成长记录</button>
   <!-- 生日选择器 -->
   <t-date-time-picker auto-close visible="{{dateVisible}}" mode="date" value="{{date}}" format="YYYY-MM-DD" bindchange="onConfirm" bindcancel="hidePicker" />
 </view>

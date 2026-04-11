@@ -24,7 +24,7 @@ Page({
     qiniuToken: {
       token: '',
       url: '',
-    },
+    }
   },
 
   async setCoverImage() {
@@ -172,6 +172,9 @@ Page({
   },
   gotoRelationPage() {
     wx.redirectTo({ url: '/pages/rela-group/rela-group' });
+  },
+  gotoRecordPage(){
+    wx.redirectTo({ url: '/pages/growthRecord/growthRecord' });
   },
   handleBabyBloodTypeModify() {
     this.setData({ actionPanelType: 'blood' });
