@@ -20,12 +20,18 @@ Page({
     activeSocialId: null,
     activeCommentId: null,
     commentSubmitting: false,
+    showBackToTop: false,
+    screenHeight: 0,
   },
 
   onLoad() {
     this.initCurrentDate();
     this.syncCurrentUser();
     this.loadSocialList();
+
+    // 获取屏幕高度
+    const sysInfo = wx.getSystemInfoSync();
+    this.setData({ screenHeight: sysInfo.windowHeight });
   },
 
   onShow() {
@@ -34,6 +40,30 @@ Page({
 
   onPullDownRefresh() {
     this.refreshList();
+  },
+
+  onPageScroll(e) {
+    const threshold = this.data.screenHeight * 0.8;
+    const shouldShow = e.scrollTop > threshold;
+    // 避免频繁 setData
+    if (shouldShow !== this.data.showBackToTop) {
+      this.setData({ showBackToTop: shouldShow });
+    }
+  },
+
+  scrollToTop() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300,
+    });
+  },
+
+  handleFloatingBtnTap() {
+    if (this.data.showBackToTop) {
+      this.scrollToTop();
+    } else {
+      this.openPublishModal();
+    }
   },
 
   initCurrentDate() {
@@ -138,6 +168,9 @@ Page({
       const createTime = item.create_time || '';
       const timeText = this.formatTimeText(createTime);
 
+      // 如果接口返回了 comment_count 字段，则作为评论数初始值
+      const commentTotalCount = (item.comment_count != null) ? Number(item.comment_count) : 0;
+
       return this.normalizeSocialItem({
         id: item.id,
         dateText: this.formatDateText(createTime),
@@ -154,7 +187,7 @@ Page({
         commentPage: 1,
         commentPageSize: 10,
         commentNoMore: false,
-        commentTotalCount: 0,
+        commentTotalCount,
       });
     });
   },

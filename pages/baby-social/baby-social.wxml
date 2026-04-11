@@ -1,17 +1,24 @@
 <!-- 相册圈页面 -->
 <view class="container">
   <view class="social-list">
+    <!-- 空状态 -->
     <view class="empty-hint" wx:if="{{!loading && socialList.length === 0}}">
+      <text class="empty-emoji">📷</text>
       <text class="empty-text">暂无朋友圈动态</text>
+      <text class="empty-sub">点击右下角按钮发布第一条动态吧～</text>
     </view>
 
+    <!-- 动态列表 -->
     <view class="social-item" wx:for="{{socialList}}" wx:key="id">
+      <!-- 日期时间线 -->
       <view class="date-header">
         <view class="date-dot"></view>
         <text class="date-text">{{item.dateText}}</text>
       </view>
 
+      <!-- 内容卡片 -->
       <view class="content-card">
+        <!-- 卡片头部 -->
         <view class="card-header">
           <view class="card-info">
             <text class="author">{{item.author}}</text>
@@ -23,6 +30,12 @@
           </view>
         </view>
 
+        <!-- 文本内容（放在图片前面，优化阅读体验） -->
+        <view class="text-content" wx:if="{{item.content}}">
+          <text>{{item.content}}</text>
+        </view>
+
+        <!-- 媒体展示 -->
         <view class="media-container" wx:if="{{item.mediaList && item.mediaList.length > 0}}">
           <block wx:for="{{item.mediaList}}" wx:for-item="media" wx:key="index" wx:for-index="mediaIndex">
             <image wx:if="{{media.type === 'image'}}" class="media-image" src="{{media.url.image_url}}"
@@ -33,35 +46,35 @@
           </block>
         </view>
 
-        <view class="text-content" wx:if="{{item.content}}">
-          <text>{{item.content}}</text>
-        </view>
-
+        <!-- 标签 -->
         <view class="tags" wx:if="{{item.tags && item.tags.length > 0}}">
           <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item.tag_name}}</text>
         </view>
 
+        <!-- 位置信息 -->
         <view class="location-info" wx:if="{{item.location}}">
           <text class="location-icon">📍</text>
           <text class="location-text">{{item.location}}</text>
         </view>
 
+        <!-- 评论操作栏 -->
         <view class="comment-toolbar">
           <view class="comment-action-btn" bindtap="openCommentEditor" data-social-id="{{item.id}}">
-            <text class="comment-action-text">写评论</text>
+            <text class="comment-action-text">✏️ 写评论</text>
           </view>
           <view class="comment-action-btn comment-action-secondary" bindtap="toggleCommentList"
             data-social-id="{{item.id}}">
-            <text class="comment-action-text">{{item.commentToggleText}}</text>
+            <text class="comment-action-text">💬 {{item.commentToggleText}}</text>
           </view>
         </view>
 
+        <!-- 评论区 -->
         <view class="comment-section" wx:if="{{item.commentsVisible}}">
-          <view class="comment-loading" wx:if="{{item.commentLoading}}">评论加载中...</view>
+          <view class="comment-loading" wx:if="{{item.commentLoading}}">加载中...</view>
 
           <view class="comment-empty"
             wx:if="{{!item.commentLoading && (!item.comments || item.comments.length === 0)}}">
-            还没有评论，来抢沙发吧
+            还没有评论，点击「写评论」按钮抢沙发吧 🛋️
           </view>
 
           <view class="comment-list" wx:if="{{item.comments && item.comments.length > 0}}">
@@ -87,12 +100,13 @@
           <view class="comment-load-more"
             wx:if="{{!item.commentLoading && !item.commentNoMore && item.comments && item.comments.length > 0}}"
             bindtap="loadMoreComments" data-social-id="{{item.id}}">
-            加载更多评论
+            加载更多评论 ↓
           </view>
         </view>
       </view>
     </view>
 
+    <!-- 加载状态 -->
     <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
 
     <view class="load-more-container" wx:if="{{!loading && !noMore && socialList.length > 0}}">
@@ -100,16 +114,20 @@
     </view>
 
     <view class="no-more" wx:if="{{noMore && socialList.length > 0}}">
-      已加载全部 {{totalCount}} 条记录
+      — 已加载全部 {{totalCount}} 条记录 —
     </view>
   </view>
 
-  <view class="floating-publish-btn" bindtap="openPublishModal">
-    <image class="publish-icon" src="/images/iconTemp/camera.png" mode="aspectFit"></image>
+  <!-- 悬浮按钮：发布 / 返回顶部 -->
+  <view class="floating-btn {{showBackToTop ? 'floating-btn-back' : ''}}" bindtap="handleFloatingBtnTap">
+    <image wx:if="{{!showBackToTop}}" class="floating-btn-icon" src="/images/iconTemp/camera_black.png" mode="aspectFit"></image>
+    <image wx:if="{{showBackToTop}}" class="floating-btn-icon" src="/images/iconTemp/backToTop.png" mode="aspectFit"></image>
   </view>
 
+  <!-- 发布组件 -->
   <social-post visible="{{showPublish}}" bind:cancel="closePublishModal" bind:save="handlePublish"></social-post>
 
+  <!-- 评论编辑器弹窗 -->
   <view class="comment-editor-mask" wx:if="{{showCommentEditor}}" catchtap="closeCommentEditor">
     <view class="comment-editor-panel" catchtap="preventTouchMove">
       <view class="comment-editor-header">

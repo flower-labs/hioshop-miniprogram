@@ -2,9 +2,9 @@
   "navigationBarTitleText": "相册",
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50,
-  "backgroundColor": "#E8F4F8",
+  "backgroundColor": "#FFF8E1",
   "backgroundTextStyle": "dark",
-  "navigationBarBackgroundColor": "#4A90E2",
+  "navigationBarBackgroundColor": "#F5A623",
   "navigationBarTextStyle": "white",
   "pullDownRefreshThreshold": 45,
   "usingComponents": {

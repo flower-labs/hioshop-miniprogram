@@ -1,8 +1,8 @@
-/* 相册圈页面样式 */
+/* 相册圈页面样式 - 浅黄暖色主题 */
 .container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(180deg, #E8F4F8 0%, #F5FBFD 100%);
+  background: linear-gradient(180deg, #FFF8E1 0%, #FFFDF5 100%);
   color: #333;
 }
 
@@ -24,13 +24,26 @@
   margin-top: 100rpx;
 }
 
+.empty-emoji {
+  display: block;
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+}
+
 .empty-text {
   display: block;
   font-size: 32rpx;
-  color: #666;
-  margin-bottom: 16rpx;
+  color: #888;
+  margin-bottom: 12rpx;
 }
 
+.empty-sub {
+  display: block;
+  font-size: 26rpx;
+  color: #aaa;
+}
+
+/* 日期时间线 */
 .date-header {
   display: flex;
   align-items: center;
@@ -38,34 +51,36 @@
 }
 
 .date-dot {
-  width: 16rpx;
-  height: 16rpx;
-  background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%);
+  width: 18rpx;
+  height: 18rpx;
+  background: linear-gradient(135deg, #F5A623 0%, #F7C948 100%);
   border-radius: 50%;
   margin-right: 16rpx;
-  box-shadow: 0 2rpx 8rpx rgba(74, 144, 226, 0.3);
+  box-shadow: 0 2rpx 10rpx rgba(245, 166, 35, 0.35);
 }
 
 .date-text {
   font-size: 28rpx;
-  color: #4A90E2;
+  color: #D48806;
   font-weight: 600;
+  letter-spacing: 1rpx;
 }
 
+/* 内容卡片 */
 .content-card {
   background-color: #FFFFFF;
-  border-radius: 20rpx;
-  padding: 28rpx;
+  border-radius: 24rpx;
+  padding: 30rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 16rpx rgba(74, 144, 226, 0.08);
-  border: 1rpx solid rgba(74, 144, 226, 0.1);
+  box-shadow: 0 6rpx 20rpx rgba(245, 166, 35, 0.08);
+  border: 1rpx solid rgba(245, 166, 35, 0.12);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .card-info {
@@ -83,7 +98,7 @@
 .delete-icon {
   width: 40rpx;
   height: 40rpx;
-  opacity: 0.6;
+  opacity: 0.5;
   transition: opacity 0.3s;
 }
 
@@ -91,6 +106,7 @@
   opacity: 1;
 }
 
+/* 媒体展示区 */
 .media-container {
   margin-bottom: 24rpx;
 }
@@ -98,25 +114,27 @@
 .media-image {
   width: 100%;
   height: 600rpx;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   margin-bottom: 16rpx;
 }
 
 .media-video {
   width: 100%;
   height: 600rpx;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   margin-bottom: 16rpx;
 }
 
+/* 文本内容 */
 .text-content {
   font-size: 28rpx;
-  line-height: 44rpx;
+  line-height: 46rpx;
   color: #333333;
   margin-bottom: 24rpx;
   word-break: break-all;
 }
 
+/* 标签 */
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -125,12 +143,12 @@
 }
 
 .tag {
-  padding: 8rpx 20rpx;
-  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  padding: 8rpx 22rpx;
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
   border-radius: 32rpx;
   font-size: 24rpx;
-  color: #4A90E2;
-  border: 1rpx solid rgba(74, 144, 226, 0.2);
+  color: #D48806;
+  border: 1rpx solid rgba(245, 166, 35, 0.2);
 }
 
 .author {
@@ -143,12 +161,13 @@
   font-size: 24rpx;
 }
 
+/* 位置信息 */
 .location-info {
   display: flex;
   align-items: center;
   margin-top: 16rpx;
   padding-top: 16rpx;
-  border-top: 1rpx solid rgba(74, 144, 226, 0.1);
+  border-top: 1rpx solid rgba(245, 166, 35, 0.1);
 }
 
 .location-icon {
@@ -161,37 +180,44 @@
   color: #666666;
 }
 
+/* 评论工具栏 */
 .comment-toolbar {
   display: flex;
   align-items: center;
   gap: 20rpx;
   margin-top: 24rpx;
   padding-top: 20rpx;
-  border-top: 1rpx solid rgba(74, 144, 226, 0.08);
+  border-top: 1rpx solid rgba(245, 166, 35, 0.1);
 }
 
 .comment-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10rpx 24rpx;
+  padding: 10rpx 28rpx;
   border-radius: 999rpx;
-  background: rgba(74, 144, 226, 0.12);
+  background: rgba(245, 166, 35, 0.1);
+  transition: background 0.2s;
+}
+
+.comment-action-btn:active {
+  background: rgba(245, 166, 35, 0.2);
 }
 
 .comment-action-secondary {
-  background: rgba(103, 181, 232, 0.12);
+  background: rgba(247, 201, 72, 0.12);
 }
 
 .comment-action-text {
   font-size: 24rpx;
-  color: #4A90E2;
+  color: #D48806;
 }
 
+/* 评论区域 */
 .comment-section {
   margin-top: 20rpx;
   padding: 20rpx;
-  background: linear-gradient(180deg, #F8FCFF 0%, #F3F8FC 100%);
+  background: linear-gradient(180deg, #FFFDF5 0%, #FFF9E6 100%);
   border-radius: 16rpx;
 }
 
@@ -200,8 +226,12 @@
 .comment-load-more {
   text-align: center;
   font-size: 24rpx;
-  color: #7A8CA5;
+  color: #A08C60;
   padding: 16rpx 0;
+}
+
+.comment-load-more:active {
+  color: #D48806;
 }
 
 .comment-list {
@@ -212,7 +242,7 @@
 
 .comment-item {
   padding-bottom: 20rpx;
-  border-bottom: 1rpx solid rgba(74, 144, 226, 0.08);
+  border-bottom: 1rpx solid rgba(245, 166, 35, 0.08);
 }
 
 .comment-item:last-child {
@@ -235,13 +265,13 @@
 
 .comment-author {
   font-size: 25rpx;
-  color: #376FAE;
+  color: #B8860B;
   font-weight: 600;
 }
 
 .comment-time {
   font-size: 22rpx;
-  color: #A0AEC0;
+  color: #B0A080;
 }
 
 .comment-content {
@@ -260,23 +290,24 @@
 
 .comment-action-link {
   font-size: 23rpx;
-  color: #4A90E2;
+  color: #D48806;
 }
 
 .comment-action-danger {
   color: #F56C6C;
 }
 
+/* 加载状态 */
 .loading-tip,
 .no-more {
   text-align: center;
   padding: 32rpx 0;
   font-size: 28rpx;
-  color: #4A90E2;
+  color: #D48806;
 }
 
 .loading-tip {
-  color: #666;
+  color: #888;
 }
 
 .no-more {
@@ -292,46 +323,69 @@
 .load-more-link {
   display: block;
   font-size: 26rpx;
-  color: #4A90E2;
+  color: #D48806;
   padding: 16rpx 32rpx;
-  border-radius: 4rpx;
+  border-radius: 8rpx;
   transition: all 0.2s ease;
   margin-bottom: 8rpx;
 }
 
 .load-more-link:active {
-  color: #67B5E8;
-  background-color: rgba(74, 144, 226, 0.05);
+  color: #F5A623;
+  background-color: rgba(245, 166, 35, 0.06);
 }
 
-.floating-publish-btn {
+/* 悬浮按钮 - 白色凸起风格 */
+.floating-btn {
   position: fixed;
   bottom: 42rpx;
   right: 42rpx;
-  width: 80rpx;
-  height: 80rpx;
-  background: linear-gradient(135deg, #6aa4e6 0%, #67B5E8 100%);
+  width: 70rpx;
+  height: 70rpx;
+  background: #FFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+  /* 多层阴影：底层扩散阴影 + 中层灰色阴影 + 顶层微凸高光 */
+  box-shadow:
+    0 2rpx 4rpx rgba(0, 0, 0, 0.04),
+    0 6rpx 16rpx rgba(0, 0, 0, 0.1),
+    0 12rpx 32rpx rgba(0, 0, 0, 0.06);
   z-index: 999;
   transition: all 0.3s ease;
   animation: floating 5s ease-in-out infinite;
 }
 
-.floating-publish-btn:active {
-  transform: scale(0.9);
-  box-shadow: 0 4rpx 16rpx rgba(74, 144, 226, 0.6);
+.floating-btn:active {
+  transform: scale(0.92) translateY(2rpx);
+  box-shadow:
+    0 1rpx 2rpx rgba(0, 0, 0, 0.06),
+    0 4rpx 10rpx rgba(0, 0, 0, 0.12);
   animation: none;
 }
 
-.publish-icon {
-  width: 45rpx;
-  height: 45rpx;
+/* 返回顶部状态 */
+.floating-btn-back {
+  background: #FFFFFF;
+  box-shadow:
+    0 2rpx 4rpx rgba(0, 0, 0, 0.04),
+    0 6rpx 16rpx rgba(0, 0, 0, 0.1),
+    0 12rpx 32rpx rgba(0, 0, 0, 0.06);
 }
 
+.floating-btn-back:active {
+  box-shadow:
+    0 1rpx 2rpx rgba(0, 0, 0, 0.06),
+    0 4rpx 10rpx rgba(0, 0, 0, 0.12);
+}
+
+.floating-btn-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+/* 评论编辑器 */
 .comment-editor-mask {
   position: fixed;
   left: 0;
@@ -368,7 +422,7 @@
 
 .comment-editor-count {
   font-size: 24rpx;
-  color: #94A3B8;
+  color: #B0A080;
 }
 
 .comment-editor-textarea {
@@ -377,8 +431,8 @@
   max-height: 360rpx;
   padding: 22rpx 24rpx;
   box-sizing: border-box;
-  background: #F8FAFC;
-  border: 1rpx solid #D9E6F2;
+  background: #FFFDF5;
+  border: 1rpx solid #F0DCA0;
   border-radius: 18rpx;
   font-size: 28rpx;
   line-height: 42rpx;
@@ -402,21 +456,28 @@
 
 .comment-editor-cancel {
   color: #64748B;
-  background: #EEF2F7;
+  background: #F0F0EB;
 }
 
 .comment-editor-confirm {
   color: #fff;
-  background: linear-gradient(135deg, #4A90E2 0%, #67B5E8 100%);
+  background: linear-gradient(135deg, #F5A623 0%, #F7C948 100%);
 }
 
+/* 悬浮动画 - 微微凸起呼吸效果 */
 @keyframes floating {
   0%, 100% {
     transform: translateY(0);
-    box-shadow: 0 8rpx 24rpx rgba(74, 144, 226, 0.4);
+    box-shadow:
+      0 2rpx 4rpx rgba(0, 0, 0, 0.04),
+      0 6rpx 16rpx rgba(0, 0, 0, 0.1),
+      0 12rpx 32rpx rgba(0, 0, 0, 0.06);
   }
   50% {
-    transform: translateY(-8rpx);
-    box-shadow: 0 12rpx 32rpx rgba(74, 144, 226, 0.5);
+    transform: translateY(-6rpx);
+    box-shadow:
+      0 4rpx 8rpx rgba(0, 0, 0, 0.06),
+      0 10rpx 24rpx rgba(0, 0, 0, 0.12),
+      0 18rpx 40rpx rgba(0, 0, 0, 0.08);
   }
 }
