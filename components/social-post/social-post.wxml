@@ -51,7 +51,7 @@
               ></video>
               <!-- 删除按钮 -->
               <view class="delete-btn" bindtap="deleteMedia" data-index="{{index}}">
-                <image class="delete-icon" src="/images/iconTemp/close.svg" mode="aspectFit"></image>
+                <image class="delete-icon" src="https://cdn.bajie.club/images/close.png" mode="aspectFit"></image>
               </view>
             </view>
           </block>
@@ -62,7 +62,7 @@
             bindtap="chooseMedia" 
             wx:if="{{formData.mediaList.length < 5}}"
           >
-            <image class="camera-icon" src="/images/iconTemp/add.png" mode="aspectFit"></image>
+            <image class="camera-icon" src="https://cdn.bajie.club/images/add.png" mode="aspectFit"></image>
           </view>
         </view>
       </view>
@@ -92,36 +92,36 @@
         <!-- 所在位置 -->
         <view class="option-item" bindtap="chooseLocation">
           <view class="option-left">
-            <image class="option-icon" src="/images/iconTemp/location.png" mode="aspectFit"></image>
+            <image class="option-icon" src="https://cdn.bajie.club/images/location.png" mode="aspectFit"></image>
             <text class="option-label">所在位置</text>
           </view>
           <view class="option-right">
             <text class="option-value">{{formData.location || ''}}</text>
-            <image class="arrow-icon" src="/images/iconTemp/arrow-right.png" mode="aspectFit"></image>
+            <image class="arrow-icon" src="https://cdn.bajie.club/images/arrow-right.png" mode="aspectFit"></image>
           </view>
         </view>
 
         <!-- 谁可以看 -->
         <view class="option-item" bindtap="chooseVisibility">
           <view class="option-left">
-            <image class="option-icon" src="/images/iconTemp/lock.png" mode="aspectFit"></image>
+            <image class="option-icon" src="https://cdn.bajie.club/images/lock.png" mode="aspectFit"></image>
             <text class="option-label">谁可以看</text>
           </view>
           <view class="option-right">
             <text class="option-value">{{formData.visibilityText}}</text>
-            <image class="arrow-icon" src="/images/iconTemp/arrow-right.png" mode="aspectFit"></image>
+            <image class="arrow-icon" src="https://cdn.bajie.club/images/arrow-right.png" mode="aspectFit"></image>
           </view>
         </view>
 
         <!-- 记录时间 -->
         <view class="option-item" bindtap="chooseTime">
           <view class="option-left">
-            <image class="option-icon" src="/images/iconTemp/time.png" mode="aspectFit"></image>
+            <image class="option-icon" src="https://cdn.bajie.club/images/time.png" mode="aspectFit"></image>
             <text class="option-label">记录时间</text>
           </view>
           <view class="option-right">
             <text class="option-value">{{formData.recordTime}}</text>
-            <image class="arrow-icon" src="/images/iconTemp/arrow-right.png" mode="aspectFit"></image>
+            <image class="arrow-icon" src="https://cdn.bajie.club/images/arrow-right.png" mode="aspectFit"></image>
           </view>
         </view>
       </view>

@@ -25,7 +25,7 @@
             <text class="time">{{item.publishTime}}</text>
           </view>
           <view class="card-actions">
-            <image class="delete-icon" src="/images/iconTemp/close.png" mode="aspectFit" bindtap="deleteSocialRecord"
+            <image class="delete-icon" src="https://cdn.bajie.club/images/close.png" mode="aspectFit" bindtap="deleteSocialRecord"
               data-id="{{item.id}}"></image>
           </view>
         </view>
@@ -120,8 +120,8 @@
 
   <!-- 悬浮按钮：发布 / 返回顶部 -->
   <view class="floating-btn {{showBackToTop ? 'floating-btn-back' : ''}}" bindtap="handleFloatingBtnTap">
-    <image wx:if="{{!showBackToTop}}" class="floating-btn-icon" src="/images/iconTemp/camera_black.png" mode="aspectFit"></image>
-    <image wx:if="{{showBackToTop}}" class="floating-btn-icon" src="/images/iconTemp/backToTop.png" mode="aspectFit"></image>
+    <image wx:if="{{!showBackToTop}}" class="floating-btn-icon" src="https://cdn.bajie.club/images/camera_black.png" mode="aspectFit"></image>
+    <image wx:if="{{showBackToTop}}" class="floating-btn-icon" src="https://cdn.bajie.club/images/backToTop.png" mode="aspectFit"></image>
   </view>
 
   <!-- 发布组件 -->
