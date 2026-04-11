@@ -1,4 +1,4 @@
-import * as echarts from '../../../lib/ec-canvas/echarts';
+import * as echarts from '../../lib/ec-canvas/echarts';
 import moment from 'moment';
 import { generateOptions } from './utils';
 

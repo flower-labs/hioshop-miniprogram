@@ -3,7 +3,7 @@ const api = require('../../../config/api.js');
 const util = require('../../../utils/util.js');
 const moment = require('moment');
 
-import * as echarts from '../../../lib/ec-canvas/echarts';
+import * as echarts from '../../lib/ec-canvas/echarts';
 // 当为let定义才能修改全局变量
 let heightChart = '';
 let weightChart = '';
