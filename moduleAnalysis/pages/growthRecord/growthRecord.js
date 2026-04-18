@@ -637,6 +637,40 @@ Page({
   },
   // 阻止事件冒泡（空函数）
   preventBubble() {},
+  // 记录列表下拉刷新
+  onListRefresh() {
+    this.setData({ isRefreshing: true });
+    const defaultBabyId = wx.getStorageSync('defaultBabyId');
+    util
+      .request(
+        api.ListBabyBodyRecord,
+        { baby_id: defaultBabyId },
+        'post',
+      )
+      .then(res => {
+        if (res.errno == 0) {
+          const tempBabyData = res.data.list.map(item => ({
+            id: item.id,
+            baby_id: item.baby_id,
+            weight: item.weight,
+            height: item.height,
+            date: item.measure_date.split(' ')[0],
+          }));
+          this.setData({
+            growthRecords: tempBabyData,
+            latestHeight: tempBabyData[tempBabyData.length - 1]?.height,
+            latestWeight: tempBabyData[tempBabyData.length - 1]?.weight,
+          });
+        }
+      })
+      .catch(err => {
+        console.error('刷新数据失败：', err);
+        wx.showToast({ title: '刷新失败', icon: 'none' });
+      })
+      .finally(() => {
+        this.setData({ isRefreshing: false });
+      });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

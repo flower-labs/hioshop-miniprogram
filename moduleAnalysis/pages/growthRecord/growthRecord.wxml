@@ -86,32 +86,42 @@
   <swiper current="{{currentTab}}" duration="300" bindchange="swiperChange" style="flex: 1;">
     <!-- 记录列表页 -->
     <swiper-item>
-      <view class="list-container">
-        <button class="add-record-btn" bindtap="addNewRecord">
-          <icon type="plus" size="20" color="#fff" />
-          <text>添加记录</text>
-        </button>
+      <scroll-view
+        class="list-scroll-view"
+        scroll-y
+        refresher-enabled
+        refresher-triggered="{{isRefreshing}}"
+        bindrefresherrefresh="onListRefresh"
+        refresher-default-style="black"
+        refresher-background="#f8f8f8"
+      >
+        <view class="list-container">
+          <button class="add-record-btn" bindtap="addNewRecord">
+            <icon type="plus" size="20" color="#fff" />
+            <text>添加记录</text>
+          </button>
 
-        <view class="records-list">
-          <view class="list-header">
-            <view class="date-column">日期</view>
-            <view class="height-column">身高(cm)</view>
-            <view class="weight-column">体重(kg)</view>
-            <view class="delete-data">编辑</view>
-          </view>
+          <view class="records-list">
+            <view class="list-header">
+              <view class="date-column">日期</view>
+              <view class="height-column">身高(cm)</view>
+              <view class="weight-column">体重(kg)</view>
+              <view class="delete-data">编辑</view>
+            </view>
 
-          <view class="record-item" wx:for="{{growthRecords}}" wx:key="index">
-            <view class="date-column">{{item.date}}</view>
-            <view class="height-column">{{item.height}}</view>
-            <view class="weight-column">{{item.weight}}</view>
-            <view class="delete-data" data-id="{{item.id}}" bindtap="handleDelete" >删除</view>
-          </view>
+            <view class="record-item" wx:for="{{growthRecords}}" wx:key="index">
+              <view class="date-column">{{item.date}}</view>
+              <view class="height-column">{{item.height}}</view>
+              <view class="weight-column">{{item.weight}}</view>
+              <view class="delete-data" data-id="{{item.id}}" bindtap="handleDelete">删除</view>
+            </view>
 
-          <view class="empty-tip" wx:if="{{growthRecords.length === 0}}">
-            暂无记录，点击"添加记录"开始记录生长数据
+            <view class="empty-tip" wx:if="{{growthRecords.length === 0}}">
+              暂无记录，点击"添加记录"开始记录生长数据
+            </view>
           </view>
         </view>
-      </view>
+      </scroll-view>
     </swiper-item>
 
     <!-- 身高曲线页 -->

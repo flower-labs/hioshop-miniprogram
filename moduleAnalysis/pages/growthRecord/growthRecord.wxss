@@ -264,11 +264,16 @@
     }
     
     /* 记录列表样式 */
-    .list-container {
+    .list-scroll-view {
       height: 100%;
+    }
+
+    .list-container {
+      min-height: 100%;
       display: flex;
       flex-direction: column;
       background-color: #f8f8f8;
+      padding-bottom: 20rpx;
     }
     
     .add-record-btn {
