@@ -25,31 +25,59 @@
   </view>
   <!-- 弹窗组件（隐藏状态，点击按钮后显示） -->
 
-  <view class="dialog-mask" wx:if="{{isShowDialog}}">
-    <view class="dialog-container">
-      <!-- 添加数据表单 -->
-      <view class="add-form">
-        <view class="form-title">添加新数据</view>
-        <view class="form-row">
-          <text class="form-label">日期：</text>
+  <view class="dialog-mask" wx:if="{{isShowDialog}}" catchtap="hideDialog">
+    <view class="dialog-container" catchtap="preventBubble">
+      <!-- 弹窗头部 -->
+      <view class="dialog-header">
+        <view class="dialog-title-wrapper">
+          <view class="dialog-title-icon">+</view>
+          <text class="dialog-title">添加生长记录</text>
+        </view>
+        <view class="dialog-close" bindtap="hideDialog">✕</view>
+      </view>
+
+      <!-- 表单内容 -->
+      <view class="dialog-body">
+        <!-- 日期选择 -->
+        <view class="form-group">
+          <view class="form-label-modern">
+            <text class="label-text">测量日期</text>
+          </view>
           <picker mode="date" value="{{formData.date}}" start="2020-01-01" end="{{today}}" bindchange="onDateChange">
-            <view class="form-input">{{formData.date}}</view>
+            <view class="form-picker">
+              <text class="picker-value">{{formData.date}}</text>
+              <text class="picker-arrow">›</text>
+            </view>
           </picker>
         </view>
-        <view class="form-row">
-          <text class="form-label">身高(cm)：</text>
-          <input type="number" placeholder="输入身高（50-200）" value="{{formData.height}}" bind:input="onHeightInput" class="form-input"></input>
-        </view>
-        <view class="form-row">
-          <text class="form-label">体重(kg)：</text>
-          <input type="number" placeholder="输入体重（2-100）" value="{{formData.weight}}" bind:input="onWeightInput" class="form-input"></input>
+
+        <!-- 身高输入 -->
+        <view class="form-group">
+          <view class="form-label-modern">
+            <text class="label-text">身高</text>
+            <text class="label-unit">cm</text>
+          </view>
+          <view class="form-input-wrapper">
+            <input type="digit" placeholder="请输入身高" value="{{formData.height}}" bind:input="onHeightInput" class="form-input-modern" placeholder-class="input-placeholder" />
+          </view>
         </view>
 
-        <!-- 按钮区域 -->
-        <view class="dialog-btns">
-          <button bindtap="hideDialog" class="cancel-btn">取消</button>
-          <button bindtap="submitData" class="confirm-btn">确认提交</button>
+        <!-- 体重输入 -->
+        <view class="form-group">
+          <view class="form-label-modern">
+            <text class="label-text">体重</text>
+            <text class="label-unit">kg</text>
+          </view>
+          <view class="form-input-wrapper">
+            <input type="digit" placeholder="请输入体重" value="{{formData.weight}}" bind:input="onWeightInput" class="form-input-modern" placeholder-class="input-placeholder" />
+          </view>
         </view>
+      </view>
+
+      <!-- 按钮区域 -->
+      <view class="dialog-footer">
+        <button class="btn-cancel" bindtap="hideDialog">取消</button>
+        <button class="btn-confirm" bindtap="submitData">确认提交</button>
       </view>
     </view>
   </view>

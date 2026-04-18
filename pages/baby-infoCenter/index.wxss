@@ -47,26 +47,31 @@ page {
 
 .overlay-box {
   position: absolute;
-  top: 64rpx;
-  left: 84rpx;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+  top: 120rpx;
+  left: 40rpx;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12rpx);
   display: flex;
-  align-items: center;
-  padding: 10px;
-  color: black;
+  align-items: flex-end;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  box-shadow:
+    0 4rpx 12rpx rgba(0, 0, 0, 0.08),
+    0 8rpx 24rpx rgba(0, 0, 0, 0.05);
 }
 
 .overlay-image {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   margin-right: 10rpx;
+  flex-shrink: 0;
 }
 
 .overlay-text {
-  font-size: 32rpx;
-  margin-left: 12rpx;
-  color: black;
-  font-weight: bolder;
+  font-size: 26rpx;
+  margin-left: 16rpx;
+  margin-bottom: 15rpx;
+  font-weight: 600;
 }
 
 .baby-relation-button {

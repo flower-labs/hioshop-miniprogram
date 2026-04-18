@@ -1,7 +1,11 @@
 // 线上地址
-const ApiRoot = 'https://api.bajie.club';
-// const ApiRoot = 'http://127.0.0.1:8360';
-// const ApiRoot = 'https://www.qile.club:8688';
+const ApiRootOnline = 'https://api.bajie.club';
+const ApiRootLocal = 'http://127.0.0.1:8360';
+
+const platform = wx.getDeviceInfo().platform;
+const isDevtoolsMode = platform === 'devtools';
+const ApiRoot = isDevtoolsMode ? ApiRootLocal : ApiRootOnline;
+
 const ApiRootUrl = ApiRoot + '/api/';
 
 export const CDN_URL = 'https://cdn.bajie.club';

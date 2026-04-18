@@ -1,94 +1,190 @@
 /* pages/growthRecord/growthRecord.wxss */
 /* 弹窗遮罩 */
 .dialog-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-  }
-  
-  /* 弹窗容器 */
-  .dialog-container {
-    width: 80%;
-    max-width: 500rpx;
-    background-color: white;
-    border-radius: 16rpx;
-    padding: 30rpx;
-  }
-  /* 按钮区域 */
-  .dialog-btns {
-    display: flex;
-    gap: 20rpx;
-  }
-  
-  .cancel-btn, .confirm-btn {
-    flex: 1;
-    height: 80rpx;
-    line-height: 80rpx;
-    padding: 0;
-    border-radius: 8rpx;
-    font-size: 28rpx;
-  }
-  
-  .cancel-btn {
-    background-color: #f5f5f5;
-    color: #666;
-  }
-  
-  .confirm-btn {
-    background-color: #1aad19;
-    color: white;
-  }
-  /* 弹窗标题 */
-  .dialog-title {
-    font-size: 30rpx;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 30rpx;
-    color: #333;
-  }
-  /* 添加数据表单样式 */
-  .add-form {
-    background-color: white;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  
-  .form-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    color: #333;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .form-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 14px;
-  }
-  
-  .form-label {
-    width: 90px;
-    font-size: 14px;
-    color: #666;
-  }
-  .form-input {  
-    flex: 1;  
-    padding: 10px;  
-    border: 1px solid #eee;  
-    border-radius: 4px;  
-    font-size: 14px;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* 弹窗容器 */
+.dialog-container {
+  width: 88%;
+  max-width: 640rpx;
+  background-color: #fff;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 弹窗头部 */
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 36rpx 36rpx 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.dialog-title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.dialog-title-icon {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #3478f6, #5b9bf6);
+  border-radius: 12rpx;
+  margin-right: 16rpx;
+}
+
+.dialog-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.dialog-close {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #bbb;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+}
+
+/* 弹窗内容 */
+.dialog-body {
+  padding: 28rpx 36rpx 12rpx;
+}
+
+/* 表单组 */
+.form-group {
+  margin-bottom: 28rpx;
+}
+
+.form-label-modern {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+
+.label-text {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.label-unit {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 8rpx;
+  background-color: #f5f7fa;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+/* 日期选择器 */
+.form-picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 24rpx;
+  background-color: #f8f9fb;
+  border-radius: 16rpx;
+  border: 2rpx solid #eef0f3;
+  transition: border-color 0.2s;
+}
+
+.picker-value {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.picker-arrow {
+  font-size: 36rpx;
+  color: #ccc;
+  font-weight: 300;
+}
+
+/* 输入框 */
+.form-input-wrapper {
+  position: relative;
+}
+
+.form-input-modern {
+  height: 88rpx;
+  padding: 0 24rpx;
+  background-color: #f8f9fb;
+  border-radius: 16rpx;
+  border: 2rpx solid #eef0f3;
+  font-size: 30rpx;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.form-input-modern:focus {
+  border-color: #3478f6;
+}
+
+.input-placeholder {
+  color: #c8c8c8;
+  font-size: 28rpx;
+}
+
+/* 弹窗底部按钮 */
+.dialog-footer {
+  display: flex;
+  padding: 16rpx 36rpx 36rpx;
+  gap: 24rpx;
+}
+
+.btn-cancel,
+.btn-confirm {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 500;
+  border-radius: 16rpx;
+  border: none;
+  padding: 0;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.btn-cancel::after {
+  border: none;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #3478f6, #5b9bf6);
+  color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(52, 120, 246, 0.3);
+}
+
+.btn-confirm::after {
+  border: none;
+}
   /* pages/growthRecord/growthRecord.wxss */
   .container {
       width: 100%;
