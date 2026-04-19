@@ -123,53 +123,46 @@ Page({
     this.calculateStats();
   },
   // 获取后端数据
-  fetchBabyData() {
+  async fetchBabyData() {
     const defaultBabyId = wx.getStorageSync('defaultBabyId');
     // 显示loading
     wx.showLoading({
       title: '加载中...',
       mask: true,
     });
-    util
-      .request(
+    try {
+      const res = await util.request(
         api.ListBabyBodyRecord,
-        {
-          baby_id: defaultBabyId,
-        },
+        { baby_id: defaultBabyId },
         'post',
-      )
-      .then(res => {
-        if (res.errno == 0) {
-          const tempBabyData = res.data.list.map(item => {
-            return {
-              id: item.id,
-              baby_id: item.baby_id,
-              weight: item.weight,
-              height: item.height,
-              date: item.measure_date.split(' ')[0],
-            };
-          });
-          this.setData({
-            growthRecords: tempBabyData,
-            latestHeight: tempBabyData[tempBabyData.length - 1]?.height,
-            latestWeight: tempBabyData[tempBabyData.length - 1]?.weight,
-          });
-          console.log(this.data.growthRecords);
-        }
-      })
-      .catch(err => {
-        console.error('获取生长记录失败：', err);
-        wx.showToast({
-          title: '数据加载失败',
-          icon: 'none',
+      );
+      if (res.errno == 0) {
+        const tempBabyData = (res.data.list || []).map(item => ({
+          id: item.id,
+          baby_id: item.baby_id,
+          weight: item.weight,
+          height: item.height,
+          date: item.measure_date.split(' ')[0],
+        }));
+        this.setData({
+          growthRecords: tempBabyData,
+          latestHeight: tempBabyData[tempBabyData.length - 1]?.height,
+          latestWeight: tempBabyData[tempBabyData.length - 1]?.weight,
         });
-      })
-      .finally(() => {
-        // 无论成功或失败，都隐藏loading
-        wx.hideLoading();
-        // 刷新图表
-        this.initCharts();
+        console.log(this.data.growthRecords);
+      }
+    } catch (err) {
+      console.error('获取生长记录失败：', err);
+      wx.showToast({
+        title: '数据加载失败',
+        icon: 'none',
       });
+    } finally {
+      // 无论成功或失败，都隐藏loading
+      wx.hideLoading();
+      // 刷新图表
+      this.initCharts();
+    }
   },
 
   // 初始化图表
@@ -528,7 +521,7 @@ Page({
     console.log(this.data.formData.weight);
   },
   //删除数据
-  handleDelete(e) {
+  async handleDelete(e) {
     // 获取页面传递的id
     const deleteId = e.currentTarget.dataset.id;
     console.log(deleteId);
@@ -540,35 +533,34 @@ Page({
       return;
     }
     // 二次确认
-    wx.showModal({
+    const { confirm } = await wx.showModal({
       title: '确认删除',
       content: '是否确定删除该条数据？删除后不可恢复',
-      success: res => {
-        if (res.confirm) {
-          // 用户确认删除，调用删除接口
-          this.deleteData(deleteId);
-        }
-      },
     });
+    if (confirm) {
+      // 用户确认删除，调用删除接口
+      await this.deleteData(deleteId);
+    }
   },
   //调用删除接口
-  deleteData(id) {
-    util
-      .request(
+  async deleteData(id) {
+    const defaultBabyId = wx.getStorageSync('defaultBabyId');
+    try {
+      const res = await util.request(
         api.DeleteBabyBodyRecord,
-        {
-          id: id,
-        },
+        { id: id, baby_id: defaultBabyId },
         'post',
-      )
-      .then(res => {
-        console.log(res);
-      });
-    // 刷新图表
-    this.fetchBabyData();
+      );
+      console.log(res);
+    } catch (err) {
+      console.error('删除记录失败：', err);
+      wx.showToast({ title: '删除失败', icon: 'none' });
+    }
+    // 刷新数据和图表
+    await this.fetchBabyData();
   },
   // 添加新记录
-  submitData() {
+  async submitData() {
     const { height, weight, date } = this.data.formData;
     // 1. 表单验证
     if (!height || !weight) {
@@ -589,8 +581,8 @@ Page({
     const defaultBabyId = wx.getStorageSync('defaultBabyId');
     // 3. 提交到后端
     wx.showLoading({ title: '提交中...', mask: true });
-    util
-      .request(
+    try {
+      const res = await util.request(
         api.AddBabyBodyRecord,
         {
           baby_id: defaultBabyId,
@@ -599,24 +591,21 @@ Page({
           measure_date: measureDate,
         },
         'post',
-      )
-      .then(res => {
-        if (res.errno == 0) {
-          wx.showToast({ title: '添加成功', icon: 'success' });
-          this.hideDialog();
-          // 刷新数据
-          this.fetchBabyData();
-        } else {
-          wx.showToast({ title: res.errmsg || '添加失败', icon: 'none' });
-        }
-      })
-      .catch(err => {
-        console.error('提交记录失败：', err);
-        wx.showToast({ title: '网络异常，请重试', icon: 'none' });
-      })
-      .finally(() => {
-        wx.hideLoading();
-      });
+      );
+      if (res.errno == 0) {
+        wx.showToast({ title: '添加成功', icon: 'success' });
+        this.hideDialog();
+        // 刷新数据
+        await this.fetchBabyData();
+      } else {
+        wx.showToast({ title: res.errmsg || '添加失败', icon: 'none' });
+      }
+    } catch (err) {
+      console.error('提交记录失败：', err);
+      wx.showToast({ title: '网络异常，请重试', icon: 'none' });
+    } finally {
+      wx.hideLoading();
+    }
   },
   // 显示弹窗
   addNewRecord() {
@@ -638,38 +627,35 @@ Page({
   // 阻止事件冒泡（空函数）
   preventBubble() {},
   // 记录列表下拉刷新
-  onListRefresh() {
+  async onListRefresh() {
     this.setData({ isRefreshing: true });
     const defaultBabyId = wx.getStorageSync('defaultBabyId');
-    util
-      .request(
+    try {
+      const res = await util.request(
         api.ListBabyBodyRecord,
         { baby_id: defaultBabyId },
         'post',
-      )
-      .then(res => {
-        if (res.errno == 0) {
-          const tempBabyData = res.data.list.map(item => ({
-            id: item.id,
-            baby_id: item.baby_id,
-            weight: item.weight,
-            height: item.height,
-            date: item.measure_date.split(' ')[0],
-          }));
-          this.setData({
-            growthRecords: tempBabyData,
-            latestHeight: tempBabyData[tempBabyData.length - 1]?.height,
-            latestWeight: tempBabyData[tempBabyData.length - 1]?.weight,
-          });
-        }
-      })
-      .catch(err => {
-        console.error('刷新数据失败：', err);
-        wx.showToast({ title: '刷新失败', icon: 'none' });
-      })
-      .finally(() => {
-        this.setData({ isRefreshing: false });
-      });
+      );
+      if (res.errno == 0) {
+        const tempBabyData = res.data.list.map(item => ({
+          id: item.id,
+          baby_id: item.baby_id,
+          weight: item.weight,
+          height: item.height,
+          date: item.measure_date.split(' ')[0],
+        }));
+        this.setData({
+          growthRecords: tempBabyData,
+          latestHeight: tempBabyData[tempBabyData.length - 1]?.height,
+          latestWeight: tempBabyData[tempBabyData.length - 1]?.weight,
+        });
+      }
+    } catch (err) {
+      console.error('刷新数据失败：', err);
+      wx.showToast({ title: '刷新失败', icon: 'none' });
+    } finally {
+      this.setData({ isRefreshing: false });
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
