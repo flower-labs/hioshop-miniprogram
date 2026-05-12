@@ -1,0 +1,67 @@
+.search {
+  width: 85%;
+  height: 72rpx;
+  background: #fff;
+  border-radius: 36rpx;
+  margin: 20rpx 0;
+  padding: 0 30rpx;
+  line-height: 72rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+.banner {
+  width: 95%;
+  height: 320rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.banner image {
+  width: 100%;
+  height: 100%;
+}
+.cate-wrap {
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+  margin: 30rpx;
+}
+.cate-item {
+  width: 150rpx;
+  height: 150rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+}
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+.course-list {
+  display: flex;
+  width: 95%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.course-item {
+  width: 47%;
+  margin-bottom: 24rpx;
+}
+.course-item image {
+  width: 100%;
+  height: 240rpx;
+  border-radius: 20rpx;
+}
+.course-item .title {
+  font-size: 28rpx;
+  margin: 10rpx 0;
+  line-height: 1.4;
+}
+.course-item .price {
+  color: #ff4d4f;
+  font-size: 30rpx;
+  font-weight: bold;
+}

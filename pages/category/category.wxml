@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="search-box">
+  <input class="search-input" placeholder="搜索课程" bindinput="onSearchInput" value="{{searchText}}" />
+  <button class="search-btn" bindtap="onSearch">搜索</button>
+</view>
+<view class="tabs">
+  <view class="tab-item {{activeTab === '全部' ? 'active' : ''}}" bindtap="onTabClick" data-tab="全部">全部</view>
+  <view class="tab-item {{activeTab === '职场' ? 'active' : ''}}" bindtap="onTabClick" data-tab="职场">职场</view>
+  <view class="tab-item {{activeTab === '设计' ? 'active' : ''}}" bindtap="onTabClick" data-tab="设计">设计</view>
+  <view class="tab-item {{activeTab === '考试' ? 'active' : ''}}" bindtap="onTabClick" data-tab="考试">考试</view>
+  <view class="tab-item {{activeTab === '兴趣' ? 'active' : ''}}" bindtap="onTabClick" data-tab="兴趣">兴趣</view>
+</view>
+  <view class="course-list">
+    <view class="item" wx:for="{{list}}" wx:key="id">
+      <image src="{{item.cover}}"></image>
+      <view class="title">{{item.title}}</view>
+      <view class="price">￥{{item.price}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="search">
+    <text>搜索课程、讲师</text>
+  </view>
+
+  <swiper class="banner" autoplay circular interval="3000">
+    <swiper-item>
+      <image src="https://picsum.photos/750/300" mode="aspectFill"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="https://picsum.photos/750/300" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <view class="cate-wrap">
+    <view class="cate-item">职场提升</view>
+    <view class="cate-item">设计创作</view>
+    <view class="cate-item">考试考证</view>
+    <view class="cate-item">兴趣生活</view>
+  </view>
+
+  <view class="section-title">热门好课</view>
+  <view class="course-list">
+    <view class="course-item" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <image src="{{item.cover}}" mode="aspectFill"></image>
+      <view class="title">{{item.title}}</view>
+      <view class="price">¥{{item.price}}</view>
+    </view>
+  </view>
+</view>

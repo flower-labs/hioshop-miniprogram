@@ -1,0 +1,76 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+  <!-- 收货地址 (可选，通常订单页会有，这里暂略或作为预留) -->
+  
+  <!-- 订单商品信息 -->
+  <view class="section order-goods">
+    <view class="section-title">课程信息</view>
+    <view class="goods-item" wx:for="{{ orderItems }}" wx:key="id">
+      <image src="{{ item.cover }}" class="goods-cover" mode="aspectFill"></image>
+      <view class="goods-info">
+        <text class="goods-title">{{ item.title }}</text>
+        <view class="goods-meta">
+          <text class="goods-price">¥{{ item.price }}</text>
+          <text class="goods-quantity">x{{ item.quantity }}</text>
+        </view>
+        <text class="goods-subtotal">小计: ¥{{ item.subtotal }}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 优惠券 -->
+  <view class="section coupon-section" bindtap="chooseCoupon">
+    <view class="section-row">
+      <text class="label">优惠券</text>
+      <view class="value-row">
+        <text class="value {{ hasCoupon ? 'active' : 'placeholder' }}">
+          {{ hasCoupon ? '已选 -¥' + couponAmount : '不使用优惠券' }}
+        </text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 金额明细 -->
+  <view class="section amount-detail">
+    <view class="section-title">金额明细</view>
+    <view class="detail-row">
+      <text class="label">课程原价</text>
+      <text class="value">¥{{ originalPrice }}</text>
+    </view>
+    <view class="detail-row">
+      <text class="label">优惠金额</text>
+      <text class="value discount">-¥{{ discountAmount }}</text>
+    </view>
+    <view class="detail-row total">
+      <text class="label">实付金额</text>
+      <text class="value highlight">¥{{ finalPrice }}</text>
+    </view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="section payment-section">
+    <view class="section-title">支付方式</view>
+    <view class="payment-item">
+      <view class="pay-info">
+        <image src="/images/wechat-pay.png" class="pay-icon" mode="aspectFit"></image> <!-- 请替换为真实图标路径 -->
+        <text>微信支付</text>
+      </view>
+      <radio-group>
+        <radio value="wechat" checked="{{ true }}" color="#07c160" style="transform:scale(0.8)" />
+      </radio-group>
+    </view>
+  </view>
+
+  <!-- 底部占位 -->
+  <view style="height: 120rpx;"></view>
+</view>
+
+<!-- 底部提交按钮栏 -->
+<view class="footer-bar">
+  <view class="final-price-box">
+    <text class="label">实付:</text>
+    <text class="price">¥{{ finalPrice }}</text>
+  </view>
+  <button class="submit-btn" bindtap="submitOrder">提交订单</button>
+</view>

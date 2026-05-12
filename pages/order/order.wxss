@@ -1,0 +1,250 @@
+/* pages/order/order.wxss */
+
+/* 全局容器 */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  /* 底部预留高度，防止内容被固定底部栏遮挡 */
+  padding-bottom: 120rpx;
+  box-sizing: border-box;
+}
+
+/* 通用区块样式 - 核心优化点 */
+.section {
+  width: 95%;
+  background-color: #fff;
+  /* 统一左右边距，确保所有卡片宽度一致且居中对齐 */
+  margin: 20rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx; /* 增加圆角，使卡片更柔和 */
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.03); /* 轻微阴影增加层次感 */
+  box-sizing: border-box; /* 确保padding不撑大宽度 */
+}
+
+/* 第一个区块顶部不需要margin-top，或者保持统一间距 */
+.section:first-child {
+  margin-top: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  border-left: 6rpx solid #07c160;
+  padding-left: 15rpx;
+  line-height: 1;
+}
+
+/* 商品列表 */
+.goods-item {
+  display: flex;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.goods-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.goods-cover {
+  width: 140rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  background-color: #eee;
+  flex-shrink: 0; /* 防止图片被压缩 */
+}
+
+.goods-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* 防止文字溢出 */
+}
+
+.goods-title {
+  font-size: 28rpx;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.goods-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+.goods-price {
+  color: #ff4d4f;
+  font-weight: 500;
+}
+
+.goods-subtotal {
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  margin-top: 10rpx;
+}
+
+/* 优惠券 */
+.coupon-section {
+  /* 继承 .section 的样式，无需额外 padding/margin 定义，除非需要特殊处理 */
+  padding: 30rpx;
+}
+
+.section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.value-row {
+  display: flex;
+  align-items: center;
+}
+
+.value {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+
+.value.active {
+  color: #ff4d4f;
+}
+
+.value.placeholder {
+  color: #999;
+}
+
+.arrow {
+  color: #ccc;
+  font-size: 28rpx;
+}
+
+/* 金额明细 */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-row .label {
+  color: #666;
+}
+
+.detail-row .value {
+  color: #333;
+}
+
+.detail-row .value.discount {
+  color: #ff4d4f;
+}
+
+.detail-row.total {
+  margin-bottom: 0;
+  padding-top: 20rpx;
+  border-top: 1rpx dashed #eee;
+}
+
+.detail-row.total .label {
+  font-weight: bold;
+  color: #333;
+}
+
+.detail-row.total .value.highlight {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+/* 支付方式 */
+.payment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pay-info {
+  display: flex;
+  align-items: center;
+}
+
+.pay-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 15rpx;
+}
+
+/* 底部结算栏 */
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.final-price-box {
+  display: flex;
+  align-items: baseline;
+}
+
+.final-price-box .label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.final-price-box .price {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+  margin-left: 10rpx;
+}
+
+.submit-btn {
+  background-color: #07c160;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 50rpx;
+  padding: 0 60rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0;
+  box-shadow: 0 4rpx 12rpx rgba(7, 193, 96, 0.2);
+}
+
+.submit-btn::after {
+  border: none;
+}

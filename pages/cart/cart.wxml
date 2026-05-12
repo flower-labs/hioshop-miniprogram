@@ -1,0 +1,70 @@
+<!--pages/cart/cart.wxml-->
+<view class="container">
+  <!-- 顶部编辑按钮 -->
+  <view class="header">
+    <text class="edit-btn" bindtap="toggleEditMode">{{ isEditMode ? '完成' : '编辑' }}</text>
+  </view>
+
+  <!-- 空购物车状态 -->
+  <view wx:if="{{ cartList.length === 0 }}" class="empty-state">
+    <image src="/images/empty-cart.png" class="empty-img" mode="aspectFit"></image>
+    <text class="empty-tip">购物车是空的</text>
+    <button class="go-shopping-btn" bindtap="goToShop">去逛逛</button>
+  </view>
+
+  <!-- 课程列表 -->
+  <scroll-view scroll-y class="cart-list" wx:else>
+    <view class="cart-item {{ isEditMode ? 'edit-mode' : '' }}" wx:for="{{ cartList }}" wx:key="id">
+      <!-- 单选框 -->
+      <checkbox-group bindchange="onItemCheckChange" data-id="{{ item.id }}">
+        <checkbox value="{{ item.id }}" checked="{{ item.checked }}" class="item-checkbox" />
+      </checkbox-group>
+
+      <!-- 封面图 -->
+      <image src="{{ item.cover }}" class="item-cover" mode="aspectFill"></image>
+
+      <!-- 信息区域 -->
+      <view class="item-info">
+        <text class="item-title">{{ item.title }}</text>
+        <view class="item-bottom">
+          <text class="item-price">¥{{ item.price }}</text>
+          
+          <!-- 数量调整 -->
+          <view class="quantity-control" wx:if="{{ !isEditMode }}">
+            <view class="qty-btn" bindtap="decreaseQty" data-id="{{ item.id }}">-</view>
+            <text class="qty-num">{{ item.quantity }}</text>
+            <view class="qty-btn" bindtap="increaseQty" data-id="{{ item.id }}">+</view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 删除按钮 (仅在编辑模式下显示，可选) -->
+      <view wx:if="{{ isEditMode }}" class="delete-btn" bindtap="deleteItem" data-id="{{ item.id }}">
+        删除
+      </view>
+    </view>
+    
+    <!-- 底部占位，防止内容被固定底部遮挡 -->
+    <view style="height: 100rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部结算栏 -->
+  <view class="footer-bar" wx:if="{{ cartList.length > 0 }}">
+    <!-- 全选框 -->
+    <view class="select-all" bindtap="toggleSelectAll">
+      <icon type="{{ allChecked ? 'success' : 'circle' }}" size="20" color="#07c160" />
+      <text>全选</text>
+    </view>
+
+    <!-- 合计金额 -->
+    <view class="total-section">
+      <text class="total-label">合计:</text>
+      <text class="total-price">¥{{ totalPrice }}</text>
+    </view>
+
+    <!-- 去结算按钮 -->
+    <button class="checkout-btn" bindtap="handleCheckout">
+      去结算({{ selectedCount }})
+    </button>
+  </view>
+</view>

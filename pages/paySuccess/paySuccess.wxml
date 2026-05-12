@@ -1,0 +1,40 @@
+<!-- pages/paySuccess/paySuccess.wxml -->
+<view class="container">
+  <!-- 1. 成功状态区域 - 图标在卡片上方居中 -->
+  <view class="success-icon-wrapper">
+    <image class="success-icon" src="/images/icons/success.png" mode="aspectFit"></image>
+  </view>
+
+  <!-- 2. 订单信息卡片 -->
+  <view class="order-info-card">
+    <!-- 订单编号 -->
+    <view class="info-item">
+      <text class="label">订单编号：</text>
+      <text class="value">{{orderNo}}</text>
+    </view>
+    
+    <!-- 课程名称 -->
+    <view class="info-item">
+      <text class="label">课程名称：</text>
+      <text class="value">{{courseName}}</text>
+    </view>
+    
+    <!-- 支付金额 -->
+    <view class="info-item">
+      <text class="label">支付金额：</text>
+      <text class="value amount">¥{{payAmount}}</text>
+    </view>
+    
+    <!-- 支付时间 -->
+    <view class="info-item">
+      <text class="label">支付时间：</text>
+      <text class="value">{{payTime}}</text>
+    </view>
+
+    <!-- 按钮操作区 -->
+    <view class="action-buttons">
+      <button class="btn btn-outline" bindtap="goToOrderDetail">查看订单</button>
+      <button class="btn btn-primary" bindtap="startLearning">立即学习</button>
+    </view>
+  </view>
+</view>

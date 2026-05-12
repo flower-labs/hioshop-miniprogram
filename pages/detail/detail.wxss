@@ -1,0 +1,206 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+/* 封面图 */
+.cover {
+  width: 100%;
+  height: 422rpx; /* 16:9比例 */
+}
+
+/* 信息区 */
+.info-section {
+  width: 100%;
+  height: 450rpx;
+  background-color: #fff;
+  border-radius: 50rpx;
+  margin-top: -50rpx;
+  
+}
+
+.title {
+  padding: 50rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.teacher-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.teacher-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  margin-left: 50rpx;
+}
+
+.price {
+  font-size: 48rpx;
+  color: #ff4d4f;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.original-price {
+  font-size: 28rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 30rpx;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+}
+
+.rating text {
+  font-size: 32rpx;
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.rating-text {
+  font-size: 24rpx;
+  margin-left: 8rpx;
+}
+
+.duration {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* Tab栏 */
+.tabs {
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0 30rpx;
+  
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background-color: #1890ff;
+  border-radius: 2rpx;
+}
+
+/* Tab内容区 */
+.tab-content {
+  width: 100%;
+  background-color: #fff;
+}
+
+.content-item {
+  margin: 30rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* 章节列表 */
+.chapter-item {
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.chapter-title {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.free-tag {
+  padding: 4rpx 16rpx;
+  background-color: #e6f7ff;
+  color: #1890ff;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+}
+
+/* 讲师详情 */
+.teacher-detail {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.teacher-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.teacher-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 底部固定栏 */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.btn-add-cart {
+  flex: 1;
+  margin-right: 20rpx;
+  background-color: #fff;
+  color: #1890ff;
+  border: 2rpx solid #1890ff;
+  border-radius: 48rpx;
+  font-size: 28rpx;
+}
+
+.btn-buy {
+  flex: 1;
+  background: linear-gradient(90deg, #1890ff, #096dd9);
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 28rpx;
+}

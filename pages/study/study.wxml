@@ -1,0 +1,48 @@
+<!-- pages/study/study.wxml -->
+<view class="container">
+  
+  <!-- 1. 顶部统计信息 -->
+  <view class="top-stats">
+    <text class="stat-item">学习时长：{{totalStudyTime}}</text>
+    <text class="stat-item">已学课程数：{{completedCoursesCount}}门</text>
+  </view>
+
+  <!-- 2. 状态标签 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+    <view class="tab-item {{currentTab === 'notStarted' ? 'active' : ''}}" bindtap="switchTab" data-tab="notStarted">未学</view>
+    <view class="tab-item {{currentTab === 'learning' ? 'active' : ''}}" bindtap="switchTab" data-tab="learning">学习中</view>
+    <view class="tab-item {{currentTab === 'completed' ? 'active' : ''}}" bindtap="switchTab" data-tab="completed">已完成</view>
+  </view>
+
+  <!-- 3. 课程列表 -->
+  <view class="course-list">
+    <block wx:if="{{courses.length > 0}}">
+      <view class="course-item" wx:for="{{courses}}" wx:key="id">
+        <image class="course-cover" src="{{item.coverUrl}}" mode="aspectFill"></image>
+        <view class="course-info">
+          <text class="course-title">{{item.title}}</text>
+          <text class="course-date">{{item.date}}</text>
+          <view class="progress-bar">
+            <view class="progress-bg"></view>
+            <view class="progress-fill" style="width: {{item.progress}}%;"></view>
+          </view>
+          <!-- 根据状态显示不同按钮文字或隐藏按钮 -->
+          <button 
+            class="btn-continue {{item.status === 'completed' ? 'btn-restart' : ''}}" 
+            bindtap="onContinueTap" 
+            data-course-id="{{item.id}}"
+          >
+            {{item.status === 'completed' ? '复习' : '继续学习'}}
+          </button>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态提示 -->
+    <view wx:else class="empty-state">
+      <text>暂无相关课程</text>
+    </view>
+  </view>
+
+</view>

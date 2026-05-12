@@ -1,0 +1,71 @@
+<view class="container">
+  <!-- 顶部状态标签 -->
+  <view class="tabs">
+    <view 
+      class="tab-item {{currentTab === index ? 'active' : ''}}" 
+      wx:for="{{statusTabs}}" 
+      wx:key="index"
+      bindtap="switchTab"
+      data-index="{{index}}"
+    >
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <block wx:if="{{orderList.length > 0}}">
+      <view class="order-card" wx:for="{{orderList}}" wx:key="id">
+        <!-- 课程信息区域 -->
+        <view class="card-header">
+          <image class="course-img" src="{{item.courseImage}}" mode="aspectFill"></image>
+          <view class="course-info">
+            <text class="course-name">{{item.courseName}}</text>
+            <text class="order-status status-{{item.status}}">{{item.statusText}}</text>
+          </view>
+        </view>
+
+        <!-- 金额区域 -->
+        <view class="card-body">
+          <text class="amount-label">实付金额：</text>
+          <text class="amount-value">¥{{item.amount}}</text>
+        </view>
+
+        <!-- 底部操作按钮区域 -->
+        <view class="card-footer">
+          <!-- 根据状态显示不同按钮 -->
+          
+          <!-- 待支付状态：去支付 + 查看详情 -->
+          <block wx:if="{{item.status === 0}}">
+            <button class="btn btn-secondary" bindtap="goToDetail" data-id="{{item.id}}">查看详情</button>
+            <button class="btn btn-primary" bindtap="goToPay" data-id="{{item.id}}">去支付</button>
+          </block>
+
+          <!-- 已完成/已取消状态：查看详情 + 申请退款(仅已完成且符合退款条件时显示，这里简化为都显示或根据业务逻辑控制) -->
+          <block wx:elif="{{item.status === 1 || item.status === 3}}">
+             <button class="btn btn-secondary" bindtap="goToDetail" data-id="{{item.id}}">查看详情</button>
+             <!-- 假设只有已完成(1)可以申请退款，具体逻辑需在JS控制hidden或wx:if -->
+             <button 
+               class="btn btn-warning" 
+               wx:if="{{item.status === 1}}" 
+               bindtap="applyRefund" 
+               data-id="{{item.id}}"
+             >
+               申请退款
+             </button>
+          </block>
+          
+          <!-- 其他状态默认显示查看详情 -->
+          <block wx:else>
+            <button class="btn btn-secondary full-width" bindtap="goToDetail" data-id="{{item.id}}">查看详情</button>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态提示 -->
+    <view class="empty-state" wx:else>
+      <text>暂无相关订单</text>
+    </view>
+  </view>
+</view>

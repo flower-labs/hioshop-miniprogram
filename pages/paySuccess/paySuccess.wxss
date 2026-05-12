@@ -1,0 +1,112 @@
+/* pages/paySuccess/paySuccess.wxss */
+page {
+  background-color: #fff; /* 使用图片中的蓝色作为背景色 */
+}
+
+.container {
+  padding: 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* 成功图标容器 - 位于卡片上方 */
+.success-icon-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -40rpx;
+  z-index: 1;
+}
+
+.success-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  line-height: 1;
+  box-shadow: 0 4rpx 12rpx rgba(0, 200, 83, 0.3);
+}
+
+/* 订单信息卡片 */
+.order-info-card {
+  width: 80%;
+  max-width: 600rpx;
+  background: linear-gradient(135deg, #ffffff, #f0f8ff); /* 添加渐变背景 */
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+  border: 1rpx solid #e0e0e0;
+  overflow: hidden;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.value {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.value.amount {
+  color: #000;
+  font-weight: bold;
+}
+
+/* 按钮操作区 */
+.action-buttons {
+  display: flex;
+  gap: 30rpx;
+  margin-top: 40rpx;
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+  height: 72rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  font-size: 32rpx;
+  padding: 0;
+  margin: 0;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #007aff;
+  border: 2rpx solid #007aff;
+}
+
+.btn-primary {
+  background-color: #00c853;
+  color: white;
+}

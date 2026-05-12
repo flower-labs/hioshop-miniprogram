@@ -1,0 +1,185 @@
+/* pages/orderList/orderList.wxss */
+/* 容器 */
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部 Tabs */
+.tabs {
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  padding: 20rpx 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #07c160; /* 微信绿 */
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: #07c160;
+  border-radius: 2rpx;
+}
+
+/* 订单列表 */
+.order-list {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 95%;
+}
+
+/* 订单卡片 */
+.order-card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.02);
+}
+
+/* 卡片头部：图片+名称+状态 */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.course-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  background-color: #eee;
+}
+
+.course-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 120rpx;
+}
+
+.course-name {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.order-status {
+  font-size: 24rpx;
+  align-self: flex-end;
+}
+
+.status-0 {
+  color: #ff9800;
+} /* 待支付 */
+.status-1 {
+  color: #07c160;
+} /* 已完成 */
+.status-2 {
+  color: #999;
+} /* 已取消 */
+.status-3 {
+  color: #ff4d4f;
+} /* 退款中/已退款等，视具体定义而定 */
+
+/* 卡片主体：金额 */
+.card-body {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.amount-label {
+  font-size: 26rpx;
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.amount-value {
+  font-size: 32rpx;
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+/* 卡片底部：按钮 */
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+}
+
+.btn {
+  padding: 10rpx 30rpx;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn-primary {
+  background-color: #07c160;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  color: #666;
+  border: 1rpx solid #ddd;
+}
+
+.btn-warning {
+  background-color: #fff;
+  color: #ff4d4f;
+  border: 1rpx solid #ff4d4f;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding-top: 100rpx;
+  color: #999;
+  font-size: 28rpx;
+}

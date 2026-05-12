@@ -1,0 +1,127 @@
+/* pages/user/user.wxss */
+page {
+  background-color: #f5f6fa;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20rpx;
+}
+
+/* --- 顶部用户信息 --- */
+.user-header {
+  width: 100vw;
+  height: 30vh;
+  background: #1677ff;
+  padding: 40rpx 20rpx;
+  border-radius: 20rpx 20rpx 0 0;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  position: absolute;
+  top: 300rpx;
+  left: 10%;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 16rpx;
+  background-color: #eee;
+}
+
+.nickname {
+  position: absolute;
+  top: 300rpx;
+  left: 30%;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.member-status {
+  position: absolute;
+  top: 350rpx;
+  left: 30%;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* --- 菜单列表 --- */
+.menu-list {
+  position: relative;
+  top: -100rpx;
+  width: 95%;
+  background-color: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 20rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40rpx 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.icon-box {
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #007aff;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+  margin-left: 16rpx;
+}
+
+.arrow {
+  font-size: 24rpx;
+  color: #ccc;
+}
+
+/* --- 底部退出登录 --- */
+.footer-action {
+  padding: 40rpx 30rpx;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: #1677ff;
+  color: white;
+
+  border-radius: 44rpx;
+  font-size: 32rpx;
+}
+
+.btn-logout::after {
+  border: none;
+}

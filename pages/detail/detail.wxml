@@ -1,0 +1,77 @@
+<view class="container">
+  <!-- 课程封面图 -->
+  <image class="cover" src="{{course.cover}}" mode="aspectFill"></image>
+
+  <!-- 课程基本信息区域 -->
+  <view class="info-section">
+    <view class="title">{{course.title}}</view>
+    <view class="teacher-info">
+      <image class="avatar" src="{{course.teacher.avatar}}" mode="aspectFill"></image>
+      <text class="teacher-name">{{course.teacher.name}}</text>
+    </view>
+    <view class="price-row">
+      <text class="price">¥{{course.price}}</text>
+      <text class="original-price">¥{{course.originalPrice}}</text>
+      <view class="rating">
+        <text>{{course.rating}}</text>
+        <text class="rating-text">分</text>
+      </view>
+      <text class="duration">{{course.duration}}</text>
+    </view>
+  </view>
+
+  <!-- Tab切换栏 -->
+  <view class="tabs">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="index"
+      class="tab-item {{activeTab === index ? 'active' : ''}}"
+      data-index="{{index}}"
+      bindtap="switchTab"
+    >
+      {{item}}
+    </view>
+  </view>
+
+  <!-- Tab内容区域 -->
+  <view class="tab-content">
+    <!-- 课程简介 -->
+    <view wx:if="{{activeTab === 0}}" class="content-item">
+      <text>{{course.description}}</text>
+    </view>
+
+    <!-- 课程大纲章节 -->
+    <view wx:if="{{activeTab === 1}}" class="content-item">
+      <view 
+        wx:for="{{course.chapters}}" 
+        wx:key="index"
+        class="chapter-item"
+      >
+        <text class="chapter-title">{{item.title}}</text>
+        <text wx:if="{{item.free}}" class="free-tag">免费试看</text>
+      </view>
+    </view>
+
+    <!-- 讲师详细介绍 -->
+    <view wx:if="{{activeTab === 2}}" class="content-item">
+      <view class="teacher-detail">
+        <image class="teacher-avatar" src="{{course.teacher.avatar}}" mode="aspectFill"></image>
+        <view class="teacher-info">
+          <text class="teacher-name">{{course.teacher.name}}</text>
+          <text class="teacher-title">{{course.teacher.title}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 用户评价 -->
+    <view wx:if="{{activeTab === 3}}" class="content-item">
+      <text class="no-comment">暂无评价</text>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="footer">
+    <button class="btn-add-cart" bindtap="addToCart">加入购物车</button>
+    <button class="btn-buy" bindtap="buyNow">立即购买</button>
+  </view>
+</view>

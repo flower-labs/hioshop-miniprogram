@@ -1,0 +1,29 @@
+<!-- pages/user/user.wxml -->
+<view class="container">
+  
+  <!-- 1. 顶部用户信息区 -->
+  <view class="user-header">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+    <text class="nickname">{{userInfo.nickName || '用户昵称'}}</text>
+    <view class="member-status">普通会员</view>
+  </view>
+
+  <!-- 2. 菜单功能区 (List布局) -->
+  <view class="menu-list">
+    <view class="menu-item" wx:for="{{menuList}}" wx:key="id" bindtap="onMenuTap" data-path="{{item.path}}">
+      <view class="icon-box">
+        <text class="icon">{{item.icon}}</text>
+      </view>
+      <text class="label">{{item.name}}</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+
+
+  <!-- 3. 底部退出登录 -->
+  <view class="footer-action">
+    <button class="btn-logout" bindtap="handleLogout">退出登录</button>
+  </view>
+
+</view>
