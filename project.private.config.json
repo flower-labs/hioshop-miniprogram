@@ -11,8 +11,8 @@
                     "name": "pages/index/index",
                     "pathName": "pages/index/index",
                     "query": "",
-                    "scene": null,
-                    "launchMode": "default"
+                    "launchMode": "default",
+                    "scene": null
                 },
                 {
                     "name": "pages/baby-setting/index",

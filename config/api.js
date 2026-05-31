@@ -1,6 +1,7 @@
 // 线上地址
-const ApiRoot = 'https://api.bajie.club';
+// const ApiRoot = 'https://api.bajie.club';
 // const ApiRoot = 'http://192.168.1.4:8360';
+const ApiRoot = 'http://127.0.0.1:8360';
 // const ApiRoot = 'https://www.qile.club:8688';
 const ApiRootUrl = ApiRoot + '/api/';
 
@@ -86,6 +87,8 @@ module.exports = {
   // 足迹
   FootprintList: ApiRootUrl + 'footprint/list', //足迹列表
   FootprintDelete: ApiRootUrl + 'footprint/delete', //删除足迹
+  //课程
+  CoureseList:ApiRootUrl + 'course/list', //课程列表
   // 搜索
   SearchIndex: ApiRootUrl + 'search/index', //搜索页面数据
   SearchHelper: ApiRootUrl + 'search/helper', //搜索帮助
